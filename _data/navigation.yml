@@ -1,11 +1,11 @@
 links:
   - title: Posts
     url: /
+  - title: Search
+    url: /search
   - title: Linkedin
     url: https://linkedin.com/in/dev-jonghoonpark
     target: _blank
-  - title: Search
-    url: /search
   - title: RSS
     url: /atom.xml
     target: _blank
