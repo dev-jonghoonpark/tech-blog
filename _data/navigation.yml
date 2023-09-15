@@ -1,9 +1,11 @@
 links:
-- title: Writing
-  url: /
-- title: About
-  url: /about
-- title: Search
-  url: /search
-- title: Rss
-  url: /atom.xml
+  - title: Posts
+    url: /
+  - title: Linkedin
+    url: https://linkedin.com/in/dev-jonghoonpark
+    target: _blank
+  - title: Search
+    url: /search
+  - title: RSS
+    url: /atom.xml
+    target: _blank

@@ -1,17 +1,12 @@
-site: Sidey
-url: #yoururl
-title: Sidey
-description: Simple and minimalistic jekyll blogging theme.
-twitter:
-  username: #yourusername
-  card: summary
-  creator: #yourusername
+site: jonghoonpark
+url: https://github.jonghoonpark.com
+title: 박종훈 기술블로그
+description: 공부하고 경험한 것을 기록합니다.
 author:
-  twitter: #yourusername
-  name: #yourusername
-  avatar:
-  email: #youremail
-  url: #yoururl
+  name: 박종훈
+  email: dev@jonghoonpark.com
+  linkedin: https://www.linkedin.com/in/dev-jonghoonpark
+  url: https://jonghoonpark.com
 permalink: pretty
 
 baseurl: ""
@@ -20,19 +15,19 @@ highlighter: none
 
 exclude:
   - .jekyll-cache
-  
+
 compress_html:
   clippings: all
   comments: ["<!-- ", " -->"]
 
 sass:
-  sass_dir:          _sass
-  style:            :compressed
+  sass_dir: _sass
+  style: :compressed
 
 plugins:
   - jekyll-paginate
   - jekyll-seo-tag
-  - jekyll-sitemap  
+  - jekyll-sitemap
 
 collections:
   pages:
@@ -41,21 +36,18 @@ collections:
   posts:
     output: true
     permalink: /:year/:month/:day/:slug
-  
+
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
     values:
       layout: "default"
-  -
-    scope:
+  - scope:
       path: ""
       type: "pages"
     values:
       layout: "page"
-  -
-    scope:
+  - scope:
       path: ""
       type: "posts"
     values:
