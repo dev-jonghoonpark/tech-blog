@@ -11,7 +11,12 @@ permalink: pretty
 
 baseurl: ""
 
-highlighter: none
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    default_lang: html
+    css_class: "syntax"
 
 exclude:
   - .jekyll-cache
