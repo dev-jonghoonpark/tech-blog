@@ -204,6 +204,11 @@ h1 {
   font-size: 28px;
 }
 
+.post li {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
 @media screen and (max-width: 45rem) {
   header li {
     display: inline;
