@@ -5,8 +5,23 @@ layout: default
 <section class="post">
   <h1>{{ page.title }}</h1>
   {{ content }}
-  <span class="meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time> &middot; {% for tag in page.tags %}
-    <a href="/tag/{{tag}}">{{tag}}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</span>
+  <div class="meta">
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+    {% if page.categories.size > 0 %}
+    <p>
+      categories: {% for category in page.categories %}
+      <a href="/category/{{category}}">{{category}}</a>
+      {% unless forloop.last %}, {% endunless %}
+      {% endfor %}
+    </p>
+    {% endif %}
+    {% if page.tags.size > 0 %}
+    <p>
+      tags: {% for tag in page.tags %}
+      <a href="/tag/{{tag}}">{{tag}}</a>
+      {% unless forloop.last %}, {% endunless %}
+      {% endfor %}
+    </p>
+    {% endif %}
+  </div>
 </section>
-
-
