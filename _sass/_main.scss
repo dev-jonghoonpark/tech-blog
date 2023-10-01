@@ -48,6 +48,17 @@ pre {
   margin-left: 1.5rem;
 }
 
+.post table {
+  border: 1px solid grey;
+  border-collapse: collapse;
+}
+
+.post table td,
+.post table th {
+  border: 1px solid grey;
+  padding: 0.25rem;
+}
+
 .meta {
   margin: 2rem 0;
 }
