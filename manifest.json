@@ -1,0 +1,38 @@
+{
+  "short_name": "박종훈 기술블로그",
+  "name": "박종훈 기술블로그",
+  "start_url": "/index.html",
+  "description": "박종훈 기술블로그 - 공부하고 경험한 것을 기록합니다",
+  "icons": [
+    {
+      "src": "/assets/icons/icons-vector.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/assets/icons/icons-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icons/icons-192-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icons/icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/assets/icons/icons-512-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#070707"
+}
