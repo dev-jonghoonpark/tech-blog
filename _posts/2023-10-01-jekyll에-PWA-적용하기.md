@@ -62,6 +62,7 @@ manifest의 각 항목에 대해서 궁금하다면
 {
   "short_name": "박종훈 기술블로그",
   "name": "박종훈 기술블로그",
+  "id": "/",
   "start_url": "/",
   "description": "박종훈 기술블로그 - 공부하고 경험한 것을 기록합니다",
   "icons": [
@@ -93,6 +94,13 @@ manifest의 각 항목에 대해서 궁금하다면
   "theme_color": "#070707"
 }
 ```
+
+### id, start_url
+
+처음 접속했을 때 나와야 하는 경로를 지정해주면 됩니다.
+저의 경우 '/' 이기 때문에 '/'로 지정해줬으며, query param이나 hash를 추가해야 한다면 추가하시면 됩니다.
+
+참고 : [https://developer.chrome.com/blog/pwa-manifest-id/](https://developer.chrome.com/blog/pwa-manifest-id/)
 
 ### 아이콘 생성하기
 
