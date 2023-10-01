@@ -1,7 +1,7 @@
 {
   "short_name": "박종훈 기술블로그",
   "name": "박종훈 기술블로그",
-  "start_url": "/index.html",
+  "start_url": "/",
   "description": "박종훈 기술블로그 - 공부하고 경험한 것을 기록합니다",
   "icons": [
     {
