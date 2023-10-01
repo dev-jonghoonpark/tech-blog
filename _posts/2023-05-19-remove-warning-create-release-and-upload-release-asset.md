@@ -10,6 +10,8 @@ tags:
     workflow,
     release,
     artifacts,
+    deprecated,
+    warning,
   ]
 date: 2023-05-19 13:00:00 +0900
 ---
