@@ -171,3 +171,6 @@ app/build/outputs/apk/release/app-release.apk 에 있다.
 # 참고
 
 [Github에서 Keystore를 Secret Key로 반영하기(feat. Android)](https://blog.soobinpark.com/232)
+
+이 코드는 다음글에서 조금 더 개선되었습니다.
+[Github Action - create-release, upload-release-asset warning 제거하기](/2023/05/19/remove-warning-create-release-and-upload-release-asset)
