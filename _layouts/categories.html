@@ -1,0 +1,35 @@
+---
+layout: default
+title: Categories
+---
+
+<style>
+	.categories ul {
+		list-style: none;
+	}
+
+	.categories li {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+	}
+
+	.categories li a {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-decoration: none;
+	}
+</style>
+
+<section class="categories">
+	<h1>{{ page.title }}</h1>
+  <ul>
+    {% for category in site.categories %}
+    <li>
+      <li><a href="/category/{{ category | first }}/">{{ category[0] }} ({{ category | last | size }})</a></li>
+    </li>
+    {% endfor %}
+  </ul>
+</section>

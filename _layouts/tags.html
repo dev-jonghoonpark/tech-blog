@@ -3,13 +3,31 @@ layout: default
 title: Tags
 ---
 
-<section class="posts">
-	<h1>{{ page.title }}</h1>
-{% assign tags = site.tags | sort %}
-<ul>
-{% for tag in tags %}
- <li><a href="/tag/{{ tag | first | slugify }}/">{{ tag[0] | replace:'-', ' ' }} ({{ tag | last | size }}){% unless forloop.last %}, {% endunless %}</a></li>
-{% endfor %}
-</ul>
+<style>
+	.tags ul {
+		list-style: none;
+	}
 
+	.tags li {
+		margin-bottom: 0.5rem;
+		margin-right: 0.25rem;
+    display: inline-block;
+	}
+
+	.tags li a {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-decoration: none;
+	}
+</style>
+
+<section class="tags">
+	<h1>{{ page.title }}</h1>
+	{% assign tags = site.tags | sort %}
+	<ul>
+		{% for tag in tags %}
+		<li><a href="/tag/{{ tag | first }}/">{{ tag[0] }} ({{ tag | last | size }}){% unless forloop.last %}, {% endunless %}</a></li>
+		{% endfor %}
+	</ul>
 </section>
