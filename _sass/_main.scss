@@ -229,8 +229,8 @@ h1 {
 
 @media screen and (max-width: 45rem) {
   header li {
-    display: inline;
-    margin-right: 0.5rem;
+    display: flex;
+    margin-right: 0;
   }
   .logo {
     padding-bottom: 1rem;
@@ -240,7 +240,11 @@ h1 {
     padding-bottom: 2rem;
   }
   nav ul {
-    border-right: 0px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+    gap: 0.5rem;
+    border-right: 0;
   }
 
   .photos ul {
