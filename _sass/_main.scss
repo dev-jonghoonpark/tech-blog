@@ -218,6 +218,10 @@ h1 {
   font-size: 28px;
 }
 
+.post a {
+  overflow-wrap: break-word;
+}
+
 .post li {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;

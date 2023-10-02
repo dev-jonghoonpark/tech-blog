@@ -92,7 +92,7 @@ date: 2023-10-02 21:00:00 +0900
 
 ![image4](/assets/images/2023-10-02-Fork한-Github-저장소-분리하기/image4.png)
 
-왜 레포지토리를 분리하고 싶냐고 물어보는데 당황할 필요는 없다. 셀렉트 박스를 통해 선택지를 제공해준다. `Contributions to the repository aren't visible`이 첫번째 선택지이였다.
+왜 레포지토리를 분리하고 싶냐고 물어보는데 당황할 필요는 없다. 셀렉트 박스를 통해 선택지를 제공해준다. `Contributions to the repository aren't visible`이 첫번째 선택지였다.
 
 ![image5](/assets/images/2023-10-02-Fork한-Github-저장소-분리하기/image5.png)
 
