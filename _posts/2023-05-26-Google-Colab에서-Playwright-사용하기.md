@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Google Colab에서 Playwright 사용하기
-categories: [개발]
+categories: [개발, Playwright]
 tags: [Google Colab, Colab, Playwright, E2E, End to End, Python]
 date: 2023-05-26 12:00:00 +0900
 ---
