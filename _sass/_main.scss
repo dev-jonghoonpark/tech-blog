@@ -211,7 +211,7 @@ header ul {
 
 .pagination img {
   width: 24px;
-  height: 24px;  
+  height: 24px;
   display: block;
   padding: 4px;
 }
@@ -252,6 +252,10 @@ h1 {
 .post li {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
+}
+
+.post iframe {
+  max-width: 100%;
 }
 
 @media screen and (max-width: 45rem) {
