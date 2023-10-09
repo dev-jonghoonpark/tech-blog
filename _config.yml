@@ -27,7 +27,7 @@ compress_html:
 
 sass:
   sass_dir: _sass
-  style: :compressed
+  style: compressed
 
 plugins:
   - jekyll-paginate
@@ -63,3 +63,6 @@ social:
   name: jonghoonpark
   links:
     - https://www.linkedin.com/in/dev-jonghoonpark
+
+paginate: 20
+paginate_path: "/page:num/"

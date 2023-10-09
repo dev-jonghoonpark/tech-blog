@@ -193,6 +193,33 @@ header ul {
   font-variant-numeric: tabular-nums;
 }
 
+.pagination {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.pagination .page_number {
+  margin-right: 1rem;
+}
+
+.pagination .page_number .current {
+  font-weight: bold;
+}
+
+.pagination img {
+  width: 24px;
+  height: 24px;  
+  display: block;
+  padding: 4px;
+}
+
+.pagination img.disabled {
+  opacity: 0.3;
+}
+
 main {
   display: flex;
   flex-wrap: wrap;

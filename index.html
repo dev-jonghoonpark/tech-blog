@@ -3,10 +3,35 @@ layout: default
 ---
 
 <section class="posts">
-<ul>
-{% for post in site.posts %}
-<li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%m-%d-%Y" }}</time></li>
-{% endfor %}
-</ul>
-</section>
+  <ul>
+    {% for post in paginator.posts %}
+    <li>
+      <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a
+      ><time datetime="{{ post.date | date_to_xmlschema }}"
+        >{{ post.date | date: "%m-%d-%Y" }}</time
+      >
+    </li>
+    {% endfor %}
+  </ul>
 
+  <!-- Pagination links -->
+  <div class="pagination">
+    <div class="page_number"><span class="current">{{ paginator.page }}</span> of {{ paginator.total_pages }}</div>
+
+    {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}" class="previous">
+      <img src="/assets/icons/next-rtl.svg" alt="previous" />
+    </a>
+    {% else %}
+    <img src="/assets/icons/next-rtl.svg" class="disabled" alt="no-previous"/>
+    {% endif %}
+
+    {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}" class="next">
+      <img src="/assets/icons/next-ltr.svg" alt="next" />
+    </a>
+    {% else %}
+    <img src="/assets/icons/next-ltr.svg" class="disabled" alt="no-next" />
+    {% endif %}
+  </div>
+</section>
