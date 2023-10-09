@@ -1,0 +1,233 @@
+---
+layout: post
+title: 서버에서 google sheet api 사용하기 (with python)
+date: "2023-08-02 02:27:08 +0900"
+categories:
+  - 개발
+tags:
+  - google sheet
+  - google sheet api
+  - sheet api
+  - oauth
+  - service account
+---
+
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">개요</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>어쩌다보니 회사에서 무선 네트워크를 담당하고 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  될 것 이라 기대한 것이 되지 않았을 때 오는 스트레스가 많은 편이라 그런지<br />내가
+  가장 적극적으로 의견을 내었고 실천으로 옮겼다.<br />회사의 무선 네트워크에
+  대한 개선 이야기도 나중에 한 번 블로그로 써보고 싶고, 쓸 예정이다.<br />꽤
+  장기간에 걸쳐서 무선 네트워크를 개선해왔고 현재는 매우 안정적으로 운영되고
+  있다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 이야기를 하는 이유는 오늘 아래와 같은 요청이 있었기 때문이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  우리 회사는 현재 radius를 통한 인증 시스템을 사용하고 있다.<br />(이것도 내가
+  구축하였다.)
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh3.googleusercontent.com/g3J5IhpK241retTBOmJ1aXARlFJh0fHExGkNOs-HQZU_4DGnhQqKAJH2IB-K4knKWo5u3-FwZfngjoyRG30HXvzH4Q0fxFmzV_X3hFh63jjgRO1Qqqt7qiE3tH56Vwr2Xlk64QkQXpLO5lPJMKzgYe0"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  다만 인증 시스템에 대한 관리를 내가 하고 있다 보니<br />구성원 변경이 발생
+  되었을 때 피플팀(인사팀) 에서 나를 거쳐서 구성원을 등록/삭제/수정 을 진행해야
+  했다.<br />그래서 이 작업을 피플팀(인사팀)으로 옮겨 줄 수 있는지에 대한 요청이
+  있었다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그래서 어떻게 하면 좋을지 잠시 고민을 해보았다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  현재의 무선 인증 시스템의 경우<br />우리 회사의 인원이 그렇게 많은 것은 아니기
+  때문에 각 유저에 대한 정보를 plain text로 관리하고 있다.<br />1차적으로는
+  엑셀(google sheet)에 정리해서 실제 인증 서버에 반영하는 형태를 취하고 있다.<br />이
+  과정에서 서버에 접속해서 cli 상에서 내용을 수정하다보니 피플팀(인사팀) 에 바로
+  방법을 설명하기에는 어려움이 있을 것이라 예상되었다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  그래서 먼저는 radius 웹 관리 콘솔을 찾아보았다.<br />정석이기도 하고, 해결책은
+  될 수 있겠지만, 이를 위해 설정해야 하는 것이 배보다 배꼽이 더 커지는
+  느낌이였다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  그래서 스케쥴러를 만들어 google sheet 에 등록된 정보를 기반으로 주기적으로
+  api를 통해 변경된 내용을 수집하고<br />변경된 내용이 있다면 유저 설정 파일을
+  업데이트해주기로 계획을 세웠다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  언어는 파이썬을 선택하였다.<br />그냥 간단한거 만들때는 python이 무난해서
+  그런가<br />python을 잘하는 편은 아니지만 이럴때 사용하고 싶어지는 것 같다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">본문</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">기본 구현</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:image {"id":411,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1.png"
+    alt=""
+    class="wp-image-411"
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  <a href="https://developers.google.com/sheets/api/quickstart/python"
+    >https://developers.google.com/sheets/api/quickstart/python</a
+  >
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  기본적인 구현의 경우 공식문서에 잘 설명이 되어 있기 때문에 딱히 설명해 줄 것은
+  없다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">Range 지정하기</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  <a href="https://developers.google.com/sheets/api/guides/concepts#cell"
+    >https://developers.google.com/sheets/api/guides/concepts#cell</a
+  >
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  내가 가져오고 싶은 데이터 부분을 어떻게 설정해야 할지 애매하다면 위 링크에서
+  A1 notation 부분을 참고하면 된다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh5.googleusercontent.com/mwVzzFKORDZIUlij3Rg81Ab-2oVNQEaxfVdsVPaiiyQKc-s5EqvssJWuS2O1EgIOBRMGN8tina2HFKiM9rkNmHhHXWg00-SSMb_djbAPGKEbj0MqyJ2e7-pTz84zL-xTwelpxUHphmhl50oePAO40BA"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">
+  서버에서 google sheet api 사용하기 (for backend)
+</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>공식 문서에 있는 대로 하면 문제없이 잘 동작한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  다만 한가지 문제인 것이 공식문서에서는 OAuth를 사용하는 방법만 소개하는데<br />이렇게
+  될 경우 브라우저를 통한 계정 인증을 거쳐야 한다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  나는 주기적으로 서버에서 알아서 처리되는 것을 기대하였기 때문에 해당 부분을
+  수정해야 했다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  해결 방법은 간단하다.<br /><strong>service account</strong>로 계정을
+  생성하고<br />그 계정을 통해 API 접근하도록 해주면 된다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  service account를 생성하는 것은 OAuth를 생성하는 것과 크게 다른점이 없기
+  때문에 따로 설명하지는 않는다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>service account를 생성하면 credentials json 파일을 받을 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>해당 파일을 프로젝트 루트로 이동시켜 주자.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">실제 구현</h3>
+<p><!-- /wp:heading --></p>
+<p>
+  <!-- wp:html --><br />
+  <script src="https://gist.github.com/dev-jonghoonpark/51d88bdc9b5643a32990b7f1d05d04da.js?file=index.py"></script>
+  <br />
+  <!-- /wp:html -->
+</p>
+<p><!-- wp:paragraph --></p>
+<p>위와 같은 구조를 가져가면 되고</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p># Call the Sheets API</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>부분에 google spread api 로 처리하는 부분에 대한 로직을 작성하면 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">주의할 점</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  서비스 계정이 google sheet에 추가되었는지 꼭 확인하자.<br />권한이 없으면
+  접근할 수 없다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":409,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image3-1.png"
+    alt=""
+    class="wp-image-409"
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>조회만 하므로 viewer 권한으로 주었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":1} --></p>
+<h1 class="wp-block-heading">참고</h1>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  <a
+    href="https://denisluiz.medium.com/python-with-google-sheets-service-account-step-by-step-8f74c26ed28e"
+    >https://denisluiz.medium.com/python-with-google-sheets-service-account-step-by-step-8f74c26ed28e</a
+  >
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>fin.</p>
+<p><!-- /wp:paragraph --></p>

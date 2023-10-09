@@ -1,0 +1,236 @@
+---
+layout: post
+title: 6장 단위 테스트 스타일 - 함수형 아키텍처
+date: '2023-07-13 14:59:45 +0900'
+categories:
+- 테스트
+tags:
+- 테스트
+- test
+- unit test
+- test style
+- 테스트 스타일
+- 함수형 아키텍처
+- functional architecture
+---
+<p><!-- wp:paragraph --></p>
+<p>단위테스트 (블라디미르 코리코프)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p>아래 내용에서 이어지는 글입니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><a href="https://jonghoonpark.com/unit-test-style">https://jonghoonpark.com/unit-test-style</a><br><a href="https://jonghoonpark.com/unit-test-style-comparison">https://jonghoonpark.com/unit-test-style-comparison</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">3. 함수형 아키텍처 이해</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>함수형 아키텍처의 기본 원리에 대해서 설명한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">3.1 함수형 프로그래밍이란</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>함수형 프로그래밍은 수학적 함수(mathematical function, 순수 함수 라고도 함)를 사용한 프로그래밍이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>[Note] 순수 함수는 다음 속성을 갖는 함수입니다.<br>- 함수 반환 값은 동일한 인수에 대해 동일합니다<br>- 함수에는 사이드 이펙트가 없습니다<br>(로컬 정적 변수, 비로컬 변수, 가변 참조 인수 또는 입력/출력 스트림의 변형 없음).<br>출처 : <a href="https://en.wikipedia.org/wiki/Pure_function">https://en.wikipedia.org/wiki/Pure_function</a> </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>수학적 함수는 숨은 입출력이 없는 함수(또는 메서드)다. 수학적 함수의 모든 입출력은 메서드 이름, 인수, 반환 타입으로 구성된 메서드 시그니처(method signature)에 명시해야 한다. 수학적 함수는 호출 횟수에 상관없이 주어진 입력에 대해 동일한 출력을 생성한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>수학적 함수의 예시는 다음과 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td><strong>public</strong> <strong>decimal</strong> CalculateDiscount(Product[] products)<br>{<br>&nbsp; &nbsp; <strong>decimal</strong> discount = products.Length * 0.1m;<br>&nbsp; &nbsp; <strong>return</strong> Math.Min(discount, 0.m);<br>}</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 메서드는 하나의 입력(Product 배열)과 하나의 출력(decimal 타입의 discount)이 있으며, 둘 다 메서드 시그니처에 명시돼 있다. 이로써 CalculateDiscount()는 수학적 함수가 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"width":780,"height":298} --></p>
+<figure class="wp-block-image is-resized"><img src="https://lh5.googleusercontent.com/HphOlmecH2JwJTSwTETPgaSBtXR4QvK0CdCCRaGugj8E6Eme1aSeynjN85rUodviUytRhFLHxnKK63_NgGLyEJt9A3gGZAz3XGGkrnn_vn50PV17yGxtJn8DslfUI0snHCchjCIEnEKBraLZq3K3AbnHOz-jylxehVIYsz1r0eV5Td12u2hp3iKYlG9fSA" alt="" width="780" height="298"/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>숨은 입출력이 없는 메서드는 수학에서 말하는 함수의 정의를 준수하기 떄문에 수학적 함수라고 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>[Note] 수학에서의 함수는 첫 번째 집합의 각 요소에 대해 두 번째 집합에서 정확히 하나의 요소를 찾는 두 집합 사이의 관계다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"width":472,"height":362} --></p>
+<figure class="wp-block-image is-resized"><img src="https://lh6.googleusercontent.com/2yemTmFV4uWbAm2yjPLIUirZagDCEVSvUsihwVc_HONfiya8lHM7h38Syd247r-QIuQOe1iVL9e1LMbIxVRzQzM8F_167ALn5K9gAz4Uxdjrl2luI83z4tM2rGOhiG3-Orr_fG6wt1HSySncy51J32Bv7wNT-CJUhVuGCYZkzz_fkXydvBYKvM5OCdPetQ" alt="" width="472" height="362"/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>입출력을 명시한 수학적 함수는 이에 따르는 테스트가 짧고 간결하며 이해하고 유지 보수하기 쉬우므로 테스트하기가 매우 쉽다. 출력 기반 테스트를 적용할 수 있는 메서드 유형은 수학적 함수뿐이다. 이는 유지 보수성이 뛰어나고 거짓 양성 빈도가 낮다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>반면에 숨은 입출력은 코드를 테스트하기 힘들게 한다(가독성도 떨어짐). 숨은 입출력의 유형은 다음과 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>사이드 이펙트</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>사이드 이펙트는 메서드 시그니처에 표시되지 않은 출력이며, 따라서 숨어있다.&nbsp;</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>예외</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>메서드가 예외를 던지면, 프로그램 흐름에 메서드 시그니처에 설정된 계약을 우회하는 경로를 만든다. 호출된 예외는 호출 스택의 어느 곳에서도 발생할 수 있으므로, 메서드 시그니처가 전달하지 않은 출력을 추가한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>내외부 상태에 대한 참고</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>DateTime.Now와 같이 정적 속성을 사용해 현재 날짜와 시간을 가져오는 메서드가 있을 수 있다. 데이터베이스에서 데이터를 질의할 수 있고, 비공개 변경 가능 필드를 참조할 수도 있다. 이 모두 메서드 시그니처에 없는 실행 흐름에 대한 입력이며, 따라서 숨어있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>메서드가 수학적 함수인지 판별하는 가장 좋은 방법은 프로그램의 동작을 변경하지 않고 해당 메서드에 대한 호출을 반환 값으로 대체할 수 있는지 확인하는 것이다. 메서드 호출을 해당 값으로 바꾸는 것을 참조 투명성(referential transparency)이라고 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>예를 들면 아래와 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td><strong>public</strong> <strong>int</strong> <strong>Increment</strong>(<strong>int</strong> x)<br>{<br>&nbsp; &nbsp; <strong>return</strong> x+1;<br>}</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 메서드는 수학적 함수다. 다음 두 구문은 서로 동일하다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td>int y = Increment(4);<br>int y = 5;</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>반면 다음 메서드는 수학적 함수가 아니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>반환 값이 메서드의 출력을 모두 나타내지 않으므로 반환 값으로 대체할 수 없다. 이 예제에서 숨은 출력은 필드 x의 변경(사이드 이펙트)이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td><strong>int</strong> x = 0;<br><strong>public</strong> <strong>int</strong> <strong>Increment</strong>()<br>{<br>&nbsp; &nbsp; x++;<br>&nbsp; &nbsp; <strong>return</strong> x;<br>}</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>사이드 이펙트는 숨은 출력의 가장 일반적인 유형이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>다음 예제는 겉으로 수학적 함수처럼 보이지만, 실제로 그렇지 않은 AddComment 메서드를 보여준다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td>public Comment AddComment(string text)<br>{<br>&nbsp; &nbsp; var comment = new Comment(text);<br>&nbsp; &nbsp; _comments.Add(comment); <em>// 사이드 이펙트</em><br>&nbsp; &nbsp; return comment;<br>}</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">3.2 함수형 아키텍처란?</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>물론 어떤 사이드 이펙트도 일으키지 않는 애플리케이션을 만들 수는 없다.</strong><br><strong>함수형 프로그래밍의 목표는 사이드 이펙트를 완전히 제거하는 것이 아니라 비즈니스 로직을 처리하는 코드와 사이드 이펙트를 일으키는 코드를 분리하는 것이다.</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>모든 곳에서 고려한다면 복잡도가 배가되고 장기적으로 코드의 유지 보수성을 방해한다. 사이드 이펙트를 비즈니스 연산 끝으로 몰아서 비즈니스 로직을 사이드 이펙트와 분리한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>[Note] 항수형 아키텍처는 사이드 이펙트를 다루는 코드를 최소화하면서 순수 함수(불변) 방식으로 작성한 코드의 양을 극대화 한다. ‘불변(immutable)’이란 변하지 않는 것을 의미한다. 일단 객체가 작성되면 그 상태는 바꿀 수 없다. 이는 생성 후 수정할 수 있는 변경 가능한(mutable) 객체와 대조적이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>다음 두 가지 코드 유형을 구분해서 비즈니스 로직과 사이드 이펙트를 분리할 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>결정을 내리는 코드</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 코드는 사이드 이펙트가 필요 없기 떄문에 수학적 함수를 사용해 작성할 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>해당 결정에 따라 작용하는 코드</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 코드는 수학적 함수에 의해 이뤄진 모든 결정을 데이터베이스의 변경이나 메시지 버스로 전송된 메시지와 같이 가시적인 부분으로 전환한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>결정을 내리는 코드는 종종 함수형 코어(functional code) 또는 불변 코어(immutable core)라고도 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>해당 결정에 따라 작용하는 코드는 가변 셸(mutable shell)이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh6.googleusercontent.com/2xNEvSodjD3kp88rTOy4kUQOdpxxlCscBGENh5I-P_Qwvcp0m19QPrkdl_RNaVdpCGXfJU_5Xj02VHjweaOH_xG9gXwAexdpGrhhB98I4m4-rLNJE0bkeMSVfz9r4TJVO0QGvNhYvx5oTgNiYLx60EYc2g3UIzFQWu2RhRPXzUx6V2u0u4UZDYQ9VZMbaQ" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>함수형 코어와 가변 셸은 다음과 같은 방식으로 협력한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 가변 셸은 모든 입력을 수집한다.<br>- 함수형 코어는 결정을 생성한다.<br>- 셸은 결정을 사이드 이펙트로 반환한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 두 계층을 계속 잘 분리하려면, 가변 셸이 의사 결정을 추가하지 않게끔 결정을 내는 클래스에 정보가 충분히 있는지 확인해야 한다. 다시 말해, 가변 셸은 가능한 한 아무 말도 하지 않아야 한다. 목표는 출력 기반 테스트로 함수형 코어를 두루 다루고 가변 셸을 훨씬 더 적은 수의 통합 테스트에 맡기는 것이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">3.3 함수형 아키텍처와 육각형 아키텍처 비교</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>함수형 아키텍처와 육각형 아키텍처는 비슷한 점이 많다. 둘 다 관심사 분리라는 아이디어를 기반으로 한다. 그러나 분리를 둘러싼 구체적인 내용은 다양하다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>육각형 아키텍처는 도메인 계층과 애플리케이션 서비스 계층을 구별한다. 도메인 계층은 비즈니스 로직에 책임이 있는 반면, 애플리케이션 서비스 계층은 데이터베이스나 SMTP 서비스와 같이 외부 애플리케이션의 통신이 책임이 있다. 이는 결정과 실행을 분리하는 함수형 아키텍처와 매우 유사하다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>또 다른 유사점은 의존성 간의 단방향 흐름이다. 육각형 아키텍처에서 도메인 계층 내 클래스는 서로에게만 의존해야 한다. 애플리케이션 서비스 계층의 클래스에 의존해서는 안된다. 마찬가지로 함수형 아키텍처의 불변 코어는 가변 셸에 의존하지 않는다. 자급할 수 있고 외부 계층과 격리돼 작동할 수 있다. 이로 인해 함수형 아키텍처를 테스트하기 쉽다. 가변 셸에서 불변 코어를 완전히 떼어내 셸이 제공하는 입력을 단순한 값으로 모방할 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 둘의 차이점은 사이드 이펙트에 대한 처리에 있다. 함수형 아키텍처는 모든 사이드 이펙트를 불변 코어에서 비즈니스 연산 가장자리로 밀어낸다. 이 가장자리는 가변 셸이 처리한다. 반면 육각형 아키텍처는 도메인 계층에 제한하는 한, 도메인 계층으로 인한 사이드 이펙트도 문제없다. 육각형 아키텍처의 모든 수정 사항은 도메인 계층 내에 있어야 하며, 계층의 경계를 넘어서는 안 된다. 예를 들어 도메인 클래스 인스턴스는 데이터베이스에 직접 저장할 수 없지만, 상태는 변경할 수 있다. 애플리케이션 서비스에서 이 변경 사항을 데이터베이스에 적용한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>[Note] 함수형 아키텍처는 육각형 아키텍처의 하위 집합이다. 극단적으로는 함수형 아키텍처를 육각형 아키텍처로 볼 수도 있다.</p>
+<p><!-- /wp:paragraph --></p>

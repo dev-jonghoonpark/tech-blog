@@ -1,0 +1,635 @@
+---
+layout: post
+title: 소나큐브 설치하기 (with Docker, macOS)
+date: "2023-08-02 01:32:14 +0900"
+categories:
+  - 개발
+tags:
+  - 테스트
+  - testing
+  - macos
+  - sonarqube
+  - 정적 테스트
+  - docker
+  - bitbucket
+  - 소나큐브
+---
+
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">개요</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  최근에 devops 님께 3개의 sonarqube 프로젝트를 생성해달라는 요청을 드렸었다.<br />devops
+  님께는 항상 감사한 마음을 가지고 있다. 참 수고가 많으신 것 같다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>요청 드린것은 요청 드린 것이고</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>한번쯤은 직접 어떤 과정을 통해 진행되는지 확인해보고 싶었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>참고로 소나큐브는</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:quote --></p>
+<blockquote class="wp-block-quote">
+  <p><!-- wp:paragraph --></p>
+  <p>
+    20개 이상의 프로그래밍 언어에서 버그, 코드 스멜, 보안 취약점을 발견할
+    목적으로 <strong>정적 코드 분석</strong>으로 자동 리뷰를 수행하기 위한
+    지속적인 코드 품질 검사용 오픈 소스 플랫폼이다
+  </p>
+  <p><!-- /wp:paragraph --></p>
+</blockquote>
+<p><!-- /wp:quote --></p>
+<p><!-- wp:paragraph --></p>
+<p>라고 위키피디아에 소개되어있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">본문</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">설치 환경</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  이 글에서는 Docker를 이용해서 설치하며, 로컬에 설치하기 때문에 macOS 를
+  기반으로 설명을 진행한다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">진행 순서</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">1. 도커 이미지 pull &amp; run</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  공식홈페이지에 이미지에 따른 pull 명령어가 정리되어 있다.<br /><a
+    href="https://www.sonarsource.com/products/sonarqube/deployment/"
+    >https://www.sonarsource.com/products/sonarqube/deployment/</a
+  >
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  나는 커뮤니티 버전을 사용할 예정이기 때문에 아래와 같은 명령어로 이미지를
+  받아왔다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre
+  class="wp-block-code"
+><code>docker pull sonarqube:10.1.0-community</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>다운로드(pull)가 다 되었으면 실행시키면 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  소나 큐브는 웹 콘솔이 있는데 9000 포트를 기본적으로 사용하는 것으로
+  확인되었다.<br /><a
+    href="https://github.com/SonarSource/sonar-.net-documentation/blob/master/doc/installation-and-configuration.md"
+    >https://github.com/SonarSource/sonar-.net-documentation/blob/master/doc/installation-and-configuration.md</a
+  ><br />그래서 port forwarding 옵션과 함께 실행시켜 주었다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre
+  class="wp-block-code"
+><code>docker run -d --name sonarqube -p 9000:9000 sonarqube</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>참고로 d 옵션은 아래와 같은 의미이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>-d : detached</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:quote --></p>
+<blockquote class="wp-block-quote">
+  <p><!-- wp:paragraph --></p>
+  <p>[Note]</p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>Docker가 실행되지 않고 있다면 아래와 같은 에러가 발생된다.</p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>
+    Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the
+    docker daemon running?
+  </p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>
+    App 에 들어가서 도커(데스크탑)을 gui로 실행 해줘도 되겠지만 이미 cli에
+    들어와 있는 상태이니 명령어로 실행시켜주자.
+  </p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>open -a Docker</p>
+  <p><!-- /wp:paragraph --></p>
+</blockquote>
+<p><!-- /wp:quote --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">2. 웹 콘솔 접속하기</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  아무튼 성공적으로 실행이 되면 브라우저에서 localhost:9000 로 접속해주면 된다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>처음 접속하면 세팅을 진행하는데 기다리면 로딩 후 로그인 화면이 나온다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  기본 계정 정보는 admin/admin 이다. (document 도 안찾아보고 그냥 때려봤는데
+  맞았다.)
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>섬세하게 기본 비밀번호를 변경하도록 유도해주니 적당히 변경해주자.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">3. Git 서비스 계정 연동하기</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>로그인 이후의 메인 화면은 다음과 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  아직 연결된 프로젝트가 하나도 없는 첫 접속상태라 그런지 친절하게 어떤 서비스
+  연결할것인지 물어본다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh6.googleusercontent.com/k-G4Luhi-gEanFkhAAysaGAAqLbP1jxnl1xfXI--_Tun39Pm_3UHD5jiN7yIIZVG1eQkgestRj8c6VMkFQVkRbLyONWMRbeSi41V3Xc2sKmBw19m3s8TknroVbZ9Kfp2zNjlTF70POJ4xLipbAgzerQ"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  우리 회사는 bitbucket을 쓰고 있기 때문에 bitbucket을 기준으로 설명을 한다.<br />repository와
+  굳이 연결하지 않아도 된다 싶으면 Manually 을 선택하면 되는 것으로 보인다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  중간중간에 필요한 설명들을 잘 적어두었기 때문에 놓치지 않고 꼼꼼히 잘 읽으면
+  한번에 진행할 수 있다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh3.googleusercontent.com/PQpfwS67LzxIiDXUlt6XQMu7-nTNBk5xY3J5UuBOV9AO3pXjI9aPReWuRJj6PCufMaYLwF46tZbjA8UhQHWt--qlcbQ7aR-SC98fyi_S-A_O6SjXaRr-jW7FCFR2ycEVivIEGmdpP_jK45RAb0pu0UU"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  OAuth Key 발급과 관련해서는 파란색 부분에 잘 적혀있다.<br /><a
+    href="https://support.atlassian.com/bitbucket-cloud/docs/use-oauth-on-bitbucket-cloud/"
+    >https://support.atlassian.com/bitbucket-cloud/docs/use-oauth-on-bitbucket-cloud/</a
+  >
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  bit bucket 페이지에서 우측 상단의 프로필 버튼을 누르면 아래와 같은 드롭다운
+  메뉴가 나오게 된다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>여기서 All workspaces 를 클릭하자.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":393,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image11.png"
+    alt=""
+    class="wp-image-393"
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>그러면 내가 접근 가능한 워크스페이스 목록을 볼 수 있다. </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":396,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image18.png"
+    alt=""
+    class="wp-image-396"
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  여기서 회사 워크스페이스의 경우에는 내가 수정할 권한이 없기 때문에 Manage
+  버튼이 보이지 않았다.<br />그래서 진행 가능한 개인 계정으로 진행하였다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  Manage 버튼을 누르면 아래같은 화면이 나오게 되는데 좌측 메뉴에서 아래로 내려가
+  OAuth consumers 메뉴를 클릭한다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":397,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image6.png"
+    alt=""
+    class="wp-image-397"
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>Add Consumer 를 해준다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh3.googleusercontent.com/7ChXjmmcG-xUo-zUM1nmwH34DvEvPR66-aBkrEPXP8YYjWXRlUuydaQDzn2Oph85HkLJJ0YqnrhNve1XwkhTNhWUL70zn-jLbiIW9eQ95pxpnB8gV86Cq8bDPq8U-XoX7HCORjTZCFLIcs6_w0lbAKc"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>아래와 같은 입력폼이 나오는데 위에서 본 설명을 참고해서 작성하면 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh3.googleusercontent.com/lahTF3WjKgMuB-p99OqxoxgXwbOfamUf7KDhMc0JxTd2ju-a7zszNEJUCu-ZQ3YyBxWj9SuZBJ2gPoOi1D-18uLTPkhYerRro_sbZu8E2nBK4R3EQbDByRULStOq1RgtPiJlTgkxawAXAjrJqKBvb2w"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh3.googleusercontent.com/jmmLY0I4GhcIrLx2ucFqwiHY1iAJ8x7jAS7tVXzejSrE-p8IbO5Ksdc1d7KPjY92Zpz5vdLWyoVy0oMnnn-FvSHOFMLzqJDg3OeHQ9PWhQ2H5NrXkHaBbvLSmTJ84Emg-kfzrNsTtF_OQTmDki1l_Gc"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>- Name 체크</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  - Callback URL 입력 (sonarqube에서 callback을 사용하지는 않지만 입력해야
+  한다고 명시되어 있다. 입력하지 않으면 중간 과정에서 막히기 때문에 아무 주소나
+  입력하면 된다. 작성자의 경우에는 그냥 블로그 주소를 적었다.
+  <a href="https://jonghoonpark.com">https://jonghoonpark.com</a> )
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>-&nbsp; This is private consumer 체크</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  권한은 Pull Requests: Read 만 체크 하면 된다.<br />Repositories: Read 도
+  필요하지 않을까 했는데 Pull Requests: Read 를 하면 자동으로 선택 되었다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이후 저장을 하면 아래와 같이 키 값과 시크릿 값이 생성이 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":398,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image4.png"
+    alt=""
+    class="wp-image-398"
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 키 값과 시크릿 값을 다시 소나큐브로 돌아가서 입력하면 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:quote --></p>
+<blockquote class="wp-block-quote">
+  <p><!-- wp:paragraph --></p>
+  <p>[Note]</p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>Callback을 입력하지 않으면 이렇게 에러가 나서 진행이 막히게 된다.</p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:image --></p>
+  <figure class="wp-block-image">
+    <img
+      src="https://lh5.googleusercontent.com/yBhqRtbLcd4YtZfzEO39nWPcKeL8uhbj-71AfEsJY-yZDhzuISaeQIUc31CH0WMseMrZrVKJhIBYu_rhCDUnIeVPnjoPdZ6NAOmCs_zcwkXpyQ8fNUitepOVJ5jpHzqnBgJUoX7KSNlQ2yzlPSu540w"
+      alt=""
+    />
+  </figure>
+  <p><!-- /wp:image --></p>
+</blockquote>
+<p><!-- /wp:quote --></p>
+<p><!-- wp:paragraph --></p>
+<p>다음 단계로 넘어왔는데 또 뭘 입력하라고 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh6.googleusercontent.com/mFW3V4E0HklSusAdjK0Em56TDheHTy87E_z5Y5311blu77B275uhtQKAHnCFWUnsZpnuSkG5m4OFJHGjBuqEcvpFirtwhLKNruPJXWn5P7Dg7wiU8zTnnnE0gQH22UG5MhcK6uQTx4phGXtueg-lFM4"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>여기서 주의할 점은 app password다. 일반적인 password가 아니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  우측에 힌트를 참고해서 생성해주면 된다.<br /><a
+    href="https://bitbucket.org/account/settings/app-passwords/new"
+    >https://bitbucket.org/account/settings/app-passwords/new</a
+  >
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이번에는 Repositories: Read 권한이 있으면 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh6.googleusercontent.com/EKClDGVW6JBSNKnzFPSQieRcQZzEAR450pW45M1Y_LuURSHAy3TnOJOtwiI8KVcHsuNGxYrxLpWskDNcTpk0FAxKvXsEoMcsDfrsllh7Z6IijwG3shyY2Od1KsS9EwjxA0ziTQh-_KCuN_6akf0PZOE"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>Create 하면 아래와 같이 app password 가 생성된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":404,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image16.png"
+    alt=""
+    class="wp-image-404"
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>한번만 볼 수 있다니 잘 저장해두자.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>생성된 app password로 로그인을 하면 프로젝트 목록이 가져와진다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":399,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image3.png"
+    alt=""
+    class="wp-image-399"
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>(회사랑 관련된 프로젝트들이라 이름을 가렸다)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>원하는 프로젝트에 Set up 버튼을 클릭하자.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">4. 프로젝트 분석하기</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>프로젝트 Set up 버튼을 누르면 아래와 같이 프로젝트 페이지가 생성되고</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  마찬가지로 생성후 첫 접속이기 때문에 어떻게 분석을 처리할지에 대해서 물어본다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":400,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image5.png"
+    alt=""
+    class="wp-image-400"
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>우리 회사는 Jenkins를 사용한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>다만 개인적인 테스트 용도로 하는 것이기 때문에 Locally를 선택하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh5.googleusercontent.com/XC4t5Ac1GS85doo_Xxgcai9KACq3EgaTSSE2S_GKOC23UHd1Y66I7zEtTyRzmSv1B-_rBkoLHzPRm61XP299n4xiXizjyhHPCrvdcoPplOsvMGQsh8nbG-3-0kQ5w-ozz8TceOGwL2pJZsmBm9LdrAk"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>토큰을 생성해주라고 해서 대충 생성해주었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  Generate를 누르면 아래와 같이 토큰이 생성되는데 굳이 기억하거나 어디에 옮겨
+  적을 필요는 없다. 바로 다음에 나온다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":401,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image21.png"
+    alt=""
+    class="wp-image-401"
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  이후에 어떻게 수동으로 분석을 할지에 대해서 환경에 따라 설명을 해주니 본인의
+  환경에 맞게 선택하면된다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>작성자의 경우에는 TS, macOS 여서 그렇게 선택하였다. </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":402,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image13.png"
+    alt=""
+    class="wp-image-402"
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>로컬에서 실행하려면 SonarScanner 라는걸 설치해야 하는 모양이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh6.googleusercontent.com/kFCtxUL8PXx9XrPnnTTmW1gZ34_eQpjwL6VqetnRmCZ4ucfcS7UoGs1LqgqdSR7Ukrsc2zlb4FRz478OlkjgBVGEx0S_KDB9d8ZkLtAY8uPmSOxAmJS0sYtBp65az9KeE4fcLQCs3rFyYQmnNlJkyNg"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>다운로드 해서 적당한 위치에 풀어주고 환경변수에 추가해주면 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>작성자의 경우에는</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  vim .zshrc 에<br />export
+  PATH="$PATH:/Users/dev-jonghoonpark/dev/sonar-scanner/bin"<br />추가 후<br />source
+  ~/.zshrc  로 적용하였다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  환경변수 설정이 정상적으로 되었다면 이후 위에서 나온 명령어를 입력해주면
+  분석이 진행 된다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  명령어를 입력할 때는 아무데서나 실행하면 안되고
+  <strong>해당 프로젝트의 경로에서 실행</strong>시켜줘야 했다.<br />나는
+  repository와도 연동 했으니깐 그냥 아무데서나 실행해도 될꺼라고 생각해서 막
+  했는데 착오였다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:quote --></p>
+<blockquote class="wp-block-quote">
+  <p><!-- wp:paragraph --></p>
+  <p>[Note]</p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>
+    분석을 실행하였는데 “개발자를 확인할 수 없기 때문에 ‘java’을(를) 열 수
+    없습니다.” 라고 나와서
+  </p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>설정 - 보안 및 개인 정보 보호 로 가서</p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:image --></p>
+  <figure class="wp-block-image">
+    <img
+      src="https://lh5.googleusercontent.com/2yKRffrgnXb9B-1vERKY082VFBQhuXwvqMROq3ZaXGIpf9f-NVYHC0toN2bObWS9Nl5z-4RqvYSf-VXhcv683cMpjWZ7Ak2f_dA8cAQP1sJK_bvZVghjApti8HWKfdlcYHENe63IcFuFrYvf7WkpkLE"
+      alt=""
+    />
+  </figure>
+  <p><!-- /wp:image --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>“확인 없이 허용” 을 눌러 허용 해주었다.</p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>TMI : Java는 asdf 로 세팅되어있다.</p>
+  <p><!-- /wp:paragraph --></p>
+</blockquote>
+<p><!-- /wp:quote --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh6.googleusercontent.com/E4Y-TfCJjfNckcOtaNOofhmzzpIRl2YufdLpenH7VDCDHpbzNPDMRNl91X-FZYDNHQAImgOYCScWUuP_3Or64V3TF0Bo8rcWlo3Ek80bPPP_42fW3N5rmur8FeYrimho41OTNWPcpi4RZrLEoLF2zkE"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  따로 설정 없이 기본 값으로 분석해본 것 이기에 일단은 별 문제 없는 것으로
+  나왔다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  제대로 된 코드와 제대로 된 sonaqube 설정을 해주면 제대로된 결과가 나올 것이다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>일단 여기까지 알아보는 것이 목적이였기 때문에 여기 까지만 작성해본다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:quote --></p>
+<blockquote class="wp-block-quote">
+  <p><!-- wp:paragraph --></p>
+  <p>[Note]</p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:image --></p>
+  <figure class="wp-block-image">
+    <img
+      src="https://lh4.googleusercontent.com/BGbeJhNwz5uUTc_KdXRhWqpCemclo2uQ0XT4z_wmfB62qcDtIY1J0TMYI01J0gd5L9fm5PT9Dle07NHBjYfU_62dDzf_JEyHMOPpOyyRXWLa4HKEXZBzk3iu7rbhtZJEnSVkqQ44hn71axjLv7D-kFo"
+      alt=""
+    />
+  </figure>
+  <p><!-- /wp:image --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>
+    추가적으로 진행을 하다보면 하단에 임베디드 데이터베이스에 대한 워닝이
+    나온다.
+  </p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>
+    <a href="https://hub.docker.com/_/sonarqube"
+      >https://hub.docker.com/_/sonarqube</a
+    >
+  </p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>
+    도커 문서를 보니 기본 값으로 H2 database를 embedded database로 사용하고
+    있다는것 같다.
+  </p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>설치 가능한 Database로는 MSSQL 과 Oracle 과 PostgreSQL을 제공한다.</p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>
+    <a
+      href="https://docs.sonarsource.com/sonarqube/latest/setup-and-upgrade/install-the-server/"
+      >https://docs.sonarsource.com/sonarqube/latest/setup-and-upgrade/install-the-server/</a
+    >
+  </p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>본인의 인프라 환경에 따라 세팅하면 될 것 같고</p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>
+    Supabase 에서 PostgreSQL을 무료로 제공 받을 수 있는것으로 알고 있어서
+    궁금하면 연결해봐도 좋을 것 같다.
+  </p>
+  <p><!-- /wp:paragraph --></p>
+  <p><!-- wp:paragraph --></p>
+  <p>
+    여기서는 Sonarqube를 실행시켜보는것이 주 목적이기 때문에 Embedded Database로
+    그냥 진행하였다.
+  </p>
+  <p><!-- /wp:paragraph --></p>
+</blockquote>
+<p><!-- /wp:quote --></p>
+<p><!-- wp:paragraph --></p>
+<p>끝.</p>
+<p><!-- /wp:paragraph --></p>

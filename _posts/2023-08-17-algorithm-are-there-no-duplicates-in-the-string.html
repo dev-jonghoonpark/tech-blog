@@ -1,0 +1,54 @@
+---
+layout: post
+title: 문자열이 주어졌을 때, 이 문자열에 같은 문자가 중복되어 등장하는지 확인하는 알고리즘을 작성하라
+date: "2023-08-17 04:50:58 +0900"
+categories:
+  - 알고리즘
+tags:
+  - 알고리즘
+  - 중복
+  - 중복 확인
+  - 버블정렬
+  - 시간복잡도
+  - 정렬
+  - Set
+  - 자료구조
+---
+
+<h3>
+  중복이 없는가: 문자열이 주어졌을 때, 이 문자열에 같은 문자가 중복되어
+  등장하는지 확인하는 알고리즘을 작성하라 자료구조를 추가로 사용하지 않고 풀 수
+  있는 알고리즘 또한 고민하라.
+</h3>
+<p>set을 이용해서 해결할 수 있다.</p>
+<pre><code>def has_duplicate_chars(s):
+    seen_chars = set()
+    for char in s:
+        if char in seen_chars:
+            return True
+        seen_chars.add(char)
+    return False
+
+# 예시
+input_str = &quot;abcdefg&quot;
+print(has_duplicate_chars(input_str))  # 출력: False
+
+input_str = &quot;hello&quot;
+print(has_duplicate_chars(input_str))  # 출력: True</code></pre>
+<p>이렇게 구현할 경우 시간복잡도는 O(n) 이다.</p>
+<hr />
+<p>
+  자료구조를 사용하지 않고 문제를 해결하려면<br />
+  버블정렬 하는 것 처럼 한 글자씩 해서 순차적으로 같은 글자가 있는지 검사 하면
+  된다. 이 때 시간복잡도는 O(n^2) 이다.
+</p>
+<p>
+  <img
+    src="http://jonghoonpark.com/wp-content/uploads/2023/08/Bubble_sort_animation.gif"
+    alt="bubble sort gif - wikipedia"
+  />
+</p>
+<p>
+  아니면 정렬을 시키고 그 이후에 인접한 문자를 검사하는 방법도 있다.<br />
+  이렇게 하면 시간복잡도를 O(n log n) 로 낮출 수 있다.
+</p>

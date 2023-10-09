@@ -1,0 +1,292 @@
+---
+layout: post
+title: playwright 를 이용해 디시인사이드 크롤링 해보기 (python)
+date: '2023-07-24 02:28:09 +0900'
+categories:
+- 개발
+tags:
+- 자동화
+- playwright
+- crawling
+- 플레이라이트
+- 크롤링
+- 스크린샷
+- automation
+- screenshot
+- 디시인사이드
+- dcinside
+---
+<p><!-- wp:heading {"level":1} --></p>
+<h1 class="wp-block-heading">발단</h1>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh4.googleusercontent.com/sZLUTayHVwSL5LLkyCjB8Ym8C3L2je5XRmQM0EqDrmZGcURCLaUyLJt0T6Osavq7Sli4VqlU9CXUnf-e7fWlHjCLIGHTiox7DkJMQJ2Z4ixksiAAyMkng6Hak6cD-PfwHoUctko-oVyl36Jf7GeTuFU" alt=""/><br />
+<figcaption class="wp-element-caption">출처: https://pixabay.com/vectors/gui-interface-internet-program-2457113/</figcaption>
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>디시인사이드의 특정 갤러리의 게시글들을 주기적으로 백업을 해서 보고 싶었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>요구사항은</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 주기적으로 새로운 게시글을 조회하여 백업 (이전 글들은 굳이 다시 조회할 필요 없음)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 백업한 게시글은 dcinside를 거치지 않고 자체적으로 다시 볼 수 있어야 함</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이렇게 두 가지 였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":1} --></p>
+<h1 class="wp-block-heading">구현 방식 고민</h1>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>나는 playwright 라는 도구를 사랑한다.<br>회사에서는 playwright node.js 버전을 사용하고 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그런데 어쩐 일인지 과거의 나는 python 으로 뭔가를 만들어보고 싶어했던것 같고<br>클라우드 한 구석에 playwright python 을 이용한 자동화 시스템이 있었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 시스템은 문제없이 잘 돌아가고 있었기에 기존 시스템의 연장선 느낌으로 개발을 원했다.<br>그래서 나는 python에 그렇게 익숙한 편은 아니지만 이번 작업도 playwright python 으로 개발을 하기로 마음 먹었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>참고로 실행 환경은 ubuntu 이다.<br>서버는 oracle cloud 를 사용하였는데<br>개인적인 용도로 서버가 필요할 때 oracle cloud의 무료 인스턴스가 정말 좋다.<br>주변 사람들에게 적극 추천하고 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>사용을 위해 설치가 필요한 항목들이 좀 있다<br>기본 세팅은 <a href="https://jonghoonpark.com/use-playwright-in-google-colab">https://jonghoonpark.com/use-playwright-in-google-colab</a> 를 참고하면 좋을 것 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>playwright python으로 백업본을 생성시키고<br>백업본이 생성 될 때마다 telegram 으로 전달을 해주고 볼 수 있도록 하도록 해보자 생각을 하였다. </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":1} --></p>
+<h1 class="wp-block-heading">telegram bot 생성해주기</h1>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>봇을 생성하는 방법은 간단하다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>telegram은 botfather 라는 봇을 이용해서<br>사용자가 bot을 생성할 수 있도록 하였다. </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><a href="https://t.me/botfather">https://t.me/botfather</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>위 링크로 들어가서 botfather와 상호작용을 할 수 있다.<br>메뉴 기반으로 해서 진행할 수 있기 때문에 안내에 따라서 생성해주면 된다. <br>token 값을 잘 보관해두면 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":1} --></p>
+<h1 class="wp-block-heading">playwright 구현하기</h1>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>위에서 언급한대로<br><a href="https://jonghoonpark.com/use-playwright-in-google-colab">https://jonghoonpark.com/use-playwright-in-google-colab</a><br>이 세팅을 기반으로 한다.<br>필요한 것들을 설치해주자.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>대부분의 사이트는 user-agent 와 referer 를 잘 설정해주면 크게 문제없이 접근이 가능하다.&nbsp;</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>user-agent 의 경우 generate 해주는 사이트를 활용해도 되고<br>나의 경우에는 적당히 내 것을 가져다 쓰는 편인것 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>다음과 같이 header를 설정해주었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>await page.set_extra_http_headers({
+    "Connection" : "keep-alive",
+    "Cache-Control" : "max-age=0",
+    "sec-ch-ua-mobile" : "?0",
+    "DNT" : "1",
+    "Upgrade-Insecure-Requests" : "1",
+    "User-Agent" : "YOUR_USER_AGENT",
+    "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+    "Sec-Fetch-Site" : "none",
+    "Sec-Fetch-Mode" : "navigate",
+    "Sec-Fetch-User" : "?1",
+    "Sec-Fetch-Dest" : "document",
+    "Accept-Encoding" : "gzip, deflate, br",
+    "Accept-Language" : "ko-KR,ko;q=0.9",
+    "Referer": "https://gall.dcinside.com/"
+})</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p>접근에 성공하였다면 이제 다음 고민을 할 차례이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>내가 원하는 페이지에 접근하였을 때 어떻게 데이터를 저장할지에 대해서도 고민이 필요하다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>처음에는 html을 통채로 저장하고, 여기서 필요한 리소스들도 수동으로 찾아내서 각각 파일로 저장을 해둘까 생각도 해봤고</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그 다음은 playwright 에서 제공하는 trace 기능(<a href="https://playwright.dev/docs/trace-viewer">https://playwright.dev/docs/trace-viewer</a>) 을 이용하여 모든 네트워크 패킷과 화면 구성 과정을 저장할까도 생각해보았는데 그렇게 까지 해야하나 생각이 들었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>최종적으로는 게시글 영역만 딱 스크린샷으로 남기는 방향을 선택하였다.<br>playwright는 스크린샷 기능(https://playwright.dev/docs/screenshots)을 제공한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>각각의 게시글을 스크린샷으로 남긴다면 이에 대한 저장소를 고려해야 하지만<br>텔레그램의 경우 저장소에 제한이 없기 때문에 문제가 없이 사용이 가능할 것이라 판단했다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>또 게시글 백업은 이후 데이터 분석같은 추가 가공으로 이어지는 것이 아니라 내가 개인적으로 보고 싶어서 하는 것이라 스크린샷만 있어도 문제가 없기도 했다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>다만 스크린샷으로 남기는 것이다보니 불필요한 요소들도 화면에 담기는 문제가 있었다.<br>그래서 아래와 같이 코드를 작성하여 광고와 같은 부분들을 display: none; 처리를 해주고<br>이후에 내가 필요한 부분(#container) 만 스크린샷으로 가져왔다.<br>(fullpage 로 스크린샷을 찍으려 하면 실패빈도가 높았다.)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code># hide unnecessary content
+await page.evaluate('() => document.querySelectorAll("iframe").forEach(iframe => iframe.setAttribute("style", "display: none"))')
+await page.evaluate('() => document.querySelector("#container > section > article:last-child").setAttribute("style", "display: none")')
+buffer = await page.locator("#container").screenshot();</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>playwright 의 screenshot은 경로를 지정하여 파일로 바로 저장할 수도 있지만</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>나는 어처피 telegram 으로 보내줄 예정이기 때문에 buffer 형태로 받았다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":1} --></p>
+<h1 class="wp-block-heading">어떻게 어디까지 읽었는지를 체크하게 할 것인가.</h1>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 부분은 local 에 파일을 만들어 처리하기로 하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>처음에는 파이어베이스 실시간 데이터 베이스 와 같은 방식도 고려해보려 했으나, 당장 이 시스템이 다른 시스템/플랫폼 과 연동되거나 할 필요는 없었기에 local 파일을 만들어 관리하는 것으로 마음을 정했다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>latest_id_pointer.json 이라는 파일을 생성하여 id를 저장하게 하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>크롤링 시작 시 해당 값을 불러오고</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>with open("{0}/{1}".format(pathlib.Path(__file__).parent.resolve(), "latest_id_pointer.json")) as json_file:
+    latest_id_pointer = json.load(json_file)&#91;"latest_id_pointer"];</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>게시글 id (num) 값이 latest_id_pointer 보다 작거나 같으면 (이미 거친 글이면) continue를 통해 무시하고 다음 동작을 하도록 처리했다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>for tr in await page.locator("table.gall_list tbody tr.us-post").all():
+     num = await tr.locator("td.gall_num").text_content()
+     num = int(num)
+
+     if num &lt;= latest_id_pointer:
+         continue</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>크롤링을 성공적으로 마쳤으면 현재 크롤링을 마친 게시글 id (num)으로 업데이트를 처리한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>with open("{0}/{1}".format(pathlib.Path(__file__).parent.resolve(), "latest_id_pointer.json"), "w") as json_file:
+    json.dump({"latest_id_pointer": article&#91;"num"]}, json_file)</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":1} --></p>
+<h1 class="wp-block-heading">telegram bot api 처리</h1>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 부분에서 조금 헤맸다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>python telegram bot api 문서는 항상 볼 때 마다 나에게는 그렇게 친절하지 못하다는 인상을 주었고, 최근에 변경사항도 있는 것으로 보였다 (블로그 글에 적혀있는 코드들은 그렇게 잘 동작하지 못했다.)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그래도 많은 기능을 요구하는 것은 아니기 때문에 몇번 시도해 보았을 때 금방 내가 원하는 기능을 구현할 수 있었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>python telegram bot api는<br><a href="https://github.com/python-telegram-bot/python-telegram-bot">https://github.com/python-telegram-bot/python-telegram-bot</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 라이브러리를 사용하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>사용한 부분은 많지 않다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>screenshot까지 정상적으로 진행 되었다면<br>해당 글에 대한 간단한 정보를 caption에 담아 스크린샷을 내 계정(chat_id)으로 보내도록 하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>message = "&#91;{0}] {1}\n{2}".format(article&#91;"num"], article&#91;"title"], article_url)
+
+await bot.send_document(chat_id=YOUR_CHAT_ID, document=buffer, caption=message, filename="screenshot_{0}.png".format(article&#91;"num"]))</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>그리고 만약 실패하였다면 실패한 이유에 대한 부분을 마찬가지로 내 계정(chat_id)으로 보내도록 하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>await bot.send_message(chat_id=YOUR_CHAT_ID, text=str(e))</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>여기 까지 하면 기초적인 구현은 마무리 되었다고 볼 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>내 chat_id의 경우 bot과 상호작용을 해보면 확인 할 수 있다. echo 와 같은 기본 제공 해주는 예제를 응용해보면 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":1} --></p>
+<h1 class="wp-block-heading">어떻게 주기 마다 반복 실행되도록 할 것인가</h1>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>ubuntu 의 자체 cron 기능을 사용하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>0분, 30분에는 기존의 시스템이 동작하는 시간이기 때문에 이 시간을 피해서 동작하게 하고 싶었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그래서 뒷 자리가 5로 끝나는 분에 처리를 하고자 마음 먹었다.<br>(5분, 15분, 25분, 35분, 45분, 55분)  <br>너무 자주 조회하는 것은 다른 사람의 시스템에 부담을 줄 수 있으니 적당한 주기로 시도하도록 하자.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>먼저 실행 스크립트는 다음과 같이 작성하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>run.sh 파일을 만들어 다음과 같이 만들었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>#!/bin/bash
+. /home/ubuntu/dc-crawling/.venv/bin/activate
+python3 /home/ubuntu/dc-crawling/index.py</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>그리고 이 run.sh를 cron 시스템에 등록해주었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>crontab -e 를 입력 한 후 최하단에 아래 코드를 추가후 저장해주었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>5,15,25,35,45,55 * * * * /home/ubuntu/dc-crawling/run.sh</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>본인이 원하는 주기에 맞게 수정하면 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>각 자리의 의미는 다음과 같다.<br># m h dom mon dow<br># minute (m), hour (h), day of month (dom), month (mon), day of week (dow)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":1} --></p>
+<h1 class="wp-block-heading">마무리</h1>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>최종 코드는 다음과 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:html --><br />
+<script src="https://gist.github.com/dev-jonghoonpark/7a7532cefac46fb0f50dfb18d28a7b22.js"></script><br />
+<!-- /wp:html --></p>
+<p><!-- wp:paragraph --></p>
+<p>일주일 정도 되었는데 문제없이 잘 동작하고 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>fin.</p>
+<p><!-- /wp:paragraph --></p>

@@ -1,0 +1,290 @@
+---
+layout: post
+title: 1장 최신 자바 소개 (3)
+date: '2023-06-11 03:11:32 +0900'
+categories:
+- Java
+tags:
+- Well-Grounded Java Developer
+- Java
+- 자바
+- Java11
+- Collection
+- JEP330
+- Single-file
+- shebang
+---
+<p><!-- wp:paragraph --></p>
+<p>Well-Grounded Java Developer - 2nd edition</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">1.5 java 11의 작은 변경 사항</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>java 8 이후 비교적 많은 수의 새로운 작은 기능들이 적용되었습니다. 모든 변경 사항은 아니지만 가장 중요한 몇 가지 사항을 빠르게 살펴보겠습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.5.1 Collections factories (JEP 213)</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>컬렉션 리터럴 (collection literals - 리스트나 맵과 같은 objects 컬렉션) 을 선언하는 간단한 방법을 지원하는 것은 자주 요청되었던 개선 사항이였습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Java 컬렉션의 기본 설계 원칙은 클래스가 아닌 인터페이스로 표현된다는 것입니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Java 8에서 인터페이스에 정적 메서드를 가질 수 있는 기능이 추가되었기 때문에</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이를 활용하여 인터페이스에 간단한 팩터리 메서드를 추가하였습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td>Set&lt;String&gt; set = Set.of("a", "b", "c");<br>var list = List.of("x", "y");</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 방법은 언어 수준에서 지원을 하는 것보다는 장황(verbose)하지만 구현 측면에서 복잡성 비용은 훨씬 적습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이러한 새 메서드는 다음과 같이 오버로드 집합으로 구현됩니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td><strong>List</strong>&lt;<strong>E</strong>&gt; <strong>List</strong>&lt;<strong>E</strong>&gt;.&lt;<strong>E</strong>&gt;of()<br><strong>List</strong>&lt;<strong>E</strong>&gt; <strong>List</strong>&lt;<strong>E</strong>&gt;.&lt;<strong>E</strong>&gt;of(<strong>E</strong> e1)<br><strong>List</strong>&lt;<strong>E</strong>&gt; <strong>List</strong>&lt;<strong>E</strong>&gt;.&lt;<strong>E</strong>&gt;of(<strong>E</strong> e1, <strong>E</strong> e2)<br><strong>List</strong>&lt;<strong>E</strong>&gt; <strong>List</strong>&lt;<strong>E</strong>&gt;.&lt;<strong>E</strong>&gt;of(<strong>E</strong> e1, <strong>E</strong> e2, <strong>E</strong> e3)<br><strong>List</strong>&lt;<strong>E</strong>&gt; <strong>List</strong>&lt;<strong>E</strong>&gt;.&lt;<strong>E</strong>&gt;of(<strong>E</strong> e1, <strong>E</strong> e2, <strong>E</strong> e3, <strong>E</strong> e4)<br><strong>List</strong>&lt;<strong>E</strong>&gt; <strong>List</strong>&lt;<strong>E</strong>&gt;.&lt;<strong>E</strong>&gt;of(<strong>E</strong> e1, <strong>E</strong> e2, <strong>E</strong> e3, <strong>E</strong> e4, <strong>E</strong> e5)<br>// ...<br><strong>List</strong>&lt;<strong>E</strong>&gt; <strong>List</strong>&lt;<strong>E</strong>&gt;.&lt;<strong>E</strong>&gt;of(<strong>E</strong> e1, <strong>E</strong> e2, <strong>E</strong> e3, <strong>E</strong> e4, <strong>E</strong> e5, <strong>E</strong> e6, <strong>E</strong> e7, <strong>E</strong> e8, <strong>E</strong> e9, <strong>E</strong> e10)<strong>List</strong>&lt;<strong>E</strong>&gt; <strong>List</strong>&lt;<strong>E</strong>&gt;.&lt;<strong>E</strong>&gt;of(<strong>E</strong>... elements)</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>10개 이상의 요소가 필요한 사례를 위해 varargs 형식과 함께 제공됩니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>맵의 경우 상황이 조금 더 복잡합니다. 맵에는 두 개의 일반 매개변수(key - value)가 있으므로 간단한 경우에는 다음과 같이 작성할 수 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td>var m1 = Map.of(k1, v1)<em>;</em><br>var m2 = Map.of(k1, v1, k2, v2)<em>;</em></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>map 에서는 varargs 형식으로 해결할수는 없습니다. 대신에 ofEntries가 다음과 같이 정적 헬퍼 메소드인 entry() 와 함께 사용되어 varargs 형식으로 사용 가능하게 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td>Map.ofEntries(<br>&nbsp; &nbsp; <strong>entry</strong>(k1, v1),<br>&nbsp; &nbsp; <strong>entry</strong>(k1, v1),<br>&nbsp; &nbsp; // ...<br>&nbsp; &nbsp; <strong>entry</strong>(kn, vn))<em>;&nbsp;</em></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>[Note] 팩토리 메서드는 불변(immutable) 형태의 인스턴스를 생성합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td>jshell&gt; var ints = List.of(2, 3, 5, 7);<br>ints =&gt; [2, 3, 5, 7]<br><br>jshell&gt; ints.getClass();<br>$2 =&gt; class java.util.ImmutableCollections$ListN</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>이는 변경 가능한 클래스 (ex. ArrayList, HashMap) 와 달리 수정 불가능합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.5.2 Remove enterprise module (JEP 320)</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>시간이 지나가면서 Java SE (Standard) 에 Java EE (Enterprise)의 일부 모듈이 추가되었습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>아래와 같은 것들 입니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>JAXB</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>JAX-WS</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>CORBA</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>JTA</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:paragraph --></p>
+<p>플랫폼을 간소화 하기 위한 노력의 일환으로</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Java 9에서 이러한 기술을 구현한 패키지들은 비핵심 모듈로 이동되었이며 제거를 위해 deprecated 되었습니다. 그리고 Java 11에서 제거 되었습니다.&nbsp;</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 기능을 사용하려는 JAVA 11이상의 프로젝트는 외부 종속성을 명시적으로 포함해야 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>[용어정리]</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>JAXB : 자바 클래스를 XML로 표현하는 자바 API</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>JAX-WS : 웹 서비스를 생성하는 자바 API</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>CORBA : OMG(Object Management Group)에서 정의한 규격으로서 소프트웨어 컴포넌트들을 언어와 사용환경에 대한 제약이 없는 통합을 위한 표준을 지칭</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>JTA :  단일 데이터베이스나 데이터베이스 여러개를 이용할 경우 트랜잭션을 제어하기 위한 목적으로 사용</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.5.3 HTTP/2 (Java 11)</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>별도의 포스트로 작성</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.5.4 Single-file source-code programs (JEP 330)</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>Java가 실행되는 일반적인 방법은 소스 코드를 클래스 파일로 컴파일한 다음 클래스의 바이트 코드를 해석하는 실행 컨테이너 역할을 하는 가상 머신 프로세스를 실행시키는 것입니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이러한 방식은 직접 해석(interpreted)되는 언어들(파이썬, 루비, 펄 등)과 매우 다르게 동작합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>JEP 330의 출시를 통해 소스코드가 메모리에서 컴파일된 다음 디스크에 .class 파일을 생성하지 않고 인터프리터에 의해 실행될 수 있게 되었습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"width":800,"height":478} --></p>
+<figure class="wp-block-image is-resized"><img src="https://lh6.googleusercontent.com/XhjNcTontuq-dwd7q16Ywv-zljqpIXbLhqmtivQ6uF5OPT6m58Q-faCgMnrNgkV85h3qnBWHeO8v1aGQmQuvY4OvLDH2jOb0pYjdM7Tj6ojdP5VPQsV5RVzruwfSvpJRjJYSbZpAFmC5BKlx1UGtp9c" alt="" width="800" height="478"/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>이는 파이썬과 같은 스크립트 언어와 유사한 사용자 경험을 제공하게 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 기능은 아래와 같은 제한이 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>단일&nbsp; 소스 코드로 코드를 제한합니다.</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>하나의 실행에서 다른 추가적인 소스 파일을 컴파일 할 수 없습니다.</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>소스파일에 여러 클래스를 포함할 수 있습니다.</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>소스코드에 진입점으로 사용할 첫 클래스가 있어야 합니다.</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>진입점 클래스에서는 반드시 main 메소드가 필요합니다.</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 기능을 사용하기 위해서는 –source flag를 사용하여 소스 코드 호환성 모드로 표시해야 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Java 이름 지정 규칙 (Java file-naming conventions) 에 따라 클래스 이름이 파일이름과 일치해야 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그러나 .java 확장자는 런처를 혼동할 수 있으므로 사용하지 않아야 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이러한 타입의 스크립트 형 자바(Java scripts)는 shebang 을 포함할 수 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td><strong>#!/user/bin/java -source 11</strong><br><br><strong>public</strong> <strong>final</strong> <strong>class</strong> HTTP2Check {<br>&nbsp; &nbsp; <strong>public</strong> <strong>static</strong> <strong>void</strong> main(String[] args) {<br>&nbsp; &nbsp; &nbsp; &nbsp; <strong>if</strong> (args.length &lt; 1) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; usage();<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; <em>// implementation of our HTTP callers...</em><br>&nbsp; &nbsp; }<br>}</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>shebang라인은 다음과 같이 파일이 실행 가능한 것으로 표시되고 직접 호출될 수 있도록 필요한 매개변수를 제공합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td>$ ./HTTP2Check https://www.google.<strong>com</strong><br>https://www.google.<strong>com</strong>: HTTP_2</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 기능이 Java에 완전한 스크립트 언어 경험을 제공하지는 않지만 다른 프로그래밍 언어를 혼합하지 않고 Unix 기반 시스템에서 사용가능한 간단하고 유용한 도구를 작성할 수 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>* shebang : 셔뱅(shebang)은 해시 기호와 느낌표(#!) 로 이루어진 문자 시퀀스로, 스크립트의 맨 처음에 온다. - 위키 -</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>* "그러나 .java 확장자는 런처를 혼동할 수 있으므로 사용하지 않아야 합니다." 에 대한 것은<br>- <a href="https://www.google.com/url?q=https://openjdk.org/jeps/330&amp;sa=D&amp;source=docs&amp;ust=1686422271043336&amp;usg=AOvVaw37DONmR-S827jyH2RzABdz" target="_blank" rel="noreferrer noopener">https://openjdk.org/jeps/330</a><br>- <a href="https://www.google.com/url?q=https://stackoverflow.com/questions/52530470/java-11-executing-source-file-via-shebang-is-not-working&amp;sa=D&amp;source=docs&amp;ust=1686422808547502&amp;usg=AOvVaw1evhYtJxbdgSV8NVGuQ4rp" target="_blank" rel="noreferrer noopener">https://stackoverflow.com/questions/52530470</a><br>를 참고하면 더 자세한 설명을 볼 수 있다.<br>실행 파일이 shebang 줄을 무시하려면 .java파일 이름이 로 끝나지 않아야 한다고 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">요약</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>- Java의 언어와 플랫폼은 나눠져 있습니다. 플랫폼은 Java 외에도 많은 언어들을 지원합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- Java 8 이후 Java 플랫폼은 새로운 릴리즈 프로세스를 채택하였습니다. 새 버전은 6개월마다 릴리즈되고, LTS 릴리즈는 2-3년마다 나옵니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 현재 LTS 버전은 11 및 17이며 Java 8은 계속 지원됩니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 이전버전 호환을 고려하여 변경을 해야합니다. 따라서 변경하는건 쉽지 않습니다. 구현 수준에 따라 복잡도가 달라집니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- Java 11에는 업그레이드할 가치가 있는 많은 유용한 기능이 도입되었습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>  - 변수 정의를 간소화 하는 var 키워드<br>  - 목록, 맵 및 기타 컬렉션 생성을 단순화 하는 팩토리 메소드<br>  - 전체 HTTP/2를 지원하는 새로운 HttpClient 구현<br>  - 클래스 파일로 컴파일하지 않고 직접 실행할 수 있는 단일 파일 프로그램</p>
+<p><!-- /wp:paragraph --></p>

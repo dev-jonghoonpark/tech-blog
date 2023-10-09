@@ -1,0 +1,251 @@
+---
+layout: post
+title: build linux kernel from macbook pro m1
+date: "2023-08-21 01:48:49 +0900"
+categories:
+  - 운영체제 컨셉
+tags:
+  - Operating System
+  - linux
+  - kernel
+  - kernel build
+  - mac m1
+  - apple silicon
+  - linux kernel
+---
+
+<p>
+  I recently started an offline group study.<br />
+  One of the things going on in the study is an operating system study (We are
+  using
+  <a href="https://www.os-book.com/OS10/" title="this book">this book</a>).
+</p>
+<p>
+  At the end of Chapter 2, there is a section that describes the Linux kernel
+  build.
+</p>
+<p>
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692547659095.png"
+    style="max-width: 250px"
+    alt="linux symbol"
+  />
+</p>
+<p>
+  While I was making a presentation slide, I was like, 'Is this really going to
+  work?' It occurred to me that.
+</p>
+<p>
+  <img
+    src="https://i.imgur.com/t3SvsiC.png"
+    alt="thinking emoji"
+    title="thinking emoji"
+  />
+</p>
+<p>
+  So I tried it.<br />
+  <del>I shouldn't have tried that</del>
+</p>
+<h1>Try building the Linux kernel</h1>
+<p>The order introduced in the book was as follows.</p>
+<ol>
+  <li>
+    Download the Linux source code from
+    <a href="http://www.kernel.org">http://www.kernel.org</a>.
+  </li>
+  <li>
+    Configure the kernel using the “make menuconfig” command. This step creates
+    a .config configuration file.
+  </li>
+  <li>
+    Compile the main kernel using the “make” command. The make command compiles
+    the kernel based on the configuration parameters identified in the .config
+    file to create a kernel image, the vmlinuz file.
+  </li>
+  <li>
+    Compile the kernel module using the “make modules” command. Like kernel
+    compilation, module compilation depends on configuration parameters
+    specified in the .config file.
+  </li>
+  <li>
+    Install the kernel module to vmlinuz using the “make modules install”
+    command.
+  </li>
+  <li>
+    Enter the “make install” command to install the new kernel on your system.
+  </li>
+</ol>
+<p>And I followed this order</p>
+<h2>Caution</h2>
+<ul>
+  <li>
+    Since the mac m1 is arm-based, I started with the expectation that it would
+    be difficult in the process.
+  </li>
+  <li>
+    I'm trying to organize it in writing to see if there is anyone who makes a
+    unique attempt like me. In my own search, I didn't find much information.
+  </li>
+  <li>
+    I'm not familiar with C. It's all I studied in my first year of university.
+    That's why the following contents have been solved in a bad way.
+  </li>
+</ul>
+<h2>
+  1. Download the Linux source code from
+  <a href="http://www.kernel.org" title="http://www.kernel.org"
+    >http://www.kernel.org</a
+  >.
+</h2>
+<p>
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692543681651.png"
+    alt="kernel downlaod page"
+  />
+</p>
+<p>
+  Latest Release seems to mean the Stable version.<br />
+  Download and decompress it in a good place to work.
+</p>
+<h2>2. Configure the kernel using the “make menuconfig” command.</h2>
+<p>There are things to do from here.</p>
+<p>
+  Since I usually use the <code>make</code> command during the development
+  process, I thought there would be no problem, but the problem occurs with the
+  <code>make</code> command.
+</p>
+<p>
+  When I run it, I get the following error:<br />
+  <code
+    >Makefile:15: *** GNU Make &gt;= 3.82 is required. Your Make version is
+    3.81. Stop</code
+  >
+</p>
+<p>
+  The latest version of make is available through brew. Let's set environment
+  variables as well.
+</p>
+<pre><code>brew install make
+export PATH=&quot;/usr/local/opt/make/libexec/gnubin:$PATH&quot;</code></pre>
+<p>
+  If you check the version after installing the latest version with brew, you
+  can see that it has been upgraded to the 4.x version.<br />
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692544376168.png"
+    alt="make version"
+  />
+</p>
+<p>Then install the following things</p>
+<pre><code>brew install gcc-arm-embedded --cask
+brew install cmake autoconf libtool gcc automake openssl
+brew link openssl --force</code></pre>
+<p>
+  if you don't install<br />
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692545466662.png"
+    alt="linker error"
+  /><br />
+  This error will occur.
+</p>
+<p>
+  After completing the installation, you can finally enter the menu setting
+  page.
+</p>
+<p>
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692545770737.png"
+    alt="menuconfig"
+  />
+</p>
+<p>
+  Since I don't know anything about these setting values, I created a config
+  file with the default setting values.
+</p>
+<h2>3. Compile the main kernel using the “make” command.</h2>
+<p>
+  This process took quite a long time.<br />
+  I think it was more difficult because I didn't know much about C.
+</p>
+<p>
+  This part referenced a lot of blog post written down in the reference at the
+  bottom.
+</p>
+<h3>fatal error: 'elf.h' file not found</h3>
+<p>In mac, elf.h is not provided by default.</p>
+<p>
+  <a href="https://gist.github.com/mlafeldt/3885346"
+    >https://gist.github.com/mlafeldt/3885346</a
+  ><br />
+  You can create elf.h with the above code.
+</p>
+<p>or,</p>
+<pre><code>curl https://gist.githubusercontent.com/mlafeldt/3885346/raw/elf.h | tee /usr/local/include/elf.h</code></pre>
+<p>If you type this command, it will be created at once.</p>
+<p>
+  But the problem was, I don't know why, but my code couldn't load the header
+  file normally.<br />
+  (Maybe it's because I don't know how to use gcc's I option properly.)
+</p>
+<p>
+  So move the header file into the kernel project,<br />
+  And it was modified to include the local header file.<br />
+  (Change braket to double quote. ,
+  <a
+    href="https://stackoverflow.com/a/3162067"
+    title="https://stackoverflow.com/a/3162067"
+    >https://stackoverflow.com/a/3162067</a
+  >)
+</p>
+<p>I edited about 5 files.</p>
+<h3>
+  typedef redefinition with different types ('struct uuid_t' vs
+  '__darwin_uuid_t' (aka 'unsigned char[16]'))
+</h3>
+<pre><code>/* UUID types for backward compatibility, don&#039;t use in new code */
+typedef struct {
+        __u8 b[16];
+} guid_t;
+
+#define uuid_t compat_uuit_t
+
+typedef struct {
+        __u8 b[16];
+} uuid_t;</code></pre>
+<p>
+  The file structure of the post I referenced and my computer was a little
+  different, and the code included #endif, so I thought, 'Where does the if
+  begin?' I thought a lot about it.
+</p>
+<p>I just did the above and it built without problems.</p>
+<p>The key seems to be adding <code>#define uuid_t compat_uuit_t</code>.</p>
+<h3>openssl setup issue</h3>
+<p>
+  Similar to elf.h earlier, my computer could not import the openssl header
+  file.<br />
+  I was repeating builds and modifications, and correcting errors.<br />
+  There was no end, so I stopped the work and looked for how many places needed
+  to be corrected.<br />
+  About 500+ places needed fixing...
+</p>
+<p>
+  I thought it was not something a person would do, so I made batch changes
+  using regex as a command.
+</p>
+<h3>build success</h3>
+<p>After solving these and other issues, a vmlinux file was created.</p>
+<p>The build itself seems to have taken about 10 minutes.</p>
+<p>
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692546771277.png"
+    alt="vmlinux"
+  />
+</p>
+<p>Conclusion: Don't Build the Linux Kernel on Apple Silicon</p>
+<h2>Reference</h2>
+<p>
+  <a
+    href="https://ariesgun.xyz/setting-up-mac-m1-for-linux-kernel-device-driver-development#heading-2-setup-cross-compiling-toolchain"
+    title="Setting up Mac M1 for Linux Kernel/ Device Driver Development"
+    >Setting up Mac M1 for Linux Kernel/ Device Driver Development</a
+  >
+</p>

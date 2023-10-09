@@ -1,0 +1,239 @@
+---
+layout: post
+title: macbook pro m1 에서 리눅스 커널 빌드해보기
+date: "2023-08-21 00:56:48 +0900"
+categories:
+  - 운영체제 컨셉
+tags:
+  - 운영체제
+  - Operating System
+  - linux
+  - kernel
+  - kernel build
+  - 리눅스
+  - 커널
+  - 커널 빌드
+  - mac m1
+  - apple silicon
+---
+
+<p>
+  최근에 스터디를 시작하게 되었다.<br />
+  스터디에서 진행하는 것 중 하나는 운영체제 (aka 공룡책) 스터디이다.
+</p>
+<p>
+  이번 범위는 1~2장 이였는데<br />
+  발표자료는
+  <a
+    href="https://jonghoonpark.com/operating-system-slides-chapter-1-and-2"
+    title="여기"
+    >여기</a
+  >에 올려두었다.
+</p>
+<p>2장 뒷 부분에는 리눅스 커널 빌드에 대해 설명하는 부분이 나온다.</p>
+<p>
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692547659095.png"
+    style="max-width: 250px"
+    alt="linux symbol"
+  />
+</p>
+<p>발표용 슬라이드를 만들던 나는 이게 진짜 될까? 라는 생각이 들었었다.</p>
+<p>
+  <img
+    src="https://i.imgur.com/t3SvsiC.png"
+    alt="thinking emoji"
+    title="thinking emoji"
+  />
+</p>
+<p>
+  그래서 시도해보았다.<br />
+  <del>그런 짓은 하지 말아야 했는데</del>
+</p>
+<h1>Linux 커널 빌드해보기</h1>
+<p>책에서 소개한 순서는 다음과 같았다.</p>
+<ol>
+  <li>
+    <a href="http://www.kernel.org">http://www.kernel.org</a> 에서 linux 소스
+    코드를 다운로드 한다.
+  </li>
+  <li>
+    “make menuconfig” 명령을 사용하여 커널을 구성한다. 이 단계는 .config 구성
+    파일을 생성한다.
+  </li>
+  <li>
+    “make” 명령을 사용하여 메인 커널을 컴파일한다. make 명령은 .config파일에서
+    식별된 구성 매개변수를 기반으로 커널을 컴파일하여 커널 이미지인 vmlinuz
+    파일을 생성한다.
+  </li>
+  <li>
+    “make modules” 명령을 사용하여 커널 모듈을 컴파일한다. 커널 컴파일과
+    마찬가지로 모듈 컴파일은 .config 파일에 지정된 구성 매개변수에 따라 다른다.
+  </li>
+  <li>
+    “make modules install” 명령을 사용하여 커널 모듈을 vmlinuz에 설치한다.
+  </li>
+  <li>“make install” 명령을 입력하여 시스템에 새 커널을 설치한다.</li>
+</ol>
+<p>그리고 나는 이 순서를 따라가 보고자 하였다.</p>
+<h2>주의사항</h2>
+<ul>
+  <li>
+    mac m1이 arm 기반이기 때문에 그 과정에서 어려울 것이라 예상은 하면서
+    시작하였다.
+  </li>
+  <li>
+    나처럼 독특한 시도를 하는 사람이 있을까 싶어 글로 정리해본다. 직접
+    검색해가면서 해본 결과 자료가 많지는 않았다.
+  </li>
+  <li>
+    나는 C에 익숙하지는 않다. 학부 1학년 때 공부했던게 전부이다. 그렇기 때문에
+    아래 내용들은 야매로 해결한 부분들이 있다.
+  </li>
+</ul>
+<h2>
+  1.
+  <a href="http://www.kernel.org" title="http://www.kernel.org"
+    >http://www.kernel.org</a
+  >
+  에서 linux 소스 코드를 다운로드 한다.
+</h2>
+<p>
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692543681651.png"
+    alt="kernel downlaod 페이지"
+  />
+</p>
+<p>
+  Latest Release 가 Stable 버전을 뜻하는 것 같다.<br />
+  다운로드해서 작업하기 좋은 공간에서 압축을 풀어주자.
+</p>
+<h2>2. “make menuconfig” 명령을 사용하여 커널을 구성한다.</h2>
+<p>여기서 부터 할 것들이 발생된다.</p>
+<p>
+  나는 회사에서 개발과정중에 make 명령어를 사용하고 있기 때문에 별 문제가 없을
+  것이라 생각하였지만 make 명령부터 문제가 발생된다.
+</p>
+<p>
+  실행시켜 보면 아래와 같은 에러가 나온다.<br />
+  <code
+    >Makefile:15: *** GNU Make &gt;= 3.82 is required. Your Make version is
+    3.81. Stop</code
+  >
+</p>
+<p>아쉽게도 맥에 기본적으로 설치된 make와 버전이 0.01 만큼 차이가 난다.</p>
+<p>
+  최신 버전 make 는 brew를 통해서 받을 수 있다. 환경변수 세팅도 같이 해주자.
+</p>
+<pre><code>brew install make
+export PATH=&quot;/usr/local/opt/make/libexec/gnubin:$PATH&quot;</code></pre>
+<p>
+  brew로 최신 버전을 설치한 후 버전을 확인해보면 4.x 버전대로 올라간걸 확인할 수
+  있다.<br />
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692544376168.png"
+    alt="make version"
+  />
+</p>
+<p>그리고 나서 아래 항목들을 추가로 설치해준다.</p>
+<pre><code>brew install gcc-arm-embedded --cask
+brew install cmake autoconf libtool gcc automake openssl
+brew link openssl --force</code></pre>
+<p>
+  설치해주지 않으면<br />
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692545466662.png"
+    alt="linker error"
+  /><br />
+  이런 에러가 발생된다.
+</p>
+<p>이것 저것 설치를 다 마치면 최종적으로 메뉴설정 페이지에 진입할 수 있다.</p>
+<p>
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692545770737.png"
+    alt="menuconfig"
+  />
+</p>
+<p>
+  이 설정 값들에 대해서는 아는 것이 없기 때문에 기본 설정값 그대로 config 파일을
+  생성하였다.
+</p>
+<h2>3. “make” 명령을 사용하여 메인 커널을 컴파일한다</h2>
+<p>
+  이 과정에서 상당이 오랜 시간이 걸렸다.<br />
+  C에 대해 잘 모르다보니 더 힘들었던것 같다.
+</p>
+<p>이 부분은 하단의 참고에 적어둔 블로그 포스트를 많이 참고했다.</p>
+<h3>fatal error: 'elf.h' file not found</h3>
+<p>mac에서는 기본적으로 elf.h 가 제공되지 않는다.</p>
+<p>
+  <a href="https://gist.github.com/mlafeldt/3885346"
+    >https://gist.github.com/mlafeldt/3885346</a
+  ><br />
+  의 코드로 elf.h를 생성해주면 되는데
+</p>
+<pre><code>curl https://gist.githubusercontent.com/mlafeldt/3885346/raw/elf.h | tee /usr/local/include/elf.h</code></pre>
+<p>이 명령어를 치면 한 번에 생성이 된다.</p>
+<p>
+  그런데 문제는 왜 인지 모르겠지만 내 코드에서 header 파일을 정상적으로 불러오지
+  못한다는 것이였다.<br />
+  (아마 gcc의 I 옵션을 제대로 활용할 줄 몰라서 그런것 같다.)
+</p>
+<p>
+  그래서 header 파일을 kernel 프로젝트 내부로 이동시켜주고<br />
+  로컬 include 를 하도록 수정하였다. (braket에서 double quote 로 변경해주면
+  된다. 참고 :
+  <a href="https://stackoverflow.com/a/3162067"
+    >https://stackoverflow.com/a/3162067</a
+  >)
+</p>
+<p>파일 5개 정도를 수정해주었다.</p>
+<h3>
+  typedef redefinition with different types ('struct uuid_t' vs
+  '__darwin_uuid_t' (aka 'unsigned char[16]'))
+</h3>
+<pre><code>/* UUID types for backward compatibility, don&#039;t use in new code */
+typedef struct {
+        __u8 b[16];
+} guid_t;
+
+#define uuid_t compat_uuit_t
+
+typedef struct {
+        __u8 b[16];
+} uuid_t;</code></pre>
+<p>
+  참고한 포스트와 파일 구조도 조금 달랐고 코드에 #endif가 포함되어 있어서 어디서
+  if가 시작되는거지? 라는 생각을 했었는데 그냥 위와같이 처리해주니깐 문제 없이
+  빌드되었다.
+</p>
+<p>
+  핵심은 <code>#define uuid_t compat_uuit_t</code> 를 추가해주는걸로 보인다.
+</p>
+<h3>openssl 설정 이슈</h3>
+<p>
+  아까 elf.h와 비슷하게 header 파일을 import 하지 못해서<br />
+  빌드해가면서 직접 에러나는 부분들에 하나하나 다 변경을 해주고 있었는데<br />
+  끝이 없길래 찾아보니 대략 500곳이 넘는 곳을 수정해야 하더라...
+</p>
+<p>
+  사람이 할짓이 아니라 생각되어서 명령어로 regex를 이용하여 일괄 변경 해줬다.
+</p>
+<h3>빌드 성공</h3>
+<p>이런 저런 이슈들을 해결해주니 vmlinux 파일이 생성되었다.</p>
+<p>빌드 자체는 10분정도 소요되었던것 같다.</p>
+<p>
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692546771277.png"
+    alt="vmlinux"
+  />
+</p>
+<p>결론 : 굳이 애플 실리콘에서 리눅스 빌드 하지 말자</p>
+<h2>참고</h2>
+<p>
+  <a
+    href="https://ariesgun.xyz/setting-up-mac-m1-for-linux-kernel-device-driver-development#heading-2-setup-cross-compiling-toolchain"
+    title="Setting up Mac M1 for Linux Kernel/ Device Driver Development"
+    >Setting up Mac M1 for Linux Kernel/ Device Driver Development</a
+  >
+</p>

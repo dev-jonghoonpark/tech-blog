@@ -1,0 +1,362 @@
+---
+layout: post
+title: 8장 URL 단축기 설계
+date: '2023-06-15 01:59:31 +0900'
+categories:
+- 시스템 디자인
+tags:
+- System Design
+- 시스템 디자인
+- tinyurl
+- url shortener
+- base64
+- hash
+- hash function
+- 해시 함수
+- url 단축기
+---
+<p><!-- wp:paragraph --></p>
+<p>가상 면접 사례로 배우는 대규모 시스템 설계 기초 – System Design Interview</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p>개인적으로 URL 단축기를 만들어 쓰고 있는데<br>(공개할만한 수준은 아니기에 개인적인 용도로만 사용하고 있다.)<br>내가 만든 단축기의 경우, Firebase에서 제공하는 hosting에 Firebase의 database 기능을 이용해서 사용하고 있다보니 고려해야 할 부분이 적었다.<br>unique 한 id 생성에 대한 부분도 firebase 자체 기능을 이용해서 크게 신경 쓸 부분이 없었는데 이 책에서는 베이스부터 어떻게 설계해야 하는지에 대해서 설명해줘서 개인적으로 재밌게 보았다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>tinyurl 같은 url 단축기를 설계해보자.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">1단계 문제 이해 및 설계 범위 확정</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>시스템 설계 면접 문제는 의도적으로 어떤 정해진 결말을 갖지 않도록 만들어진다 따라서 면접장에서 시스템을 성공적으로 설계해내려면 질문을 통해 모호함을 줄이고 요구사항을 알아내야 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">질문 예시</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 어떻게 동작해야하는지 예제를 보여주실 수 있을까요?<br>- 트래픽 규모는 어느정도 일까요?<br>- 단축 URL의 길이는 어느 정도여야 하나요?<br>- 단축 URL에 포함될 문자에 제한이 있습니까?<br>- 단축 URL을 시스템에서 지우거나 갱신할 수 있습니까?</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 시스템의 기본적 기능은 아래와 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>1. URL 단축 : 주어진 긴 URL을 훨씬 짧게 줄인다.<br>2. URL 리다이렉션(redirection): 축약된 URL로 HTTP 요청이 오면 원래 URL로 안내<br>3. 높은 가용성과 규모 확장성, 그리고 장애 감내가 요구됨</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">개략적 추정</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 쓰기 연산: 매일 1억 개의 단축 URL 생성<br>- 초당 쓰기 연산: 1억 / 24 / 3600 = 1160<br>- 읽기 연산: 읽기 연산과 쓰기 연산 비율은 10:1이라고 하자. 그 경우 읽기 연산은 초당 11,600회 발생한다(1160 x 10 = 11,600)<br>- URL 단축 서비스를 10년간 운영한다고 가정하면 1억 x 365 x 10 = 3650억 개의 레코드를 보관해야 한다.<br>- 축약 전 URL의 평균 길이는 100이라고 하자.<br>- 따라서 10년 동안 필요한 저장 용량 3650억 x 100바이트 = 36.5TB 이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>* 위 개략적 추정은 질문을 통해 답변 받은것을 통해서 계산하는 것이며 계산이 끝나면 결과를 면접관과 점검하여 합의한 후에 진행하도록 하자.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">2단계 개략적 설계안 제시 및 동의 구하기</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">API 엔드포인트</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>REST API로 설계하는걸 가정한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>URL 단축기는 기본적으로 두 개의 엔드포인트를 필요로 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>1. URL 단축용 엔드포인트</strong><br>POST /api/v1/data/shorten<br>인자: { longUrl: longURLstring }<br>반환: 단축 URL</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>2. URL 리다이렉션용 엔드포인트</strong><br>GET /api/v1/shortUrl<br>반환: HTTP 리다이렉션 목적지가 될 원래 URL</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">URL 리다이렉션</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 책에서는 301, 302 응답 코드를 통한 리다이렉트 방법에 대해서 설명한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>각각의 차이는 요약하면 다음과 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>301 Permanently Moved : 해당 URL에 대한 HTTP 요청의 처리 책임이 영구적으로 Location 헤더에 반환된 URL로 이전되었다는 응답이다. 영구적이기 때문에 브라우저는 이 응답을 캐시한다.<br>* Permanently : 영구적으로</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>302 Found : 해당 URL에 대한 HTTP 요청이 “일시적으로” Location 헤더가 지정하는 URL에 의해 처리되어야 한다는 응답이다. 따라서 클라이언트의 요청은 언제나 원래 URL을 거친 후 리다이렉션이 진행된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>서버 부하를 줄이는 것이 중요하다면 301을, 트래픽 분석이 필요할 때는 302를 쓰는 것이 유리할 것이다. </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">URL 단축</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>단축 URL이 www.tinyurl.com/[hashValue] 같은 형태라고 해 보자. 결국 중요한 것은 긴 URL을 이 해시 값으로 대응시킬 해시 함수 fx를 찾는 일이 될 것이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>해시 함수는 다음 요구사항을 만족해야 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 입력으로 주어지는 긴 URL이 다른 값이면 해시 값도 달라야 한다.<br>- 계산된 해시 값은 원래 입력으로 주어졌던 긴 URL로 복원될 수 있어야 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">3단계 상세설계</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">데이터 모델</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>&lt;단축 URL, 원래 URL&gt;의 순서쌍을 데이터베이스에 저장<br>* 책에는 관계형 데이터베이스로 이야기 하는데 굳이 관계형 데이터베이스여야 할까 싶다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">해시 함수</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>해시 함수는 원래 URL을 단축 URL로 변환하는데 쓰인다. 편의상 해시 함수가 계산하는 단축 URL값을 hashValue라고 지칭한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">자릿수 정하기</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>URL 에 담길수 있는 영역은 숫자와 영문자이다. ([0-9, a-z, A-Z])<br>(책에서는 문제 이해 과정에서 먼저 짚고 넘어간다.)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>따라서 사용할 수 있는 문자의 개수는 10 + 26 + 26 = 62개 이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>우리는 3650억개의 레코드를 보관할 수 있도록 하는 것을 고려해야 하기 때문에 몇 자리의 문자가 필요한지 계산해보면 다음과 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td>n</td>
+<td>URL 개수</td>
+</tr>
+<tr>
+<td>1</td>
+<td>62<sup>1</sup> = 62</td>
+</tr>
+<tr>
+<td>2</td>
+<td>62<sup>2</sup> = 3,844</td>
+</tr>
+<tr>
+<td>3</td>
+<td>62<sup>3</sup> = 238,328</td>
+</tr>
+<tr>
+<td>4</td>
+<td>62<sup>4</sup> = 14,776,336</td>
+</tr>
+<tr>
+<td>5</td>
+<td>62<sup>5</sup> = 916,132,832</td>
+</tr>
+<tr>
+<td>6</td>
+<td>62<sup>6</sup> = 56,800,235,584</td>
+</tr>
+<tr>
+<td>7</td>
+<td>62<sup>7</sup> = 3,521,614,606,208 = 약 3.5조</td>
+</tr>
+<tr>
+<td>8</td>
+<td>62<sup>8</sup> = 218,340,105,584,896</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>따라서 7자리로 3.5조 개의 URL을 커버할 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">해시후 충돌 해소</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>잘 알려진 해시 함수 (CRC32, MD5, SHA-1 등) 를 이용한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>다만 이러한 해시 함수를 사용하면 자릿수가 길기 때문에 필요한 만큼만 잘라서 쓴다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이렇게 될 경우 중복이 발생될 가능성이 높아지는데, 이를 해결하기 위해 중복이 발생되었을 경우 사전에 정한 문자열을 해시값에 덧붙인 후 다시 해시 함수를 거치게 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh5.googleusercontent.com/vv-U3TChusdFIn9kgpjHtvCxPbPzWsOpu-is9PqG9FEBEcW5XxxHDO3K2Tg35vknx9rLCi5IufTC9tuchKQ8C7xOBIVOLH-8HjEru1FgvcZGm4gvxEjvPChbnpYtXs7Z6DFLIYMFd2mR82W_ZhCk5Ls" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>블룸 필터를 사용하면 중복 확인을 위해 DB 재조회를 하는 오버헤드를 줄일 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">base-62 변환</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>62진법은 수를 표현하기 위해 총 62개의 문자를 사용하는 진법이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>0은 0으로, 9는 9로, 10은 a로, 11은 b로, … 35는 z로, 36은 A로 … 61은 Z로 대응시켜 표현하도록 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>따라서 62진법에서 ‘a’ 는 10을, ‘Z’ 는 61을 나타낸다.&nbsp;</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>* base64 는 여기서 ‘+’ 와 ‘/’ 가 추가된 형태이다.<br><a href="https://ko.wikipedia.org/wiki/베이스64">https://ko.wikipedia.org/wiki/베이스64</a><br>base64가 있는데 굳이 base62를 쓰는 이유는 ‘/’ 가 들어가면 url이 꼬이기 때문이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">두 접근법 비교</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td><strong>해시 후 충돌 해소 전략</strong></td>
+<td><strong>base-62 변환</strong></td>
+</tr>
+<tr>
+<td>단축 URL의 길이가 고정됨</td>
+<td>단축 URL의 길이가 가변적. ID 값이 커지면 같이 길어짐</td>
+</tr>
+<tr>
+<td>유일성이 보장되는 ID 생성기가 필요치 않음</td>
+<td>유일성 보장 ID 생성기가 필요</td>
+</tr>
+<tr>
+<td>충돌이 가능해서 해소 전략이 필요</td>
+<td>ID의 유일성이 보장된 후에야 적용 가능한 전략이라 충돌은 아예 불가능</td>
+</tr>
+<tr>
+<td>ID로부터 단축 URL을 계산하는 방식이 아니라서 다음에 쓸 수 있는 URL을 알아내는 것이 불가능</td>
+<td>ID가 1씩 증가하는 값이라고 가정하면 다음에 쓸 수 있는 단축 URL이 무엇인지 쉽게 알아낼 수 있어서 보안상 문제가 될 소지가 있음</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">URL 단축기 상세 설계</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>URL 단축기는 시스템의 핵심 컴포넌트이므로, 그 처리 흐름이 논리적으로는 단순해야 하고 기능적으로는 언제나 동작하는 상태로 유지되어야 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>본 책에서는 62진법(base62) 변환 기법을 사용해 설계한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh3.googleusercontent.com/UOXIxATsjI5RKU1RzLNu23eJVF-4_yMQ3czjLQ_hoS1vHGcEVs2BAF_dsVQJc-DAgXqSjxpqThdPVh0daCXxeehtzy2p9pDfJPlETRgdizRehvAf0FQVIWimp33BunUc-e9jGG-aysb7tP9LNz3IH_A" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>1. 입력으로 긴 URL을 받는다.<br>2. 데이터베이스에 해당 URL이 있는지 검사한다.<br>3. 데이터베이스에 있다면 해당 URL에 대한 단축 URL을 만든 적이 있다는 것이다. 따라서 데이터베이스에서 해당 단축 URL을 가져와서 클라이언트에게 반환한다.<br>4. 데이터베이스에 없는 경우에는 해당 URL은 새로 접수된 것이므로 유일한 ID를 생성한다. 이 ID는 데이터베이스의 기본 키로 사용된다.<br>5. 62진법 변환을 적용, ID를 단축 URL로 만든다.<br>6. ID, 단축 URL, 원래 URL로 새 데이터베이스 레코드를 만든 후 단축 URL을 클라이언트에 전달한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>* ID는 전역적 유일성이 보장되어야 한다. 7장의 내용을 참고하자.&nbsp;</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">URL 리다이렉션 상세 설계</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>쓰기보다 읽기를 더 자주하는 시스템이라, 캐시에 저장하여 성능을 높였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh6.googleusercontent.com/k_EYDu4S9zeWJrsgLojYDhcLuGyDs42uA9L4elVtP4K_r_CdXoa7j_ePmgn06y_owF41CEKn7z1HwWdEJjA6Z0klUKHdC7dpeDrZaQVKoxgF1-MIdM_yc5Wm1Awo-d-OFli31Pj9k122iyPKjwta1Qs" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>로드밸런서의 동작 흐름은 다음과 같이 요약할 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>1. 사용자가 단축 URL을 클릭한다.<br>2. 로드밸런서가 해당 클릭으로 발생한 요청을 웹 서버에 전달한다.<br>3. 단축 URL이 이미 캐시에 있는 경우에는 원래 URL을 바로 꺼내서 클라이언트에게 전달한다.<br>4. 캐시에 해당 단축 URL이 없는 경우에는 데이터베이스에서 꺼낸다. 데이터베이스에 없다면 아마 사용자가 잘못된 단축 URL을 입력한 경우일 것이다.<br>5. 데이터베이스에서 꺼낸 URL을 캐시에 넣은 후 사용자에게 반환한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">4단계 마무리</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>설계를 마친 후에도 시간이 좀 남는다면 다음과 같은 것을 면접관과 이야기 할 수 있을 것이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 처리율 제한 장치: 4장 참고</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 웹 서버의 규모 확장: 본 설계에 포함된 웹 계층은 무상태 계층이므로, 웹 서버를 자유로이 증설하거나 삭제할 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 데이터베이스의 규모 확장: 데이터베이스를 다중화하거나 샤딩하여 규모 확장성을 달성할 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 분석 솔루션: 성공적인 비즈니스를 위해서는 데이터가 중요하다. URL 단축기에 데이터 분석 솔루션을 통합해두면 어떤 링크를 얼마나 많은 사용자가 클릭했는지, 언제 주로 클릭했는지 등 중요한 정보를 알아낼 수 있을 것이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 가용성, 데이터 일관성, 안정성</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">정리하면서 든 생각</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>* 개인적으로는 ID가 있는데 단축 URL도 컬럼으로 둬야하는가에 대한 생각이 들었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>책에서 든 예시는 다음과 같았다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td>ID</td>
+<td>shortURL</td>
+<td>longURL</td>
+</tr>
+<tr>
+<td>2009215674938</td>
+<td>zn9edcu</td>
+<td>https://en.wikipedia.org/wiki/Systems_design</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>여기서 shortURL에 들어갈 값은 62진법으로 계산된 ID 이고, 이 값은 uuid와 다르게 랜덤한 것 이 아니라 순차적인 값이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>1. 그럼 shortURL이 ID 컬럼으로 사용해서 백엔드에서 62진법으로 1씩 올려서 DB에 저장</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>2. 아니면 ID와 longURL 만 DB에 저장하고 백엔드에서 ID를 62진법으로 계산해서 클라이언트에게 전달.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이렇게 한다면</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 컬럼은 2개로 줄어들게 되지만 백엔드(or 클라이언트) 단에서 매번 base62 처리를 해줘야 하는게 더 코스트가 큰가? 처리를 마친 것을 캐시 서버에 넣는다면?</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이라는 추가적인 생각이 또 들었다.&nbsp;</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>fin.</p>
+<p><!-- /wp:paragraph --></p>

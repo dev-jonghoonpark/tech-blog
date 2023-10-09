@@ -1,0 +1,244 @@
+---
+layout: post
+title: 7장 컨트롤러에서 조건부 로직 처리 (컨트롤러가 도메인의 세부사항을 모르도록 처리하자)
+date: '2023-08-08 14:04:30 +0900'
+categories:
+- 테스트
+tags:
+- 테스트
+- 단위 테스트
+- unit test
+- 컨트롤러
+- 도메인 계층
+- 비지니스 로직
+- 분리
+- 조건부 로직
+---
+<p><!-- wp:paragraph --></p>
+<p>단위테스트 (블라디미르 코리코프)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p><a href="https://jonghoonpark.com/identifying-the-code-to-refactor">https://jonghoonpark.com/identifying-the-code-to-refactor</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><a href="https://jonghoonpark.com/refactoring-toward-valuable-unit-tests">https://jonghoonpark.com/refactoring-toward-valuable-unit-tests</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>에서 이어지는 글입니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p>비즈니스 로직과 오케스트레이션의 분리는 다음과 같이 비즈니스 연산이 세 단계로 있을 때 가장 효과적이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>저장소에서 데이터 검색</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>비즈니스 로직 실행</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>데이터를 다시 저장소에 저장</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh6.googleusercontent.com/5LRBd6eRBIbR5cBNt6JuKr_4PLOLLYi52lPOahXGAH6VNBW51Af1QW-L-__2GofJO486IXcx4RBYcpHGn6HVmkpX5OSQKg8UiUGbI93phzR6xJjDJct0mz_MZHmRHqO63OkfRX4Zgc_A5m3Tg0v2FBQ" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>그러나 이렇게 단계가 명확하지 않은 경우가 많다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>의사 결정 프로세스의 중간 결과를 기반으로 프로세서 외부 의존성에서 추가 데이터를 조회해야 할 수도 있다. 프로세스 외부 의존성 쓰기 작업도 종종 그 결과에 따라 달라진다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh5.googleusercontent.com/XmpvNHb7OEoRrklBY8IcZN4UuxtJLel1LnVgfm6WaloktrwOcQkufE3HiU_HpFvS_zob3bRDdNRlfc0SmgcA-M4Go6MWLY7AW0dG_qAtoz8ZL3tFlJqreAtZRAmCO0rwi39aFLuVdN1rJuWiyZD-ihQ" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>이러한 상황에서는 다음과 같이 세 가지 방법이 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>어쨌든 외부에 대한 모든 읽기와 쓰기를 가장자리로 밀어낸다. 이 방법은 “읽고-결정하고-실행하기” 구조를 유지하지만 성능이 저하된다. 필요 없는 경우에도 컨트롤러가 프로세스 외부 의존성을 호출한다.</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>도메인 모델에 프로세스 외부 의존성을 주입하고 비즈니스 로직이 해당 의존성을 호출할 시점을 직접 결정할 수 있게 한다.</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>의사 결정 프로세스 단계를 더 세분화하고, 각 단계별로 컨트롤러를 실행하도록 한다.</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:paragraph --></p>
+<p>문제는 다음 세 가지 특성의 균형을 맞누는 것이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>도메인 모델 테스트 유의성: 도메인 클래스의 협력자 수와 유형에 따른 함수</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>컨트롤러 단순성: 의사 결정(분기) 지점이 있는지에 따라 다름</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>성능: 프로세스 외부 의존성에 대한 호출 수로 정의</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:paragraph --></p>
+<p>위에서 언급한 방법은 세 가지 특성 중 두 가지 특성만 갖는다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>외부에 대한 모든 읽기와 쓰기를 비즈니스 연산 가장자리로 밀어내기: 컨트롤러를 계속 단순하게 하고 프로세스 외부 의존성과 도메인 모델을 분리하지만, 성능이 저하된다.</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>도메인 모델에 프로세스 외부 의존성 주입하기: 성능을 유지하면서 컨트롤러를 단순하게 하지만, 도메인 모델의 테스트 유의성이 떨어진다.</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>의사 결정 프로세스 단계를 더 세분화하기: 성능과 도메인 모델 테스트 유의성에 도움을 주지만, 컨트롤러가 단순하지 않다. 이러한 세부 단계를 관리하려면 컨트롤러에 의사 결정 지점이 있어야 한다.</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh4.googleusercontent.com/5okfuVuUAbdQII6s0MByIkWaUITeLvW5sU0yluHr5zoCgirijN8ZpepwzVXUjpsMe3Lajnrr9X2D3DleMyoYMj4nPtNEEy1KXfqOtZEKOv3kVva5Mi4noIUEwSy83_j5AUlrcRl5D9_lUKdVSEirLXE" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>대부분의 소프트웨어 프로젝트에서는 성능이 매우 중요하므로 첫 번째 방법(외부에 대한 모든 읽기와 쓰기를 비즈니스 연산 가장자리로 밀어내기)은 고려할 필요가 없다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>두 번째 옵션(도메인 모델에 프로세스 외부 의존성 주입하기)은 대부분 코드를 지나치게 복잡한 사분면에 넣는다. 이러한 코드는 비즈니스 로직과 프로세스 외부 의존성과의 통신을 분리하지 않으므로 테스트와 유지 보수가 훨씬 어려워진다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그러면 <strong>세 번째 옵션(의사 결정 프로세스 단계를 더 세분화하기)이 남게된다</strong>. 이 방식을 쓰면 컨트롤러를 더 복잡하게 만들어 지나치게 복잡한 사분면에 더 가까워지게 된다. 그러나 이 문제를 완화할 수 있는 방법이 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">4.1 CanExecute/Execute 패턴 사용</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>컨트롤러 복잡도가 커지는 것을 완화하는 첫 번째 방법은 CanExecute/Execute 패턴을 사용해 비즈니스 로직이 도메인 모델에서 컨트롤러로 유출되는 것을 방지하는 것이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>예시는 다음과 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:html --><br />
+<script src="https://gist.github.com/dev-jonghoonpark/4357c4f489d9a3fa218631353d288c78.js?file=4-1%20CanExecute-Execute%20example"></script><br />
+<!-- /wp:html --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 방법에는 두 가지 중요한 이점이 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>컨트롤러는 더 이상 이메일 변경 프로세스를 알 필요가 없다. CanChangeEmail() 메서드를 호출해서 연산을 수행할 수 있는지 확인하기만 하면 된다. 이 메서드에 여러가지 유효성 검사가 있을 수 있고, 유효성 검사 모두 컨트롤러로부터 캡슐화 돼 있다.</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>ChangeEmail()의 전제 조건이 추가돼도 먼저 확인하지 않으면 이메일을 변경할 수 없도록 보장한다.</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 패턴을 사용하면 도메인 계층의 모든 결정을 통합할 수 있다. 이제 컨트롤러에 이메일을 확인할 일이 없기 때문에 더 이상 의사 결정 지점은 없다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>따라서 컨트롤러에서 CanChangeEmail()을 호출하는 if 문이 있어도 if 문을 테스트할 필요는 없다. User 클래스의 전제 조건을 단위 테스트하는 것으로 충분하다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>요약하면 컨트롤러에서 도메인 계층으로 책임을 옮긴다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">4.2 도메인 이벤트를 사용해 도메인 모델 변경 사항 추적</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>도메인 모델에 단계가 있을 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>컨트롤러에 이러한 단계를 알아야 하는 책임이 있으면 시스템이 복잡해진다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>도메인 이벤트(doamin event)로 이러한 단계 추적을 구현할 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:quote --></p>
+<blockquote class="wp-block-quote"><p><!-- wp:paragraph --></p>
+<p>[정의] 도메인 이벤트는 애플리케이션 내에서 도메인 전문가에게 중요한 이벤트를 말한다. 도메인 전문가에게는 무엇으로 도메인 이벤트와 일반 이벤트(예: 버튼 클릭)를 구별하는지가 중요하다. 도메인 이벤트는 종종 시스템에서 발생한 중요한 변경 사항을 외부 애플리케이션에 알리는 데 사용된다.</p>
+<p><!-- /wp:paragraph --></p></blockquote>
+<p><!-- /wp:quote --></p>
+<p><!-- wp:html --><br />
+<script src="https://gist.github.com/dev-jonghoonpark/4357c4f489d9a3fa218631353d288c78.js?file=4-2-1%20EmailChangedEvent"></script><br />
+<!-- /wp:html --></p>
+<p><!-- wp:quote --></p>
+<blockquote class="wp-block-quote"><p><!-- wp:paragraph --></p>
+<p>[참고] 도메인 이벤트는 이미 일어난 일들을 나타내기 때문에 항상 과거 시제로 명명해야 한다. 도메인 이벤트는 값이고 불변이다.</p>
+<p><!-- /wp:paragraph --></p></blockquote>
+<p><!-- /wp:quote --></p>
+<p><!-- wp:paragraph --></p>
+<p>User에 이메일이 변경될 때 새 요소를 추가할 수 있는 이벤트 컬렉션을 갖게 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>컨트롤러는 이벤트를 메시지 버스의 메시지로 변환한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:html --><br />
+<script src="https://gist.github.com/dev-jonghoonpark/4357c4f489d9a3fa218631353d288c78.js?file=4-2-2%20User%20ChangeEmail%20with%20EmailChangedEvent"></script><br />
+<!-- /wp:html --></p>
+<p><!-- wp:html --><br />
+<script src="https://gist.github.com/dev-jonghoonpark/4357c4f489d9a3fa218631353d288c78.js?file=4-2-3%20Contoller%20ChangeEmail%20with%20EmailChangedEvent"></script><br />
+<!-- /wp:html --></p>
+<p><!-- wp:paragraph --></p>
+<p>CRM을 제외한 어떤 애플리케이션도 데이터베이스에 대한 접근 권한을 갖지 않는다고 하면, 해당 데이터베이스와의 통신은 CRM의 식별할 수 있는 동작이 아니고 구현 세부 사항이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>반면 메시지 버스와의 통신은 애플리케이션의 식별할 수 있는 동작이다. 외부 시스템과의 계약을 지키려면 CRM은 이메일이 변경될 때만 메시지를 메시지 버스에 넣어야 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>도메인 이벤트는 컨트롤러에서 의사 결정 책임을 제거하고 해당 책임을 도메인 모델에 적용함으로써 외부 시스템과의 통신에 대한 단위 테스트를 간결하게 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>컨트롤러에 집중하고 프로세스 외부 의존성을 목으로 대체하는 대신, 다음과 같이 단위 테스트에서 직접 도메인 이벤트 생성을 테스트할 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:html --><br />
+<script src="https://gist.github.com/dev-jonghoonpark/4357c4f489d9a3fa218631353d288c78.js?file=4-2-4%20Domain%20Unit%20Test%20with%20Domain%20Event"></script><br />
+<!-- /wp:html --></p>
+<p><!-- wp:paragraph {"textColor":"light-gray","fontSize":"small"} --></p>
+<p class="has-light-gray-color has-text-color has-small-font-size">일단 책에 이렇게 나와 있어서 적긴 했는데<br>EvemailChangedEvents 는 컬랙션이고 뒤에 Equal 에 들어가는건 EmailChanedEvent인데 Equal 한게 테스트 통과할지 모르겠다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 코드로 바뀐 것은 컨트롤러 단에서 처리 로직에 따라 이메일을 보내야 할지 신경을 쓰지 않아도 되도록 변경되었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>컨트롤러에서 해줘야 할 일은 그저 이벤트가 있는지 확인하고 있으면 보내주면 되는 것이 되었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>오케스트레이션이 올바르게 수행되는지 확인하고자 한다면 컨트롤러를 테스트해야 하지만, 그렇게 하려면 훨씬 더 작은 테스트가 필요하다. 이것이 다음 장의 주제이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>* 오케스트레이션 : 통합</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">5. 결론</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>이번 장의 주제는 외부 시스템에 대한 애플리케이션의 사이드 이펙트를 추상화 하는 것이다. 비지니스 연산이 끝날 때까지 이러한 사이드 이펙트를 메모리에 둬서 추상화하고 프로세스 외부 의존성 없이 단순한 단위 테스트로 테스트할 수 있다. 도메인 이벤트는 메시지 버스에서 메시지에 기반한 추상화에 해당한다. 도메인 클래스의 변경 사항은 데이터베이스의 향후 수정 사항에 대한 추상화다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:quote --></p>
+<blockquote class="wp-block-quote"><p><!-- wp:paragraph --></p>
+<p>[참고] 추상화 할 것을 테스트하기보다 추상화를 테스트하는 것이 더 쉽다.</p>
+<p><!-- /wp:paragraph --></p></blockquote>
+<p><!-- /wp:quote --></p>
+<p><!-- wp:paragraph --></p>
+<p>도메인 이벤트와 CanExecute/Execute 패턴을 사용해 도메인 모델에 모든 의사 결정을 잘 담을 수 있었지만, 항상 그렇게 할 수는 없다. 비즈니스 로직 파편화가 불가피한 상황들이 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>예를들어, 도메인 모델에 프로세스 외부 의존성을 두지 않고서는 컨트롤러 외부에서 이메일 고유성을 검증할 방법이 없다. 또 다른 예는 비즈니스 연산 과정을 변경해야 하는 프로세스 외부 의존성의 실패다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>도메인 계층에서 프로세스 외부 의존성을 호출하지 않기 때문에 어디로 갈 것인지에 대한 결정은 도메인 계층에 있을 수 없다. 이 로직을 컨트롤러에 넣고 통합 테스트로 처리해야 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>잠재적인 파편화가 있더라도 비즈니스 로직을 오케스트레이션에서 분리하는 것은 많은 가치가 있다. 이렇게 분리하면 단위 테스트 프로세스가 크게 간소화 되기 때문이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>컨트롤러에 비즈니스 로직이 있는 것을 피할 수 없는 것처럼, 도메인 클래스에서 모든 협력자를 제거할 수 있는 경우는 거의 없을 것이다. 하지만 괜찮다. 프로세스 외부 의존성을 참조하지 않는 한, 도메인 클래스는 지나치게 복잡한 코드가 아닐 것이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>fin.</p>
+<p><!-- /wp:paragraph --></p>

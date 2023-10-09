@@ -1,0 +1,111 @@
+---
+layout: post
+title: 테스트용 크롬 (Chrome for Testing)
+date: '2023-07-02 00:53:25 +0900'
+categories:
+- 테스트
+tags:
+- 테스트
+- testing
+- 테스트용 크롬
+- Chrome for Testing
+- chrome
+- 크롬
+- e2e
+---
+<p><!-- wp:paragraph --></p>
+<p><strong>원문</strong><br>Chrome for Testing: reliable downloads for browser automation<br><a href="https://developer.chrome.com/blog/chrome-for-testing/">https://developer.chrome.com/blog/chrome-for-testing/</a><br>23년 6월 12일 글</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":304,"width":256,"height":256,"sizeSlug":"full","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-full is-resized"><img src="https://jonghoonpark.com/wp-content/uploads/2023/07/Wn5kQQRVssFAHozIWDX3-1.png" alt="" class="wp-image-304" width="256" height="256"/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>정리</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>크롬은 현시점 기준 사용자 점유율이 가장 높은 브라우저이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"align":"center","width":478,"height":324} --></p>
+<figure class="wp-block-image aligncenter is-resized"><img src="https://lh6.googleusercontent.com/jjWMki9P40THk3cMHYPyD6aXxWrdqlTSxKcFw_h8UXmI1q7hWWnN420jVSWr5xVlKQjSBTiiFhjxg54O-z0N21wb6zAJ-tTQic1LU7b3lVrLX9diORFRRKvZ2MVeO5hDdFSYbeo91Ewa2NNIHG3AePk" alt="" width="478" height="324"/><br />
+<figcaption class="wp-element-caption">출처 : <a href="https://www.similarweb.com/browsers/">https://www.similarweb.com/browsers/</a></figcaption>
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>브라우저 테스트를 하면서 번거로웠던 점 중 하나는 브라우저 테스트 환경을 맞춰줘야 한다는 것인데<br>크롬의 경우에는 자동 업데이트를 권장한다.<br>이는 글에도 적혀있지만 사용자에게는 좋지만 테스트 개발자에게는 고통이다. </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>특히 크롬의 경우에는 특정 버전의 Chrome 바이너리 / 이에 맞는 Chrome Driver 를 찾기 어려운 부분이 있었는데<br>Google 에서는 의도적으로 사용자로 하여금 가능한 최신 버전으로 업데이트를 시키게 하기 위해서 버전이 지정된 Chrome 다운로드를 제공하지 않는다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이러한 고통을 해결하기 위해서 테스트용 Chrome (Chrome for Test) 을 출시하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>다운로드 가능한 버전들에 대해 API endpoints 로도 제공해 준다.<br><a href="https://github.com/GoogleChromeLabs/chrome-for-testing#json-api-endpoints">https://github.com/GoogleChromeLabs/chrome-for-testing#json-api-endpoints</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이제 크롬 테스트를 위한 환경 세팅에서 좀 더 자유로워 보자.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>[참고] Chrome for Testing은 브라우저 자동화 및 테스트 목적으로 만들어졌기 때문에 일상적인 브라우징에는 적합하지 않다고 명시되어 있으니 참고하자. (그래서 일반 다운로드 페이지에서 표시해주지 않는다고 한다.)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- <strong>정리는 여기까지</strong> -</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>브로우저 테스트 환경 세팅과 관련된 경험</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 글을 정리해서 쓰게 된 이유는 예전에 테스트 환경을 구축하면서 발생되었던 이슈가 떠올랐기 때문이다.<br>완전 직접적인 연관이 있는 이야기는 아니긴 한데 브라우저 테스트 환경 세팅과 관련된 이야기라 떠올랐다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>올해 초에 팀에서 <a href="https://testkube.io/">Testkube(Kubernetes-Native Testing Framework)</a> 라는 프레임워크를 회사에 도입해보고자 하려 했었다. 도입하려고 했던 이유는 쿠버네티스 위에서 테스트 라이브러리를 관리할 수 있는 구조라고 해서였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>결론부터 이야기 하자면 도입에는 성공했었지만 오래가지는 못했다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Testkube는 각 테스트 도구에 대한 executor 를 제공하며 executor를 통해서 Testkube 프레임워크 내에서 테스트를 사용할 수 있도록 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그래서 나는 playwright용 executor를 만들어서<br>testkube 프로젝트 팀에 등록을 요청/진행하였다.<br>testkube 쪽에서는 친절하게 응대 해주었고 잘 마무리 되는듯 하였으나</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>버전 관련 이슈가 있었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Playwright 쪽에서 업데이트가 진행될 때마다<br>프로젝트 에서 사용하는 playwright 버전과 Testkube 에서 사용하는 playwright 버전을 일치시켜 줘야 하는 이슈가 있었다.<br><a href="https://github.com/kubeshop/testkube/issues/3256">https://github.com/kubeshop/testkube/issues/3256</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이는 꾸준한 관리가 필요하다는 것을 의미를 했고<br>그 수고에 비해 사용률이 적어서 그런지 executor는 지금은 archived 되었다.<br><a href="https://github.com/kubeshop/testkube-executor-playwright">https://github.com/kubeshop/testkube-executor-playwright</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Testkube 공식 홈페이지 문서에서 아직까지 소개는 하고 있다만…<br><a href="https://docs.testkube.io/test-types/executor-playwright/">https://docs.testkube.io/test-types/executor-playwright/</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>물론 이 이슈가 결정적인 이유는 아니였고<br>결론적으로 여러 사정이 맞물려서 지금은 회사에서 testkube를 쓰고 있지는 않다.<br>(꼭 써야 한다면 위에서 이야기한 버전 관리 이슈에 적극 참여할수도 있었을 것이다.)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>앞으로도 아마 사용하지 않을 것 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>cypress 쪽은 잘 되어 있어서 만약 cypress를 사용한다면 써보면 좋을지도 모르겠다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p>회사에서 준비하고 있는 신규 프로젝트가 점점 윤곽을 드러내고 있는 시점인데<br>e2e 테스트를 슬슬 준비 해봐야겠다는 생각이 들었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>월요일날 스크럼 미팅에서 이야기를 꺼내봐야겠다.</p>
+<p><!-- /wp:paragraph --></p>

@@ -1,0 +1,192 @@
+---
+layout: post
+title: "[Jetpack Compose] DarkMode 대응하기"
+date: '2023-06-03 22:48:42 +0900'
+categories:
+- 개발
+tags:
+- android
+- jetpack
+- compose
+- Jeckpack compose
+- darkmode
+- status bar
+- splash
+---
+<p><!-- wp:paragraph --></p>
+<p>이 글을 쓰게 된 계기는 다음과 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>안드로이드 개인 프로젝트를 하고 있는데</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>초기 기본설정에서 일반적인 것들은 처리 되었으나 스플래시 화면 (splash screen)과 상태바 (status bar) 만 dark mode가 적용이 되지 않았다.<br></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>인터넷에 있는 방법들은 아무리 해도 먹히지 않았다.<br>정보가 많지않아서 많이 헤맨만큼 다른 사람도 헤맬것이라 생각하여 정리해본다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>사실 결론은 안드로이드 스튜디오에서 jetpack 프로젝트로 생성하면서<br>자동 생성된 프로젝트 기본설정에서 잘못된 부분이 있어서 무엇을 해도 적용이 제대로 되지 않았던 것이였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p>안드로이드 12 이후로 변경된 splash screen에 대해서는</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><a href="https://developer.android.com/develop/ui/views/launch/splash-screen">https://developer.android.com/develop/ui/views/launch/splash-screen</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>공식 개발자 홈페이지를 참고하자.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":267,"sizeSlug":"large","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-large"><img src="https://jonghoonpark.com/wp-content/uploads/2023/06/image-9-1024x574.png" alt="" class="wp-image-267"/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p>아래 코드는 jetpack compose - material m3 기준으로 작성하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>미리 결론부터 이야기 하면 가장 문제였던 부분은 이 부분이였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Theme.kt</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>//    val view = LocalView.current
+//    if (!view.isInEditMode) {
+//        SideEffect {
+//            val window = (view.context as Activity).window
+//            window.statusBarColor = colorScheme.primary.toArgb()
+//            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+//        }
+//    }</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>여기서 강제로 statusBarColor를 변경시켜 버렸기에 아무것도 적용되지 않고 있었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Theme.kt 의 경우 기본 생성된 파일이였고<br>나는 애초에 따로 건들지 않았기 때문에 예상도 못한 부분이였다.<br>해당 부분이 만약 코드에 포함되어 있다면 가감하게 지워도 좋을 것 같다</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p>나는 <a href="https://github.com/android/nowinandroid" target="_blank" rel="noopener" title="Now In Android">Now In Android</a> 의 코드를 참고해서 설정하였다.<br>참고로 중간중간에 나오는 NIA 라는 것은 Now In Android의 약자이므로, 본인의 프로젝트에 맞게 변경하면 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>봐야 할 부분은 딱 4가지 이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>/res/values/themes.xml</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;resources xmlns:tools="http://schemas.android.com/tools">
+
+    &lt;!-- Allows us to override night specific attributes in the
+         values-night folder. -->
+    &lt;style name="NightAdjusted.Theme.Nia" parent="android:Theme.Material.Light.NoActionBar">
+        &lt;item name="android:windowLightStatusBar" tools:targetApi="23">true&lt;/item>
+        &lt;item name="android:windowLightNavigationBar" tools:targetApi="27">true&lt;/item>
+    &lt;/style>
+
+    &lt;!-- Allows us to override platform level specific attributes in their
+         respective values-vXX folder. -->
+    &lt;style name="PlatformAdjusted.Theme.Nia" parent="NightAdjusted.Theme.Nia">
+        &lt;item name="android:statusBarColor">@color/black30&lt;/item>
+    &lt;/style>
+
+    &lt;!-- The final theme we use -->
+    &lt;style name="Theme.Nia" parent="PlatformAdjusted.Theme.Nia" />
+
+    &lt;style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
+        &lt;item name="android:windowLightStatusBar" tools:targetApi="23">true&lt;/item>
+        &lt;item name="android:windowLightNavigationBar" tools:targetApi="27">true&lt;/item>
+    &lt;/style>
+
+    &lt;style name="Theme.Nia.Splash" parent="NightAdjusted.Theme.Splash">
+        &lt;item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash&lt;/item>
+        &lt;item name="postSplashScreenTheme">@style/Theme.Nia&lt;/item>
+    &lt;/style>
+
+&lt;/resources></code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>/res/values-night/themes.xml</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>&lt;?xml version="1.0" encoding="utf-8"?>
+
+&lt;resources xmlns:tools="http://schemas.android.com/tools">
+
+    &lt;style name="NightAdjusted.Theme.Nia" parent="android:Theme.Material.NoActionBar">
+        &lt;item name="android:windowLightStatusBar" tools:targetApi="23">false&lt;/item>
+        &lt;item name="android:windowLightNavigationBar" tools:targetApi="27">false&lt;/item>
+    &lt;/style>
+
+    &lt;style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
+        &lt;item name="android:windowLightStatusBar" tools:targetApi="23">false&lt;/item>
+        &lt;item name="android:windowLightNavigationBar" tools:targetApi="27">false&lt;/item>
+    &lt;/style>
+
+&lt;/resources></code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>/res/values-v23/themes.xml</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;resources>
+
+    &lt;style name="PlatformAdjusted.Theme.Nia" parent="NightAdjusted.Theme.Nia">
+        &lt;item name="android:statusBarColor">@android:color/transparent&lt;/item>
+    &lt;/style>
+&lt;/resources></code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>/res/values-v27/themes.xml</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;resources>
+
+    &lt;style name="PlatformAdjusted.Theme.Nia" parent="NightAdjusted.Theme.Nia">
+        &lt;item name="android:statusBarColor">@android:color/transparent&lt;/item>
+        &lt;item name="android:navigationBarColor">@android:color/transparent&lt;/item>
+    &lt;/style>
+&lt;/resources></code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이렇게 버전에 따라 theme.xml을 설정해준 후<br>(필요하다면 중간에 나오는 @color/black30 도 추가해주거나 본인에 맞게 수정하면 된다. 나는 @color/white 로 변경해주었다.)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>/AndroidManifest.xml 에서 application 의 theme 값을 "@style/Theme.Nia.Splash" 로 수정해주면 된다. (Nia는 상황에 맞게 수정)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p>트러블 슈팅 하는 과정에서 </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>구글에서 jetpack 환경에서 쉽게 System UI를 수정할 수 있도록 만든 &lt; <strong>systemuicontroller</strong> > 이라는 라이브러리도 알게되었다. 궁금하면 참고해보자.<br><a href="https://google.github.io/accompanist/systemuicontroller/">https://google.github.io/accompanist/systemuicontroller/</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><br>트러블 슈팅 할 때는 이것저것 해보느라 넣어서 사용해보았지만 정확한 원인을 알고나서는 제거하였다. (일단 내가 만들고 있는 앱은 디자인이 중요하지 않기 때문에...)</p>
+<p><!-- /wp:paragraph --></p>

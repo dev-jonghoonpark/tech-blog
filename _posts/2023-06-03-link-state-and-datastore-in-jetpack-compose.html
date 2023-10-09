@@ -1,0 +1,110 @@
+---
+layout: post
+title: "[Jetpack Compose] State와 DataStore 연결하기"
+date: '2023-06-03 23:13:09 +0900'
+categories:
+- 개발
+tags:
+- android
+- jetpack
+- jetpack compose
+- compose
+- datastore
+- state
+- checkbox
+---
+<p><!-- wp:paragraph --></p>
+<p><a href="https://developer.android.com/topic/libraries/architecture/datastore">https://developer.android.com/topic/libraries/architecture/datastore</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>DataStore 라는것이 생겼다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>옛날에는 SharedPreference 라는 것을 썼었는데 더 모던해진 애로 이해하면 될 것 같다.<br>정확한 설명은 다음과 같다.<br><br>Jetpack&nbsp;DataStore&nbsp;is&nbsp;a&nbsp;data&nbsp;storage&nbsp;solution&nbsp;that&nbsp;allows&nbsp;you&nbsp;to&nbsp;store&nbsp;key-value&nbsp;pairs&nbsp;or&nbsp;typed&nbsp;objects&nbsp;with&nbsp;protocol&nbsp;buffers.&nbsp;DataStore&nbsp;uses&nbsp;Kotlin&nbsp;coroutines&nbsp;and&nbsp;Flow&nbsp;to&nbsp;store&nbsp;data&nbsp;asynchronously,&nbsp;consistently,&nbsp;and&nbsp;transactionally.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>아무튼 이 애를 Compose 환경에서 쓸 수 있도록 연결한 과정에 대해서 설명한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p>설정 페이지를 만들기 위해서 아래와 같은 작업을 진행했으며<br>목표는 checkbox를 선택했을 때 해당 선택 정보가 로컬 기기에 저장되기를 바랬다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그리고 이를 위해서 Compose 와 DataStore 를 연결해야 했다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>일단은 DataStore를 만드는 부분이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>SettingDataStore.kt</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>class SettingDataStore {
+    companion object {
+        val Context.dataStore: DataStore&lt;Preferences&gt; by preferencesDataStore(name = "settings")
+        val ignore_no_content_key = booleanPreferencesKey("ignore_no_content")
+        val ignore_duplicated_key = booleanPreferencesKey("ignore_duplicated")
+    }
+}</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>DataStore의 이름을 정해주고 필요한 key들을 생성해둔다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>SettingActivity.kt</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>@Composable
+fun SettingPage() {
+    val dataStore = (LocalContext.current).dataStore
+
+    val ignoreNoContentState = remember { mutableStateOf(false) }
+    val ignoreNoDuplicatedState = remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        dataStore.data.collect { preferences -&gt;
+            ignoreNoContentState.value = preferences&#91;ignore_no_content_key] ?: false
+            ignoreNoDuplicatedState.value = preferences&#91;ignore_duplicated_key] ?: false
+        }
+    }
+
+    LaunchedEffect(ignoreNoContentState.value) {
+        dataStore.edit { preferences -&gt;
+            preferences&#91;ignore_no_content_key] = ignoreNoContentState.value
+        }
+    }
+
+    LaunchedEffect(ignoreNoDuplicatedState.value) {
+        dataStore.edit { preferences -&gt;
+            preferences&#91;ignore_duplicated_key] = ignoreNoDuplicatedState.value
+        }
+    }
+    
+    ... 중략 ...
+}</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>Checkbox(
+    checked = ignoreNoContentState.value,
+    onCheckedChange = { checked -&gt;
+        run {
+            ignoreNoContentState.value = checked
+        }
+    }
+)</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>이렇게 만들어주면 CheckBox에서 값이 변경되었을 때 DataStore에도 반영이 되게 된다.</p>
+<p><!-- /wp:paragraph --></p>

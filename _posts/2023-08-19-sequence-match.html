@@ -1,0 +1,83 @@
+---
+layout: post
+title: 문자열 매칭 수 계산
+date: "2023-08-19 23:00:06 +0900"
+categories:
+  - 알고리즘
+tags:
+  - algorithm
+  - difflib
+  - lcs
+  - sequence match
+  - string match
+---
+
+<h4>
+  하나 빼기: 문자열을 편집하는 방법에는 세 가지 종류가 있다. 문자 삽입, 문제
+  삭제, 문자 교체. 문자열 두 개가 주어졌을 때, 문자열을 같게 만들기 위한
+  편집횟수가 1회 이내인지 확인하는 함수를 작성하라
+</h4>
+<p>예시</p>
+<ul>
+  <li>pale, ple → true</li>
+  <li>pales, pale → true</li>
+  <li>pale, bale → true</li>
+  <li>pale, bake → false</li>
+</ul>
+<p>
+  문자열 매칭 수 &gt;= 긴 문자열의 length - 1<br />
+  이면 true를 반환하게 처리
+</p>
+<pre><code>import difflib
+
+def get_matching_character_count(str1, str2):
+    matcher = difflib.SequenceMatcher(None, str1, str2)
+    matching_blocks = matcher.get_matching_blocks()
+    matching_characters_count = sum(block.size for block in matching_blocks)
+    return matching_characters_count
+
+def is_one_edit_away(str1, str2):
+    max_length = max(len(str1), len(str2))
+    matching_character_count = get_matching_character_count(str1, str2)
+
+    return matching_characters &gt;= max_length - 1
+
+# 예시 테스트
+print(is_one_edit_away(&quot;pale&quot;, &quot;ple&quot;))   # True
+print(is_one_edit_away(&quot;pales&quot;, &quot;pale&quot;)) # True
+print(is_one_edit_away(&quot;pale&quot;, &quot;bale&quot;))  # True
+print(is_one_edit_away(&quot;pale&quot;, &quot;bake&quot;))  # False</code></pre>
+<p>
+  물론 difflib을 사용하지 않는 것이 의도된 것이였겠지만<br />
+  나는 풀이 자체가 중요하므로 패스<br />
+  필요하다면 문자열 매칭 수 계산을 직접 구현하면 되겠다.
+</p>
+<p>
+  <strong
+    ><a
+      href="https://en.wikipedia.org/wiki/Longest_common_subsequence"
+      title="LCS 알고리즘"
+      >LCS 알고리즘</a
+    ></strong
+  >에 대해 찾아보면 되겠다.
+</p>
+<pre><code>function LCSLength(X[1..m], Y[1..n])
+    C = array(0..m, 0..n)
+    for i := 0..m
+        C[i,0] = 0
+    for j := 0..n
+        C[0,j] = 0
+    for i := 1..m
+        for j := 1..n
+            if X[i] = Y[j]
+                C[i,j] := C[i-1,j-1] + 1
+            else
+                C[i,j] := max(C[i,j-1], C[i-1,j])
+    return C[m,n]</code></pre>
+<p>
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-1692453581744.png"
+    alt="file"
+  /><br />
+  출처 : 위키
+</p>

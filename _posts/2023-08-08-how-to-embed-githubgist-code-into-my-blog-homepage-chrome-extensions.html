@@ -1,0 +1,365 @@
+---
+layout: post
+title: How to embed github(gist) code into my blog/homepage (+ chrome extensions)
+date: "2023-08-08 22:32:27 +0900"
+categories:
+  - 개발
+tags:
+  - github
+  - gist
+  - embed
+  - snippet
+  - wordpress
+---
+
+<p>
+  This article tells you how to github embed / gist embed<br />
+  Introducing a chrome extension application (made by myself) that helps you
+  embed easily.
+</p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">introduction</h2>
+<p>
+  <!-- /wp:heading --><br />
+  <!-- wp:image {"width":304,"height":314} -->
+</p>
+<figure class="wp-block-image is-resized">
+  <img
+    src="https://lh3.googleusercontent.com/Xs1sLXSHg0y6Lwv-i8sMmoeLARjSA-xFiqkliHC0AOPn-khXu1ZGHN0n_k9o-ptXcAsTw3mrLNy5yQJn47jKuCfHSO_XP9FvB7we7oC2NxbNSVXdEX16z7T6eOlFopquSpQGm_8n6nlT73CM-a5REQQ"
+    alt=""
+    width="304"
+    height="314"
+  />
+</figure>
+<p>
+  <!-- /wp:image --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>When writing a blog, there are times when you need to insert code.</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  At that time, I thought it would be nice to be able to write code on gist or
+  github and embed the code, so I searched for it and used it, and there was
+  something inconvenient.
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  So, First I will introduce how to generate embed code<br />Then, Introducing a
+  Chrome extension application created to improve this method.
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:heading -->
+</p>
+<h2 class="wp-block-heading">how to generate embed code</h2>
+<p>
+  <!-- /wp:heading --><br />
+  <!-- wp:heading {"level":3} -->
+</p>
+<h3 class="wp-block-heading">gist</h3>
+<p>
+  <!-- /wp:heading --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>By default, the embed code is provided.</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:image -->
+</p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh5.googleusercontent.com/CKLVAryL9m1Rs_p-rR1f4JbQDPAq7gKEl5t_sCMW9YeoKvT1oDpJf6tEg-Q2PzjMeJ5Uo39kU8COsm9SiVPxdpNviRjphbK2vfz5vjZy0XTDCYPh2-p2QbuMrp_lGbU6DfPUccE5Wh3vclhWoYVBY_w"
+    alt=""
+  />
+</figure>
+<p>
+  <!-- /wp:image --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>Copy the embed code from the top right corner and put it where you want.</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>However, the problem occurs when there are multiple files in one gist.</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  As an example, I created the following code.<br /><a
+    href="https://gist.github.com/dev-jonghoonpark/e56f32c1795497a6a796005095159024"
+    target="_blank"
+    rel="noopener"
+    title=""
+    >https://gist.github.com/dev-jonghoonpark/e56f32c1795497a6a796005095159024</a
+  >
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>The embed code provided in this gist is as follows.</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  &lt;script
+  src="https://gist.github.com/dev-jonghoonpark/e56f32c1795497a6a796005095159024.js"&gt;&lt;/script&gt;
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>When applied in practice, it is applied as follows</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:html --><br />
+  <script src="https://gist.github.com/dev-jonghoonpark/e56f32c1795497a6a796005095159024.js"></script>
+  <br />
+  <!-- /wp:html --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>You can see 3 files displayed at once with one script.</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>Then, what if you want to embed only one file here?</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>You need to change the value of the src attribute.</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  Add a query param called "file" to the src attribute value. The value of param
+  should be the file name.
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>The following is an example of importing only the first file named "a".</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  &lt;script
+  src="https://gist.github.com/dev-jonghoonpark/e56f32c1795497a6a796005095159024.js?file=a"&gt;&lt;/script&gt;
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>When you actually use it, it comes out as follows.</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:html --><br />
+  <script src="https://gist.github.com/dev-jonghoonpark/e56f32c1795497a6a796005095159024.js?file=a"></script>
+  <br />
+  <!-- /wp:html --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:heading {"level":3} -->
+</p>
+<h3 class="wp-block-heading">github</h3>
+<p>
+  <!-- /wp:heading --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>Unlike gist, github does not provide embed by default.</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  I was not the only one who was disappointed in this part, but there was a
+  project to wrap it so that I could use embed script like a gist.
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:image -->
+</p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh6.googleusercontent.com/r614z4ax21m1Ns6wwnObxMoSxBlSItFz5Yobqiksu8u0KwNSBAHhAELyP3W9mah0nXOgh_gJIBcpm5dyAJBVrkB57zoNOUz6ngefdssnxIgTAjTFqNJraqBKLt-Cdq8WwjMnLbA7OtRAml7RyJ7JvGQ"
+    alt=""
+  />
+</figure>
+<p>
+  <!-- /wp:image --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  Go to
+  <a href="https://emgithub.com/" target="_blank" rel="noopener" title=""
+    >emgithub.com</a
+  >
+  , enter the URL of the file in the repository that I want to embeds, and press
+  the "Go" button to generate an embeds code.
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:heading {"level":3} -->
+</p>
+<h3 class="wp-block-heading">How to insert embed code into WordPress</h3>
+<p>
+  <!-- /wp:heading --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  For WordPress, you can create a "custom HTML" block and paste the embed code.
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:image {"align":"center","id":432,"width":339,"height":289,"sizeSlug":"full","linkDestination":"none"} -->
+</p>
+<figure class="wp-block-image aligncenter size-full is-resized">
+  <img
+    src="https://jonghoonpark.com/wp-content/uploads/2023/08/image-2.png"
+    alt=""
+    class="wp-image-432"
+    width="339"
+    height="289"
+  /><br />
+  <figcaption class="wp-element-caption">
+    image from www.wonderplugin.com
+  </figcaption>
+</figure>
+<p>
+  <!-- /wp:image --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:heading -->
+</p>
+<h2 class="wp-block-heading">Chrome extensions</h2>
+<p>
+  <!-- /wp:heading --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  After repeating it a few times, I thought I could use it more comfortably if I
+  had a button.<br />So I made this extension and registered it in the Chrome
+  extension store.
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:heading {"level":3} -->
+</p>
+<h3 class="wp-block-heading">github embed</h3>
+<p>
+  <!-- /wp:heading --><br />
+  <!-- wp:image {"width":640,"height":400} -->
+</p>
+<figure class="wp-block-image is-resized">
+  <img
+    src="https://lh4.googleusercontent.com/KI9uZnBQkAt1lazttNFq2WDBBc7UWXU38qxBw7MaREMSAZRp7hx2oqt9R26M7-CBF1tgqPL-Kb-W70Zy15AdhV-zz7b56uuRgpoi8fiCaA1fn6P4t_09LOG42osa9GdM8PfIYLM-DcL7CsCsSzbDWbc"
+    alt=""
+    width="640"
+    height="400"
+  />
+</figure>
+<p>
+  <!-- /wp:image --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  chrome store<br /><a
+    href="https://chrome.google.com/webstore/detail/github-embed/ghhinoegpcglicofkleanpieaoemkidp"
+    target="_blank"
+    rel="noopener"
+    title=""
+    >https://chrome.google.com/webstore/detail/github-embed/ghhinoegpcglicofkleanpieaoemkidp</a
+  >
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  github repository<br /><a
+    href="https://github.com/dev-jonghoonpark/github-embed-chrome-extension"
+    target="_blank"
+    rel="noopener"
+    title=""
+    >https://github.com/dev-jonghoonpark/github-embed-chrome-extension</a
+  >&nbsp;
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  After installing the application,<br />When you access the github/gist page,
+  an embed button is automatically generated in your browser.<br />And when you
+  click the generated embed button, the embed code is automatically generated
+  and copied.
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>It is no longer necessary to add param directly to the embed code.</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  Creating a chrome extension project itself wasn't that complicated because of
+  its well-guided.
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>
+  Like the Play Store console, it costs to register a developer in the Chrome
+  extension store for the first time.<br />The cost is $5.
+</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>It seems that it took a day or two to complete the registration.</p>
+<p>
+  <!-- /wp:paragraph --><br />
+  <!-- wp:paragraph -->
+</p>
+<p>fin.</p>
+<p><!-- /wp:paragraph --></p>

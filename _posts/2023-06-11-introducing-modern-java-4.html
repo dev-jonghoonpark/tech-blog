@@ -1,0 +1,188 @@
+---
+layout: post
+title: 1장 최신 자바 소개 (4) - HTTP/2 소개
+date: '2023-06-11 18:40:31 +0900'
+categories:
+- Java
+tags:
+- Well-Grounded Java Developer
+- HTTP/2
+- HTTP
+- HTTP 1.1
+- Async
+- Sync
+---
+<p><!-- wp:paragraph --></p>
+<p>Well-Grounded Java Developer - 2nd edition</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.5.3 HTTP/2 (Java 11)</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP 표준의 새로운 버전인 HTTP/2가 출시되었습니다.<br>(글 작성 시점 기준 현재는 HTTP/3도 나왔습니다. 2022년 6월 6일, <a href="https://datatracker.ietf.org/doc/rfc9114/">IETF RFC 9114</a>로 표준화되었다고 함)<br>HTTP 1.1(1997년) 에서 업데이트가 된 이유에 대해서 알아보고 Java 11에서 어떻게 HTTP/2를 제공하는지 알아보겠습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP 1.1은 오래된 표준이기 때문에 최신 웹 어플리케이션에서 요구하는 성능에 비해 노후화 되었습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이로 인해 아래와 같은 문제가 있었습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>Head-of-line 블로킹&nbsp;</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>단일 사이트에 대한 연결 제한</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>HTTP 컨트롤 헤더의 성능 오버헤드</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:paragraph --></p>
+<p>* 각각의 문제점에 대해서는 아래에서 자세히 다룰 예정입니다.&nbsp;</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP/2는 위의 문제로 인한&nbsp; 성능 문제를 해결하는데 초점을 맞춘 프로토콜 업데이트 입니다. 클라이언트와 서버 간의 바이트 흐름(flow)에 초점을 두고 있기 때문에 HTTP 개념 중 많은 부분들(요청/응답, 헤더, 상태 코드, 응답 본문 등)이 변경되지 않고 유지되었습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">Head-of-line 블로킹</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP 통신은 TCP 소켓을 통해 이루어 집니다. HTTP 1.1은 불필요한 설정 비용(setup cost)을 반복하지 않기 위해 개별 소캣을 재사용하도록 되어 있습니다. 다만 여러 요청이 소켓을 공유하는 경우에도 요청이 순서대로 반환되도록 설계되었습니다. (파이프라인으로 알려짐)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이는 서버의 느린 응답이 더 빨리 반환될 수 있는 다른 응답들을 막게 될 수 있는 것을 의미합니다. 이로 인해 브라우저 렌더링 지연이 발생됩니다. JVM 애플리케이션에도 제한이 발생될 수 있습니다.<br></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh4.googleusercontent.com/2w-PWBK4ge3urNY4iEiFw4kUn5NqbhlW7qUp4HKIF7cZOihui06vNl4QZWM1XkSD0IxGGnepmL103A4Jb1_EL9BDBXR1bwxOzKFr1c-_zCWnf_yFrS9ol1P51ae2BTR69iPkVXY3Kr7eLgt6EP7gIZw" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP/2 는 동일한 연결 내에서 요청을 다중화 할 수 있도록 설계되었습니다. 클라이언트와 서버 간의 다중 스트림은 항상 지원됩니다. 헤더와 본문을 별도로 수신할 수도 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP/1 에서는 많은 작은 에셋(asset)을 반환하는 것이 더 큰 번들을 만드는 것보다 성능이 좋지 않은 경우들이 있었는데</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP/2에서는 다중화된 응답을 통해 리소스가 느린 요청에 의해 차단되지 않고 정확하게 캐시되어 전반적으로 더 나은 경험을 제공할 수 있게 되었습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh5.googleusercontent.com/Ofkjejx3G994uNU23dDwwcGuhxi-uQfeV8jc68dABQuGRPh8SFURGfAxpKuFx1DsylN0ibKLQai7JnBWnyQ2FagAcVwhfO_1CgCsRMZK6VO3F0pr81EocH5bcA36sHaLljpdBN667B6SHpno-v7KofU" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>Q: 여기서 binary 값이 의미하는것은? 그리고 추가 요청에서 binary 값이 바뀌지 않는 이유?</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">제한된 연결</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP 1.1 사양에서는 서버에 대한 연결을 두 개로 제한하는 것을 권장합니다. 이것은 필수 라기보다는 권장입니다. 최신 웹 브라우저는 도메인당 6~8개의 연결을 허용합니다. 이러한 제한으로 인해 개발자는 종종 여러개의 도메인을 통해 제공하거나 번들링을 구현하게 되었습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP/2 는 이 상황을 해결합니다. 각 연결을 효과적으로 사용하여 원하는 만큼 동시 요청을 할 수 있습니다. 브라우저는 주어진 도메인에 대해 하나의 연결만 열지만 동일한 연결을 통해 동시에 많은 요청을 수행할 수 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">HTTP 헤더 성능</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>요청과 함께 헤더를 보낼 수 있는 것은 HTTP의 중요한 기능입니다. HTTP 프로토콜은 그 자체로는 무상태(stateless) 이지만 헤더를 통해서 어플리케이션에서 상태를 유지할 수 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP 1.1 페이로드의 본문은 클라이언트와 서버가 알고리즘(일반적으로 gzip)에 동의할 수 있는 경우 압축 될 수 있지만 헤더는 포함되지 않습니다. 웹 어플리케이션이 점점 더 많은 요청을 해감에 따라, 헤더의 반복이 문제가 될 수 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP/2 는 헤더에 대한 새로운 바이너리 형식으로 이 문제를 해결합니다. 프로토콜 사용자는 이것에 대해 많이 생각할 필요는 없습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">TLS</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP 1.1이 나올 당시에는 초기 프로토콜 설계에서 보안이 최우선 관심사는 아니였습니다. (전자 상거래는 이제 막 도약하기 시작하였고, 보안을 고려하기에는 컴퓨팅 시스템이 너무 느렸습니다.)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP/2는 시대의 흐름에 따라 보안을 고려하였습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">기타 추가 고려 사항</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>- HTTP/2는 바이너리 전용입니다. 불투명한 형태(Opaque format)를 사용하는 것은 어렵습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- HTTP/2를 지원하는 로드 밸런서, 방화벽, 디버깅 도구가 필요합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 성능 이점은 브라우저 기반 사용에 타겟을 두었습니다. 백엔드 서비스에서는 이점이 적을 수 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>* Opaque format : 인터페이스 에 정의되지 않은 데이터 유형<br><a href="https://en.wikipedia.org/wiki/Opaque_data_type">https://en.wikipedia.org/wiki/Opaque_data_type</a></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>* HTTP2 에서 어떻게 바뀌었는지 더 보고 싶으면<br><a href="https://inpa.tistory.com/entry/WEB-%F0%9F%8C%90-HTTP-20-%ED%86%B5%EC%8B%A0-%EA%B8%B0%EC%88%A0-%EC%9D%B4%EC%A0%9C%EB%8A%94-%ED%99%95%EC%8B%A4%ED%9E%88-%EC%9D%B4%ED%95%B4%ED%95%98%EC%9E%90">HTTP 2.0 소개 &amp; 통신 기술 알아보기</a><br>를 보면 좋을 것 같다. 위 블로그에서 자세히 설명되어있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":4} --></p>
+<h4 class="wp-block-heading">HTTP/2 in Java 11</h4>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>새로운 HTTP 버전이 등장하자 JEP 110 에서 새로운 API를 도입하게 되었습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그 결과 Java 9 에서 HTTP/2 및 웹 소켓 호환 API가 인큐베이팅 기능으로 Java 9에서 처음 등장했습니다.<br>이후 JEP 321 를 거쳐 Java 11에서 java.net.http 아래로 옮겨졌습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>새 API는 HTTP 1.1과 HTTP/2를 지원하며 서버가 HTTP/2를 지원하지 않는 경우 HTTP 1.1로 동작합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Java 에서 HTTP 요청을 보내는 예시는 다음과 같습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td><strong>var</strong> client = HttpClient.<strong>new</strong><strong>Buider</strong>().build();<br><br><strong>var</strong> uri = <strong>new</strong> <strong>URI</strong>("https://google.com");<br><strong>var</strong> request = HttpRequest.<strong>new</strong><strong>Builder</strong>(uri).build();<br><br><strong>var</strong> response = client.send(<br>&nbsp; &nbsp; request,<br>&nbsp; &nbsp; HttpResponse.BodyHandlers.ofString(<br>&nbsp; &nbsp; &nbsp; &nbsp; Charset.defaultCharset()));<br><br>System.out.println(response.body());</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>위에서 사용된 client.send 메소드는 동기(Sync) 방식입니다. request가 완료되어 응답 객체를 수신할 때 까지 이후 작업을 Block 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>HTTP/2의 가장 중요한 이점 중 하나는 내장된 멀티플렉싱(다중화, 하나의 연결내에서 여러개의 응답을 받음)입니다. 동기 방식으로는 이러한 이점을 사용할 수 없기 때문에 비동기(Async) 방식을 제공합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>예시는 다음과 같습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td><strong>var</strong> client = HttpClient.newBuilder().build();<br><br><strong>var</strong> uri = <strong>new</strong> URI("https://google.com");<br><strong>var</strong> request = HttpRequest.newBuilder(uri).build();<br><br><strong>var</strong> handler = HttpResponse.BodyHandlers.ofString();<br>CompletableFuture.allOf(<br>&nbsp; &nbsp; client.sendAsync(request, handler)<br>&nbsp; &nbsp; &nbsp; &nbsp; .thenAccept((resp) -&gt;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println(resp.body())),<br>&nbsp; &nbsp; client.sendAsync(request, handler)<br>&nbsp; &nbsp; &nbsp; &nbsp; .thenAccept((resp) -&gt;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println(resp.body())),<br>&nbsp; &nbsp; client.sendAsync(request, handler)<br>&nbsp; &nbsp; &nbsp; &nbsp; .thenAccept((resp) -&gt;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; System.out.println(resp.body()))<br>).<strong>join</strong>();</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>CompletableFuture.allOf 는 모든 요청들이 끝날때까지 기다립니다.<br>sendAsync 를 통한 HTTP 요청이 종료되면 thenAccept부분이 처리됩니다.<br>PushPromiseHandler 를 이용하면 서버는 클라이언트에 푸시를 할수 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이러한 비동기(Async) 방식은 기존 시스템에 매력적인 대안을 제공합니다.</p>
+<p><!-- /wp:paragraph --></p>

@@ -1,0 +1,144 @@
+---
+layout: post
+title: 6장 단위 테스트 스타일
+date: '2023-07-11 13:14:12 +0900'
+categories:
+- 테스트
+tags:
+- 테스트
+- 단위 테스트
+- test
+- unit test
+- test style
+- 테스트 스타일
+- 함수형 프로그래밍
+- functional programming
+---
+<p><!-- wp:paragraph --></p>
+<p>단위테스트 (블라디미르 코리코프)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:separator --></p>
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator --></p>
+<p><!-- wp:paragraph --></p>
+<p>단위테스트에는 출력 기반, 상태 기반, 통신 기반이라는 세 가지 테스트 스타일이 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>출력 기반 스타일의 테스트가 가장 품질이 좋고, 상태 기반 테스트는 두 번째로 좋은 선택이며, 통신 기반 테스트는 간헐적으로만 사용해야 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>안타깝게도 출력 기반 테스트 스타일은 아무데서나 사용할 수 없으며, 순수 함수 방식으로 작성된 코드에만 적용된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그러나 걱정할 필요는 없다. 출력 기반 스타일로 변환하는 데 도움이 되는 기법이 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이를 위해 함수형 프로그래밍 원칙을 사용해 기반 코드가 함수형 아키텍처를 지향하게끔 재구성해야 한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>[Note] </strong>순수 함수는 다음 속성을 갖는 함수입니다.<br>- 함수 반환 값은 동일한 인수에 대해 동일합니다<br>- 함수에는 사이드 이펙트가 없습니다<br>(로컬 정적 변수, 비로컬 변수, 가변 참조 인수 또는 입력/출력 스트림의 변형 없음).<br>출처 : <a href="https://en.wikipedia.org/wiki/Pure_function">https://en.wikipedia.org/wiki/Pure_function</a>&nbsp;</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">1. 단위 테스트의 세 가지 스타일</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>단위 테스트는 세 가지 스타일이 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>- 출력 기반 테스트 (output-based testing)<br>- 상태 기반 테스트 (state-based testing)<br>- 통신 기반 테스트 (communication-based testing)</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>하나의 테스트에서 여러 스타일을 함께 사용할 수도 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.1 출력 기반 테스트 정의</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>테스트 대상 시스템(SUT)에 입력을 넣고 생성되는 출력을 점검하는 방식이다. 이러한 단위 테스트 스타일은 전역 상태나 내부 상태를 변경하지 않는 코드에만 적용되므로 반환 값만 검증하면 된다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh3.googleusercontent.com/SwvyrEh3RWBDw1O3m3TXnjh-PU3NVQ_dvedrF9EscmCVaAnAFR9QkEuSwdB5tamiWQ1IEEeN400GumBteCkZN9QPccZzeLEPgIDC_ErlVJW6F4We1_4isZz5qAoPaDBnTSUQKia2Pp-B_BwK5BDYp-KTBhXmSHWNpf6hwZ2L0IkayDtvmpo9hukfegTA_w" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>다음은 출력 기반 테스트의 예제다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td><strong>public</strong> <strong>class</strong> <strong>PriceEngine</strong><br>{<br>&nbsp; &nbsp; <strong>public</strong> <strong>decimal</strong> <strong>CalculateDiscount</strong>(<strong>params</strong> Product[] products)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; <strong>decimal</strong> discount = products.length * 0.01m;<br>&nbsp; &nbsp; &nbsp; &nbsp; <strong>return</strong> Math.Min(discount, 0.2m);<br>&nbsp; &nbsp; }<br>}<br><br>[<strong>Fact</strong>]<br><strong>public</strong> <strong>void</strong> <strong>Discount_of_two_products</strong>()<br>(<br>&nbsp; &nbsp; <strong>var</strong> product1 = new Product("Hand wash");<br>&nbsp; &nbsp; <strong>var</strong> product2 = <strong>new</strong> Product("Shampoo");<br>&nbsp; &nbsp; <strong>var</strong> sut = <strong>new</strong> PriceEngine();<br><br>&nbsp; &nbsp; <strong>decimal</strong> discount = sut.CalculateDiscount(product1, product2);<br><br>&nbsp; &nbsp; Assert.Equal(0.02m, discount);<br>)</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>위 코드에서 PriceEngine은 상품 수에 1%를 곱하고 그 결과를 20%로 제한한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 클래스에는 다른 것이 없으며 CalculateDiscount() 메서드의 결과인 반환된 할인 즉 출력 값 뿐이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>출력 기반 단위 테스트 스타일은 함수형(functional)이라고도 한다. 이 이름은 사이드 이펙트 없는 코드 선호를 강조하는 프로그래밍 방식인 함수형 프로그래밍(functional programming)에 뿌리를 두고 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.2 상태 기반 스타일 정의</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>상태 기반 스타일은 작업이 완료된 후 시스템 상태를 확인하는 것이다. 이 테스트 스타일에서 상태라는 용어는 SUT나 협력자 중 하나, 또는 데이터베이스나 파일 시스템 등과 같은 프로세스 외부 의존성의 상태 등을 의미할 수 있다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh4.googleusercontent.com/pOctzdZlD2HL1QIR1mqOz2LWu5ygtn3jeLgCZDIydG4euFZKF1snUdPORD-JxTT9ifor3MUDCbRbY4FyhHnUXx-CcENMtFrobbyOuZoCBVu3KBxjnpB0EvzdXL4t-Y4j7q7mg_6GkQkN6sNMwY8dnBW1qhdcDNPRPJsuD_GXmJi9M2MHyWWG82OzgFcQ-g" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>다음은 상태 기반 테스트의 예제다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td><strong>public</strong> <strong>class</strong> <strong>Order</strong><br>{<br>&nbsp; &nbsp; <strong>private</strong> <strong>readonly</strong> List&lt;Product&gt; _products = <strong>new</strong> List&lt;Product&gt;();<br>&nbsp; &nbsp; <strong>public</strong> IReadOnlyList&lt;Product&gt; Products =&gt; _products.ToList();<br><br>&nbsp; &nbsp; <strong>public</strong> <strong>void</strong> <strong>AddProduct</strong>(Product product)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; _products.Add(product);<br>&nbsp; &nbsp; }<br>}<br><br>[<strong>Fact</strong>]<br><strong>public</strong> <strong>void</strong> <strong>Adding_a_product_to_an_order</strong>()<br>{<br>&nbsp; &nbsp; <strong>var</strong> product = <strong>new</strong> Product("Hand wash");<br>&nbsp; &nbsp; <strong>var</strong> sut = <strong>new</strong> Order();<br><br>&nbsp; &nbsp; sut.AddProduct(product)<br><br>&nbsp; &nbsp; Assert.Equal(1, sut.Products.Count);<br>&nbsp; &nbsp; Assert.Equal(product, sut.Products[0]);<br>}</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>위 테스트는 상품을 추가한 후 Products 컬렉션을 검증한다. 출력 기반 테스트 정의와 달리 AddProduct()의 결과는 주문 상태의 변경이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.3 통신 기반 스타일 정의</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>마지막으로 살펴볼 세 번째 단위 테스트 스타일은 통신 기반 테스트다. 이 스타일은 목을 사용해 테스트 대상 시스템과 협력자 간의 통신을 검증한다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image"><img src="https://lh5.googleusercontent.com/vRZkoQYZMzuDxeDTE8K_9T47gmKz14AuKCqAACgi9lDXng7lR9-0fUUt2xY1OOVKHWK-j74OWGmFG1nFCekxqVCH_DBX4WQmtUH9DtN-uOkCdJmLJFBNcxiLZ2V9d8NFKsKgLJQWRDx7AMJM-ajVnmU68pOWPyeauNt-ZeRKnKcXpmGc-b_sKyA29BlnNg" alt=""/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>다음은 통신 기반 테스트의 예제다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td>[<strong>Fact</strong>]<br><strong>public</strong> <strong>void</strong> <strong>Sending_a_greetings_email</strong>()<br>{<br>&nbsp; &nbsp; <strong>var</strong> emailGatewayMock = <strong>new</strong> Mock&lt;IEmailGateway&gt;();<br>&nbsp; &nbsp; <strong>var</strong> sut = <strong>new</strong> Controller(emailGatewayMock.Object);<br><br>&nbsp; &nbsp; sut.GreetUser("user@email.com")<br><br>&nbsp; &nbsp; emailGatewayMock.Verify(<br>&nbsp; &nbsp; &nbsp; &nbsp; x =&gt; x.SendGreetingsEmail("user@email.com"),<br>&nbsp; &nbsp; &nbsp; &nbsp; Times.Once);<br>}</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p>fin.</p>
+<p><!-- /wp:paragraph --></p>

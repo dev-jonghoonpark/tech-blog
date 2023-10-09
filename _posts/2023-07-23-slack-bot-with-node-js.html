@@ -1,0 +1,351 @@
+---
+layout: post
+title: Node.js 기반 Slack 봇 만들어보기 (Daily Geek News 알림 봇 만들기)
+date: "2023-07-23 10:56:45 +0900"
+categories:
+  - 개발
+tags:
+  - Slack
+  - Bot
+  - 슬랙
+  - 봇
+  - K-DEVCON
+  - 슬랙 봇
+  - Slack Bot
+  - RSS
+  - API
+  - CRON
+---
+
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">발단</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  GeekNews(<a href="https://news.hada.io/">https://news.hada.io/</a>) 라는
+  플랫폼을 잘 사용하고 있다.<br />재밌는 소식이 자주 들려와서 좋다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  GeekNews에서는 자체 제작된 봇을 통해서 글이 생성될 때마다 알림해주는 기능을
+  제공해준다.<br />내가 속해 있는 K-DEVCON 슬랙에도 해당 봇을 추가 해두고 잘
+  사용 하고 있었는데
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  최근에 의견이 나온 것이 너무 알림이 잦다는 것이였다.<br />그래서 하루에 한 번
+  알림이 오도록 하면 어떻겠냐 라는 의견이 나왔다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그래서 <strong>Daily GeekNews 봇</strong>을 만들어보기로 했다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">구현 방식 고민</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>어떻게 처리할 수 있을까를 고민해봤다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  첫번째 생각났던 방법은 현재의 봇을 어떻게든 이용하는 것이였다.<br />private
+  채널을 만들어 거기서 현재 봇이 알림을 보내주도록 하고<br />slack api를
+  이용하여 하루에 한 번 취합하여 public 채널에 전달하는 느낌으로 해볼까 생각이
+  들었다.<br />그러나 그렇게 효율적이지는 않다는 생각이 들어 다른 방법은 없을까
+  조금 더 고민해보았다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  두번째 생각났던 방법은 그냥 해당 홈페이지를 크롤링 해볼까 생각했다.<br />그래서
+  홈페이지에 들어가서 어떻게 해볼까 견적을 내보던 중에 RSS 기능이 눈에 보였다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  그래서 최종적으로 생각한 방식이 RSS를 통해 내용을 가져와 가공해서 올려주면
+  되겠다 라는 방식이였고 이 방식으로 가기로 마음먹었다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">환경 정하기</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  K-DEVCON 슬랙에는 현재는 1개의 봇이 연결되어 있다.<br />요즘에는 잘 사용되지는
+  않지만 Node.js로 개발된 ChatGPT 봇이 있다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  이 봇은 CloudType 이라는 서비스에서 무료 제공해주는 인스턴스를 이용하여
+  운영되고 있다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  알림을 보내주기만 하면 되는지라. 리소스도 그렇게 많이 필요한 상황이 아니기
+  때문에<br />기존에 있던 Node.js 프로젝트에 살을 붙여야 겠다고 마음먹었다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  CloudType의 경우, 토이 프로젝트로 뭔가를 만들어야 할 일이 있을 때 추천해드리고
+  싶다.<br /><a href="https://cloudtype.io/">https://cloudtype.io/</a
+  ><br />아직까지 큰 문제 없이 잘 사용하고 있다.<br />Github과의 연동 시스템이
+  잘 되어있다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">bot 생성해주기</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  슬랙 봇을 만들기 위해서는 Slack API (<a href="https://api.slack.com/"
+    >https://api.slack.com/</a
+  >) 에 들어가서 앱을 생성해줘야 한다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh3.googleusercontent.com/K8fQegkkfHcnHLPu6VsYTzu7m0dAdu12rF8MCV0HgzA3tsBRpRux-bPC3U-BQXE8F6AYT5C5rqIzqSKV6HJ4VaWqMRWc3N-NO_JARXKzpkAX40CuK0l4hJua5PLiJ7hnpsMEaKa7z6jwUnTLux53Xzw"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  같은 인스턴스에서 실행될 예정이지만 서로 역할은 다르기 때문에 별도의 앱으로
+  생성했다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  이 봇의 기능은 크게 없다.<br />그냥 정해진 시간에 알림만 보내주면 된다. 그래서
+  권한도 크게 부여해 줄 것이 없다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh4.googleusercontent.com/TujugAHUCpeY-YZkPCmE555urFXzV4OD-HQxuwLXuUvd3w1_o4Jdx7CtAgwRjJP7dMVVGQo4GIVR61RUSh8cnUgR5Tz8hGgG_gJwudOKpVRqLfMhTs_wzo71NkMBxlKh-kfWWH0DCBbsRBIXO_4_nKk"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  여기서 <strong>Bots 파트</strong>와 <strong>Permissions 파트</strong>만 보면
+  된다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Bots 파트에서는 Bot에 대한 기본 설정을 해주면 되고</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Permission 파트에서는 chat:write 권한을 아래와 같이 추가해 주면</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh6.googleusercontent.com/teyVwguWxeykT9B5Yd0nl54g63DlPkt683H2L1a_QAYA4e471jcv4BsCDob0paX5hAQLdXapZ42XdxbDx0ET-sMUnN-k3rjx52pxCbqGhKmQy98A7nQT5SBvXEMWGGWbpNiJvITQqEs5ou1nugwcXOI"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>xoxb- 로 시작하는 토큰이 발급되었을 것이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh6.googleusercontent.com/bm5ZVfrxieFsK6Nk6HSnl8EQ2O9U1yGf-tQaDQuWtovhbdUHB_ueR9eWtiWHbVvPBjgyW6HAFrEsRPkdP1iIB8T2d5k1IZp468sNYI8JsDBuCWWJL_BkLXmgOkyEpAQAGJCJwel5zfEPKUTA6w6ZBsM"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  이 토큰을 잘 기억해 두었다가 이후에 CloudType 에 환경 변수로 세팅해주면 된다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh4.googleusercontent.com/VXlbNu9c4m0qG4FuEylZrv6O0MzRoSHoWLnK4NsUKHNsoT8JENHRfZ5NrzZ0Zk0eTn8Dbl9cGDC8Ub9taw8tZUBj8MheTDcr6q3FqptsDEP-vM-VcHxFDlKo7Yl5GvcH2Ipp89i0fcgyBQs1Ou_abT4"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">구현하기</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>chat gpt 봇만 있던 상태에서 시작을 하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  <a
+    href="https://github.com/ssi-at/ssi-at-slack-bot/tree/f5218398adc3e0d42e60374b76546af23ac94c1c"
+    >https://github.com/ssi-at/ssi-at-slack-bot/tree/f5218398adc3e0d42e60374b76546af23ac94c1c</a
+  >
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">RSS 처리</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>먼저 RSS 처리를 위한 라이브러리를 찾아보았다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>rss-parser 라는 라이브러리가 무난하게 사용 가능할 것 같아서 도입하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Geek News 의 RSS 주소는 "http://feeds.feedburner.com/geeknews-feed" 이다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이 주소에서 Feed 들을 가져온 뒤 가공하여 return 하도록 하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  글이 중복해서 담기지 않도록 실행 시점을 기준으로 하루 (60초 * 60분 * 24시간 *
+  1000 밀리초) 동안 작성된 글만 담기도록 처리하였다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p>
+  <!-- wp:html --><br />
+  <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fssi-at%2Fssi-at-slack-bot%2Fblob%2Fmain%2Fgeeknews.js&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script>
+  <br />
+  <!-- /wp:html -->
+</p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">SLACK API 처리</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>slack에 메시지를 보내는 것 외에는 따로 기능이 없는 bot 이기 때문에</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  별도의 라이브러리를 거치지 않고 단순하게 rest api로 처리하였다.<br /><a
+    href="https://api.slack.com/methods/chat.postMessage"
+    >https://api.slack.com/methods/chat.postMessage</a
+  >
+</p>
+<p><!-- /wp:paragraph --></p>
+<p>
+  <!-- wp:html --><br />
+  <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fssi-at%2Fssi-at-slack-bot%2Fblob%2Fmain%2Fslack.js&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script>
+  <br />
+  <!-- /wp:html -->
+</p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">CRON 처리 (스케쥴링)</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>그리고 정해진 시간에 알림을 보내게 하기 위해 node-cron 을 사용하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이전부터 사용해온 라이브러리인데 무난하게 사용할 만 하다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  CloudType 인스턴스는 UTC를 기준으로 동작하기 때문에 (CloudType이 아니더라도
+  일반적인 서버 환경이 보통 UTC를 기준으로 동작하긴 한다) 다음과 같이 코드를
+  작성하였다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code>cron.schedule("0 0 * * *", async () => {
+  sendMessage(process.env.GEEK_NEWS_BOT_TOKEN, "C0539A1CQA3", await GeekNewsRSS())
+})</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p> </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Cron Syntax 의미는 다음과 같다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre class="wp-block-code"><code> # ┌────────────── second (optional)
+ # │ ┌──────────── minute
+ # │ │ ┌────────── hour
+ # │ │ │ ┌──────── day of month
+ # │ │ │ │ ┌────── month
+ # │ │ │ │ │ ┌──── day of week
+ # │ │ │ │ │ │
+ # │ │ │ │ │ │
+ # * * * * * *</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  설정한 "0 0 * * *" 는 UTC 기준, 0시 0분 이기 때문에 우리나라 기준(KST)으로는
+  9시 0분 이다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  그리고 여기서 “C0539A1CQA3” 는 채널의 ID 이다.<br />채널 ID는 채널 우클릭 -
+  채널 세부정보 보기 클릭 하면 나오는 팝업에서<br />최하단을 보면 확인할 수
+  있다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh5.googleusercontent.com/NvNjPDfn25AkW1wXYgdVZxrHodN-KeDlyqxS6xMVgk0Noa4Sl7Sq2nqVwlIeao-0RzMjrwv12fKEg9_ZJVqyI0Ci0fOesCdVpBctfQD2QRODPN0jc1FuykOnSrcTDn9I7Zp1a8roxRWQ1kYSg5zSzbU"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh5.googleusercontent.com/NkRGsVbSzKbjqW3j1EehDksgUNgcsebmiA6PpFAHdaTzMDBCdVqimTfVY2iXeZBmnDWdwzqcXXRGimdSd4oJsJnHrJxca73uXetgJ1UFqrVkm18mjYBvSd9TJfj7cpW1pb1i04XB1l_nmdX0gUf9Q-0"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  채널에 Bot을 초대해줘야 Bot이 알림을 줄 수 있기 때문에 잊지 않도록 하자.<br />봇을
+  초대하려면 해당 채널 채팅창에서 봇을 멘션 하면 된다.
+</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">마무리</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>오늘(23년 7월 23일)도 잘 동작하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image --></p>
+<figure class="wp-block-image">
+  <img
+    src="https://lh4.googleusercontent.com/dXoGyUDTvxNu32waOpZkexJquA1-iweyqn9IQxSCpQYGkdH88PrzQVGSKvuoRl7oYSMB9zheveRTXCsqvSLakdb-r9XAAH6LQVhWt-HH7F0tTzm67FHopHeVPSpHS8sKdCZSI1A0Do3juDaoQiaeOBI"
+    alt=""
+  />
+</figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  <a href="https://github.com/ssi-at/ssi-at-slack-bot"
+    >https://github.com/ssi-at/ssi-at-slack-bot</a
+  ><br />작업 코드는 여기서 확인할 수 있다.
+</p>
+<p><!-- /wp:paragraph --></p>

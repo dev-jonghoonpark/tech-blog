@@ -1,0 +1,209 @@
+---
+layout: post
+title: 1장 최신 자바 소개 (2)
+date: '2023-06-07 02:19:30 +0900'
+categories:
+- Java
+tags:
+- Well-Grounded Java Developer
+- Java
+- 자바
+- JSR
+- JEP
+- incubating
+- preview
+---
+<p><!-- wp:paragraph --></p>
+<p>Well-Grounded Java Developer - 2nd edition</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading --></p>
+<h2 class="wp-block-heading">1.4 언어 및 플랫폼 변경</h2>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>우리는 무엇이, 왜 변경되었는지 파악하는 것은 중요하게 생각합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>일반적으로 언어의 새로운 기능에 대해서는 관심이 많지만, 변화를 만들어 내기까지 얼마나의 시간과 노력이 소요되는지에 대해서는 관심이 많지 않습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>자바와 같이 성숙한(mature, 오래된) 런타임의 경우에는 다른 언어나 라이브러리에서 영향을 받기도 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:image {"id":283,"width":512,"height":271,"sizeSlug":"large","linkDestination":"none"} --></p>
+<figure class="wp-block-image size-large is-resized"><img src="https://jonghoonpark.com/wp-content/uploads/2023/06/image-13-1024x541.png" alt="" class="wp-image-283" width="512" height="271"/></figure>
+<p><!-- /wp:image --></p>
+<p><!-- wp:paragraph --></p>
+<p>* syntactic sugar(구문적 설탕, 문법적 설탕) : 사람이 이해하기 쉽고 표현하기 쉽게 컴퓨터 언어를 디자인해 놓은 문맥</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>당연하게도 일반적으로 최소한의 노력이 드는 구현 수준을 선택하는 것이 좋습니다.<br>즉 새 기능을 라이브러리로 구현하는 것이 가능하다면 라이브러리로 구현하면 됩니다.<br>그러나 모든 기능이 라이브러리나 IDE 기능 (IDE capability, Tool capability) 수준에서 구현 가능하지는 않습니다.<br>일부 기능은 플랫폼 내부에서 구현되어야 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>새로생긴 기능들을 대상으로 복합성 척도를 세워보면 다음과 같습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:table --></p>
+<figure class="wp-block-table">
+<table>
+<tbody>
+<tr>
+<td>구현 수준 복합도</td>
+<td>기능 (버전)</td>
+</tr>
+<tr>
+<td>Library change</td>
+<td><a href="https://jamcode.tistory.com/67">Collections factory methods</a> (Java 9)</td>
+</tr>
+<tr>
+<td>Syntactic sugar</td>
+<td><a href="https://countryxide.tistory.com/52">Underscores in numbers</a> (Java 7)</td>
+</tr>
+<tr>
+<td>Small new language feature</td>
+<td><a href="https://ryan-han.com/post/java/try_with_resources/">try with resources</a> (Java 7)</td>
+</tr>
+<tr>
+<td>Class file format change</td>
+<td><a href="https://en.wikipedia.org/wiki/Java_annotation">Annotations</a> (Java 5)</td>
+</tr>
+<tr>
+<td>New JVM feature</td>
+<td><a href="https://sejoung.github.io/2018/09/2018-09-27-JEP_181/">Nestmates</a> (Java 11)</td>
+</tr>
+<tr>
+<td>Major new feature</td>
+<td><a href="https://en.wikibooks.org/wiki/Java_Programming/Lambda_expressions">Lambda Expressions</a> (Java 8)</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!-- /wp:table --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.4.1 설탕 뿌리기</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>syntactic sugar 이라고 하는 것은 이미 기능이 있지만, 사람이 작업하기 더 쉽도록 만든 것을 의미합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>syntactic sugar은 컴파일 프로세스 초기에 컴파일러의 프로그램 표현(representation) 과정에서 제거 됩니다. 이를 desugared 라고도 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>일반적으로 컴파일러에 대한 변경만 포함하기 때문에 비교적 적은 양의 작업이 필요하며 구현하기 쉬운 편입니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.4.2 언어 변경</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>언어적 변경이 있기 위해서는 최소 아래의 사항들이 수행되거나 조사되어야 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>JLS(Java 언어 스펙) 업데이트</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>소스 컴파일러에서 프로토타입 구현</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>라이브러리 지원 추가</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>테스트와 예시 작성하기</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>문서 업데이트 하기</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>추가적으로 변경 사항이 JVM 또는 플랫폼 측명세도 영향을 미친다면 아래 사항들도 포함되어야 합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:list --></p>
+<ul><!-- wp:list-item --></p>
+<li>VMSpec(JVM 스펙) 업데이트</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>JVM 변경 구현하기</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>class file과 JVM 도구 지원 추가</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>리플렉션에 미치는 영향이 있는지 고려하기</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>직렬화에 미치는 영향이 있는지 고려하기</li>
+<p><!-- /wp:list-item --></p>
+<p><!-- wp:list-item --></p>
+<li>native code 컴포넌트(ex. JNI)에 미치는 영향이 없는지 고려하기</li>
+<p><!-- /wp:list-item --></ul>
+<p><!-- /wp:list --></p>
+<p><!-- wp:paragraph --></p>
+<p>변경에 따른 언어 전반의 영향을 고려해야합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>그중에서 type 시스템을 수정하는 것은 특히나 까다롭습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>많은 상호 작용 지점을 가질 수 있기 때문에, 변경에 따라 예기치 못한 일이 발생될 수 있습니다.&nbsp;&nbsp;</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.4.3 JSR 및 JEP</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>JCP : Java Community Process<br>JSR : Java Specification Request<br>JEP : JDK Enhancement Proposal</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>Java 플랫폼을 변경하는 데에는 두 가지 주요 메커니즘이 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>첫 번째는 JCP 에서 지정하는 JSR 입니다.<br>JSR을 통해서 성숙한(mature) 기술의 합의를 체계화 하는데 잘 사용되었습니다. </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>JSR 보다 더 빠르고 작은 단위로 구현하려는 욕구로 이후에 JEP 가 개발되었습니다. </p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>현재 JSR은 JEP 들을 기반으로 구성됩니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:heading {"level":3} --></p>
+<h3 class="wp-block-heading">1.4.4 기능 인큐베이팅 및 미리보기</h3>
+<p><!-- /wp:heading --></p>
+<p><!-- wp:paragraph --></p>
+<p>새 릴리즈 모델 내에서는 이후 릴리즈에 적용되기 전에 시험해 볼 수 있는 두 가지 메커니즘이 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>인큐베이팅</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>별도의 모듈 패키지로 제공됩니다. 이후 최종 릴리즈 시에 변경됩니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>ex. jdk.incubator.http -&gt; java.net.http</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>네임스페이스로 격리 하는 것이 특징입니다. 개발자는 기능이 표준화 되면 일부 코드를 수정하고 재 컴파일, 링크 하는 과정을 통해 빠르게 제품에 반영할 수 있습니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p><strong>미리보기</strong></p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>플래그를 통해서 제공됩니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>인큐베이팅보다 더 깊은 구현 수준을 가집니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>이러한 기능들은 일반적으로<br>- javac 컴파일러<br>- bytecode 포맷<br>- 클래스 파일 과 클래스 로딩<br>에서도 지원이 되야 하기 때문에 인큐베이팅 기능에 비해 훨씬 복잡합니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>3장 (java 17) 에서 더 자세히 알아봅니다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>ex.&nbsp;Pattern Matching for switch (Preview)<br><a href="https://openjdk.org/jeps/406">https://openjdk.org/jeps/406</a></p>
+<p><!-- /wp:paragraph --></p>

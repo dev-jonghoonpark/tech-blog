@@ -1,0 +1,50 @@
+---
+layout: post
+title:
+  "[error] Requested but did not find extension point with identifier Xcode.IDEKit.ExtensionSentinelHostApplications
+  for ..."
+date: "2023-07-07 12:44:12 +0900"
+categories:
+  - 개발
+tags:
+  - 맥북
+  - macos
+  - xcode
+  - terminal
+  - command line tools
+  - command
+  - omz
+---
+
+<p><!-- wp:paragraph --></p>
+<p>맥북에서 어느날 부터&nbsp;</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre
+  id="code_1688701178926"
+  class="wp-block-code"
+><code>Requested but did not find extension point with identifier Xcode.IDEKit.ExtensionSentinelHostApplications for ...</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>이런 에러가 발생되었다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:paragraph --></p>
+<p>아래 명령어로 해결하였다.</p>
+<p><!-- /wp:paragraph --></p>
+<p><!-- wp:code --></p>
+<pre
+  id="code_1688701149392"
+  class="wp-block-code"
+><code>// reset to the default command line tools path
+xcode-select -r
+
+// Link xcode-select with CommandLineTools
+sudo xcode-select -s /Library/Developer/CommandLineTools</code></pre>
+<p><!-- /wp:code --></p>
+<p><!-- wp:paragraph --></p>
+<p>
+  <a href="https://stackoverflow.com/a/73253436"
+    >https://stackoverflow.com/a/73253436</a
+  >
+</p>
+<p><!-- /wp:paragraph --></p>
