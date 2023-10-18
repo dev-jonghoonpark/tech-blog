@@ -18,8 +18,8 @@ tags:
 date: 2023-10-18 13:00:00 +0900
 ---
 
-Growing Object-Oriented Software, Guided by Tests
-by Steve Freeman, Nat Pryce
+Growing Object-Oriented Software, Guided by Tests  
+by Steve Freeman, Nat Pryce  
 ch1. Levels of Testing
 
 ---
