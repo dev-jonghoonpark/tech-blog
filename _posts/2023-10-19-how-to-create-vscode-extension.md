@@ -77,7 +77,7 @@ Run Extension 과 Extension Tests 를 제공해주는 것을 볼 수 있다
 [mocha](https://mochajs.org/)는 처음 사용해 보았는데 대부분의 테스트 도구가 비슷한 형태를 가지고 있기 때문에 그렇게 문제될 부분은 없었다.
 
 공식 문서를 보면 TDD 방식과 BDD 방식을 지원한다고 되어 있는데 나는 BDD를 사용하기로 결정을 하였다.
-BDD 테스트 작성 방법에 대해서는 [<JUnit5로 계층 구조의 테스트 코드 작성하기>](https://johngrib.github.io/wiki/junit5-nested/) 이 글을 정말 좋아한다. BDD 테스트 작성 방법에 대해 궁금한 사람이 있다면 봐보는것을 추천한다.
+BDD 테스트 작성 방법에 대해서는 "[JUnit5로 계층 구조의 테스트 코드 작성하기](https://johngrib.github.io/wiki/junit5-nested/)" 이 글을 정말 좋아한다. BDD 테스트 작성 방법에 대해 궁금한 사람이 있다면 봐보는것을 추천한다.
 
 `yo code`로 설정한 프로젝트에서는 기본값으로 TDD가 설정이 되어있다.
 BDD 로 변경하려면 `src/test/suite/index.ts` 에서
@@ -90,7 +90,7 @@ const mocha = new Mocha({
 });
 ```
 
-tdd 라고 되어 있던 부분을 tdd 로 변경해주면 된다.
+`tdd` 라고 되어 있던 부분을 `bdd` 로 변경해주면 된다.
 
 테스트 코드는 변환기가 정상적으로 동작하는지만 확인하면 되었기 때문에 매우 간단하게 작성하였다.
 `src/test/suite/extension.test.ts`에 기존에 작성되어 있던 테스트 코드 예제를 지우고 작성하였다.
@@ -109,7 +109,9 @@ describe("converter 유틸", () => {
   describe("한글 입력을 변환기에 입력하면", () => {
     it("영어 키보드로 입력했을 때의 결과를 출력한다.", () => {
       assert.equal(
-        ETTKConverter.korTypeToEng("조두 쇼ㅔㄷ 두히ㅑ노 ㅑㅜ ㅏㅐㄱㄷ무 ㅏ됴ㅠㅐㅁㄱㅇ"),
+        ETTKConverter.korTypeToEng(
+          "조두 쇼ㅔㄷ 두히ㅑ노 ㅑㅜ ㅏㅐㄱㄷ무 ㅏ됴ㅠㅐㅁㄱㅇ"
+        ),
         "when type english in korean keyboard"
       );
     });
