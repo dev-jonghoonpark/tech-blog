@@ -15,6 +15,12 @@ workbox.clientsClaim();
 // let Workbox handle our precache list
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
+// use `NetworkFirst` strategy for root page
+workbox.routing.registerRoute(
+  /^\/$/,
+  new workbox.strategies.NetworkFirst()
+);
+
 // use `NetworkFirst` strategy for html
 workbox.routing.registerRoute(
   /\.html$/,
