@@ -35,6 +35,7 @@ date: 2023-09-29 1:00:00 +0900
 
 현재 github 블로그는 github.jonghoonpark.com 을 사용중에 있고
 워드프레스 블로그는 jonghoonpark.com 을 사용중에 있습니다.
+(2023.10.24 기준 jonghoonpark.com 으로 마이그레이션 진행함.)
 
 기존 게시글에 대한 이동을 마치면 github 블로그를 jonghoonpark.com 으로 연결하고
 워드프레스 블로그를 wordpress.jonghoonpark.com 과 같은 링크로 (당분간) 연결을 하는 것으로 계획을 세웠습니다.
