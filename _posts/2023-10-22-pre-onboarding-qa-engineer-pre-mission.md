@@ -130,4 +130,4 @@ QA 엔지니어에게는 매우 중요하다고 생각합니다.
 > - 4장 테스트 기법
 
 ISTAB CTFL의 한글 실라버스는 여기서 받을 수 있다.  
-[http://www.kstqb.org/board_skin/board_view.asp?idx=426&page=1&bbs_code=4&key=0&word=&etc=ISTQB] (http://www.kstqb.org/board_skin/board_view.asp?idx=426&page=1&bbs_code=4&key=0&word=&etc=ISTQB)
+[http://www.kstqb.org/board_skin/board_view.asp?idx=426&page=1&bbs_code=4&key=0&word=&etc=ISTQB](http://www.kstqb.org/board_skin/board_view.asp?idx=426&page=1&bbs_code=4&key=0&word=&etc=ISTQB)
