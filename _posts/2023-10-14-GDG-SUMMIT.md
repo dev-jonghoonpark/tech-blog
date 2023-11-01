@@ -1,7 +1,7 @@
 ---
 layout: post
 title: GDG SUMMIT 2023
-categories: [커뮤니티]
+categories: [커뮤니티, 행사]
 tags:
   [
     구글,
