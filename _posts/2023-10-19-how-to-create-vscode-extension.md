@@ -39,7 +39,7 @@ date: 2023-10-19 20:40:00 +0900
 
 [your-first-extension](https://code.visualstudio.com/api/get-started/your-first-extension)
 
-기본적인 것은 가이드를 따라서 하면 되는데 나는 나는 pnpm을 좋아하기 떄문에 pnpm으로 진행하였다.
+기본적인 것은 가이드를 따라서 하면 되는데 나는 나는 pnpm을 좋아하기 때문에 pnpm으로 진행하였다.
 
 yo 와 generator-code 라이브러리를 다운로드 하면 된다.
 

@@ -66,7 +66,7 @@ tags:
 
 <script src="https://gist.github.com/dev-jonghoonpark/50148202c34029d912874b5c6b541ed6.js?file=2-2. 새로운 iFileSystem 인터페이스 사용"></script>
 
-이제 AuditManager가 파일 시스템에서 분리되었기 떄문에, 공유 의존성이 사라져 테스트를 서로 독립적으로 실행할 수 있다.
+이제 AuditManager가 파일 시스템에서 분리되었기 때문에, 공유 의존성이 사라져 테스트를 서로 독립적으로 실행할 수 있다.
 
 다음은 그러한 테스트다.
 
