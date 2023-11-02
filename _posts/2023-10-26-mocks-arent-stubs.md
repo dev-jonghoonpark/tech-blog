@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 목은 스텁이 아닙니다 (Mocks Aren't Stubs 번역)
+title: 목은 스텁이 아닙니다 (마틴 파울러 - Mocks Aren't Stubs 번역)
 categories: [스터디-아키텍처]
 tags:
   [
@@ -15,11 +15,12 @@ tags:
     더미,
     테스트 대역,
     모의 객체,
+    마틴 파울러,
   ]
 date: 2023-10-26 22:00:00 +0900
 ---
 
-원문 : [Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html)
+원문 : 마틴 파울러 - [Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html)
 
 테스트 대역들에 대해서 찾아볼 때 많이 언급되는 글이라 언젠가 한 번 번역을 하면서 읽고 싶었던 글입니다.  
 이 글에서는 반정도 번역하였으며 나머지 반은 또 기회가 되면 번역해보겠습니다.
