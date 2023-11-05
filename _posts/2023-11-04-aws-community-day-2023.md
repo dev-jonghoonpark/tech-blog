@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AWS Community day 2023 참여 기록
+title: AWS Community day 2023 참여 기록 (with AWSKRUG)
 categories: [행사, 커뮤니티]
 tags:
   [
