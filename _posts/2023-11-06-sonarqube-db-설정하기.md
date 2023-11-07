@@ -95,6 +95,11 @@ docker run -d --name sonarqube -p 9000:9000 \
   sonarqube
 ```
 
+v 옵션에 대해서 간단하게 설명 하자면 `-v A:B` 라고 되어 있다면
+A는 호스트의 경로이고, B는 컨테이너의 경로이다. 그리고 두 가지를 연결해준다고 생각하면 되겠다.
+따라서 컨테이너에서 B라는 경로를 접속할 한다면 A로 연결된다. (마운트된다고 표현)
+더 자세한 내용이 궁금하다면 검색해보자.
+
 data 와 temp는 Eleasticsearch storage path 인데 별도의 경로를 세팅하는 것이 좋다고 해서 같이 빼주었다.
 
 이후 `/conf/sonar.properties` 에서 아래 부분들을 수정해주면 된다. (참고로 서로 모여있지는 않다.)
@@ -151,4 +156,9 @@ sudo sysctl -w vm.max_map_count=262144
 
 ![database-created](/assets/images/2023-11-06-sonarqube-db-설정하기/database-created.png)
 
-다음 글에서는 jenkins와 연동한 경험을 기록할 예정이다.
+이후 글에서는
+
+- [소나큐브 프로젝트 설정하고 정적 분석 해보기](/2023/11/07/create-sonarqube-project)
+- [소나큐브 코드 정적 검사 자동화 하기 (with Jenkins)](/2023/11/07/sonarqube-with-jenkins)
+
+에 대해서 이야기 해본다.
