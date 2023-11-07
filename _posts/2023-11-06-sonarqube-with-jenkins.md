@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 소나큐브 코드 정적 검사 자동화 하기 (with Jenkins)
+title: 소나큐브 정적 분석 자동화 하기 (with Jenkins)
 categories: [개발, 스터디-테스트]
 tags:
   [
