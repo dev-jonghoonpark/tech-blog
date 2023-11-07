@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 소나큐브 에 PostgreSQL DB 설정하기 (with PostgreSQL)
+title: 소나큐브 DB 설정하기 (with PostgreSQL)
 categories: [개발, 스터디-테스트]
 tags: [
     Sonarqube,
@@ -51,7 +51,7 @@ user 생성은 다음과 같이 쿼리하면 된다. CREATEDB 권한이 필요�
 CREATE USER sonarqube PASSWORD 'mysecretpassword' CREATEDB;
 ```
 
-![test-connection](/assets/images/2023-11-06-sonarqube-db-설정하기/test-connection.png)
+![test-connection](/assets/images/2023-11-06-sonarqube-db-config/test-connection.png)
 테스트 연결을 해보았을 때 잘 되는걸 볼 수 있다.
 
 특이하게 PostgreSQL에는 Database 라는 개념 외에도 Schema 라는 개념도 있었다.  
@@ -112,7 +112,7 @@ sonar.path.data=/var/sonarqube/data
 sonar.path.temp=/var/sonarqube/temp
 ```
 
-![sonarqube-properties](/assets/images/2023-11-06-sonarqube-db-설정하기/sonarqube-properties.png)
+![sonarqube-properties](/assets/images/2023-11-06-sonarqube-db-config/sonarqube-properties.png)
 
 ## 에러 해결
 
@@ -154,7 +154,7 @@ sudo sysctl -w vm.max_map_count=262144
 
 이렇게 정상적으로 마치고 sonarqube를 실행하여 진입하였다면 아래와 같이 데이터베이스가 생성된다.
 
-![database-created](/assets/images/2023-11-06-sonarqube-db-설정하기/database-created.png)
+![database-created](/assets/images/2023-11-06-sonarqube-db-config/database-created.png)
 
 이후 글에서는
 
