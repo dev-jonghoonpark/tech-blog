@@ -27,7 +27,7 @@ date: 2023-11-07 12:50:00 +0900
 
 **[sonarqube - install-the-server](https://docs.sonarsource.com/sonarqube/latest/setup-and-upgrade/install-the-server/)**
 
-Sonarqube는 Database로 `MSSQL` 과 `Oracle` 과 `PostgreSQL` 을 제공한다.
+Sonarqube는 Database로 `MSSQL` 과 `Oracle` 과 `PostgreSQL` 을 사용할 수 있다.
 
 일단은 셋 중에서 가장 설치하기 쉬운 PostgreSQL을 선택하였다.  
 [supabase](https://supabase.com/) 에서 무료로 지원해주는 것으로 알고있으니 사용해봐도 좋을 것 같다.
@@ -150,3 +150,5 @@ sudo sysctl -w vm.max_map_count=262144
 이렇게 정상적으로 마치고 sonarqube를 실행하여 진입하였다면 아래와 같이 데이터베이스가 생성된다.
 
 ![database-created](/assets/images/2023-11-06-sonarqube-db-설정하기/database-created.png)
+
+다음 글에서는 jenkins와 연동한 경험을 기록할 예정이다.
