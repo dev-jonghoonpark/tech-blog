@@ -3,7 +3,7 @@ layout: post
 title: 디바이스팜 STF 설치해보기 (with docker)
 categories: [개발, 스터디-테스트]
 tags: [테스트, 디바이스팜, 안드로이드, stf, iOS, MacOS, 아이폰, 모바일]
-date: 2023-11-10 23:00:00 +0900
+date: 2023-11-10 21:30:00 +0900
 ---
 
 QA 업무를 하면서 디바이스팜 이라는 단어를 알게 되었다.  
