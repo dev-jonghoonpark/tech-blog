@@ -241,11 +241,11 @@ kubectl apply -f v2_5_4_full.yaml
 ```
 
 > sed 명령어
-> sed(stream editor)는 유닉스에서 텍스트를 분해하거나 변환하기 위한 프로그램이다.
+> sed(stream editor)는 유닉스에서 텍스트를 분해하거나 변환하기 위한 프로그램이다.  
 > 출처 : [위키피디아](<https://ko.wikipedia.org/wiki/Sed_(%EC%9C%A0%ED%8B%B8%EB%A6%AC%ED%8B%B0)>)
->
-> '596,604d' : 596번 라인부터 604번 라인까지의 내용을 삭제하라는 명령
-> 's|your-cluster-name|eks-demo|' : your-cluster-name를 eks-demo로 치환하라는 뜻
+
+- `596,604d` : 596번 라인부터 604번 라인까지의 내용을 삭제하라는 명령
+- `s|your-cluster-name|eks-demo|` : your-cluster-name를 eks-demo로 치환하라는 뜻
 
 3. IngressClass yaml을 다운로드 하여 클러스터에 Ingress 클래스를 배포합니다.
 
