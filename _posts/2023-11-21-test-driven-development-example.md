@@ -9,10 +9,11 @@ tags:
     Test-Driven Development,
     TDD,
     예제,
-    Red,
-    Green,
+    Thinking
+    Red Bar,
+    Green Bar,
     Refactoring,
-    리펙터링,
+    리팩터링,
   ]
 date: 2023-11-21 23:00:00 +0900
 ---
@@ -91,7 +92,7 @@ public int count() { return 1; }
 
 저는 "이름을 바꿔야겠다"고 색인 카드(index card)에 메모를 하였습니다. HttpQuery라는 이름이 더 좋아보이네요.
 
-사이클을 진행하면서 어떻할지 결정해봅시다.
+사이클을 진행하면서 어떻게 할지 결정해봅시다.
 
 ![index-card-1](/assets/images/2023-11-21-test-driven-development-example/index-card-1.gif)
 
@@ -110,7 +111,7 @@ public void testNoNameValuePairs() {
 }
 ```
 
-테스트를 실행해보면 `Expected: <0> but was: <1>.` 이라는 결과도 나올텐데, 사실 당연합니다.
+테스트를 실행해보면 빨간 막대(테스트 실패 표시)와 함께 `Expected: <0> but was: <1>.` 이라는 결과도 나올텐데, 사실 당연합니다.
 
 여기서 두 가지 생각이 들었는데, 첫째는 생성자의 인수로 null이 들어오는 것에 대한 테스트를 작성해야겠다는 부분과 테스트 코드에서 중복이 보이기 시작했다는 것입니다. 두 가지 모두 색인 카드에 추가하였습니다.
 
