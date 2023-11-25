@@ -16,7 +16,7 @@ tags:
     contributor,
     contribute,
   ]
-date: 2023-11-15 22:50:00 +0900
+date: 2023-11-26 01:00:00 +0900
 ---
 
 전 세계의 GDG 에서는 연말에 DevFest 라는 행사를 개최한다.  
