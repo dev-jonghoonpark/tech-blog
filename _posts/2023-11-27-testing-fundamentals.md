@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 테스트 기초 (testing fundamentals)
+title: 기초가 탄탄한 자바 개발자가 되기 위해 알아야할 테스트 기초 (testing fundamentals)
 categories: [스터디-테스트]
 tags:
   [

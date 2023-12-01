@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 테스트 주도 개발 (TDD, Test-driven development)
+title: 기초가 탄탄한 자바 개발자가 되기 위해 알아야할 테스트 주도 개발 (TDD, Test-driven development)
 categories: [스터디-테스트]
 tags: [
     테스트,
@@ -13,13 +13,19 @@ tags: [
     Refactor,
     리팩터링,
   ]
-date: 2023-11-28 23:30:00 +0900
-published: false
+date: 2023-12-01 23:10:00 +0900
 ---
 
 원문 : Well Grounded Java Developer - ch13 testing fundamentals
 
 [테스트 기초 (testing fundamentals)](/2023/11/27/testing-fundamentals) 에서 이어지는 글입니다.
+
+이 글을 읽은 후 추가적으로 TDD 에 궁금하다면 
+
+- [테스트 주도 개발 (TDD) 사용법](2023-11-28-test-driven-development.md)
+- [2023-11-28-test-driven-development.md](2023-11-28-test-driven-development.md)
+
+을 추가적으로 보면 좋을 것 같다.
 
 ---
 
@@ -72,7 +78,7 @@ TDD는 단위 테스트 수준에서 가장 쉬우며 TDD에 익숙하지 않은
 
 만약 JUnit이 익숙하지 않다면 [사용자 가이드](https://junit.org/junit5/docs/current/user-guide/)를 참고하는 것을 권장합니다. 더 자세한 내용은 Cătălin Tudose의 [JUnit in Action](https://livebook.manning.com/book/junit-in-action-third-edition/chapter-1/)을 보십시오.
 
-### 13.3.2 단일 사용 사례를 갖는 TDD 예제
+### 13.3.2 한 가지 케이스를 고려하는 TDD 예제
 
 실무에서 TDD에 대해 익숙하다면 이 과정을 건너뛰어도 좋습니다. 하지만 이 글을 통해 새로운 통찰력을 제공할 것입니다.
 
@@ -106,7 +112,7 @@ endif
 
 이에 대해 너무 깊게 생각하지 않는것이 중요합니다. 테스트가 설계와 구현을 주도할 것입니다.
 
-### 실패하는 테스트 작성 (Red)
+#### 실패하는 테스트 작성 (빨강, Red)
 
 이 단계에서 해야하는 것은 실패하는 테스트로 부터 시작하는 것입니다. 아직 우리는 TicketRevenue 라는 클래스를 작성하지도 않았기 때문에 테스트가 컴파일 되지도 못한 상태입니다.
 
@@ -161,20 +167,197 @@ public class TicketRevenue {
 }
 ```
 
-일반적인 상황에서는 불변성이 선호되지만, 테스트 코드에서 venueRevenue는 변경 가능한 형태로 되어 있어서 이상하다고 느낄 수 있습니다. 이렇게 작성된 이유는 공유 필드를 통해 (곧 추가적으로 작성될) 다른 테스트 케이스들과의 공동 설정을 하기 위해서 입니다. 테스트에는 프로덕션 코드와 동일한 보호가 필요하지 않으며, 이렇게 작성하면 테스트 케이스들 간의 동일한 부분을 보여줘 명확성이 향상됩니다.
+일반적인 상황에서는 불변성이 선호되지만, 위 테스트 코드에서는 venueRevenue 변수가 변경 가능한 형태로 되어 있어서 어색하게 느껴질 수 있습니다. 이렇게 작성된 이유는 공유 필드를 통해 (곧 추가적으로 작성될) 다른 테스트 케이스들과의 공동 설정을 하기 위해서 입니다. 테스트에는 프로덕션 코드와 동일한 보호가 필요하지 않으며, 이렇게 작성하면 테스트 케이스들 간의 동일한 부분을 보여줘 명확성이 향상됩니다.
 
-## 13.4 테스트 대역
+이제 테스트 컴파일하면 IDE 도구나 CLI 환경에서 실행할 수 있습니다. Gradle이나 Maven 에서는 테스트를 쉽게 실행할 수 있도록 명령어를 제공합니다. (_gradle test_ or _mvn test_)
 
-### 13.4.1 Dummy 객체
+> [Note] 각 IDE 에서 JUnit 테스트를 실행할 수 있는 방법을 제공합니다. 일반적으로 테스트 클래스를 우클릭해서 테스트를 실행할수도 있습니다. 그러면 IDE에서는 별도의 창이나 섹션을 통해 실패한 테스트에 대해서 안내합니다. (여기서는 30을 기대했지만 0을 리턴하기 때문에 실패합니다.)
 
-### 13.4.2 Stub 객체
+테스트에 실패했으면, 다음 단계는 테스트를 통과하도록 만드는 것입니다. (초록색으로 만들기)
 
-### 13.4.3 Fake 객체
+#### 테스트에 통과하도록 구현하기 (초록, Green)
 
-### 13.4.4 Mock 객체
+이번 단계의 핵심은 테스트를 통과하도록 하는 것입니다. 하지만 구현이 완벽할 필요는 없습니다. TicketRevenue 클래스을 더 좋은 방식으로 구현을 하면 됩니다. (현재는 그냥 0을 리턴하고 있습니다.) 그저 테스트를 통과하게 하면 됩니다. (초록색으로 만들기)
 
-### 13.4.5 Mocking의 문제점
+다시 한 번 말하지만, 이번 단계에서 너무 완벽한 코드를 작성하려고 하지는 않아도 됩니다.
 
-## 13.5 Junit 4에서 5로 migration 하기
+초기 구현은 이런 모습이 될 수 있습니다.
 
-## 요약
+```java
+import java.math.BigDecimal;
+
+public class TicketRevenue {
+  public BigDecimal estimateTotalRevenue(int numberOfTicketsSold) {
+    BigDecimal totalRevenue = BigDecimal.ZERO;
+
+    // 테스트에 통과할 수 있도록 구현
+    if (numberOfTicketsSold == 1) {
+      totalRevenue = new BigDecimal("30");
+    }
+
+    return totalRevenue;
+  }
+}
+```
+
+테스트를 실행시켜보면 테스트에 통과할 것입니다. 그리고 대부분의 IDE 에서 초록색 바나 체크 표시를 볼 수 있을 겁니다. CLI 환경이더라도 초록색 메시지로 테스트가 통과했다는 것을 안내해줄 것입니다.
+
+그럼 이제 다 끝난걸까요? 다른 것으로 넘어가도 될까요?
+
+물론 아닙니다.
+
+위에서 작업한 코드를 정리(tidy up)해야 합니다. 지금 바로 진행해보겠습니다.
+
+> 여기서 정리 이라는 부분에 tidy 라는 단어가 사용됐는데 이 단어를 보고 Kent Beck 이 최근에 발간한 [tidy first](https://www.amazon.com/Tidy-First-Personal-Exercise-Empirical/dp/1098151240) 라는 책이 떠올랐다. 나중에 읽어보고 싶은 책 목록에 넣어둔 책이다.
+
+#### 테스트 리팩터링 하기
+
+이번 단계의 핵심 포인트는 테스트에 통과하기 위해 빠르게 구현한 것을 허용된 관행(accepted practice)을 따르고 있는지 확인하는 것입니다.
+
+현재의 코드는 깔끔하게 작성되지 않은 상태입니다. 이 코드는 분명히 리팩터링하여 개선할 수 있습니다.
+
+테스트를 통과하게 했기 때문에, 걱정없이 리팩터링 할 수 있습니다. 비지니스 로직을 놓칠 가능성이 없습니다.
+
+> [TIP] 테스트를 통과하는 초기 코드를 작성함으로써 얻은 또 다른 이점은 더 빠르게 개발 프로세스를 가져갈 수 있다는 것입니다. 팀의 나머지 구성원들은 첫번째 코드 버전을 가져와서 더 큰 코드베이스 안에서 테스트를 시작할 수 있습니다. (통합 테스트 이상의 테스트로)
+
+> 해당 케이스에 대해서는 통과를 한 상태이기 때문에 이 케이스가 필요한 통합 테스트 이상의 테스트에서 가져다 쓸 수 있다는 뜻인가 싶다.
+
+이전 코드에서 티켓 가격에 대해 사용한 매직 넘버를 제거한 뒤 아래와 같이 코드로 바꾸어 옮겨보겠습니다.
+
+```java
+import java.math.BigDecimal;
+
+public class TicketRevenue {
+  private final static int TICKET_PRICE = 30;
+  
+  public BigDecimal estimateTotalRevenue(int numberOfTicketsSold) {
+    BigDecimal totalRevenue = BigDecimal.ZERO;
+    if (numberOfTicketsSold == 1) {
+      totalRevenue = new BigDecimal(TICKET_PRICE * numberOfTicketsSold);
+    }
+    return totalRevenue;
+  }
+}
+```
+
+> "30"으로 하드코딩 되어 있던 부분을 TICKET_PRICE 상수값을 정의하여 처리하는 방식으로 변경함.
+
+리팩터링을 통해 코드를 개선하였지만, 아직은 가능한 여러 케이스들을 해결해주지는 못합니다. (음수, 0, 2-100, 100개 초과)
+
+다른 케이스에 대한 구현을 어떻게 할지에 대해 직접적으로 추측하는 것이 아니라. 추가 테스트를 통해서 설계와 구현을 주도해야 합니다.
+
+다음 섹션에서는 여러 케이스들을 고려하는 테스트 주도 개발을 진행해보겠습니다.
+
+#### 여러 테스트 케이스를 고려하는 TDD 예제 
+이전에 해결하지 못한 음수, 0, 2-100, 100개 초과 케이스에 대해서도 테스트를 계속 추가합니다. 
+
+마찬가지로 케이스에 대한 유효한 테스트를 미리 작성합니다.
+
+red-green-refactoring 주기를 따르는 것은 여전히 중요합니다.
+
+위 케이스들에 대한 테스트를 모두 추가하면 아래와 같은 테스트 클래스가 생성될 수 있습니다.
+
+```java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class TicketRevenueTest {
+  private TicketRevenue venueRevenue;
+  private BigDecimal expectedRevenue;
+
+  @BeforeEach
+  public void setUp() {
+    venueRevenue = new TicketRevenue();
+  }
+
+  @Test
+  public void failIfLessThanZeroTicketsAreSold() {
+    assertThrows(IllegalArgumentException.class,
+                () -> venueRevenue.estimateTotalRevenue(-1));
+  }
+
+  @Test
+  public void zeroSalesEqualsZeroRevenue() {
+    assertEquals(BigDecimal.ZERO, venueRevenue.estimateTotalRevenue(0));
+  }
+
+  @Test
+  public void oneTicketSoldIsThirtyInRevenue() {
+    expectedRevenue = new BigDecimal("30");
+    assertEquals(expectedRevenue, venueRevenue.estimateTotalRevenue(1));
+  }
+
+  @Test
+  public void tenTicketsSoldIsThreeHundredInRevenue() {
+    expectedRevenue = new BigDecimal("300");
+    assertEquals(expectedRevenue, venueRevenue.estimateTotalRevenue(10));
+  }
+  
+  @Test
+  public void failIfMoreThanOneHundredTicketsAreSold() {
+    assertThrows(IllegalArgumentException.class,
+                () -> venueRevenue.estimateTotalRevenue(101));
+  }
+}
+```
+
+그리고 이 테스트들을 통과시키는 구현은 다음과 같을 수 있습니다.
+
+```java
+import java.math.BigDecimal;
+
+public class TicketRevenue {
+  public BigDecimal estimateTotalRevenue(int numberOfTicketsSold)
+    throws IllegalArgumentException {
+
+    if (numberOfTicketsSold < 0) {
+      throw new IllegalArgumentException("Must be > -1");
+    }
+
+    if (numberOfTicketsSold == 0) {
+      return BigDecimal.ZERO;
+    }
+
+    if (numberOfTicketsSold == 1) {
+      return new BigDecimal("30");
+    }
+
+    if (numberOfTicketsSold == 101) {
+      throw new IllegalArgumentException("Must be < 101");
+    }
+
+    return new BigDecimal(30 * numberOfTicketsSold);
+  }
+}
+```
+
+이렇게 구현하면, 테스트들에 통과할 수 있습니다.
+
+TDD 주기에 따라 구현을 다시 리팩터링 합니다. 예를들어 잘못된 케이스(`< 0` 또는 `> 100`)에 대해서 하나의 if 문으로 결합하고 유효한 케이스에 대해서는 수식(`TICKET_PRICE * numberOfTicketsSold`)을 사용하여 수익을 반환하게 처리할 수 있습니다.
+
+아래와 같이 작성할 수 있습니다.
+
+```java
+import java.math.BigDecimal;
+
+public class TicketRevenue {
+  
+  private final static int TICKET_PRICE = 30;
+  
+  public BigDecimal estimateTotalRevenue(int numberOfTicketsSold)
+    throws IllegalArgumentException {
+
+    if (numberOfTicketsSold < 0 || numberOfTicketsSold > 100) {
+      throw new IllegalArgumentException("# Tix sold must == 1..100");
+    }
+
+    return new BigDecimal(TICKET_PRICE * numberOfTicketsSold);
+  }
+}
+```
+
+TicketRevenue 클래스는 이제 더 컴팩트해졌고 동시에 모든 테스트를 통과하게 되었습니다. red-green-refactor 주기를 따라 기능 구현을 완료하였고 이제 다른 비즈니스 로직 구현을 시작해도 됩니다. 놓친 경계 케이스(엣지 케이스edge case)들이 있다면 현재 작업한 코드에 대해서 주기를 다시 진행해도 됩니다. (e.g. 티켓 가격이 고정이 아닐 경우)
