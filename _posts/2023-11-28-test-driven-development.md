@@ -18,9 +18,9 @@ date: 2023-12-01 23:10:00 +0900
 
 원문 : Well Grounded Java Developer - ch13 testing fundamentals
 
-[테스트 기초 (testing fundamentals)](/2023/11/27/testing-fundamentals) 에서 이어지는 글입니다.
+[기초가 탄탄한 자바 개발자가 되기 위해 알아야할 테스트 기초](/2023/11/27/testing-fundamentals) 에서 이어지는 글입니다.
 
-이 글을 읽은 후 추가적으로 TDD 에 궁금하다면 
+이 글을 읽은 후 추가적으로 TDD 에 궁금하다면
 
 - [테스트 주도 개발 (TDD) 사용법](2023-11-28-test-driven-development.md)
 - [2023-11-28-test-driven-development.md](2023-11-28-test-driven-development.md)
@@ -229,7 +229,7 @@ import java.math.BigDecimal;
 
 public class TicketRevenue {
   private final static int TICKET_PRICE = 30;
-  
+
   public BigDecimal estimateTotalRevenue(int numberOfTicketsSold) {
     BigDecimal totalRevenue = BigDecimal.ZERO;
     if (numberOfTicketsSold == 1) {
@@ -248,8 +248,9 @@ public class TicketRevenue {
 
 다음 섹션에서는 여러 케이스들을 고려하는 테스트 주도 개발을 진행해보겠습니다.
 
-#### 여러 테스트 케이스를 고려하는 TDD 예제 
-이전에 해결하지 못한 음수, 0, 2-100, 100개 초과 케이스에 대해서도 테스트를 계속 추가합니다. 
+#### 여러 테스트 케이스를 고려하는 TDD 예제
+
+이전에 해결하지 못한 음수, 0, 2-100, 100개 초과 케이스에 대해서도 테스트를 계속 추가합니다.
 
 마찬가지로 케이스에 대한 유효한 테스트를 미리 작성합니다.
 
@@ -296,7 +297,7 @@ public class TicketRevenueTest {
     expectedRevenue = new BigDecimal("300");
     assertEquals(expectedRevenue, venueRevenue.estimateTotalRevenue(10));
   }
-  
+
   @Test
   public void failIfMoreThanOneHundredTicketsAreSold() {
     assertThrows(IllegalArgumentException.class,
@@ -345,9 +346,9 @@ TDD 주기에 따라 구현을 다시 리팩터링 합니다. 예를들어 잘�
 import java.math.BigDecimal;
 
 public class TicketRevenue {
-  
+
   private final static int TICKET_PRICE = 30;
-  
+
   public BigDecimal estimateTotalRevenue(int numberOfTicketsSold)
     throws IllegalArgumentException {
 
