@@ -18,7 +18,7 @@ tags:
     목,
     mocking,
   ]
-date: 2023-12-04 23:30:00 +0900
+date: 2023-12-05 13:00:00 +0900
 ---
 
 원문 : Well Grounded Java Developer - ch13 testing fundamentals
