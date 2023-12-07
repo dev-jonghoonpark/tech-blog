@@ -114,7 +114,7 @@ MySQLContainer<SELF>' used without 'try'-with-resources statement
 그래서 최종적으로는 테스트용 디비를 로컬에서 하나 더 띄워서 3307를 사용하기로 하였다.  
 대신 데이터는 위에서 이야기 한대로 각 테스트케이스마다 항상 초기화를 하도록 처리할 예정이다.
 
-위 코드에서 db ort만 3307을 바라볼 수 있도록 overrideProps 부분만 따와서 사용할 예정이다.
+위 코드에서 db port만 3307을 바라볼 수 있도록 overrideProps 부분만 따와서 사용할 예정이다.
 
 ```java
 @DynamicPropertySource
