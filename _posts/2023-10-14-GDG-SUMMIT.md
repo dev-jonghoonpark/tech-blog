@@ -236,8 +236,8 @@ org level OKR에 따라 팀 내부적으로 목표를 기획하고 리드에게 
 
 ## L3, L4, L5
 
-L3: direct technical contributions
-L4: larger, independent technical contributions
+L3: direct technical contributions  
+L4: larger, independent technical contributions  
 L5: influence beyond themselves
 
 L6, L7 ...
