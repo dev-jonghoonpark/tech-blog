@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring 기반 프로젝트에서 Service 클래스 안의 로직에 대한 테스트를 시도 하면서 경험한 것 (로직 분리, 함수형 프로그래밍, 순수 함수)
-categories: [개발]
+categories: [개발, 스터디-테스트]
 tags:
   [
     테스트,
