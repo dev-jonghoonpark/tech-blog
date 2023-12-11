@@ -101,5 +101,19 @@ public static void truncateTables(EntityManager em, String... tableNames) {
 }
 ```
 
+`FOREIGN_KEY_CHECKS` 를 넣어준 이유는 외래키로 인한 꼬임이 없도록 하기 위해서 추가하였고
+
+이렇게 작성한 코드를 BeforeAll 에서 사용해주었다. 필요에 따라서 BeforeEach에서 사용해도 된다.
+
+```java
+@BeforeAll
+void setup() throws IOException {
+    EntityManager em = emf.createEntityManager();
+    DatabaseUtils.truncateTables(em, "table_a", "table_b", "table_c", ...);
+
+    // ...
+}
+```
+
 최대한 직접 손대는 것은 피하고 싶기 때문에 위와 같은 방식으로 직접 SQL을 작성하는 것은 데이터베이스 초기화에만 사용하였다.
 나머지 부분들은 Repository를 이용해서 데이터를 구성하도록 처리하였다.
