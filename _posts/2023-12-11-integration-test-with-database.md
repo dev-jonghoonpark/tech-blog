@@ -48,7 +48,7 @@ date: 2023-12-12 01:00:00 +0900
 
 TestInstance 어노테이션을 이용하여 아래와 같이 코드를 구성할 수 있다.
 
-````java
+```java
 @TestInstance(Lifecycle.PER_CLASS)
 class TweetSerializerUnitTest {
 
@@ -73,7 +73,7 @@ JPQL을 통해서 수행하면 삭제가 가능하다는 것을 보여주는 답
 
 ```java
 em.createNativeQuery("DELETE FROM user").executeUpdate();
-````
+```
 
 위와같이 sql을 작성해서 수행하니 데이터가 잘 삭제 되었다.
 하지만 이후 나온 문제가 auto increment 도 리셋이 되어야 완벽한 초기화가 된다는 것이였다.
