@@ -92,7 +92,7 @@ tasks.register('integrationTest', Test) {
 해당 부분이 필요한 것은 통합테스트의 경우 뿐이다.
 따라서 통합테스트를 위한 task를 따로 만들어서 doFirst 부분에 어떤 프로파일을 활성화를 지정할 수 있도록 처리하였다.
 
-이렇게 되면 클래스 구현시 실수로 빠트리거나 하는 경우가 발생하지 않는다.
+이렇게 되면 클래스 구현시 실수로 빠트리거나 하는 경우가 발생하지 않는다. 혹시나 integrationTest 가 아닌 test task로 실행한다 하더라도 filter에 걸려서 실행되지 않는다.
 
 ## CompletableFuture 목 처리 하기
 
