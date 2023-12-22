@@ -163,15 +163,10 @@ TLB에 없으면(TLB 미스라고 함) 기존과 같은 단계로 진행된다. 
 
 시스템에서 ASID(address-space identifier) 를 지원하면 그 TLB 항목이 어느 프로세스에 속한것인지를 알 수 있다. ASID 지원이 없으면 새로운 페이지 테이블이 선택될 때마다 TLB를 플러시 해야 한다.
 
+> intel 에서는 PCID(Process Context IDentifiers) 라고도 부르는 것으로 보인다.
+
 현재의 CPU는 여러 단계의 TLB를 가지고 있다.
 
-> e.g. Intel Core i7 CPU
->
-> - 128개 항목의 L1 instruction TLB
-> - 64개 항목의 L1 data TLB
->
->   L1에서 TLB 미스가 날 경우
->
-> - 512개 항목의 L2 TLB
->
-> 를 검색함.
+> **e.g. Intel Core i7 CPU**  
+> 128개 항목의 L1 instruction TLB, 64개 항목의 L1 data TLB 이 있음.  
+> L1에서 TLB 미스가 날 경우 512개 항목의 L2 TLB 를 검색함.
