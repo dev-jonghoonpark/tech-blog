@@ -57,7 +57,7 @@ docker-compose -f docker-compose.yaml up --detach
 
 방금 전 docker-compose 에서 설정한 email과 name 으로 로그인을 할 수 있다.
 
-아직 기기를 연결하지 않아 처음에 들어갔을떄는 아무것도 보이지 않았다.
+아직 기기를 연결하지 않아 처음에 들어갔을때는 아무것도 보이지 않았다.
 
 ![stf-main-page](/assets/images/2023-11-10-devicefarm-stf-using-docker/stf-main-page.png)
 
