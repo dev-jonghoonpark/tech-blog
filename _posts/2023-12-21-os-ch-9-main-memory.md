@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 운영체제 9장 - 메인 메모리 (1) - 기본
-categories: [스터디-운영채제]
+categories: [스터디-운영체제]
 tags: [
     운영체제,
     OS,
