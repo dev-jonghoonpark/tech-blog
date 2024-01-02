@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 운영체제 9장 - 메인 메모리 (3) - 페이징 테이블, 스와핑
-categories: [스터디-운영채제]
+categories: [스터디-운영체제]
 tags:
   [
     운영체제,
