@@ -292,4 +292,4 @@ public void testOrderSendsMailIfUnfilled() {
 
 ---
 
-이 글의 나머지 부분에서는 [테스트의 두 분파 (Classical and Mockist Testing)](/2023/10/31/테스트의-두-분파) 에 대해서 다룹니다.
+이 글의 나머지 부분에서는 [테스트의 두 분파 (Classical and Mockist Testing)](/2023/11/01/테스트의-두-분파) 에 대해서 다룹니다.
