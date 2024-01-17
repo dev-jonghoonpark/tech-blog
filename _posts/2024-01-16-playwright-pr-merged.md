@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Playwright PR 성공
+title: Playwright PR 마무리
 categories: [개발]
 tags: [github, pr, pull requests, contribute, playwright]
 date: 2024-01-16 23:00:00 +0900
