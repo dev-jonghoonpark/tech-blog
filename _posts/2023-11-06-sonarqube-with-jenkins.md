@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 소나큐브 정적 분석 자동화 하기 (with Jenkins)
-categories: [개발, 스터디-테스트]
+categories: [개발, 스터디-테스트, 스터디-자동화]
 tags:
   [
     Sonarqube,

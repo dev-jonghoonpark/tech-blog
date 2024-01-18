@@ -1,7 +1,7 @@
 ---
 layout: post
 title: jenkins pipeline 에서 데이터베이스 테스트 환경 세팅 자동화하기 (테스트용 데이터베이스 컨테이너 사용)
-categories: [개발, 스터디-테스트]
+categories: [개발, 스터디-테스트, 스터디-자동화]
 tags:
   [
     jenkins,
@@ -16,7 +16,7 @@ tags:
     gradle,
     mysql,
   ]
-date: 2024-01-16 23:00:00 +0900
+date: 2024-01-18 23:30:00 +0900
 ---
 
 최근 며칠 동안 시간날 때마다 jenkins상에서 데이터베이스 테스트(통합 테스트)를 실행할 수 있도록 만들기위해 매우 많은 삽질을 하였습니다. 어느 정도 진행이 되어서 진행상황을 블로그에 정리해보기로 하였습니다.
@@ -28,7 +28,7 @@ date: 2024-01-16 23:00:00 +0900
 젠킨스 파이프라인을 빌드하면
 
 1. 최신 코드 가져와서
-2. gradle integration task 수행
+2. gradle integration test task 수행
 
    - 이때 데이터가 비어있는 테스트 데이터베이스 서버를 구축
    - 테스트 데이터베이스에 연결하여 테스트를 수행
@@ -62,7 +62,7 @@ def scmVars = checkout([
     ]],
     submoduleCfg: [],
     userRemoteConfigs: [[
-        credentialsId: 'bitbucket',
+        credentialsId: 'YOUR_CREDENTIAL_ID',
         url: env.GIT_URL
     ]]
 ])
@@ -153,7 +153,7 @@ pipeline {
                                 ]],
                                 submoduleCfg: [],
                                 userRemoteConfigs: [[
-                                    credentialsId: 'bitbucket',
+                                    credentialsId: 'YOUR_CREDENTIAL_ID',
                                     url: env.GIT_URL
                                 ]]
                             ])
@@ -266,3 +266,5 @@ RUN \
 
 일단은 동작하도록 스크립트를 작성을 완료해서 어느정도 만족스럽다.  
 내일 devops 님께 리뷰를 받아보고 개선할 부분이 있으면 개선해 볼 예정이다.
+
+커뮤니티 유저분이 글을 봐주시고 도커 컴포즈로 묶어보는건 어떨지에 대한 조언을 해주셨다.
