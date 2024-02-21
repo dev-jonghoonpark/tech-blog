@@ -23,7 +23,7 @@ tags: [
     K-DEVCON,
     DEVCON,
   ]
-date: 2024-02-19 23:00:00 +0900
+date: 2024-02-19 23:59:00 +0900
 image:
   path: /assets/images/2024-02-19-introduce-trees/thumbnail.png
 ---
