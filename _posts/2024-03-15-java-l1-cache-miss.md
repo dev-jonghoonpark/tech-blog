@@ -82,6 +82,16 @@ public class Caching {
 
 하지만 실제로 실행을 해보면 생각외로 큰 차이는 없다.
 
+```
+Line: 487481 ns ; Item: 452421
+Line: 425039 ns ; Item: 428397
+Line: 415447 ns ; Item: 395332
+Line: 372815 ns ; Item: 397519
+Line: 366305 ns ; Item: 375376
+Line: 332249 ns ; Item: 330512
+...
+```
+
 ![result](/assets/images/2024-03-15-java-l1-cache-miss/result.png)
 
 ### touchEvenyItem() 이 touchEveyLine() 보다 16배 더 오래걸리지 않는 이유는 무엇일까?
