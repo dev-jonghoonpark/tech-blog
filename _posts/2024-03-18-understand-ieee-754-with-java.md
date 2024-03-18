@@ -51,7 +51,7 @@ IEEE 754의 부동소수점 표현은 크게 세 부분으로 구성되는데
 
 ![double-precision](/assets/images/2024-03-18-understand-ieee-754-with-java/IEEE_754_Double_Floating_Point_Format.svg)
 
-## 변환 과정 (+예시)
+### 변환 과정 (+예시)
 
 −118.625(십진법)를 32비트 단정밀도로 표현해 보자.
 
