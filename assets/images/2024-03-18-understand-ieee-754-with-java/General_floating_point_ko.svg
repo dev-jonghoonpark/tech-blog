@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="500"
+   height="95"
+   id="svg2">
+  <defs
+     id="defs4">
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       style="overflow:visible"
+       id="Arrow2Mend">
+      <path
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.97309,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(-0.6,-0.6)"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3321" />
+    </marker>
+  </defs>
+  <g
+     transform="translate(-230.30882,-757.46531)"
+     id="layer1">
+    <path
+       d="M 261.89818,798.80025 L 261.89818,789.3745 L 380.03681,789.3745 L 380.03681,798.80025"
+       style="fill:none;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path2170" />
+    <path
+       d="M 381.91964,798.80025 L 381.91964,789.3745 L 725.06687,789.3745 L 725.06687,798.80025"
+       style="fill:none;fill-rule:evenodd;stroke:#800000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path2172" />
+    <rect
+       width="345.97119"
+       height="26.023642"
+       x="380.91882"
+       y="802.24695"
+       style="fill:#ff1e1e;fill-opacity:0.36184208;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect2174" />
+    <rect
+       width="120.00082"
+       height="26.023895"
+       x="260.91882"
+       y="802.27661"
+       style="fill:#10ff2e;fill-opacity:0.39473685;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect3147" />
+    <rect
+       width="14.999176"
+       height="26.023895"
+       x="245.91963"
+       y="802.27637"
+       style="fill:#0af5ff;fill-opacity:0.23684214;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect3149" />
+    <text
+       x="254.98299"
+       y="776.24402"
+       style="font-size:14.64121246px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Gill Sans MT"
+       id="text3151"
+       xml:space="preserve"><tspan
+         x="264.98299"
+         y="776.24402"
+         style="font-weight:normal;font-family:Arial"
+         id="tspan3153">부호 비트</tspan></text>
+    <g
+       transform="translate(1.9188155,1.5944959)"
+       id="g3355">
+      <path
+         d="M 249.50082,778.20575 L 249.50082,796.20575 L 251.50082,796.20575 L 251.50082,778.20575 L 249.50082,778.20575 z "
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path3155" />
+      <path
+         d="M 258.40394,787.27476 L 250.52004,797.13176 L 242.44471,787.27476 C 245.1454,789.97545 255.71246,789.96624 258.40394,787.27476 z "
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3361" />
+    </g>
+    <text
+       x="325.92392"
+       y="769.71899"
+       style="font-size:14.64121246px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Gill Sans MT"
+       id="text3365"
+       xml:space="preserve"><tspan
+         x="325.92392"
+         y="769.71899"
+         style="font-weight:normal;font-family:Arial"
+         id="tspan3367">(e 비트)</tspan></text>
+    <text
+       x="325.92392"
+       y="784.71899"
+       style="font-size:14.64121246px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Gill Sans MT"
+       id="text3369"
+       xml:space="preserve"><tspan
+         x="325.92392"
+         y="784.71899"
+         style="font-weight:normal;font-family:Arial"
+         id="tspan3371">지수</tspan></text>
+    <text
+       x="477.37943"
+       y="769.71899"
+       style="font-size:14.64121246px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Gill Sans MT"
+       id="text3373"
+       xml:space="preserve"><tspan
+         x="477.37943"
+         y="769.71899"
+         style="font-weight:normal;font-family:Arial"
+         id="tspan3375">(f 비트)</tspan></text>
+    <text
+       x="477.37943"
+       y="784.71899"
+       style="font-size:14.64121246px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Gill Sans MT"
+       id="text3377"
+       xml:space="preserve"><tspan
+         x="477.37943"
+         y="784.71899"
+         style="font-weight:normal;font-family:Arial"
+         id="tspan3379">가수</tspan></text>
+    <path
+       d="M 494.90408 79.011902 A 1.9620061 1.9620061 0 1 1  490.98007,79.011902 A 1.9620061 1.9620061 0 1 1  494.90408 79.011902 z"
+       transform="matrix(1.0193648,0,0,1.0193648,220.93183,752.25829)"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path3381" />
+    <text
+       x="723.44421"
+       y="847.91595"
+       style="font-size:14.04066658px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial"
+       id="text3383"
+       xml:space="preserve"><tspan
+         x="723.44421"
+         y="847.91595"
+         style="font-weight:normal"
+         id="tspan3385">0</tspan></text>
+    <path
+       d="M 494.90408 79.011902 A 1.9620061 1.9620061 0 1 1  490.98007,79.011902 A 1.9620061 1.9620061 0 1 1  494.90408 79.011902 z"
+       transform="matrix(1.0193648,0,0,1.0193648,-114.06816,752.2583)"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path3391" />
+    <text
+       x="393.48892"
+       y="847.91595"
+       style="font-size:14.04066658px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial"
+       id="text3393"
+       xml:space="preserve"><tspan
+         x="393.48892"
+         y="847.91595"
+         style="font-weight:normal"
+         id="tspan3395">f-1</tspan></text>
+    <path
+       d="M 494.90408 79.011902 A 1.9620061 1.9620061 0 1 1  490.98007,79.011902 A 1.9620061 1.9620061 0 1 1  494.90408 79.011902 z"
+       transform="matrix(1.0193648,0,0,1.0193648,-129.0469,752.2583)"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path3397" />
+    <text
+       x="373.12897"
+       y="847.91595"
+       style="font-size:14.04066658px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial"
+       id="text3399"
+       xml:space="preserve"><tspan
+         x="373.12897"
+         y="847.91595"
+         style="font-weight:normal"
+         id="tspan3401">f</tspan></text>
+    <text
+       x="495.56448"
+       y="847.91595"
+       style="font-size:14.04066658px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial"
+       id="text3403"
+       xml:space="preserve"><tspan
+         x="495.56448"
+         y="847.91595"
+         style="font-weight:normal"
+         id="tspan3405">(비트 번호)</tspan></text>
+    <path
+       d="M 494.90408 79.011902 A 1.9620061 1.9620061 0 1 1  490.98007,79.011902 A 1.9620061 1.9620061 0 1 1  494.90408 79.011902 z"
+       transform="matrix(1.0193648,0,0,1.0193648,-234.06816,752.2583)"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path3407" />
+    <text
+       x="280.79718"
+       y="847.91595"
+       style="font-size:14.04066658px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial"
+       id="text3409"
+       xml:space="preserve"><tspan
+         x="280.79718"
+         y="847.91595"
+         style="font-weight:normal"
+         id="tspan3411">e+f-1</tspan></text>
+    <path
+       d="M 494.90408 79.011902 A 1.9620061 1.9620061 0 1 1  490.98007,79.011902 A 1.9620061 1.9620061 0 1 1  494.90408 79.011902 z"
+       transform="matrix(1.0193648,0,0,1.0193648,-249.06816,752.2583)"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path3413" />
+    <text
+       x="245.33197"
+       y="847.91595"
+       style="font-size:14.04066658px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Arial"
+       id="text3415"
+       xml:space="preserve"><tspan
+         x="245.33197"
+         y="847.91595"
+         style="font-weight:normal"
+         id="tspan3417">e+f</tspan></text>
+  </g>
+</svg>
