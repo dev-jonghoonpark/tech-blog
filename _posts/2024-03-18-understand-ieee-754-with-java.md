@@ -94,19 +94,19 @@ Java의 경우에도 IEEE 754 규칙을 따라 소수를 처리한다.
 이를 확인하기 위해 java에서 다음과 같은 코드를 작성해보았다.
 
 ```java
-public static void divideFloatingBinary(String floatingBinaryString) {
-    int leftPad = 64 - floatingBinaryString.length();
+public static void formatFloatingPointBinary(String floatingPointBinaryString) {
+    int leftPad = 64 - floatingPointBinaryString.length();
     while (leftPad > 0) {
-        floatingBinaryString = "0" + floatingBinaryString;
+        floatingPointBinaryString = "0" + floatingPointBinaryString;
         leftPad--;
     }
-    System.out.println(floatingBinaryString.charAt(0) + " " + floatingBinaryString.substring(1,12) + " " + floatingBinaryString.substring(12));
+    System.out.println(floatingPointBinaryString.charAt(0) + " " + floatingPointBinaryString.substring(1,12) + " " + floatingPointBinaryString.substring(12));
 }
 ```
 
 ```java
-divideFloatingBinary(Long.toBinaryString(Double.doubleToLongBits((double) 1/3)));
-divideFloatingBinary(Long.toBinaryString(Double.doubleToLongBits((double) - 1/3)));
+formatFloatingPointBinary(Long.toBinaryString(Double.doubleToLongBits((double) 1/3)));
+formatFloatingPointBinary(Long.toBinaryString(Double.doubleToLongBits((double) - 1/3)));
 ```
 
 결과는 다음과 같다.
@@ -120,7 +120,9 @@ divideFloatingBinary(Long.toBinaryString(Double.doubleToLongBits((double) - 1/3)
 2. 0.33333... 을 이진법으로 나타내면 0.010101...(2) 으로 바꿀 수 있다.
 3. 이 상태에서 정규화를 하면 1.010101...(2)×2<sup>-2</sup> 가 된다.
 4. 가수부는 소수점의 오른쪽 부분으로, 부족한 비트 수 부분만큼 0으로 채워 52비트로 만든다.
-   여기서는 순환소수이기 때문에 계속 01 로 반복되어 채우면 된다. 그 결과 0101010101010101010101010101010101010101010101010101 이 된다.
+   (여기서는 순환소수이기 때문에 계속 01 로 반복되어 채우면 된다.) 저장될 수 있는 유효한 비트 수를 넘어선 경우 넘어선 비트는 생략한다.
+   (이러한 경우에 근사값을 사용하게 되는 것이기 때문에 오차가 발생된다.)
+   최종적으로 가수부는 `0101010101...(52bit)` 이 된다.
 5. 지수는 -2이다. 이 때 Bias를 더해야 한다. 64비트 IEEE 754 형식에서는 Bias는 1023이므로 -2 + 1023 = 1021이 된다. 이진법으로 변환하면 1111111101(2)이 된다.
 
 따라서 최종적으로 java에서 출력했던 값과 동일한 결과가 나오게 된다.
