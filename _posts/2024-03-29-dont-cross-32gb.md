@@ -17,6 +17,8 @@ tags:
     jvm optimizing,
   ]
 date: 2024-03-29 22:00:00 +0900
+image:
+  path: /assets/images/2024-03-29-dont-cross-32gb/compressed_oop.png
 ---
 
 **요약** : heap 메모리에 대한 이야기, compressed oop 에 대한 이야기
@@ -41,7 +43,7 @@ oop는 모든 객체에 대해 기계어 워드 2개로 구성된 헤더로 시�
 
 이러한 문제를 해결하기 위해 hotspot jvm에서는 힙이 약 32GB 미만일 때 객체 포인터(klass word)를 압축하는 트릭을 사용한다. 이 기술을 **compressed oop** 라고 한다.
 
-이 옵션은 `-XX:+UseCompressedOops` 를 통해 활성화 할 수 있으며, java 7 버전 이상인 64비트 머신이라면 디폴트 값으로 활성화 되는 옵션이다. 다만 32기가를 넘어선다면 사용할 수 없기 때문에 비활성화 된다.
+이 옵션은 `-XX:+UseCompressedOops` 를 통해 활성화 할 수 있으며, java 7 버전 이상인 64비트 머신이라면 디폴트 값으로 활성화 되는 옵션이다. 다만 설정한 힙의 크기가 32기가를 넘어선다면 사용할 수 없기 때문에 비활성화 된다.
 
 Integer Object 를 기준으로 compressed oop 를 적용했을 때와 적용하지 않았을 때의 차이를 확인해보면 다음과 같다.
 (참고로 java에서 int는 32/64 bit에 상관 없이 항상 4byte의 공간을 사용한다.)
