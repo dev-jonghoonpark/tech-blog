@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "biginteger 는 어떤 식으로 동작할까?"
+title: "biginteger의 내부는 어떤 식으로 동작할까?"
 categories: [스터디-알고리즘]
 tags:
   [
