@@ -126,7 +126,7 @@ querydsl의 경우 예전부터 종종 잘 쓰던 라이브러리 인데 java 21
 
 PR 준비를 하면서 cglib, byte buddy, asm 같은 애들을 사용하는 것을 볼 수 있었는데
 이런 애들이 뭐하는 라이브러리인지 간단하게 알아보고 정리를 해봐야 겠다는 생각이 들었다.
-wellgrounded java developer 를 읽을 떄도 중간에 나왔던 기억이 있다.
+wellgrounded java developer 를 읽을 때도 중간에 나왔던 기억이 있다.
 
 다음에는 spring, 특히 spring-data 쪽에 기여를 해보고 싶다 라는 생각이 들었다.
 

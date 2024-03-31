@@ -50,7 +50,7 @@ public class OauthService {
 
 default access modifier는 같은 패키지가 아니라면 접근하지 못하도록 한다.
 
-public을 추가해준다면 쉽게 해결할 수 있는 문제이긴 하나 기본적으로 테스트를 작성할때는 원본코드를 크게 건드리지 않으려 하는 편이기 떄문에 reflect를 써서 다름과 같이 우회하였다.
+public을 추가해준다면 쉽게 해결할 수 있는 문제이긴 하나 기본적으로 테스트를 작성할때는 원본코드를 크게 건드리지 않으려 하는 편이기 때문에 reflect를 써서 다름과 같이 우회하였다.
 
 ```java
 Class<?> clazz = OauthService.class;
