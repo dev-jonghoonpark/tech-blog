@@ -48,7 +48,8 @@ Immutable arbitrary-precision integers
 big integer 는 불변 객체이다.
 
 BigInteger 클래스는 다음과 같은 변수를 가지고 있다.
-쉽게 이해할 수 있도록 PlusOne, PlusTwo 를 제외하고 설명한다. 이에 대해서는 하단에 추가적으로 정리한다.
+
+> 쉽게 이해할 수 있도록 PlusOne, PlusTwo 를 제외하고 설명한다. 이에 대해서는 하단에 추가적으로 정리한다.
 
 bitCount, bitLength, lowestSetBit, firstNonzeroIntNum 의 경우 lazy하게 필요할때만 값이 할당된다.
 
