@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "biginteger의 내부는 어떤 식으로 동작할까?"
+title: "BigInteger 의 내부는 어떤 식으로 동작할까?"
 categories: [스터디-알고리즘]
 tags:
   [
@@ -11,7 +11,7 @@ tags:
     primitive,
     int,
     long,
-    biginteger,
+    BigInteger,
   ]
 date: 2024-03-31 17:00:00 +0900
 ---
@@ -105,8 +105,8 @@ bitCount, bitLength, lowestSetBit, firstNonzeroIntNum 의 경우 lazy하게 필�
 
 이 이유를 찾으려고 정말 많은 시간이 들었다. 해당 변경은 java 9 로 넘어가면서 진행되었다.
 
-- java 8 : https://github.com/AdoptOpenJDK/openjdk-jdk8u/blob/2544d2a351eca1a3d62276f969dd2d95e4a4d2b6/jdk/src/share/classes/java/math/BigInteger.java
-- java 9 : https://github.com/AdoptOpenJDK/openjdk-jdk9/blob/f00b63d24697cce8067f468fe6cd8510374a46f5/jdk/src/java.base/share/classes/java/math/BigInteger.java#L127
+- [java 8 : BigInteger](https://github.com/AdoptOpenJDK/openjdk-jdk8u/blob/2544d2a351eca1a3d62276f969dd2d95e4a4d2b6/jdk/src/share/classes/java/math/BigInteger.java)
+- [java 9 : BigInteger](https://github.com/AdoptOpenJDK/openjdk-jdk9/blob/f00b63d24697cce8067f468fe6cd8510374a46f5/jdk/src/java.base/share/classes/java/math/BigInteger.java)
 
 근데 java 8 때도 일단 deprecated 되어 있다는 것을 확인할 수 있었다. (java 6 까지도 확인해봤는데 이때도 deprecated 였다. 꽤 오랜 세월동안 deprecated 상태였나보다.) 비교해 본 결과 로직은 변경되지 않았고, 이름을 좀 더 명확하게 하기 위해서 java9 부터 이름을 변경한 것 같다.
 
