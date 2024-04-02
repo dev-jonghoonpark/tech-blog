@@ -45,10 +45,21 @@ my name: jonghoonpark
 my name: jonghoonpark
 ```
 
-me 객체의 값이 바뀌지 않은 이유는 다음과 같다.
+me 객체의 값이 바뀌지 않은 이유를 찾기위해 상태별로 구분해보면 다음과 같이 나눌 수 있다.
 
+### 상태 1
+
+`me` 변수에 `new Person()` 으로 생성된 객체를 할당한다.
 ![state 1](/assets/images/2024-04-02-java-call-by-value/state1.png)
+
+### 상태 2
+
+해당 object의 ref 값을 복사하여 메소드에 전달한다.
 ![state 2](/assets/images/2024-04-02-java-call-by-value/state2.png)
+
+### 상태 3
+
+처음의 `me` 를 수정하는게 아니라 `new Person()` 로 생성된 객체를 수정하게 된다.
 ![state 3](/assets/images/2024-04-02-java-call-by-value/state3.png)
 
 만약 아래와 같이 작성했다면 우리가 기대한대로 데이터가 변경이 될 것이다.
@@ -81,4 +92,5 @@ my name: noname
 
 ## 참고
 
+- [call by value vs call by reference](https://perfectacle.github.io/2017/10/30/js-014-call-by-value-vs-call-by-reference/)
 - [https://en.wikipedia.org/wiki/Evaluation_strategy](https://en.wikipedia.org/wiki/Evaluation_strategy)
