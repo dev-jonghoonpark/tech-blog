@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "BigInteger 의 내부는 어떤 식으로 동작할까?"
+title: "[Java] BigInteger 의 내부는 어떤 식으로 동작할까?"
 categories: [스터디-자바]
 tags:
   [
