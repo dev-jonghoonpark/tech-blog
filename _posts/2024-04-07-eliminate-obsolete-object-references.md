@@ -3,7 +3,7 @@ layout: post
 title: "[Java] 다 쓴 객체 참조를 해제하라."
 categories: [스터디-자바]
 tags: [자바, java, call by value, reference, pointer, java 21]
-date: 2024-04-7 17:00:00 +0900
+date: 2024-04-07 14:00:00 +0900
 ---
 
 ## 개요
