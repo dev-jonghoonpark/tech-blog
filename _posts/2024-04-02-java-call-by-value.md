@@ -62,7 +62,7 @@ me 객체의 값이 바뀌지 않은 이유를 찾기위해 상태별로 구분�
 처음의 `me` 를 수정하는게 아니라 `new Person()` 로 생성된 객체를 수정하게 된다.
 ![state 3](/assets/images/2024-04-02-java-call-by-value/state3.png)
 
-만약 아래와 같이 작성했다면 우리가 기대한대로 데이터가 변경이 될 것이다.
+만약 아래와 같이 작성했다면 일반적으로 기대하는대로 데이터가 변경이 될 것이다.
 
 ```java
 void main(String[] args) {
