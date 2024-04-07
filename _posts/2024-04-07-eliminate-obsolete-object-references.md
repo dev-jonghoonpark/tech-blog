@@ -14,10 +14,9 @@ date: 2024-04-07 14:00:00 +0900
 
 정리 해주셨던 부분중 해당 부분만 가져와보면
 
-```
-단 가비지컬렉션으로 참조가 해제되지 않을 수 있는 예외적인 경우가 있는데
-1. 배열, 리스트, set, map 과 같은 개발자가 메모리를 직접 관리할 수 있는 경우.
-```
+> 단 가비지컬렉션으로 참조가 해제되지 않을 수 있는 예외적인 경우가 있는데
+>
+> 1. 배열, 리스트, set, map 과 같은 개발자가 메모리를 직접 관리할 수 있는 경우.
 
 이런 설명이 있었는데 이 부분이 다소 모호했던 부분이 있어서 무슨 내용이였는지 책을 통해서 확인을 해보았다. 그리고 책에 있는 예시와 함께 보니 내용이 이해가 되었다.
 
@@ -68,7 +67,7 @@ public class Stack {
 ```java
 public Object pop() {
     if (size == 0)
-    throw new EmptyStackException();
+        throw new EmptyStackException();
     Object result = elements[--size];
     elements[size] = null; // Eliminate obsolete reference
     return result;
