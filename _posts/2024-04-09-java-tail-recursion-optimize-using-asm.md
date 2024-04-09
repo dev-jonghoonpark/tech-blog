@@ -53,11 +53,9 @@ Wellgrounded java developer 를 읽다보면 다음과 같은 내용이 나온�
 >
 > \[NOTE] In the Resources project that accompanies this book is an example of how to use the ASM library to generate a class that implements the previous bytecode sequence because javac will not emit it from recursive code.
 
-요약하면 javac는 기본적으로 tail recursion 최적화를 지원해주지 않는다는 것이다. 적용을 하려면 asm 라이브러리를 사용해야 한다고 한다. asm 라이브러리는 다음과 같이 소개하고 있다.
+요약하면 javac는 기본적으로 tail recursion 최적화를 지원해주지 않는다는 것이다. 그럼에도 불구하고 아예 불가능하지는 않다. asm 라이브러리를 통해서 최적화를 할 수 있다.
 
-> ASM is an all purpose Java bytecode manipulation and analysis framework
-
-즉, 바이트코드 조작 및 분석 프레임워크이다.
+> asm 라이브러리는 바이트코드 조작 및 분석 프레임워크이다.
 
 asm 라이브러리를 통해 tail recursive를 최적화 한 예제는 [https://github.com/well-grounded-java/resources/blob/main/Ch15/src/main/java/ch15/TailRecASM.java](https://github.com/well-grounded-java/resources/blob/main/Ch15/src/main/java/ch15/TailRecASM.java) 에서 확인할 수 있다.
 
@@ -73,7 +71,7 @@ java TailRecFactorial 100000
 
 ---
 
-그런데 생성된 Class를 실제로 사용하려면 어떻게 해야할까?
+그런데 asm을 통해 생성된 class 파일을 실제로 사용하려면 어떻게 해야할까?
 
 이 질문에 대한 답을 찾아보려고 했으나 적절한 답이 나오지 않았고 직접 한참 시도해본 결과 다음과 같이 구성하는데 성공하였다.
 
