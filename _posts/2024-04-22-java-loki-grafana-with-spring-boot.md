@@ -47,7 +47,7 @@ date: 2024-04-22 22:20:00 +0900
 
 공식 document 에서 docker-compose 를 이용하여 설치하는 방법을 제공해서 docker compose 로 설치하였다.
 
-https://grafana.com/docs/loki/latest/setup/install/docker/#install-with-docker-compose
+[Install with Docker Compose](https://grafana.com/docs/loki/latest/setup/install/docker/#install-with-docker-compose)
 
 ```sh
 wget https://raw.githubusercontent.com/grafana/loki/v2.9.2/production/docker-compose.yaml -O docker-compose.yaml
