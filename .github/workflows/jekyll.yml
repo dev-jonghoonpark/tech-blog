@@ -63,7 +63,8 @@ jobs:
 
       - name: Overwrite the paginations
         run: |
-          rsync -av --remove-source-files --ignore-existing ./_site/page* ./backup/_site/
+          rm -r ./backup/_site/page*
+          mv ./_site/page* ./backup/_site/
           mv ./_site/index.html ./backup/_site/index.html
 
       - name: restore build result
