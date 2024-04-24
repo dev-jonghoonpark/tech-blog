@@ -107,6 +107,10 @@ header {
   position: relative;
 }
 
+header > nav:first-child {
+  margin-bottom: 2rem;
+}
+
 header a {
   text-decoration: none;
 }
