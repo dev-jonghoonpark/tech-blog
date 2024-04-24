@@ -1,9 +1,13 @@
 <header aria-hidden="true" class="no-print">
-      <nav role="navigation" aria-hidden="true">
-<ul>
-   {% for item in site.data.navigation.links %}
-      <li><a href="{{ item.url }}" {% if item.url == page.url %} class="active"{% endif %} {% if item.target %} target="_blank"{% endif %}>{{ item.title }}</a></li>
-   {% endfor %}
-</ul>
-</nav>
+   <nav role="navigation" aria-hidden="true">
+      <ul>
+         {% for item in site.data.navigation.links %}
+            <li><a href="{{ item.url }}" {% if item.url == page.url %} class="active"{% endif %} {% if item.target %} target="_blank"{% endif %}>{{ item.title }}</a></li>
+         {% endfor %}
+      </ul>
+   </nav>
+
+   <div class="mobile close-button">
+      <img src="/assets/icons/close.svg">
+   </div>
 </header>
