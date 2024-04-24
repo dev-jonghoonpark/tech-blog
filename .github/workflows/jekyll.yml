@@ -63,7 +63,7 @@ jobs:
 
       - name: Overwrite the paginations
         run: |
-          find ./_site -type d | grep './_site/page' | xargs -I {} sh -c 'echo $(basename {})' | xargs -I {} sh -c 'mv ./_site/{} ./backup/_site/{}'
+          rsync -av --remove-source-files --ignore-existing ./_site/page* ./backup/_site/
           mv ./_site/index.html ./backup/_site/index.html
 
       - name: restore build result
