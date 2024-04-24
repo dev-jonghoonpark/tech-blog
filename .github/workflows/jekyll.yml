@@ -42,11 +42,33 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
+
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+
+      - name: Backup build result
+        run: mkdir -p backup && cp -r ./_site ./backup/_site
+
+      - name: Exclude algorithm post
+        run: grep -Ril '스터디-알고리즘' './_posts' | xargs -I {} mv {} './_algorithm'
+
+      - name: Build again without Algorithm category
+        # Outputs to the './_site' directory by default
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Overwrite the paginations
+        run: |
+          find ./_site -type d | grep './_site/page' | xargs -I {} sh -c 'echo $(basename {})' | xargs -I {} sh -c 'mv ./_site/{} ./backup/_site/{}'
+          mv ./_site/index.html ./backup/_site/index.html
+
+      - name: restore build result
+        run: rm -r ./_site && mv ./backup/_site ./_site
+
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v2
