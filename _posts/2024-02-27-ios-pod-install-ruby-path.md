@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[ios 개발] pod install 시 ruby path가 2.6.x일 경우 해결방법"
-categories: [스터디-알고리즘]
+categories: [개발]
 tags: [아이폰, ios, 애플, apple, pod, cocoa]
 date: 2024-02-27 13:00:00 +0900
 ---
