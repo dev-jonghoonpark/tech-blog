@@ -310,6 +310,7 @@ h1 {
       padding: 0.25rem;
       margin-left: 1.5rem;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
 
     &.close-button {
@@ -318,6 +319,7 @@ h1 {
       top: 1rem;
       padding: 0.25rem;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
   }
 }
