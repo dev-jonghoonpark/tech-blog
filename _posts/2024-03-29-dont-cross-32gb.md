@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Don't cross 32GB! (32기가 이상으로 힙 메모리를 설정하지 않는게 좋은 이유)"
+title: "[Java] Don't cross 32GB! (32기가 이상으로 힙 메모리를 설정하지 않는게 좋은 이유)"
 categories: [스터디-자바]
 tags:
   [
