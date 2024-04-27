@@ -337,6 +337,15 @@ section {
   flex-direction: column;
 }
 
+section.post .toc {
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+section.post .toc a {
+  text-decoration: none;
+}
+
 figcaption {
   font-size: smaller;
 }

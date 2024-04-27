@@ -31,10 +31,14 @@ sass:
   style: compressed
 
 plugins:
+  - jekyll-toc
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-pwa-plugin
+
+toc:
+  ordered_list: true
 
 collections:
   pages:
