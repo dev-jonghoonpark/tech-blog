@@ -1,19 +1,31 @@
 ---
 layout: post
-title: "[Java] Static Object는 GC 의 대상일까? (permgen, metaspace, jeps122, java8)"
+title: "[Java] Static Object는 GC 의 대상일까?"
 categories: [스터디-자바, 개발]
-tags: [자바, java, permgem, metaspace, static, jeps122, GC, garbage collector]
+tags:
+  [
+    자바,
+    java,
+    permgem,
+    metaspace,
+    static,
+    jeps122,
+    GC,
+    garbage collector,
+    heap,
+    class loader,
+  ]
 date: 2024-04-29 11:50:00 +0900
 toc: true
 ---
 
 ## 개요
 
-Static Object의 경우에는 GC(garbage collector) 에 포함되지 않는다는 글이 인터넷 상에 많이 돌아다닌다. java 7 이전의 경우에는 Static Object가 permanent generation (permgen) 에 있었기 때문에 맞는 설명이라고 볼 수 있다.
+Static Object의 경우에는 GC(garbage collector) 에 포함되지 않는다는 글이 인터넷 상에 많이 돌아다닌다. 그리고 permanent generation (permgen) 에 대한 언급이 함께 된다.
 
-하지만 java 8 부터 permanent generation (permgen) 이라는 공간이 사라짐에 따라 Static Object는 java heap 으로 옮겨졌다.
+하지만 java 8 부터 permanent generation (permgen) 이라는 공간이 사라졌다. 그리고 Static Object는 Java Heap 으로 옮겨졌다.
 
-그런데 여기서 조금 더 생각해 볼 부분은 java heap 에 있는 객체들은 GC의 영향을 받게 된다는 것이다. 그러면 Static Object는 GC의 영향을 받는걸까 안받는걸까?
+그러면 java 8 부터는 어떻게 되었다는 걸까? 이에 대해 알아보았다.
 
 ## 본문
 
@@ -35,10 +47,12 @@ java 8 부터는 이러한 에러를 막고자 permgen을 제거하였다.
 
 ### Static Object는 Java Heap 영역으로 이동되었다.
 
-그러면 다음과 같이 생각해볼 수 있는걸까?
+그런데 여기서 조금 더 생각해 볼 부분은 Java Heap 에 있는 객체들은 GC의 영향을 받게 된다는 것이다.
 
-1. Static Object는 java heap 영역으로 옮겨졌다.
-2. java heap은 GC의 대상이다.
+그러면 다음과 같이 생각해 볼 수 있는걸까?
+
+1. Static Object는 Java Heap 영역으로 옮겨졌다.
+2. Java Heap은 GC의 대상이다.
 3. 따라서, Static Object는 GC의 대상이다?
 
 이에 대해 맞는지 확인해보았다.
@@ -57,11 +71,9 @@ java 8 부터는 이러한 에러를 막고자 permgen을 제거하였다.
 
 일반적으로 개발자가 직접 클래스 로더와 클래스 로딩과 언로딩 에 대해서 신경쓰지 않아도 된다. 하지만 계속 알아보았다.
 
-우선 클래스 로더는 다음과 같은 일을 한다.
+클래스 로더는 Java Runtime Environment의 일부이다. JVM이 클래스를 요청하면 클래스 로더는 클래스를 찾고 정규화된 클래스 이름을 사용하여 클래스 정의를 런타임에 로드한다.
 
-> **클래스 로더**
->
-> 클래스 로더는 Java Runtime Environment의 일부이다. JVM이 클래스를 요청하면 클래스 로더는 클래스를 찾고 정규화된 클래스 이름을 사용하여 클래스 정의를 런타임에 로드한다.
+#### 클래스 로더의 종류
 
 클래스 로더는 다음과 같은 종류가 있다.
 
@@ -73,15 +85,19 @@ java 8 부터는 이러한 에러를 막고자 permgen을 제거하였다.
 
 #### 클래스 로더가 언로드 되는 경우
 
-내장 클래스 로더의 경우에는 일반적으로 jvm이 종료될 때 까지 살아있는다. 그리고 클래스 로더는 살아있는 동안 계속 Static Object 를 참조한다.
+내장 클래스 로더의 경우에는 일반적으로 jvm이 종료될 때 까지 살아있는다. 따라서 일반적인 경우에는 언로드 되지 않는다.
 
-커스텀 클래스 로더의 경우 사용자 구현에 따라 클래스 로더가 언로드 될 수 있긴 하다고 한다. (하지만 일반적인 경우는 아닐 것이다.)
+\* 커스텀 클래스 로더의 경우 사용자 구현에 따라 클래스 로더가 언로드 될 수 있긴 하다고 한다. (하지만 일반적인 경우는 아니다.)
 
 ## 정리
 
-이론상으로 Static Object 는 GC에 의해서 처리 대상이 될 수 있지만, 현실적으로는 일부러 의도 하지 않는 이상 거의 힘들다고 할 수 있다.
+클래스 로더는 불러온 모든 Class Object를 참조하고 있는다. (Every Class object contains a reference to the ClassLoader that defined it.) 따라서 Class Object 의 Static Object 가 GC 에 의해 정리되지 않게 된다.
 
-따라서 Static Object를 사용할 때는 메모리 누수가 발생되지 않도록 주의해야 하겠다.
+정리하자면 이론상으로 Static Object 는 GC에 의해서 처리 대상이 될 수 있지만, 현실적으로는 일부러 의도 하지 않는 이상 거의 힘들다고 할 수 있다.
+
+따라서 Static Object가 GC에 의해 정리될지 걱정하지는 않아도 되겠다.
+
+다만 GC에 의해 정리되지 않으므로 메모리 누수가 발생되지 않도록 주의해야 하겠다.
 
 ## 참고
 
@@ -89,6 +105,7 @@ java 8 부터는 이러한 에러를 막고자 permgen을 제거하였다.
 - [JDK 8에서 Perm 영역은 왜 삭제됐을까](https://johngrib.github.io/wiki/java8-why-permgen-removed/#fnref:compare)
 - [Are static fields open for garbage collection?](https://stackoverflow.com/questions/453023/are-static-fields-open-for-garbage-collection)
 - [Class Loaders in Java](https://www.baeldung.com/java-classloaders)
+- [ClassLoader - oracle docs](https://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html)
 
 ### 추가 정보
 
