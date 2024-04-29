@@ -49,6 +49,12 @@ jobs:
         env:
           JEKYLL_ENV: production
 
+      - name: move index.html to /page1/index.html
+        run: |
+          mkdir -p ./_site/page1
+          mv ./_site/index.html ./_site/page1/index.html
+          mv ./_site/redirect.html ./_site/index.html
+
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v2
