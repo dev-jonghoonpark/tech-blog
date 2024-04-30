@@ -57,6 +57,62 @@ docker-compose -f docker-compose.yaml up -d
 
 글을 작성한 시점에는 v3.0.0 버전이 나와있는 상태였기 때문에 다운로드 된 yaml 파일을 수정하여 3.0.0 버전으로 진행하였다.(아직 문서와 yaml 파일은 아직 업데이트 되지 않았지만.)
 
+최종적으로 작성된 docker-compose.yaml 은 다음과 같다.
+
+```yaml
+version: "3"
+
+networks:
+  loki:
+
+services:
+  loki:
+    image: grafana/loki:3.0.0
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - loki
+
+  promtail:
+    image: grafana/promtail:3.0.0
+    volumes:
+      - /var/log:/var/log
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - loki
+
+  grafana:
+    environment:
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        mkdir -p /etc/grafana/provisioning/datasources
+        cat <<EOF > /etc/grafana/provisioning/datasources/ds.yaml
+        apiVersion: 1
+        datasources:
+        - name: Loki
+          type: loki
+          access: proxy
+          orgId: 1
+          url: http://loki:3100
+          basicAuth: false
+          isDefault: true
+          version: 1
+          editable: false
+        EOF
+        /run.sh
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - loki
+```
+
 grafana 의 초기 로그인 계정은 `admin/admin` 이다.
 
 ## jenkins 에서 loki와 관련된 설정들을 삽입처리하기
