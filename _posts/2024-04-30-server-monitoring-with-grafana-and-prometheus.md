@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Grafana, Prometheus] 서버 상태 모니터링 하기"
-categories: 개발]
+categories: [개발]
 tags:
   [
     grafana,
