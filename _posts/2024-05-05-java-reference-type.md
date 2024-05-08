@@ -2,14 +2,26 @@
 layout: post
 title: "[Java] 네가지 참조유형 (Hard, Soft, Weak, Panthom)"
 categories: [스터디-자바, 개발]
-tags: [java]
+tags:
+  [
+    java,
+    자바,
+    reference,
+    참조,
+    hard,
+    string,
+    soft,
+    weak,
+    panthom,
+    reference queue,
+  ]
 date: 2024-05-05 01:00:00 +0900
 toc: true
 ---
 
 ## 개요
 
-요즘 메모리 관련 자료들을 보고 있으면 Weak Reference 에 대한 언급이 자주 되었다. 그래서 관련된 내용들을 찾아보고 정리해보기로 하였다.
+요즘 자바 메모리 관련 자료들을 보고 있으면 Weak Reference 에 대한 언급이 자주 되었다. 그래서 관련된 내용들을 찾아보고 정리해보기로 하였다.
 Weak Reference 의 경우 따로 그 동작 원리에 대해서 깊게 알아볼 예정이다.
 
 ## 본문
