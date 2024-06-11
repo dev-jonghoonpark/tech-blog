@@ -55,3 +55,7 @@ toc: true
 ### 부정확한 정보 제공
 
 생성형 AI 도구는 부정확하거나 부적절한 정보를 제안할 수 있습니다. 따라서 의료, 법률, 재무 또는 기타 전문적인 조언으로 의존하지는 않아야 합니다.
+
+## 출처
+
+[Gemini for Google Workspace](https://www.cloudskillsboost.google/paths/249)
