@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Spring AI 사용을 위한 AI 핵심 컨셉 (1)"
+title: "Spring AI 사용을 위한 AI 핵심 컨셉 (1) - AI, 프롬프트, 템플릿, 벡터, 임베딩"
 categories: [스터디-AI]
 tags:
   [
