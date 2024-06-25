@@ -14,6 +14,8 @@ tags:
     LLM,
     스팸,
     Spam,
+    Transformer,
+    GPT,
   ]
 date: 2024-06-25 19:00:00 +0900
 toc: true
