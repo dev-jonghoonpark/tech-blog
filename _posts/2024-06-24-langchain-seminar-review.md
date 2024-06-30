@@ -5,14 +5,14 @@ categories: [행사, 커뮤니티, 스터디-AI]
 tags:
   [
     devcon,
-    langchain,
+    LangChain,
     llm,
     openai,
     seminar,
     summary,
     review,
     rag,
-    langsmith,
+    LangSmith,
     smith,
   ]
 date: 2024-06-25 16:00:00 +0900
@@ -35,19 +35,19 @@ toc: true
 
 이번 세미나는 줌으로 진행되었습니다.
 
-Langchain에 대한 이야기를 정말 많이 들어봤었는데 이번 세미나를 통해서 Langchain이 무엇이고, 어떤 역할을 하는지 코드와 함께 살펴볼 수 있었습니다.
+LangChain에 대한 이야기를 정말 많이 들어봤었는데 이번 세미나를 통해서 LangChain이 무엇이고, 어떤 역할을 하는지 코드와 함께 살펴볼 수 있었습니다.
 
 ![seminar capture](/assets/images/2024-06-24-langchain-seminar-review/seminar-capture.png)
 
 이번 세미나를 통해 재밌게 보았던 부분들을 정리해보았습니다.
 
-## Langchain 이란
+## LangChain 이란
 
 LangChain은 대규모 언어 모델(LLM)을 기반으로 애플리케이션을 구축하기 위한 오픈 소스 프레임워크입니다.
 
 LangChain의 도구와 API를 통해 LLM 기반 애플리케이션을 구축하는 과정을 간소화할 수 있습니다.
 
-Langchain에 대한 설명은 인터넷에서 쉽게 찾아볼 수 있습니다.
+LangChain에 대한 설명은 인터넷에서 쉽게 찾아볼 수 있습니다.
 
 ## dev container
 
@@ -90,7 +90,7 @@ Chat model 은 메시지 주고 받습니다. 그리고 모든 메시지에는 �
 
 ## Temperature
 
-langchain을 통해 OpenAI 의 모델을 초기화 할 때 [temperature](https://platform.openai.com/docs/api-reference/chat/create#chat-create-temperature) 라는 속성 값을 넣을 수 있는데요
+LangChain을 통해 OpenAI 의 모델을 초기화 할 때 [temperature](https://platform.openai.com/docs/api-reference/chat/create#chat-create-temperature) 라는 속성 값을 넣을 수 있는데요
 
 ![temperature-in-open-ai-doc](/assets/images/2024-06-24-langchain-seminar-review/temperature-in-open-ai-doc.png)
 
@@ -98,11 +98,11 @@ langchain을 통해 OpenAI 의 모델을 초기화 할 때 [temperature](https:/
 
 관련해서 [Seed](https://platform.openai.com/docs/api-reference/chat/create#chat-create-seed) 라는 속성 값에 대한 언급도 있었습니다.
 
-## Langchain express language(LCEL)
+## LangChain express language(LCEL)
 
 [https://python.langchain.com/v0.1/docs/expression_language/](https://python.langchain.com/v0.1/docs/expression_language/)
 
-Langchain express language(LCEL, 랭체인 표현 언어)는 체인을 쉽게 구성하는 선언적 방법입니다.
+LangChain express language(LCEL, 랭체인 표현 언어)는 체인을 쉽게 구성하는 선언적 방법입니다.
 
 LCEL을 사용하면 기본 구성 요소로 복잡한 체인을 쉽게 구축할 수 있으며 스트리밍, 병렬 처리, 로깅과 같은 기본 기능을 지원합니다.
 
@@ -130,15 +130,15 @@ Output Parser 라는 것 외에는 Function Calling 으로 처리할 수 있는 
 - One Shot : 모델에게 예제를 한번만 제공
 - Few Shot : 모델에게 예제를 몇 번 제공 (6개 미만으로 주는게 좋다고 함.)
 
-## Langchain smith
+## LangChain Smith (LangSmith)
 
 [https://smith.langchain.com/](https://smith.langchain.com/)
 
 개인적으로 재밌게 본 플랫폼인데요. 내 어플리케이션이 chain 을 따라 어떻게 동작하는지 각 단계별로 볼 수 있었습니다. LLM을 로깅, 모니터링 해주는 플랫폼 이였습니다.
 
-## Langchain hub
+## LangChain hub
 
-langchain hub에서는 내가 만든, 혹은 다른 사람들이 만든 프롬프트를 공유할 수 있었습니다.
+LangChain hub에서는 내가 만든, 혹은 다른 사람들이 만든 프롬프트를 공유할 수 있었습니다.
 
 ## 검색증강생성 (RAG, Retrieval Augmented Generation)
 
