@@ -230,3 +230,7 @@ LLM 데이터의 기본 구조
   - 스팸과 정상 데이터의 비율을 상세 라벨 별로 맞추는 것이 필요
 - 언더샘플링
   - ...
+
+# 다시보기
+
+[https://www.youtube.com/playlist?list=PLwe9WEhzDhwFXRet3SL\_-sUEmdP8P_KLR](https://www.youtube.com/playlist?list=PLwe9WEhzDhwFXRet3SL_-sUEmdP8P_KLR)
