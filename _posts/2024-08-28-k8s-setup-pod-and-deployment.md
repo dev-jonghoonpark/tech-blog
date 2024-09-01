@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[k8s, kubernetes] deployment 설정하기 - k8s에서 mysql 실행하기"
-categories: [개발]
+categories: [스터디-인프라, 개발]
 tags:
   [
     k8s,

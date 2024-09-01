@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[k8s, kubernetes] microk8s node 추가 하기"
-categories: [개발]
+categories: [스터디-인프라, 개발]
 tags:
   [
     k8s,
@@ -104,7 +104,7 @@ microk8s join 10.8.0.4:25000/3a791cde34e41f8cb035e06999a9d653/1ea97a1ecc9a
 jonghoonpark@jonghoonpark:~$ microk8s join 10.8.0.4:25000/3a791cde34e41f8cb035e06999a9d653/1ea97a1ecc9a --worker
 ```
 
-worker 노드로 추가해주니, 기존과 같은 문제 없이 정상적으로 node가 연결된 것을 확인할 수 있었다. 
+worker 노드로 추가해주니, 기존과 같은 문제 없이 정상적으로 node가 연결된 것을 확인할 수 있었다.
 
 ```sh
 jonghoonpark@jonghoonpark:~$ kubectl get nodes -o wide
@@ -114,7 +114,7 @@ node2          Ready    <none>   68m   v1.31.0   10.0.0.192       <none>        
 node3          Ready    <none>   68m   v1.31.0   10.0.0.58        <none>        Ubuntu 22.04.4 LTS   6.5.0-1027-oracle    containerd://1.6.28
 ```
 
-## 2. api server endpoints 설정하기 
+## 2. api server endpoints 설정하기
 
 add-node 명령어로 join 을 하는 과정을 자세히 봤다면 아래와 같은 문구가 스쳐지나가는 것을 봤을 것이다.
 
@@ -228,7 +228,6 @@ oc2            Ready    <none>   2h    v1.31.0   10.8.0.6      <none>        Ubu
 k8s에서의 네트워크 구성이 쉽지는 않다는 것을 알게 되었다. 내용에 다 적지는 않았지만 다양한 것들을 알 수 있게 되었다.
 
 ip 구성시에 cluster 내부 ip 와 외부 ip를 혼동하지 않도록 주의한다.
-
 
 ## 추가 팁 : microk8s kubectl alias 설정하기
 

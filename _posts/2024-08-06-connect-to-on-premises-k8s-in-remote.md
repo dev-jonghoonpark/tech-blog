@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[k8s, kubernetes] 온프레미스 k8s에 리모트로 접속하기 (namespace, service account, role, rolebinding, secret, config)"
-categories: [개발]
+categories: [스터디-인프라, 개발]
 tags:
   [
     k8s,

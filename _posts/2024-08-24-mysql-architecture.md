@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[MySQL] 아키텍처 - Real MySQL 스터디 1회차"
-categories: [스터디]
+categories: [스터디-데이터베이스]
 tags:
   [
     MySQL,

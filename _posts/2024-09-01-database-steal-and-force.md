@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Database] 데이터베이스 복구 알고리즘"
-categories: [스터디]
+categories: [스터디-데이터베이스]
 tags: [
     Database,
     internals
