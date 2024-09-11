@@ -3,7 +3,7 @@ layout: post
 title: "[MySQL] 잠금 과 트랜잭션 (Lock and Transacdtion) - Real MySQL 스터디 2회차"
 categories: [스터디-데이터베이스]
 tags: [MySQL, real mysql]
-date: 2024-08-24 23:59:59 +0900
+date: 2024-09-07 23:59:59 +0900
 toc: true
 ---
 
