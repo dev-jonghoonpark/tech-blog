@@ -2,7 +2,19 @@
 layout: post
 title: "[MySQL] 잠금 과 트랜잭션 (Lock and Transacdtion) - Real MySQL 스터디 2회차"
 categories: [스터디-데이터베이스]
-tags: [MySQL, real mysql]
+tags:
+  [
+    MySQL,
+    real mysql,
+    lock,
+    transaction,
+    level,
+    commit,
+    rollback,
+    uncommit,
+    repeatable,
+    phantom,
+  ]
 date: 2024-09-07 23:59:59 +0900
 toc: true
 ---
@@ -356,10 +368,16 @@ REPEATABLE READ 에서 팬텀리드가 발생되는 사례는 다음과 같다.
 
 ![repeatable_read_phantom_read](/assets/images/2024-09-07-mysql-lock-and-transaction/repeatable_read_phantom_read.png)
 
-이럴 경우에는 Gap Lock 을 이용해서 팬텀리드 발생을 방지할 수 있다.
+\* 언두 레코드에는 잠금을 걸 수 없다.
+
+이럴 경우에는 처음부터 Gap Lock 을 이용하면 팬텀리드 발생을 방지할 수 있다.
 (`select ... for update` 를 통해서 gap lock을 걸었다.)
 
 ![repeatable_read_phantom_read_fix](/assets/images/2024-09-07-mysql-lock-and-transaction/repeatable_read_phantom_read_fix.png)
+
+#### SERIALIZABLE
+
+한 트랜잭션에서 읽고 쓰는 레코드를 다른 트랜잭션에서는 절대 접근할 수 없다. 대신 그만큼 동시 처리 성능도 떨어진다.
 
 ## 기타
 
