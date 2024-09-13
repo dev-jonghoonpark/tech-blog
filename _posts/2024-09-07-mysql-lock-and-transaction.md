@@ -368,12 +368,26 @@ REPEATABLE READ 에서 팬텀리드가 발생되는 사례는 다음과 같다.
 
 ![repeatable_read_phantom_read](/assets/images/2024-09-07-mysql-lock-and-transaction/repeatable_read_phantom_read.png)
 
+#### SELECT ... FOR UPDATE
+
+이럴 경우에는 처음부터 `SELECT ... FOR UPDATE`를 이용하여 Lock 을 획득하면 팬텀리드 발생을 방지할 수 있다.
+
+그림으로 보면 다음과 같다. (이미지가 길어서 2 단계로 그림을 나누어 그렸다.)
+
+![select_for_update_1](/assets/images/2024-09-07-mysql-lock-and-transaction/select_for_update_1.png)
+
+![select_for_update_2](/assets/images/2024-09-07-mysql-lock-and-transaction/select_for_update_2.png)
+
+```
+SELECT ... FOR [ UPDATE | SHARE ]
+```
+
+- 단순 SELECT와 다른 결과 반환 가능함
+  - 단순 SELECT : 잠금을 전혀 걸지 않음
+  - FOR UPDATE : Exclusive 락을 걸고 레코드를 조회함.
+- 격리 수준과 무관하게 항상 최신 커밋 데이터를 조회한다는 점에 유의
+
 \* 언두 레코드에는 잠금을 걸 수 없다.
-
-이럴 경우에는 처음부터 Gap Lock 을 이용하면 팬텀리드 발생을 방지할 수 있다.
-(`select ... for update` 를 통해서 gap lock을 걸었다.)
-
-![repeatable_read_phantom_read_fix](/assets/images/2024-09-07-mysql-lock-and-transaction/repeatable_read_phantom_read_fix.png)
 
 #### SERIALIZABLE
 
