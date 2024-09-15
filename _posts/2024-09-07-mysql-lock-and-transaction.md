@@ -389,7 +389,7 @@ SELECT ... FOR [ UPDATE | SHARE ]
 
 \* 언두 레코드에는 잠금을 걸 수 없다.
 
-#### SERIALIZABLE
+### SERIALIZABLE
 
 한 트랜잭션에서 읽고 쓰는 레코드를 다른 트랜잭션에서는 절대 접근할 수 없다. 대신 그만큼 동시 처리 성능도 떨어진다.
 
