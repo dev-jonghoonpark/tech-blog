@@ -94,34 +94,34 @@ ERROR 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
 
 트랜잭션이 없다면, 각 상황에 대해서 성공했는지 실패했는지를 체크하고 성공 하였을 때 이후 단계를 진행하도록 해야한다.
 
-```sql
+```text
 INSERT INTO tab_a ;
 IF (_is_insert1_succeed) {
-	INSERT INTO tab_b ...;
-	IF (_is_insert2_succeed) {
-		// 처리완료
-	} ELSE {
-		DELETE FROM tab_a WHERE ...;
-		IF (_is_delete_succeed) {
-		  // tab_a, tab_b 복구완료
-		} ELSE {
-		  // 해결 불가능한 심각한 상황 발생
-		  // 이제 어떻게 하지?
-		}
-	}
+  INSERT INTO tab_b ...;
+  IF (_is_insert2_succeed) {
+    // 처리완료
+  } ELSE {
+    DELETE FROM tab_a WHERE ...;
+    IF (_is_delete_succeed) {
+      // tab_a, tab_b 복구완료
+    } ELSE {
+      // 해결 불가능한 심각한 상황 발생
+      // 이제 어떻게 하지?
+    }
+  }
 }
 ```
 
 하지만 트랜잭션이 있다면 `try ... catch` 와 같이 좀 더 편리하게 예외 처리를 할 수 있다.
 
-```sql
+```text
 try {
-	START TRANSACTION;
-	INSERT INTO tab_a ...;
-	INSERT INTO tab_b ...;
-	COMMIT;
+  START TRANSACTION;
+  INSERT INTO tab_a ...;
+  INSERT INTO tab_b ...;
+  COMMIT;
 } catch(exception) {
-    ROLLBACK;
+  ROLLBACK;
 }
 ```
 
@@ -131,10 +131,10 @@ try {
 
 아래의 로직을 예시로 들어보자.
 
-```
+```text
 1) 처리 시작
-	=> 데이터베이스 커넥션 생성
-	=> 트랜잭션 시작
+  => 데이터베이스 커넥션 생성
+  => 트랜잭션 시작
 2) 사용자의 로그인 여부 확인
 3) 사용자의 글쓰기 내용의 오류 여부 확인
 4) 첨부로 업로드된 파일 확인 및 저장
@@ -143,29 +143,29 @@ try {
 7) 저장된 내용 또는 기타 정보를 DBMS에서 조회
 8) 게시물 등록에 대한 알림 메일 발송
 9) 알림 메일 발송 이력을 DBMS 에 저장
-	<= 트랜잭션 종료(COMMIT)
-	<= 데이터베이스 커넥션 반납
+  <= 트랜잭션 종료(COMMIT)
+  <= 데이터베이스 커넥션 반납
 10) 처리완료
 ```
 
 중간에 있는 몇몇 과정은 꼭 트랜잭션 안에 들어오지 않아도 된다. 따라서 다음과 같이 개선할 수 있다.
 
-```
+```text
 1) 처리 시작
 2) 사용자의 로그인 여부 확인
 3) 사용자의 글쓰기 내용의 오류 여부 확인
 4) 첨부로 업로드된 파일 확인 및 저장
-	=> 데이터베이스 커넥션 생성
-	=> 트랜잭션 시작
+  => 데이터베이스 커넥션 생성
+  => 트랜잭션 시작
 5) 사용자의 입력 내용을 DBMS에 저장
 6) 첨부파일 정보를 DBMS에 저장
-	<= 트랜잭션 종료(COMMIT)
+  <= 트랜잭션 종료(COMMIT)
 7) 저장된 내용 또는 기타 정보를 DBMS에서 조회
 8) 게시물 등록에 대한 알림 메일 발송
-	=> 트랜잭션 시작
+  => 트랜잭션 시작
 9) 알림 메일 발송 이력을 DBMS 에 저장
-	<= 트랜잭션 종료(COMMIT)
-	<= 데이터베이스 커넥션 반납
+  <= 트랜잭션 종료(COMMIT)
+  <= 데이터베이스 커넥션 반납
 10) 처리완료
 ```
 
@@ -272,7 +272,7 @@ infomation_schema 데이터베이스의 테이블들로 조회할 수 있다.
 
 조회하여 장시간 잠금을 가지고 있는 클라이언트를 찾아서 종료시킬 수 있다.
 
-- KILL [CONNECTION | QUERY] processlist_id
+- `KILL [CONNECTION | QUERY] processlist_id`
 
 #### InnoDB 스토리지 엔진 락 종류
 
