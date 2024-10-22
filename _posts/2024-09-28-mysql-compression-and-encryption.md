@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[MySQL] 압축과 암호화"
+title: "[MySQL] 압축과 암호화 - Real MySQL 스터디 3회차"
 categories: [스터디-데이터베이스]
 tags:
   [
