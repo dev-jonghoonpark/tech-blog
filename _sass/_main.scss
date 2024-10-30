@@ -56,7 +56,11 @@ pre {
 .post table td,
 .post table th {
   border: 1px solid grey;
-  padding: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+
+.post table th {
+  white-space: nowrap;
 }
 
 .meta {
@@ -131,7 +135,6 @@ section {
 }
 
 blockquote {
-  font-style: italic;
   border-left: 5px solid #ececec;
   padding-left: 1rem;
   margin: 1rem 0;
@@ -149,6 +152,7 @@ h5 {
 
 section h1:first-child {
   margin-top: 0;
+  line-height: 36px;
 }
 
 strong,
