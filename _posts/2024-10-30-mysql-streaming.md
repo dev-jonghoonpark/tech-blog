@@ -75,7 +75,7 @@ MySQL Streaming 방식을 사용했을 때 메모리 사용량 비교를 하기 
 
 참고로 3번 케이스는 다음과 같은 이유에서 추가하였다.
 
-MySQL Streaming 처리 관련해서 정보를 찾다 보니 일부 글들에서 jpa repository 인터페이스를 구현할 때 Stream 객체를 통해 데이터를 받아와 처리하면 대용량 처리에 도움이 된다는 느낌으로 작성된 것을 볼 수 있었따. (영어로 된 글도 있고, 번역글도 있었다.) 하지만 생각해보면 MySQL Streaming 이 활성화 된 상태가 아니라면 결국 MySQL JDBC API 구현상 모든 쿼리가 종료되어 버퍼에 모인 후에 처리를 진행하게 될 것 이기 때문에 대용량 처리와는 크게 관련이 없을 것이라고 생각하였다. 생각이 맞을지 함께 테스트 해보기로 하였다.
+MySQL Streaming 처리 관련해서 정보를 찾다 보니 일부 글들에서 jpa repository 인터페이스를 구현할 때 Stream 객체를 통해 데이터를 받아와 처리하면 대용량 처리에 도움이 된다는 느낌으로 작성된 것을 볼 수 있었다. (영어로 된 글도 있고, 번역글도 있었다.) 하지만 생각해보면 MySQL Streaming 이 활성화 된 상태가 아니라면 결국 MySQL JDBC API 구현상 모든 쿼리가 종료되어 버퍼에 모인 후에 처리를 진행하게 될 것 이기 때문에 대용량 처리와는 크게 관련이 없을 것이라고 생각하였다. 생각이 맞을지 함께 테스트 해보기로 하였다.
 
 ### testStreamingResultSet : jdbc 설정을 통해 mysql streaming 을 사용했을 경우
 
@@ -137,6 +137,12 @@ Stream<User> streamAll()
 참고로 JPA에서 Stream을 사용한 쿼리는 기본적으로 트랜잭션을 필요로 하기 때문에 이 테스트에는 Transactional 어노테이션이 추가되었다.
 
 ### 결과
+
+아래 이미지와 같이 intellij profiler를 통해 메소드에서 얼만큼의 메모리를 할당해야 했는지를 확인할 수 있었다.
+
+![profile](/assets/images/2024-10-30-mysql-streaming/profile.png)
+
+![memory-allocation](/assets/images/2024-10-30-mysql-streaming/memory-allocation.png)
 
 메소드별 할당된 메모리는 다음과 같다.
 
