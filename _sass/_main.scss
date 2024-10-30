@@ -340,10 +340,15 @@ section {
 section.post .toc {
   border: 1px solid #ccc;
   font-size: 15px;
+  margin: 1rem 0 1.5rem;
 }
 
 section.post .toc a {
   text-decoration: none;
+}
+
+section.post .table-wrapper {
+  overflow-x: auto;
 }
 
 figcaption {
