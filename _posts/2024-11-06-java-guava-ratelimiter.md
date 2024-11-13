@@ -46,13 +46,11 @@ class documentation : [https://guava.dev/releases/snapshot-jre/api/docs/com/goog
 아래는 초당 2회 api 를 호출하도록 한 테스트 코드이다. (예제이기 떄문에 그냥 `print` 메소드를 사용하였다.)
 
 ```java
-public class RateLimiterTest {
-  RateLimiter rateLimiter = RateLimiter.create(2);
+RateLimiter rateLimiter = RateLimiter.create(2);
 
-  for (int i = 0; i < Integer.MAX_VALUE; i++) {
-    rateLimiter.acquire();
-    System.out.println(i);
-  }
+for (int i = 0; i < Integer.MAX_VALUE; i++) {
+  rateLimiter.acquire();
+  System.out.println(i);
 }
 ```
 
