@@ -42,7 +42,7 @@ VALUES (10001, 60117, '1986-06-26', '1988-06-25'),
 ```
 
 여기서 `emp_no` 는 primary key 로 설정되어 있다고 가정해보자.
-그러면 당연히 key가 중복되게 insert를 수행하려고 하기 떄문에 에러가 발생해야 하겠지만 `INSERT IGNORE` 를 사용하면 error 를 warning 으로 낮춰주기 때문에 에러 없이 SQL 실행이 완료된다.
+그러면 당연히 key가 중복되게 insert를 수행하려고 하기 때문에 에러가 발생해야 하겠지만 `INSERT IGNORE` 를 사용하면 error 를 warning 으로 낮춰주기 때문에 에러 없이 SQL 실행이 완료된다.
 
 ![insert ignore 실행 결과](/assets/images/2024-12-21-mysql-insert-update-delete-optimize/insert-ignore-example.png)
 
@@ -222,7 +222,7 @@ UUID version 4 의 충돌 가능성은 굉장히 낮다.
 
 ![uuid-collision-probability-calculate](/assets/images/2024-12-21-mysql-insert-update-delete-optimize/uuid-collision-probability-calculate.png)
 
-수학적으로 계산해 보았을 떄 103조 개의 UUID 중에서 중복을 찾을 확률이 10억 분의 1 수준이며
+수학적으로 계산해 보았을 때 103조 개의 UUID 중에서 중복을 찾을 확률이 10억 분의 1 수준이며
 
 ![uuid-collision-probability-calculate2](/assets/images/2024-12-21-mysql-insert-update-delete-optimize/uuid-collision-probability-calculate2.png)
 
@@ -311,7 +311,11 @@ select hex(uuid),first_name,emp_no from tb_test3;
   - 읽기/쓰기 시에 형변환 필요.
 - 사람이 쉽게 읽을 수 있는 형태가 중요할 경우: VARCHAR(36) 권장.
 
-#### SNOWFLAKE ID
+### SNOWFLAKE ID
+
+UUID의 아쉬운 점 중 하나는 16바이트라는 비교적 큰 크기를 차지한다는 것이다.
+
+Snowflake ID는 유일한(unique) 값을 생성하면서도 64비트(bigint)를 사용하며, 생성 시각에 따라 순차적으로 정렬이 가능하다. 또한 분산 환경에서도 쓸 수 있도록 설계되어 있어, 여러 서버에서 동시에 ID를 생성해도 충돌 없이 유니크한 값을 보장할 수 있다.
 
 ![snowflake-id-structure](/assets/images/2024-12-21-mysql-insert-update-delete-optimize/snowflake-id-structure.png)
 
@@ -335,7 +339,7 @@ select hex(uuid),first_name,emp_no from tb_test3;
 한 번에 너무 많은 레코드를 변경 및 삭제하는 작업은 MySQL 서버에 과부하를 유발하거나 다른 커넥션의 쿼리 처리를 방해할 수 있다. 이 때 LIMIT을 통해 조금씩 잘라서 변경하거나 삭제하는 방식을 사용할 수 있다.
 
 SELECT 뿐 아니라 UPDATE 와 DELETE 에도 LIMIT을 사용할 수 있다.
-ORDER BY 를 사용하지 않으면 정렬 순서를 보장하지 않기 떄문에 함께 사용한다.
+ORDER BY 를 사용하지 않으면 정렬 순서를 보장하지 않기 때문에 함께 사용한다.
 
 e.g. 오래된 주문 archived 처리하기
 
