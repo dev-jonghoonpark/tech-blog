@@ -36,7 +36,7 @@ Spring In Action 이라는 책을 함께 공부하기로 하였다.
 
 ## Spring Framework
 
-Spring 프레임워크는 최신 Java 기반 엔터프라이스 애플리케이션을 위한 종합적인 프로그래밍 및 설정 모델을 제공합니다.
+Spring 프레임워크는 최신 Java 기반 엔터프라이스 애플리케이션을 위한 종합적인 프로그래밍 및 설정 모델을 제공한다.
 
 ### Architecture
 
@@ -52,7 +52,7 @@ Spring 프레임워크는 최신 Java 기반 엔터프라이스 애플리케이�
 
 개인적으로 생각하는 주요 변경사항은 아래의 두 가지 라고 생각된다.
 
-1. 반응형(reative) 프로그래밍을 위한 기능 도입
+1. 반응형(reative) 프로그래밍 지원 확대
 2. AoT(Ahead of Time) 기능 도입
 
 > AoT 와 관련된 부분은 [Graal VM 알아보기 (차세대 Java VM)](/2024/12/09/graal-vm) 글에서도 다뤘었다.
@@ -173,7 +173,7 @@ MVC는 Model, View, Controller 의 앞자리를 딴 것이다.
 
 - 모델: 정보의 내부 표현
 - 뷰: 사용자에게 정보를 제공하고 사용자로부터 정보를 받아들이는 인터페이스
-- 컨트롤러: 이 둘을 연결하는 소프트웨어.
+- 컨트롤러: 이 둘을 연결하는 소프트웨어
 
 ### Spring MVC
 
@@ -184,6 +184,8 @@ Spring 문서에서는 Spring Web MVC 에 대해 다음과 같이 소개하고 �
 > Spring Web MVC는 Servlet API를 기반으로 구축된 **최초**의 웹 프레임워크로, Spring 프레임워크의 시작부터 포함되어 왔습니다.
 
 ### Spring MVC 동작 단계별로 알아보기
+
+이 내용은 Spring MVC의 내부 로직에 대해 알아보는 내용이다. 알지 않아도 Spring MVC를 사용하는데에는 문제는 없다. 개발자는 Handler만 개발하면 된다. 하단에서 설명하겠지만 대표적으로 Controller에서 RequestMapping을 사용하는 메소드들이 Handler 메소드에 해당하게 된다.
 
 #### step1: DispatcherServlet 에서 모든 요청을 받아온다.
 
@@ -253,19 +255,19 @@ view.render(mv.getModelInternal(), request, response);
 
 #### 추가설명
 
-Spring MVC에서 가장 일반적으로 사용되는 Adapter는 RequestMappingHandlerAdapter 입니다.
-HTTP 요청을 처리하는데 사용되는 @RequestMapping, @GetMapping, @PostMapping 등이 붙은 메서드를 호출하는데 사용됩니다.
-HandlerAdapter는 RequestMappingHandlerAdapter 뿐 아니라 WebSocketHandlerAdapter, ReactorHttpHandlerAdapter 등 다양한 요청 방식에 대응할 수 있도록 설계 및 구현되어 있습니다.
+Spring MVC에서 가장 일반적으로 사용되는 Adapter는 RequestMappingHandlerAdapter 이다.
+RequestMappingHandlerAdapter 는 HTTP 요청을 처리하는데 사용되는 @RequestMapping, @GetMapping, @PostMapping 등이 붙은 메서드를 호출하는데 사용된다.
+HandlerAdapter 는 RequestMappingHandlerAdapter 뿐 아니라 WebSocketHandlerAdapter, ReactorHttpHandlerAdapter 등 다양한 요청 방식에 대응할 수 있도록 설계 및 구현되어 있다.
 
 ## Spring Boot
 
-Spring Boot는 Spring Framework 기반의 어플리케이션을 빠르고 효율적으로 개발할 수 있도록 도와주는 프레임워크입니다
+Spring Boot는 Spring Framework 기반의 어플리케이션을 빠르고 효율적으로 개발할 수 있도록 도와주는 프레임워크이다
 
-다음과 같은 특징을 가지고 있습니다.
+다음과 같은 특징을 가지고 있다.
 
-- 독립 실행형 애플리케이션: 내장 웹 서버를 이용하여 애플리케이션을 쉽게 실행하고 배포할 수 있습니다.
-- 스타터 의존성: 필요한 다양한 라이브러리나 모듈을 한 번에 쉽게 추가할 수 있도록 도와주는 그룹화 하여 제공합니다.
-- 자동 구성: Spring 및 관련 라이브러리들을 감지하여 자동으로 구성합니다.
+- 독립 실행형 애플리케이션: 내장 웹 서버를 이용하여 애플리케이션을 쉽게 실행하고 배포할 수 있다.
+- 스타터 의존성: 필요한 다양한 라이브러리나 모듈을 한 번에 쉽게 추가할 수 있도록 도와주는 그룹화 하여 제공한다.
+- 자동 구성: Spring 및 관련 라이브러리들을 감지하여 자동으로 구성한다.
 
 ### Spring Boot 구동(bootstrap) 클래스
 
@@ -285,14 +287,14 @@ public class TacoCloudApplication {
 @SpringBootApplication 어노테이션은 3가지 어노테이션을 합친 어노테이션 이다.
 
 - @SpringBootConfiguration
-  - Configuration의 특수한 형태. 기능상 차이가 있지는 않음.
-  - Spring Boot Application 의 진입점을 나타내는데 사용됨.
-  - Spring Boot Application 내에서 1번만 사용되어야 함. 일반적으로 직접 쓰지는 않음.
+  - Configuration의 특수한 형태. 기능상 차이가 있지는 않는다.
+  - Spring Boot Application 의 진입점을 나타내는데 사용된다.
+  - Spring Boot Application 내에서 1번만 사용되어야 함. 일반적으로 직접 쓰지는 않는다.
 - @EnableAutoConfiguration
   - 스프링 부트 자동 구성을 활성화 한다.
   - 스프링 부트의 자동 구성을 통해 불필요한 설정 작업이 극적으로 줄어들었다. (생산성 향상)
 - @ComponentScan : 컴포넌트 검색을 활성화 한다.
-  - 특정 패키지가 정의되지 않은 경우, 이 주석을 선언하는 클래스의 패키지부터 재귀적으로 스캔 수행
+  - 특정 패키지가 정의되지 않은 경우, 이 주석을 선언하는 클래스의 패키지부터 재귀적으로 스캔 수행한다.
 
 ### Controller 클래스
 
