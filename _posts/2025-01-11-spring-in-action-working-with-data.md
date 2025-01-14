@@ -302,7 +302,32 @@ PreparedStatementCreator 와 KeyHolder 를 사용하여 update를 하면 key 값
 
 ### 좀 더 편리하게 Insert 하기 (SimpleJdbcInsert)
 
+Insert 과정을 좀 더 편리하게 할 수 있다.
+
+```java
+SimpleJdbcInsert orderInsert = new SimpleJdbcInsert(jdbcTemplate)
+	.withTableName("order")
+	.usingGeneratedKeyColumns("id");
+
+Map<String, Object> values = convertValueToMap(order);
+long orderId =
+	orderInserter
+		.executeAndReturnKey(values)
+		.longValue();
+```
+
+테이블과 자동 생성 key 컬럼을 지정하고 paramMap 을 이용하여 insert와 동시에 id 값을 받아올 수 있다. 물론 그냥 execute만 하는것도 가능하다.
+
 ### 데이터베이스 초기화 및 버전 관리하기
+
+[spring doc - Database Initialization](https://docs.spring.io/spring-boot/how-to/data-initialization.html)
+
+- Spring boot 자체 제공 기능 사용
+  - classpath (src/main/resources) 에 schema.sql, data.sql 이 있을 경우, Spring boot 실행시 SQL 문을 수행함.
+  - 단 Embedded Database일 경우에만 자동으로 실행되며, spring.sql.init.mode 값을 변경하여 다른 데이터베이스에서도 사용할 수 있음.
+- 전문 도구를 활용하여 Database를 버저닝 하여 관리할 수도 있음.
+  - Flyway
+  - Liquibase
 
 ### JdbcClient
 
