@@ -66,9 +66,9 @@ repository 와 dao 는 거의 같다.
 
 ## 자바 개발자가 관계형 데이터를 사용하는 대표적인 방법
 
-JDBC 기반 : SQL을 직접 제어
-JPA 기반 : 객체 지향적인 방식, ORM (Object-Relational Mapping) 방식 사용
-자동으로 SQL이 생성되어 편리하나, 최적화하는데 어려움이 있다.
+- JDBC 기반 : SQL을 직접 제어
+- JPA 기반 : 객체 지향적인 방식, ORM (Object-Relational Mapping) 방식 사용.
+  - 자동으로 SQL이 생성되어 편리하나, 최적화하는데 어려움이 있다.
 
 두 가지를 상황과 필요에 따라 잘 사용하는 것이 좋다.
 
@@ -76,7 +76,7 @@ JPA 기반 : 객체 지향적인 방식, ORM (Object-Relational Mapping) 방식 
 
 [https://en.wikipedia.org/wiki/Java_Database_Connectivity](https://en.wikipedia.org/wiki/Java_Database_Connectivity)
 
-JDBC(Java DataBase Connectivity)는 클라이언트가 데이터베이스에 액세스하는 방법을 정의하는 Java API 입니다.
+JDBC(Java DataBase Connectivity)는 클라이언트가 데이터베이스에 액세스하는 방법을 정의하는 Java API 이다.
 
 ### JDBC Driver
 

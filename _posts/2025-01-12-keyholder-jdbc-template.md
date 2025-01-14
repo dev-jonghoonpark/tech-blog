@@ -33,7 +33,7 @@ toc: true
 
 먼저 JDBC와 JDBC Driver와 Spring JDBC 를 설명하고 넘어가는것이 좋을 것 같다.
 
-- JDBC(Java DataBase Connectivity)는 클라이언트가 데이터베이스에 액세스하는 방법을 정의하는 Java API 입니다.
+- JDBC(Java DataBase Connectivity)는 클라이언트가 데이터베이스에 액세스하는 방법을 정의하는 Java API 이다.
 - JDBC 드라이버는 JDBC API를 기반으로 구현된 소프트웨어이다. 애플리케이션이 개별 데이터베이스와 상호 작용할 수 있도록 돕는다.
 - Spring JDBC는 Spring Data의 일부로 JDBC 기반의 레포지토리를 쉽게 구현할 수 있도록 돕는다.
 
