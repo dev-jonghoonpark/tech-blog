@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Spring 기반 프로젝트에서 테스트컨테이너 (testcontainer) 사용해보기
+description: Spring 기반 프로젝트에서 테스트컨테이너를 사용하여 데이터베이스 테스트를 설정하는 방법을 소개합니다. Gradle에 필요한 의존성을 추가하고, MySQLContainer를 설정하여 로컬 MySQL DB와 포트 충돌을 피하며, application.yml을 구성하여 테스트가 가능하도록 합니다. 또한, 테스트 실행 시 데이터 정리를 위해 로컬에서 별도의 데이터베이스를 사용하고, 각 테스트 케이스마다 초기화하는 방식을 채택합니다.
 categories: [스터디-테스트]
 tags: [
     테스트,

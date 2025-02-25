@@ -1,6 +1,7 @@
 ---
 layout: post
 title: jekyll URL Redirect 처리하기 - 블로그 이동 준비하기 (wordpress to jekyll)
+description: 워드프레스 블로그에서 Jekyll로의 마이그레이션을 준비하며, 기존 링크 구조와 Jekyll 페이지 구조의 차이로 인해 발생하는 리다이렉트 문제를 해결하는 방법을 소개합니다. 메타 태그를 활용한 301 리다이렉트를 설정하고, GitHub Actions를 통해 리다이렉트 HTML 파일을 관리하여 깔끔한 프로젝트 구조를 유지하는 방법을 설명합니다. 블로그 이동 작업과 카테고리 기능 추가에 대한 진행 상황도 공유하며, SEO 개선 방안에 대한 고민을 덧붙입니다.
 categories: [블로그]
 tags:
   [

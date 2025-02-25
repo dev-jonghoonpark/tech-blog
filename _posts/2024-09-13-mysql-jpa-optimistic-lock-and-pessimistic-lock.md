@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[MySQL] Optimistic Lock 과 Pessimistic Lock 이해하기 (컨셉)"
+description: Optimistic Lock과 Pessimistic Lock은 데이터베이스에서 동시성 문제를 해결하기 위한 두 가지 접근 방식으로, Optimistic Lock은 트랜잭션 충돌 가능성이 낮다고 가정하고 버전이나 타임스탬프를 사용하여 수정 시점에 충돌 여부를 확인하는 반면, Pessimistic Lock은 충돌 가능성이 높다고 가정하고 락을 사용하여 다른 트랜잭션의 수정을 차단한다. MySQL은 기본적으로 Pessimistic Lock을 사용하며, JPA에서의 Optimistic Lock은 애플리케이션 레벨에서 처리되는 특성이다.
 categories: [스터디-데이터베이스]
 tags: [MySQL, real mysql, lock, transaction, jpa, optimistic, pessimistic]
 date: 2024-09-13 19:30:00 +0900

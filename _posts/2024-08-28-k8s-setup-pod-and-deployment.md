@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[k8s, kubernetes] deployment 설정하기 - k8s에서 mysql 실행하기"
+description: Kubernetes에서 MySQL을 실행하기 위한 deployment 설정 방법을 다룹니다. 기존 Docker Compose 구성을 k8s로 이전하며, MySQL 서버를 위한 deployment, persistent volume, 및 persistent volume claim을 설정하는 과정을 설명합니다. 설정 완료 후, kubectl 명령어를 통해 적용하고, pod 생성 및 데이터베이스 연결 테스트를 수행하여 정상 작동을 확인합니다.
 categories: [스터디-인프라, 개발]
 tags:
   [

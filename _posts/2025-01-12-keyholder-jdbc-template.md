@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Spring] jdbctemplate - keyholder 동작 분석"
+description: "Spring JDBC에서 KeyHolder를 사용하여 자동 생성된 키를 반환받는 방법을 분석한 글로, JDBC와 JDBC Driver, Spring JDBC의 관계를 설명하고, MySQL과 H2 데이터베이스에서의 KeyHolder 동작 방식을 살펴봅니다. MySQL의 경우 `getGeneratedKeys` 메소드를 통해 `last_insert_id`를 효율적으로 가져오는 방법을 설명하며, H2에서는 `executeUpdateInternal` 메소드를 통해 동일한 기능을 구현하는 과정을 다룹니다. 또한, KeyHolder의 동작은 JDBC 구현에 따라 다를 수 있으며, 일부 데이터베이스(예: 오라클)는 KeyHolder를 지원하지 않는 점에 유의해야 합니다."
 categories: [스터디-자바]
 tags:
   [

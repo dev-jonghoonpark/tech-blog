@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Review] 초보자를 위한 랭체인 - 랭체인 데브콘 LA : 유월엔 랭체인"
+description: K-DEVCON LA에서 열린 온라인 세미나 '유월엔 랭체인'에서는 LangChain의 기능과 역할을 코드 예제를 통해 소개했습니다. LangChain은 대규모 언어 모델(LLM) 기반 애플리케이션을 구축하기 위한 오픈 소스 프레임워크로, 다양한 도구와 API를 제공합니다. 세미나에서는 Chat model과 LLMs의 차이, 토큰의 중요성, LangChain express language(LCEL)를 통한 체인 구성 방법, Prompt engineering 기법, LangChain Smith를 통한 로깅 및 모니터링, 검색증강생성(RAG) 개념을 다루었습니다. 이로써 참석자들은 LangChain의 활용 가능성을 깊이 이해할 수 있었습니다.
 categories: [행사, 커뮤니티, 스터디-AI]
 tags:
   [

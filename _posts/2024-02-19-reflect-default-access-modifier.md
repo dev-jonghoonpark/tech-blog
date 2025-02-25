@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Java constructor access modifier - reflection 이용하여 우회하기
+description: Java의 default access modifier로 인해 OauthService 객체 생성 시 발생하는 접근 오류를 해결하기 위해 reflection을 이용한 우회 방법을 설명합니다. 기본적으로 public 접근 제어자를 추가하는 대신, getDeclaredConstructor와 setAccessible 메서드를 활용하여 private 생성자에 접근하고 인스턴스를 생성하는 방법을 다룹니다.
 categories: [개발]
 tags:
   [

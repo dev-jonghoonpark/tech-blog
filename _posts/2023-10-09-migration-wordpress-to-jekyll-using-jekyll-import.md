@@ -1,6 +1,7 @@
 ---
 layout: post
 title: jekyll import 를 이용하여 wordpress에서 jekyll로 글 옮기기 (마이그레이션)
+description: 워드프레스에서 Jekyll로 블로그 글을 마이그레이션하기 위해 jekyll-import 도구를 설치하고 사용하는 방법을 설명합니다. 설치는 간단하며, 필요한 의존성을 추가한 후 명령어를 통해 데이터를 가져올 수 있습니다. 마이그레이션 후에는 이미지 URL 변경, 포스트 URL 구조 수정, HTML을 Markdown으로 변환하는 추가 작업이 필요합니다. 이 과정에서 발생할 수 있는 문제와 해결 방법도 함께 안내합니다.
 categories: [블로그]
 tags: [블로그, wordpress, 워드프레스, jekyll, 지킬, 마이그레이션, migration]
 date: 2023-10-09 23:30:00 +0900

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: mongodb docker compose 구성하기 (+ db 연결 안될 때)
+description: MongoDB를 Docker Compose로 구성하는 방법과 데이터베이스 연결 문제 해결을 다룬 포스트입니다. Docker Compose YAML 파일을 작성하여 MongoDB 컨테이너를 설정하고, 데이터베이스 연결 시 발생하는 인증 문제를 해결하기 위해 `?authSource=admin`을 URL에 추가해야 하는 이유를 설명합니다. 환경변수로 설정한 사용자 정보는 admin 데이터베이스에 저장되며, 이를 통해 연결 문제를 해결할 수 있습니다.
 categories: [개발]
 tags: [
     mongodb,

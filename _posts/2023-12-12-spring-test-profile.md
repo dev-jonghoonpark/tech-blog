@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Spring boot - 테스트용 프로파일 관리하기, CompletableFuture 목 처리 하기
+description: Spring Boot에서 테스트용 프로파일 관리와 CompletableFuture 목 처리 방법을 다룹니다. `local` 프로파일을 기본으로 하여 `test` 프로파일의 설정을 덮어쓰는 방법을 설명하며, `application-test.yml` 파일을 생성하여 데이터 소스 정보를 설정합니다. 또한, 통합 테스트를 위한 별도의 작업을 등록하여 프로파일을 활성화하는 방법을 제시합니다. 마지막으로, CompletableFuture를 사용하여 결제 서비스의 Mock 처리를 통해 테스트를 진행하는 방법을 소개합니다.
 categories: [개발, 스터디-테스트]
 tags:
   [

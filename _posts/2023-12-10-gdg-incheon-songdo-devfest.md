@@ -1,6 +1,7 @@
 ---
 layout: post
 title: GDG 송도 devfest 참여 후기
+description: GDG 송도 DevFest에서 오픈소스 기여, 구글 엔지니어의 협업 방식, 안드로이드 모듈화, 개발자 커뮤니티 성장, Vector Database, Bun, 그리고 다양한 커리어 사례에 대한 발표가 진행되었습니다. 김인제님은 오픈소스 기여의 중요성을 강조하며 열정을 불어넣었고, 신지민님은 구글의 협업 문화를 소개했습니다. 안석용님은 안드로이드 모듈화의 기법을 설명하였으며, 한성민님은 성장형 마인드셋과 커뮤니티 운영의 중요성을 언급했습니다. 다양한 주제를 통해 개발자들이 서로의 경험을 공유하고 성장할 수 있는 기회를 제공한 행사였습니다.
 categories: [행사]
 tags: [GDG, devfest, Google, Google developer, GDG Songdo]
 date: 2023-12-12 00:30:00 +0900

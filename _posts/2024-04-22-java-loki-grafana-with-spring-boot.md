@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Java] spring boot 프로젝트에 loki 추가해서 로그 수집하기"
+description: Spring Boot 프로젝트에 Loki를 추가하여 로그를 수집하고 Grafana를 통해 모니터링하는 방법을 소개합니다. Jenkins를 활용한 파이프라인 설정을 통해 로그 수집기를 설정하고, Docker Compose를 이용해 Loki와 Grafana를 설치하는 과정을 상세히 설명합니다. 최종적으로, Grafana에서 Loki를 통해 수집된 로그를 조회할 수 있는 환경을 구축하는 방법을 다룹니다.
 categories: [스터디-자바, 개발]
 tags:
   [

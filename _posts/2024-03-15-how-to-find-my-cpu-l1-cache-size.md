@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 운영체제별 L1 Cache 사이즈 확인하기
+description: 운영체제별 L1 Cache 사이즈를 확인하는 방법을 소개합니다. Macbook Pro M2에서는 `sysctl hw.l1dcachesize` 명령어로 64KB를 확인할 수 있으며, Ubuntu의 AMD Ryzen 5 3600X는 `lscpu` 명령어로 192KB(6 인스턴스)를 확인할 수 있습니다. Windows에서는 작업관리자에서 각 코어의 L1 Cache가 96KB임을 확인할 수 있으며, CPU-Z를 통해 L1 데이터 캐시가 32KB임을 알 수 있습니다. 각 운영체제에서의 L1 Cache 사이즈를 쉽게 확인하는 방법을 알아보세요.
 categories: [개발]
 tags: [CPU, L1, Cache, hardware, windows, ubuntu, mac]
 date: 2024-03-15 23:35:00 +0900

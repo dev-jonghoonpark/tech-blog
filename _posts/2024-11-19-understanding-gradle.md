@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "gradle 톺아보기 (plugin, dependency, source set, module)"
+description: Gradle은 오픈소스 빌드 도구로, 유연성과 성능을 통해 다양한 소프트웨어 빌드를 지원하며, Java 및 Java-library 플러그인을 통해 의존성 설정과 프로젝트 구조를 관리할 수 있다. 의존성 설정은 implementation, api, compileOnly, runtimeOnly 등으로 나뉘며, 각 설정의 용도에 따라 코드의 효율성과 빌드 시간을 단축할 수 있다. 또한, 멀티 모듈 프로젝트 구성을 통해 코드베이스를 기능별로 나누고, 모듈 간 의존성을 명확히 정의하여 재사용성을 높일 수 있다.
 categories: [스터디-자바, 개발]
 tags:
   [

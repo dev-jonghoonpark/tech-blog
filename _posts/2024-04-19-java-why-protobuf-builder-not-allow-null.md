@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Java] protobuf builder 에서 null을 허용하지 않는 이유"
+description: Java의 protobuf builder에서 null 값을 허용하지 않는 이유는 'null'과 'cleared'가 의미적으로 다르기 때문이며, 이는 플랫폼 독립적인 개념을 고려한 결과입니다. null을 설정하면 NullPointerException이 발생하고, 이는 혼란을 초래할 수 있습니다. 프로토콜 버퍼는 기본값 개념을 가지고 있어 null을 설정하면 해당 필드에 접근 시 기본값이 반환됩니다. 이에 대한 대안으로 명시적으로 null을 처리하는 함수 제안이 있지만, 현재까지 수용되지 않고 있습니다.
 categories: [스터디-자바]
 tags:
   [

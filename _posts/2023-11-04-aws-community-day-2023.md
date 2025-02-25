@@ -1,6 +1,7 @@
 ---
 layout: post
 title: AWS Community day 2023 참여 기록 (with AWSKRUG)
+description: AWS Community Day 2023에 참여한 기록으로, AWSKRUG 주최 행사에서 쿠버네티스 관련 핸즈온랩 세션에 참석하였습니다. 기차를 놓치는 해프닝이 있었지만 무사히 행사에 도착했으며, 다양한 트랙 중 컨테이너 세션을 선택했습니다. 실습은 자율적으로 진행되었고, 네트워킹 기회도 있었으나 제한적이었습니다. 앞으로 architecture 소모임에 참여할 계획이며, 핸즈온 세션 관련 내용을 별도로 정리할 예정입니다.
 categories: [행사, 커뮤니티]
 tags:
   [

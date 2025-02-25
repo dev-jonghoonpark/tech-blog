@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Java] Static Object는 GC 의 대상일까?"
+description: Java 8부터 Static Object는 permanent generation(permgen)에서 Java Heap으로 이동하였고, 이로 인해 GC(garbage collector)의 대상이 될 수 있다. Static Object가 GC의 대상이 되는 경우는 참조가 없는 경우와 해당 Static Object를 포함하는 클래스 로더가 언로드된 경우로, 일반적으로 클래스 로더는 JVM 종료 시까지 살아있어 Static Object는 GC에 의해 정리되지 않는다. 따라서 Static Object가 GC에 의해 정리될 가능성은 낮지만, 메모리 누수를 방지하기 위해 주의가 필요하다.
 categories: [스터디-자바, 개발]
 tags:
   [

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Review] Kakao 에서는 스팸을 어떻게 처리하는가 - 제6회 Kakao Tech Meet"
+description: Kakao Tech Meet에서 발표된 스팸 처리 전략을 다룬 리뷰로, 카카오는 문자열 변형을 통한 스팸 메일 대응, 효율적인 이미지 모니터링을 위한 모델 도입, 그리고 대규모 언어 모델(LLM)을 활용한 스팸 콘텐츠 분류 방법을 공유했습니다. 발표 내용에는 EfficientNet, Vision Transformer, Swin 등의 모델을 통한 성능 개선 시도와 함께, active learning 및 데이터 증강을 통한 라벨링 전략이 포함되어 있습니다. 또한, LLM을 활용해 스팸 분류 결과와 사유를 운영자에게 제공하는 방법도 논의되었습니다.
 categories: [스터디-AI, 행사]
 tags:
   [

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[ios 개발] pod install 시 ruby path가 2.6.x일 경우 해결방법"
+description: iOS 개발에서 `pod install` 시 Ruby 경로가 2.6.x일 경우 발생하는 호환성 문제를 해결하는 방법을 안내합니다. 기본적으로 Mac에 설치된 Ruby 2.6.0 대신 Brew로 설치한 Ruby 3.x를 사용해야 하지만, `pod install` 시 여전히 2.6.0이 사용되는 이슈가 발생할 수 있습니다. 이를 해결하기 위해 `/usr/local/bin/pod` 파일의 첫 번째 줄을 Brew로 설치한 Ruby 경로인 `#!/usr/local/opt/ruby/bin/ruby`로 변경하면 됩니다.
 categories: [개발]
 tags: [아이폰, ios, 애플, apple, pod, cocoa]
 date: 2024-02-27 13:00:00 +0900

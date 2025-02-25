@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Spring] Spring In Action - 스프링 시작하기 (1-2장)"
+description: Spring In Action을 기반으로 한 스프링 시작하기 스터디에서는 Spring 프레임워크의 아키텍처, IoC 및 DI 개념, Spring Application Context, Servlet, Spring MVC의 배경과 동작 원리, 그리고 Spring Boot의 특징과 테스트 방법을 다룹니다. 이 과정에서 프론트 컨트롤러 패턴과 MVC 패턴을 통해 웹 애플리케이션의 구조를 이해하고, Spring Boot를 활용한 효율적인 개발 방법을 익힙니다.
 categories: [스터디-자바]
 tags:
   [

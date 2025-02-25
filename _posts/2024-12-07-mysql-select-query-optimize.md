@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[MySQL] SELECT 쿼리 작성 및 최적화 - Real MySQL 스터디 6회차"
+description: MySQL 8.0에서 SELECT 쿼리 작성 및 최적화에 대한 내용을 다루며, 쿼리의 구조, 처리 순서, WHERE 및 HAVING 절의 차이, COUNT 함수의 사용법, DISTINCT와 GROUP BY의 차이, 인덱스 활용 방법, LIMIT 절의 사용 및 페이징 쿼리 작성법, 그리고 CTE(Common Table Expression) 활용법 등을 정리했습니다. 이 글은 MySQL 쿼리 최적화와 성능 향상에 대한 실용적인 팁을 제공합니다.
 categories: [스터디-데이터베이스]
 tags:
   [

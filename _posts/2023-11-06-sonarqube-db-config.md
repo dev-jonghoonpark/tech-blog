@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 소나큐브 DB 설정하기 (with PostgreSQL)
+description: 소나큐브(Sonarqube)를 Ubuntu 서버에 PostgreSQL 데이터베이스와 함께 Docker를 이용해 설정하는 방법을 다룹니다. PostgreSQL을 설치하고 사용자 및 데이터베이스를 생성한 후, Sonarqube의 설정 파일을 수정하여 데이터와 임시 파일 경로를 지정합니다. 또한, 발생할 수 있는 에러를 해결하는 방법도 설명하며, 최종적으로 데이터베이스 생성 확인을 포함한 설치 과정을 마무리합니다.
 categories: [개발, 스터디-테스트]
 tags: [
     Sonarqube,

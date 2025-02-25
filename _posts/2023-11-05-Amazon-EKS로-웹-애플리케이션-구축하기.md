@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Amazon EKS로 웹 애플리케이션 구축하기
+description: Amazon EKS를 활용하여 웹 애플리케이션을 구축하는 핸즈온랩 경험을 공유하는 글로, AWS Cloud9을 통해 실습 환경을 구성하고, EKS 클러스터 생성, AWS Load Balancer 컨트롤러 배포, 다양한 서비스 배포 및 AWS Fargate를 활용한 서버리스 컴퓨팅을 다룹니다. 이 과정에서는 컨테이너, Kubernetes, EKS의 특징과 설정 방법, 서비스 배포를 위한 매니페스트 파일 작성 등을 포함하여, 실습 결과와 아키텍처도 소개합니다.
 categories: [개발]
 tags:
   [

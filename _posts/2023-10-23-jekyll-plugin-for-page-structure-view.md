@@ -1,6 +1,7 @@
 ---
 layout: post
 title: jekyll 에서 page 파일들의 계층 구조 표현하기 (with jekyll plugin)
+description: Jekyll을 사용하여 페이지 파일들의 계층 구조를 시각적으로 표현하는 방법에 대해 설명합니다. Logseq에서의 불편함을 겪은 후, Jekyll을 선택하여 커스텀 플러그인을 만들어 불필요한 파일 없이도 페이지 구조를 효율적으로 관리할 수 있게 되었습니다. 플러그인은 파일을 탐색하여 계층 구조를 JSON 형태로 변환하고, 이를 JavaScript로 처리하여 index.html에 적용함으로써 시각적인 구조를 개선했습니다. 이제는 관리가 용이해지고, 실제 데이터가 있는 파일에 집중할 수 있게 되었습니다.
 categories: [블로그, 개발]
 tags:
   [계층 구조, page, jekyll, 블로그, plugin, logseq, obsidian, ruby, markdown]

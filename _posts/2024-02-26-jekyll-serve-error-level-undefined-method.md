@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Jekyll 실행시 `level': undefined method `[]' for nil (NoMethodError) 에러 해결법"
+description: "Jekyll 실행 시 발생하는 `level': undefined method `[]' for nil (NoMethodError)` 에러는 Jekyll 버전을 4.3.3으로 업데이트하여 해결할 수 있으며, 이를 위해 `Gemfile`에서 Jekyll 버전을 명시한 후 `bundle install`을 진행하고, 다시 버전 명시를 제거하면 됩니다."
 categories: [블로그]
 tags: [루비, ruby, bundle, jekyll, level, fiber, NoMethodError]
 date: 2024-02-26 22:00:00 +0900
@@ -10,7 +11,7 @@ image:
 
 최근에 맥북을 구매하면서 환경을 새로 구성하였다.
 
-mac 기본 버전인 2.6.x 에서 ruby 버전을 올리고  
+mac 기본 버전인 2.6.x 에서 ruby 버전을 올리고
 평소대로 `bundle exec jekyll serve` 를 수행하려 했는데 아래와 같은 에러가 발생되었다.
 
 ```rb
@@ -21,7 +22,7 @@ jekyll 4.3.2 | Error:  undefined method `[]' for nil
                    ^^^^^^^^^^^^^^^
 ```
 
-- ruby 3.3.0 
+- ruby 3.3.0
 - bundler 2.5.4
 - jekyll 4.3.2
 
@@ -31,7 +32,7 @@ jekyll 4.3.2 | Error:  undefined method `[]' for nil
 
 jekyll 를 4.3.3 으로 올리면 해결된다.
 
-`Gemfile` 에서 `jekyll` 에 대한 버전 명시를 해준 뒤 
+`Gemfile` 에서 `jekyll` 에 대한 버전 명시를 해준 뒤
 
 ```rb
 ...

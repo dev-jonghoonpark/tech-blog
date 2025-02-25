@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Java] Thread 클래스의 sleep() 은 어떤 Thread를 sleep 시키는가"
+description: Java의 Thread 클래스에서 sleep() 메소드는 현재 스레드를 일시정지시키는 static 메소드로, 특정 스레드를 일시정지하려면 클래스를 통해 호출해야 합니다. 예를 들어, `th1.sleep(2000)`은 main 스레드를 일시정지시켜 `main end`가 가장 마지막에 출력됩니다. 특정 스레드를 외부에서 일시정지하려면 공유 객체와 락을 사용해야 하며, deadlock에 주의해야 합니다.
 categories: [스터디-자바, 개발]
 tags: [java, 자바, thread, runnable, sleep]
 date: 2024-06-26 13:00:00 +0900

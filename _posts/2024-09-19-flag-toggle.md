@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Feature Toggles (aka Feature Flags)"
+description: Feature Toggle(기능 플래그)는 개발 중인 기능을 고객에게 노출하지 않고도 배포할 수 있게 해주는 기법으로, 여러 기능을 동시에 개발할 때 유용합니다. 이 글에서는 마틴 파울러의 글을 바탕으로 Feature Toggle의 필요성과 구현 방법을 설명하며, 간단한 예시를 통해 초기 구현에서부터 복잡도를 낮추는 방법까지 단계별로 다룹니다. 특히, 제어 역전과 전략 패턴을 활용하여 코드의 유연성과 유지보수성을 향상시키는 방법을 강조합니다.
 categories: [스터디-개발]
 tags:
   [

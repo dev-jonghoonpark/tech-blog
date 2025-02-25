@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Java] 네가지 참조유형 (Hard, Soft, Weak, Panthom)"
+description: Java의 네 가지 참조 유형인 Hard Reference, Soft Reference, Weak Reference, Phantom Reference에 대해 설명합니다. Hard Reference는 일반적으로 사용되며 가비지 컬렉터에 의해 수집되지 않습니다. Soft Reference는 필요할 때까지 유지되며, 메모리가 부족할 경우 수집됩니다. Weak Reference는 가비지 컬렉션 시점에 수집되며, Phantom Reference는 메모리 회수를 지연시키고 ReferenceQueue를 필요로 합니다. GC의 처리 순서는 Soft Reference, Weak Reference, finalize, Phantom Reference 순으로 진행됩니다.
 categories: [스터디-자바, 개발]
 tags:
   [

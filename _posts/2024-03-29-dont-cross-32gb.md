@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Java] Don't cross 32GB! (32기가 이상으로 힙 메모리를 설정하지 않는게 좋은 이유)"
+description: Java에서 힙 메모리를 32GB 이상으로 설정하지 않는 이유와 compressed OOP(Ordinary Object Pointer)의 장점을 설명합니다. 32비트 시스템은 최대 4GB, 64비트 시스템은 16EB까지 메모리를 다룰 수 있지만, 힙 크기가 크면 오버헤드가 발생할 수 있습니다. HotSpot JVM은 힙 사이즈가 32GB 미만일 때 객체 포인터를 압축하여 메모리 사용 효율을 높이며, 32GB를 초과하면 compressed OOP를 사용할 수 없습니다. 따라서 메모리에 여유가 있더라도 힙 크기를 32GB 이하로 유지하는 것이 좋습니다.
 categories: [스터디-자바]
 tags:
   [

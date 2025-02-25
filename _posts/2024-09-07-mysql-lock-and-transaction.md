@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[MySQL] 잠금 과 트랜잭션 (Lock and Transacdtion) - Real MySQL 스터디 2회차"
+description: MySQL에서 트랜잭션과 잠금의 관계를 이해하고, 데이터의 정합성과 동시성을 보장하는 방법을 다룹니다. 트랜잭션은 작업의 완전성을 보장하며, 잠금은 여러 커넥션의 자원 요청을 제어합니다. InnoDB 스토리지 엔진을 기준으로 트랜잭션의 AUTO-COMMIT 모드와 다양한 잠금 방식(글로벌, 테이블, 메타데이터, 네임드 락 등)을 설명하며, 트랜잭션의 격리 수준(READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ, SERIALIZABLE)과 리두 로그 및 바이너리 로그의 차이점도 다룹니다.
 categories: [스터디-데이터베이스]
 tags:
   [

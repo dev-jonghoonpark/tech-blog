@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[k8s, kubernetes] 배포 전략 (deployment starategy)"
+description: Kubernetes의 배포 전략인 Rolling Update, Canary, Blue-Green에 대해 설명합니다. Rolling Update는 새 버전의 복제본을 점진적으로 추가하여 업데이트하며, Canary는 소규모 사용자에게 새 버전을 테스트하여 위험을 줄이는 방식입니다. Blue-Green 배포는 새 버전이 완전히 배포된 후 로드 밸런서를 통해 트래픽을 전환하여 이전 버전과 새 버전이 공존하는 시간을 최소화합니다. 각 전략의 YAML 예시를 통해 서비스와 포드 간의 연결 방식을 설명합니다.
 categories: [스터디-인프라, 개발]
 tags:
   [

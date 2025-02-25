@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[k8s] 쿠버네티스로 어플리케이션 배포하기 (deployment, service, ingress, load balancer)"
+description: 이 글에서는 k8s(microk8s)를 이용해 어플리케이션을 배포하는 과정을 정리합니다. 목표는 `admin.jonghoonpark.com` 도메인으로 어플리케이션에 접근하는 것이며, 이를 위해 host 파일 수정, private registry 설정, deployment, service, ingress 설정 및 load balancer 구성 과정을 상세히 설명합니다. 특히 nginx ingress와 metallb를 활용하여 외부 트래픽을 처리하는 방법을 다루고 있습니다.
 categories: [스터디-인프라, 개발]
 tags:
   [

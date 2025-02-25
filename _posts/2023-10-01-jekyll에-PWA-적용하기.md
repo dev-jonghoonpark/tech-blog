@@ -1,6 +1,7 @@
 ---
 layout: post
 title: jekyll 에 PWA 적용하기
+description: Jekyll에 PWA를 적용하는 방법을 설명하며, jekyll-pwa 플러그인을 설치하고 설정하는 과정을 다룹니다. manifest.json과 service-worker.js 파일을 수동으로 설정하여 PWA 기능을 활성화하고, 최종적으로 Lighthouse에서 PWA 관련 만점을 받을 수 있는 방법을 안내합니다.
 categories: [개발, 블로그]
 tags:
   [

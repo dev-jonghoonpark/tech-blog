@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Java] 초당 api 호출 횟수 제한 처리 - Guava RateLimiter"
+description: Guava 라이브러리의 RateLimiter를 사용하여 API의 초당 호출 횟수를 제한하는 방법을 소개합니다. RateLimiter는 설정된 초당 허용량에 따라 API 호출을 조절하여 과도한 요청을 방지합니다. 이 글에서는 RateLimiter의 기본 메소드인 create와 acquire를 설명하고, 초당 2회의 API 호출을 구현한 예시 코드를 제공합니다. 또한, RateLimiter는 Beta 상태로, 향후 변경 가능성이 있음을 안내합니다.
 categories: [개발, 스터디-자바]
 tags: [java, guava, rate, rate limit, api, api call, RateLimiter, token bucket]
 date: 2024-11-06 15:30:00 +0900

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[MySQL, Java] Java 에서 MySQL Streaming 사용하기"
+description: Java에서 MySQL Streaming을 활용하여 메모리 사용량을 줄이는 방법을 소개합니다. MySQL의 스트리밍 방식은 조건에 맞는 레코드를 서버에서 클라이언트로 즉시 전송하며, JDBC를 통해 스트리밍 모드를 활성화하려면 TYPE_FORWARD_ONLY, CONCUR_READ_ONLY, FETCH_SIZE를 Integer.MIN_VALUE로 설정해야 합니다. 테스트 결과, MySQL Streaming을 사용한 경우 메모리 사용량이 약 1GB 적어지는 것을 확인했습니다. 이 글에서는 스트리밍 방식의 구현 방법과 메모리 사용량 비교를 위한 테스트 세팅을 설명합니다.
 categories: [개발, 스터디-데이터베이스, 스터디-자바]
 tags:
   [

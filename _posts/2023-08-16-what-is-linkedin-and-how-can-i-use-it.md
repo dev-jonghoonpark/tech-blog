@@ -2,6 +2,7 @@
 layout: post
 title: 링크드인 (Linkedin) 소개
 date: "2023-08-16 14:59:17 +0900"
+description: 링크드인(LinkedIn)은 전세계 사용자가 이력서를 공유하는 직장인 소셜 플랫폼으로, IT 빅테크 이직 및 자기 홍보에 필수적입니다. 영어 이름과 콘텐츠 작성으로 해외에서도 기회를 얻을 수 있으며, K-Devcon Daejeon 회원들을 위해 프로필 공유 및 관리 방법, 링크드인 작성 팁을 제공합니다.
 categories:
   - 커뮤니티
 tags:

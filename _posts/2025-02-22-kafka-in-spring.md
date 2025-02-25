@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Spring] Spring 에서 Kafka를 통한 비동기 통신 구현해보기"
+description: Spring에서 Kafka를 활용한 비동기 통신 구현 방법을 소개하며, Kafka의 기본 개념과 RabbitMQ와의 비교를 통해 각각의 장점을 설명합니다. Kafka는 대량 데이터 처리에 적합한 메시징 시스템으로, Producer와 Consumer를 통해 메시지를 주고받는 구조를 가지고 있습니다. 이 글에서는 Kafka를 Docker로 실행하고, Spring에서 Producer와 Consumer를 설정하는 방법을 예시를 통해 설명합니다.
 categories: [스터디-자바]
 tags:
   [

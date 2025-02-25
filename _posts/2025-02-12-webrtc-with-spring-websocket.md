@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Spring] WebRTC 와 Spring websocket 을 이용하여 구글 밋 처럼 카메라 스트리밍 하기"
+description: WebRTC와 Spring WebSocket을 활용하여 구글 밋과 유사한 카메라 스트리밍 서비스를 구현하는 방법을 소개합니다. 이 포스트에서는 React(Next.js)로 프론트엔드를 구성하고, Spring WebSocket 서버를 통해 스트리머와 뷰어 간의 시그널링 메시지를 전달하는 구조를 설명합니다. 코드를 통해 WebRTC 초기화, WebSocket 설정 및 스트리밍 기능을 구현하는 과정을 자세히 다루며, 발생할 수 있는 이슈와 해결 방법도 공유합니다.
 categories: [스터디-자바]
 tags:
   [

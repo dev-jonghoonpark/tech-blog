@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[MySQL] INSERT, UPDATE, DELETE 쿼리 작성 및 최적화 - Real MySQL 스터디 7회차 (끝)"
+description: MySQL 8.0에서 INSERT, UPDATE, DELETE 쿼리 작성 및 최적화에 대한 내용을 다룬 글로, INSERT IGNORE와 ON DUPLICATE KEY UPDATE를 활용해 데이터 처리 시 발생할 수 있는 에러를 방지하고, BULK INSERT와 LOAD DATA를 통해 대량의 데이터를 효율적으로 삽입하는 방법을 설명합니다. 또한, PRIMARY KEY 선정 및 UUID, SNOWFLAKE ID와 같은 고유 식별자 생성 전략을 제시하며, UPDATE와 DELETE 쿼리의 LIMIT 사용법, JOIN을 통한 다중 레코드 업데이트 및 삭제 방법도 포함되어 있습니다.
 categories: [스터디-데이터베이스]
 tags:
   [

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Visual Studio Code, Extension 만들어서 등록까지 해보기 (with mocha)
+description: Visual Studio Code에서 한영타 변환기를 확장 프로그램으로 개발하고 등록하는 과정을 다룹니다. 블로그 작성 중 발생하는 한글과 영어 키보드 입력 문제를 해결하기 위해 TypeScript 기반의 변환기를 모듈화하고, Mocha를 사용하여 BDD 방식으로 테스트 코드를 작성했습니다. 이후 VS Code API를 활용해 선택된 텍스트를 변환하는 기능을 구현하였고, 최종적으로 Azure DevOps와 Visual Studio Marketplace에 등록하여 성공적으로 배포했습니다. [GitHub](https://github.com/dev-jonghoonpark/ettk-vscode-extention) 및 [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=dev-jonghoonpark.ettk)에서 확인할 수 있습니다.
 categories: [개발, 블로그]
 tags:
   [

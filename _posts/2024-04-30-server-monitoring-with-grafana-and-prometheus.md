@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Grafana, Prometheus] 서버 상태 모니터링 하기"
+description: Grafana와 Prometheus를 활용한 서버 상태 모니터링 방법을 소개합니다. 도커 컨테이너 관리 중 메모리 부족 문제를 예방하기 위해 Grafana와 Prometheus를 조합하여 모니터링 시스템을 구축하는 과정을 설명하며, Docker Compose를 이용한 Prometheus 설정, Grafana에서 DataSource 등록 및 대시보드 구성 방법을 상세히 안내합니다. 이를 통해 서버의 메모리 및 저장소 상태를 실시간으로 확인할 수 있습니다.
 categories: [개발]
 tags:
   [

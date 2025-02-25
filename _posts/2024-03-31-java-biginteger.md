@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[Java] BigInteger 의 내부는 어떤 식으로 동작할까?"
+description: Java의 BigInteger는 임의 정밀도를 지원하는 불변 객체로, 메모리의 한계에 따라 큰 숫자를 표현할 수 있습니다. 이 클래스는 부호(signum), 실제 값을 담는 int 배열(mag), 비트 수(bitCount), 비트 길이(bitLength), 가장 낮은 비트(lowestSetBit), 첫 비트 위치(firstNonzeroIntNum) 등의 변수를 포함하고 있으며, 효율성을 위해 필요한 시점에만 값을 계산합니다. BigInteger의 내부 구조와 변수의 동작 방식을 이해하면, 자바에서 큰 수를 처리하는 방법을 더 잘 알 수 있습니다.
 categories: [스터디-자바]
 tags:
   [

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "[k8s, kubernetes] 온프레미스 k8s에 리모트로 접속하기 (namespace, service account, role, rolebinding, secret, config)"
+description: 온프레미스 Kubernetes 환경에 리모트로 접속하기 위한 과정으로, 네임스페이스 생성, 서비스 어카운트 및 역할(Role) 설정, 역할 바인딩(RoleBinding) 생성, 비밀(Secret) 생성, 그리고 kubeconfig 파일 작성 방법을 설명합니다. 이 글에서는 microk8s를 사용하여 서비스 어카운트를 인증 주체로 설정하고, dev 네임스페이스의 Pod에 대한 모든 권한을 부여하는 방법을 다룹니다. 최종적으로 생성된 kubeconfig 파일을 통해 원격 Kubernetes 클러스터에 안전하게 접속할 수 있습니다.
 categories: [스터디-인프라, 개발]
 tags:
   [

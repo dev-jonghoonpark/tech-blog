@@ -1,6 +1,7 @@
 ---
 layout: post
 title: jenkins pipeline 빌드 결과 슬랙으로 노티피케이션 전송하기
+description: Jenkins Pipeline에서 빌드 결과를 Slack으로 노티피케이션 전송하는 방법을 다룹니다. Slack Notification Plugin을 사용하여 메시지를 전송하고, Gradle 테스트 결과를 정리하여 슬랙에 전송하는 과정을 설명합니다. 멀티쓰레드 환경에서의 워크스페이스 관리, Gradle 플러그인 추가, 한글 깨짐 문제 해결법, Regex를 활용한 데이터 추출 방법도 포함되어 있습니다. 최종적으로 빌드 성공 및 실패 시 Slack에 알림을 보내는 코드를 제공합니다.
 categories: [개발, 스터디-테스트, 스터디-자동화]
 tags:
   [jenkins, pipeline, slack, bot, notification, workspace, multithread, regex]

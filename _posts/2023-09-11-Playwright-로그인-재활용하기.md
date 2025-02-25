@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Playwright 로그인 재활용하기 - 세션 관리 (cookie, local storage, session storage)
+description: Playwright를 사용하여 로그인 인증정보를 관리하고 재활용하는 방법에 대해 설명합니다. 이 글에서는 cookie, local storage, session storage를 활용하여 테스트 속도를 단축시키는 방법을 다루며, 파이썬과 node.js에서의 접근 방식을 비교합니다. 수동으로 cookie 값을 가져오고 저장하는 방법, local storage 및 session storage에 접근하는 방법, Playwright의 저장소 상태를 활용하는 방법을 소개하며, 인증정보 유출 방지를 위한 주의사항도 안내합니다.
 categories: [개발, Playwright]
 tags: [Playwright, token, session, cookie, local storage, session storage, state, python, login, auth]
 date: 2023-09-11 12:00:00 +0900

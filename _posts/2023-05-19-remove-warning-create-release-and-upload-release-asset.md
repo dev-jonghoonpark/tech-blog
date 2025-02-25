@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Github Action - create-release, upload-release-asset warning 제거하기
+description: Github Action에서 deprecated 경고를 제거하기 위해, 기존의 `actions/create-release@v1` 및 `actions/upload-release-asset@v1.0.1` 대신 `softprops/action-gh-release`를 사용하여 워크플로우를 수정하는 방법을 설명합니다. 이를 통해 APK 빌드 및 릴리즈 과정을 단일 job으로 통합하고, 경고 없이 성공적으로 릴리즈할 수 있습니다.
 categories: [개발]
 tags:
   [

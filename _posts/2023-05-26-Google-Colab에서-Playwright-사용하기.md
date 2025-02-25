@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Google Colab에서 Playwright 사용하기
+description: Google Colab에서 Playwright를 사용하여 자동화를 구현하는 방법을 소개합니다. 무료로 GPU를 활용할 수 있는 Colab에서 Playwright의 기본 코드를 실행하며, Chrome 설치 및 필요한 라이브러리 설치 과정을 포함합니다. 스케줄링 기능은 Pro+에서만 지원되며, 다른 서버에서 실행할 수 있는 방법을 추가로 탐색할 예정입니다.
 categories: [개발, Playwright]
 tags: [Google Colab, Colab, Playwright, E2E, End to End, Python]
 date: 2023-05-26 12:00:00 +0900

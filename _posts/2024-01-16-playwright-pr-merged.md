@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Playwright PR 마무리
+description: Playwright에 올린 PR이 머지되었으며, 이를 기록하기 위해 블로그에 글을 남깁니다. GDG Daejeon Devfest에서 Injae Kim님의 발표를 통해 오픈소스 기여의 중요성을 배우고, Microsoft의 Playwright 프로젝트에 기여하게 되었습니다. PR 내용은 toPass() 함수의 기본 timeout을 사용자 설정으로 변경하는 것으로, 2개월 만에 머지되었습니다. 오픈소스 기여 경험을 통해 많은 것을 배우고, 앞으로도 기여할 기회를 갖고 싶습니다.
 categories: [개발]
 tags: [github, pr, pull requests, contribute, playwright]
 date: 2024-01-16 23:00:00 +0900
