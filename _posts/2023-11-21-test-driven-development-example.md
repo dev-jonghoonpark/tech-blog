@@ -1,21 +1,26 @@
 ---
-layout: post
-title: 예시로 알아보는 테스트 주도 개발 (TDD) 사용법
-description: 테스트 주도 개발(TDD)의 사용법을 예시를 통해 설명하며, 작은 단계로 작업을 나누고, 실패하는 테스트(빨간 막대)와 통과하는 코드(녹색 막대)를 작성하는 과정을 다룹니다. HTTP 쿼리 문자열을 파싱하는 자바 클래스를 만들며, 각 단계에서 생각하기, 테스트 작성, 코드 구현, 리팩토링을 반복합니다. 이 과정에서 쿼리 문자열의 이름과 값 쌍을 처리하고, 다양한 테스트 케이스를 통해 코드의 완성도를 높여가는 방법을 제시합니다. TDD의 핵심 원칙인 작은 단위로 작업하고 지속적으로 리팩토링하는 중요성을 강조합니다.
-categories: [스터디-테스트]
-tags: [
-    테스트,
-    테스트 주도 개발,
-    Test-Driven Development,
-    TDD,
-    예제,
-    Thinking
-    Red Bar,
-    Green Bar,
-    Refactoring,
-    리팩터링,
-  ]
-date: 2023-11-21 23:00:00 +0900
+layout: "post"
+title: "예시로 알아보는 테스트 주도 개발 (TDD) 사용법"
+description: "테스트 주도 개발(TDD)의 사용법을 예시를 통해 설명하며, 작은 단계로 작업을 나누고, 실패하는 테스트(빨간 막대)와 통\
+  과하는 코드(녹색 막대)를 작성하는 과정을 다룹니다. HTTP 쿼리 문자열을 파싱하는 자바 클래스를 만들며, 각 단계에서 생각하기, 테스트 작성\
+  , 코드 구현, 리팩토링을 반복합니다. 이 과정에서 쿼리 문자열의 이름과 값 쌍을 처리하고, 다양한 테스트 케이스를 통해 코드의 완성도를 높여가\
+  는 방법을 제시합니다. TDD의 핵심 원칙인 작은 단위로 작업하고 지속적으로 리팩토링하는 중요성을 강조합니다."
+categories:
+- "스터디-테스트"
+tags:
+- "테스트"
+- "테스트 주도 개발"
+- "Test-Driven Development"
+- "TDD"
+- "예제"
+- "Thinking Red Bar"
+- "Green Bar"
+- "Refactoring"
+- "리팩터링"
+date: "2023-11-21 14:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-11-21-test-driven-development-example.jpg"
 ---
 
 원문 : [Test-Driven Development](https://www.jamesshore.com/v2/books/aoad1/test_driven_development)  

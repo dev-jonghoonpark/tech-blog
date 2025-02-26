@@ -1,20 +1,25 @@
 ---
-layout: post
-title: 안드로이드 - Github Action을 이용하여 Signed APK 빌드하기
-description: 안드로이드 앱의 Signed APK를 Github Action을 이용해 자동으로 빌드하는 방법을 소개합니다. 이 포스트에서는 JDK 17 설정, Github Secrets 활용, APK 생성 경로, 릴리즈 작업의 권한 설정 등 실제로 동작한 workflow 코드를 기반으로 한 구현 세부사항을 정리하였습니다. 개인 프로젝트에서의 경험을 통해 Github Action의 유용성을 강조하며, 자동화된 빌드 프로세스의 장점을 설명합니다.
-categories: [개발]
+layout: "post"
+title: "안드로이드 - Github Action을 이용하여 Signed APK 빌드하기"
+description: "안드로이드 앱의 Signed APK를 Github Action을 이용해 자동으로 빌드하는 방법을 소개합니다. 이 포스트에서\
+  는 JDK 17 설정, Github Secrets 활용, APK 생성 경로, 릴리즈 작업의 권한 설정 등 실제로 동작한 workflow 코드를\
+  \ 기반으로 한 구현 세부사항을 정리하였습니다. 개인 프로젝트에서의 경험을 통해 Github Action의 유용성을 강조하며, 자동화된 빌드 프\
+  로세스의 장점을 설명합니다."
+categories:
+- "개발"
 tags:
-  [
-    안드로이드,
-    Android,
-    Github Action,
-    Sign APK,
-    env,
-    workflow,
-    release,
-    keystore,
-  ]
-date: 2023-05-19 12:00:00 +0900
+- "안드로이드"
+- "Android"
+- "Github Action"
+- "Sign APK"
+- "env"
+- "workflow"
+- "release"
+- "keystore"
+date: "2023-05-19 03:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-05-19-Build-Signed-Apk-Using-Github-Action.jpg"
 ---
 
 # 개요

@@ -1,16 +1,22 @@
 ---
-layout: post
-title: 7장 분산 시스템을 위한 유일 ID 생성기 설계
-date: '2023-06-06 03:34:35 +0900'
-description: 분산 시스템을 위한 유일 ID 생성기 설계에 대한 내용을 다룬 이 글에서는 ID의 유일성, 64비트 표현, 정렬 가능성, 초당 10,000개 생성 등의 요구사항을 충족하는 다양한 방법을 소개합니다. 다중 마스터 복제, UUID, 티켓 서버, 트위터 스노플레이크 접근법을 통해 각 방법의 장단점을 분석하며, 특히 스노플레이크 방식이 요구사항을 가장 잘 충족하는 것으로 평가됩니다. 이 글은 시스템 디자인 면접 준비에 유용한 기초 지식을 제공합니다.
+layout: "post"
+title: "7장 분산 시스템을 위한 유일 ID 생성기 설계"
+description: "분산 시스템을 위한 유일 ID 생성기 설계에 대한 내용을 다룬 이 글에서는 ID의 유일성, 64비트 표현, 정렬 가능성,\
+  \ 초당 10,000개 생성 등의 요구사항을 충족하는 다양한 방법을 소개합니다. 다중 마스터 복제, UUID, 티켓 서버, 트위터 스노플레이크\
+  \ 접근법을 통해 각 방법의 장단점을 분석하며, 특히 스노플레이크 방식이 요구사항을 가장 잘 충족하는 것으로 평가됩니다. 이 글은 시스템 디자인\
+  \ 면접 준비에 유용한 기초 지식을 제공합니다."
 categories:
-- 스터디-시스템 디자인
+- "스터디-시스템 디자인"
 tags:
-- System Design
-- 시스템 디자인
-- unique
-- unique id
-- distributed system
+- "System Design"
+- "시스템 디자인"
+- "unique"
+- "unique id"
+- "distributed system"
+date: "2023-06-05 18:34:35 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-06-06-unique-id-generator-for-distributed-system.jpg"
 ---
 <p><!-- wp:paragraph --></p>
 <p>가상 면접 사례로 배우는 대규모 시스템 설계 기초 – System Design Interview</p>

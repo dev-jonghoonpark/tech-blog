@@ -1,26 +1,31 @@
 ---
-layout: post
+layout: "post"
 title: "[자바 최적화] 캐시 미스 이해하기 (L1 Cache) + 코드 warm up 이해하기"
-description: 자바 최적화에서 L1 캐시 미스와 코드 워밍업을 이해하는 방법을 다룹니다. L1 캐시 미스는 처리량이 많은 코드의 성능을 저하시킬 수 있으며, 두 가지 메소드(touchEveryItem, touchEveryLine)의 실행 시간을 비교해보면 예상과 달리 큰 차이가 없음을 보여줍니다. 이는 두 메소드가 동일한 캐시 읽기 횟수를 가지기 때문입니다. 또한, 코드 워밍업은 JIT 컴파일러가 관심 있는 코드를 최적화하기 위해 반복 실행하는 과정을 의미합니다. 이를 통해 자바 애플리케이션의 성능을 향상시킬 수 있습니다.
-categories: [스터디-자바]
+description: "자바 최적화에서 L1 캐시 미스와 코드 워밍업을 이해하는 방법을 다룹니다. L1 캐시 미스는 처리량이 많은 코드의 성능을\
+  \ 저하시킬 수 있으며, 두 가지 메소드(touchEveryItem, touchEveryLine)의 실행 시간을 비교해보면 예상과 달리 큰 차이\
+  가 없음을 보여줍니다. 이는 두 메소드가 동일한 캐시 읽기 횟수를 가지기 때문입니다. 또한, 코드 워밍업은 JIT 컴파일러가 관심 있는 코드를\
+  \ 최적화하기 위해 반복 실행하는 과정을 의미합니다. 이를 통해 자바 애플리케이션의 성능을 향상시킬 수 있습니다."
+categories:
+- "스터디-자바"
 tags:
-  [
-    자바,
-    하드웨어,
-    최적화,
-    CPU,
-    L1,
-    Cache,
-    Cache miss,
-    캐시,
-    캐시 미스,
-    java,
-    optimization,
-    hardware,
-    Well-Grounded Java Developer,
-    warm up,
-  ]
-date: 2024-03-15 23:30:00 +0900
+- "자바"
+- "하드웨어"
+- "최적화"
+- "CPU"
+- "L1"
+- "Cache"
+- "Cache miss"
+- "캐시"
+- "캐시 미스"
+- "java"
+- "optimization"
+- "hardware"
+- "Well-Grounded Java Developer"
+- "warm up"
+date: "2024-03-15 14:30:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2024-03-15-java-l1-cache-miss.jpg"
 ---
 
 최근에 자바 최적화를 읽고 있다.

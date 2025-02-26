@@ -1,36 +1,42 @@
 ---
-layout: post
+layout: "post"
 title: "프롬프트 엔지니어링 (정의, 체이닝, 튜닝, RAG) - 데브콘 서울 : 오월엔 AI"
-description: 프롬프트 엔지니어링에 대한 정의와 다양한 기법을 소개하는 블로그 포스트로, K-DEVCON 행사에서 발표된 내용을 바탕으로 자연어 입력을 통해 원하는 결과를 생성하는 방법, Chain of Thought(CoT) 프롬프트, 프롬프트 튜닝, PEFT, SFT, RLHF 등의 기법을 설명합니다. 또한, RAG(검색증강생성) 기법을 활용한 최신 정보 기반의 답변 생성 방법과 관련 용어를 정리하며, AI와 LLM의 빠른 발전 속도에 대한 기대와 우려를 담고 있습니다.
-categories: [스터디-AI, 커뮤니티, 행사]
+description: "프롬프트 엔지니어링에 대한 정의와 다양한 기법을 소개하는 블로그 포스트로, K-DEVCON 행사에서 발표된 내용을 바탕으로\
+  \ 자연어 입력을 통해 원하는 결과를 생성하는 방법, Chain of Thought(CoT) 프롬프트, 프롬프트 튜닝, PEFT, SFT, RLHF\
+  \ 등의 기법을 설명합니다. 또한, RAG(검색증강생성) 기법을 활용한 최신 정보 기반의 답변 생성 방법과 관련 용어를 정리하며, AI와 LLM의\
+  \ 빠른 발전 속도에 대한 기대와 우려를 담고 있습니다."
+categories:
+- "스터디-AI"
+- "커뮤니티"
+- "행사"
 tags:
-  [
-    프롬프트 엔지니어링,
-    프롬프트,
-    k-devcon,
-    데브콘,
-    festa,
-    행사,
-    밋업,
-    네이버 클라우드,
-    AI,
-    LLM,
-    HCX,
-    하이퍼클로버X,
-    RAG,
-    TUNING,
-    CoT,
-    Chain of thought,
-    prompt,
-    프롬프트,
-    prompt engineering,
-    PEFT,
-    SFP,
-    FP,
-    RLHF,
-  ]
-date: 2024-06-09 23:59:59 +0900
+- "프롬프트 엔지니어링"
+- "프롬프트"
+- "k-devcon"
+- "데브콘"
+- "festa"
+- "행사"
+- "밋업"
+- "네이버 클라우드"
+- "AI"
+- "LLM"
+- "HCX"
+- "하이퍼클로버X"
+- "RAG"
+- "TUNING"
+- "CoT"
+- "Chain of thought"
+- "prompt"
+- "프롬프트"
+- "prompt engineering"
+- "PEFT"
+- "SFP"
+- "FP"
+- "RLHF"
+date: "2024-06-09 14:59:59 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2024-06-09-prompt-engineering.jpg"
 ---
 
 지난 5월 30일 [K-DEVCON](https://k-devcon.com/)은 네이버 클라우드의 콜라보로 "데브콘 서울 : 오월엔 AI" 행사를 진행하였다. ([festa 링크](https://festa.io/events/5272))

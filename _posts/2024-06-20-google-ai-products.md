@@ -1,25 +1,28 @@
 ---
-layout: post
+layout: "post"
 title: "구글의 ai 관련 프로젝트들 알아보기 (vertex ai, gemini 등)"
-description: 구글의 AI 프로젝트인 Vertex AI와 Gemini를 소개하며, Vertex AI는 머신러닝 플랫폼으로 Gemini를 포함한 다양한 AI 모델을 훈련하고 관리하는 데 사용됩니다. Gemini는 대규모 언어 모델로, 여러 버전이 존재하며, PaLM은 이전의 대표 LLM입니다. 또한, Spring AI는 구글 관련 다양한 AI 솔루션을 지원합니다.
-categories: [스터디-AI]
+description: "구글의 AI 프로젝트인 Vertex AI와 Gemini를 소개하며, Vertex AI는 머신러닝 플랫폼으로 Gemini를\
+  \ 포함한 다양한 AI 모델을 훈련하고 관리하는 데 사용됩니다. Gemini는 대규모 언어 모델로, 여러 버전이 존재하며, PaLM은 이전의 대\
+  표 LLM입니다. 또한, Spring AI는 구글 관련 다양한 AI 솔루션을 지원합니다."
+categories:
+- "스터디-AI"
 tags:
-  [
-    langchain,
-    spring,
-    java,
-    gemini,
-    google,
-    vertex ai,
-    AI Studio,
-    palm,
-    gemma,
-    구글,
-    제미나이,
-    spring ai,
-  ]
-date: 2024-06-20 20:30:00 +0900
+- "langchain"
+- "spring"
+- "java"
+- "gemini"
+- "google"
+- "vertex ai"
+- "AI Studio"
+- "palm"
+- "gemma"
+- "구글"
+- "제미나이"
+- "spring ai"
+date: "2024-06-20 11:30:00 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2024-06-20-google-ai-products.jpg"
 ---
 
 각 항목들이 무엇을 의미하는지 모르겠어서 찾아보고 간단하게 정리해본다.

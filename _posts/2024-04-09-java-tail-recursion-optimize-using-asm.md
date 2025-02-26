@@ -1,10 +1,26 @@
 ---
-layout: post
+layout: "post"
 title: "[Java] tail recursion 최적화하기 (using asm)"
-description: 자바에서 tail recursion 최적화를 구현하는 방법을 소개합니다. 기본적으로 자바의 재귀 함수는 스택 오버플로우 문제를 일으킬 수 있으며, javac는 tail recursion 최적화를 지원하지 않습니다. 그러나 ASM 라이브러리를 사용하면 최적화를 수행할 수 있습니다. 이 글에서는 factorial 함수를 tail recursion 형태로 수정하고, ASM을 통해 최적화된 클래스를 생성하는 방법을 설명합니다. 최적화된 클래스 파일을 실행하는 방법과 Gradle 설정에 대한 정보도 포함되어 있습니다. 자세한 내용은 GitHub에서 확인할 수 있습니다.
-categories: [스터디-자바]
-tags: [자바, java, asm, bytecode, class, classpath, classfile, optimize]
-date: 2024-04-09 21:30:00 +0900
+description: "자바에서 tail recursion 최적화를 구현하는 방법을 소개합니다. 기본적으로 자바의 재귀 함수는 스택 오버플로우 문\
+  제를 일으킬 수 있으며, javac는 tail recursion 최적화를 지원하지 않습니다. 그러나 ASM 라이브러리를 사용하면 최적화를 수행할\
+  \ 수 있습니다. 이 글에서는 factorial 함수를 tail recursion 형태로 수정하고, ASM을 통해 최적화된 클래스를 생성하는 방\
+  법을 설명합니다. 최적화된 클래스 파일을 실행하는 방법과 Gradle 설정에 대한 정보도 포함되어 있습니다. 자세한 내용은 GitHub에서 확인\
+  할 수 있습니다."
+categories:
+- "스터디-자바"
+tags:
+- "자바"
+- "java"
+- "asm"
+- "bytecode"
+- "class"
+- "classpath"
+- "classfile"
+- "optimize"
+date: "2024-04-09 12:30:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2024-04-09-java-tail-recursion-optimize-using-asm.jpg"
 ---
 
 자바에서 factorial 코드를 작성해보면 다음과 같은 코드가 나올 것이다.

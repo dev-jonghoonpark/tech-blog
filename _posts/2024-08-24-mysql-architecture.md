@@ -1,26 +1,31 @@
 ---
-layout: post
+layout: "post"
 title: "[MySQL] 아키텍처 - Real MySQL 스터디 1회차"
-description: MySQL 아키텍처에 대한 첫 번째 스터디에서는 Real MySQL 8.0을 기반으로 InnoDB 스토리지 엔진의 구조와 작동 방식을 다룹니다. MySQL은 커넥션 핸들러, SQL 파서, 옵티마이저, 쿼리 실행기 등으로 구성된 엔진과 데이터 저장을 담당하는 스토리지 엔진으로 나뉘며, 스레드 기반으로 작동하여 클라이언트 요청을 처리합니다. 메모리는 글로벌과 로컬 영역으로 나뉘며, InnoDB는 레코드 기반 잠금, 클러스터링, 외래 키 지원 등의 기능을 제공합니다. 또한, MVCC를 통해 일관된 읽기를 제공하고, ACID 원칙을 준수하여 트랜잭션의 안전성을 보장합니다. 이 글은 MySQL의 다양한 아키텍처 요소와 작동 원리를 간략하게 정리합니다.
-categories: [스터디-데이터베이스]
+description: "MySQL 아키텍처에 대한 첫 번째 스터디에서는 Real MySQL 8.0을 기반으로 InnoDB 스토리지 엔진의 구조와\
+  \ 작동 방식을 다룹니다. MySQL은 커넥션 핸들러, SQL 파서, 옵티마이저, 쿼리 실행기 등으로 구성된 엔진과 데이터 저장을 담당하는 스토\
+  리지 엔진으로 나뉘며, 스레드 기반으로 작동하여 클라이언트 요청을 처리합니다. 메모리는 글로벌과 로컬 영역으로 나뉘며, InnoDB는 레코드 기\
+  반 잠금, 클러스터링, 외래 키 지원 등의 기능을 제공합니다. 또한, MVCC를 통해 일관된 읽기를 제공하고, ACID 원칙을 준수하여 트랜잭션\
+  의 안전성을 보장합니다. 이 글은 MySQL의 다양한 아키텍처 요소와 작동 원리를 간략하게 정리합니다."
+categories:
+- "스터디-데이터베이스"
 tags:
-  [
-    MySQL,
-    아키텍처,
-    architecture,
-    engine,
-    mysql engine,
-    storage engine,
-    InnoDB,
-    memory,
-    structure,
-    flow,
-    thread,
-    thread pool,
-    metadata,
-  ]
-date: 2024-08-24 23:59:59 +0900
+- "MySQL"
+- "아키텍처"
+- "architecture"
+- "engine"
+- "mysql engine"
+- "storage engine"
+- "InnoDB"
+- "memory"
+- "structure"
+- "flow"
+- "thread"
+- "thread pool"
+- "metadata"
+date: "2024-08-24 14:59:59 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2024-08-24-mysql-architecture.jpg"
 ---
 
 [K-DEVCON](https://k-devcon.com) 대전 개발자 스터디에서 Real Mysql 책으로 스터디를 진행해보기로 했다.

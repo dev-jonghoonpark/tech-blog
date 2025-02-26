@@ -1,25 +1,29 @@
 ---
-layout: post
-title: 소나큐브 프로젝트 설정하고 정적 분석 해보기
-description: 소나큐브 프로젝트 설정과 정적 분석 진행 방법을 소개합니다. 소나큐브에서 프로젝트를 생성하고 Gradle 및 TypeScript 환경에서 소스 코드를 정적 분석하는 과정을 자세히 설명하며, 필요한 설정과 명령어를 제공합니다. 분석 결과는 소나큐브 콘솔에서 확인할 수 있으며, CI/CD를 통한 자동화 방법은 다음 글에서 다룹니다.
-categories: [스터디-테스트]
+layout: "post"
+title: "소나큐브 프로젝트 설정하고 정적 분석 해보기"
+description: "소나큐브 프로젝트 설정과 정적 분석 진행 방법을 소개합니다. 소나큐브에서 프로젝트를 생성하고 Gradle 및 TypeScript\
+  \ 환경에서 소스 코드를 정적 분석하는 과정을 자세히 설명하며, 필요한 설정과 명령어를 제공합니다. 분석 결과는 소나큐브 콘솔에서 확인할 수 있\
+  으며, CI/CD를 통한 자동화 방법은 다음 글에서 다룹니다."
+categories:
+- "스터디-테스트"
 tags:
-  [
-    Sonarqube,
-    소나큐브,
-    Java,
-    Gradle,
-    Binary,
-    SonarScanner,
-    Scanner,
-    Typescript,
-    TS,
-    Javascript,
-    JS,
-    code analysis,
-    static code analysis,
-  ]
-date: 2023-11-07 22:00:00 +0900
+- "Sonarqube"
+- "소나큐브"
+- "Java"
+- "Gradle"
+- "Binary"
+- "SonarScanner"
+- "Scanner"
+- "Typescript"
+- "TS"
+- "Javascript"
+- "JS"
+- "code analysis"
+- "static code analysis"
+date: "2023-11-07 13:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-11-06-create-sonarqube-project.jpg"
 ---
 
 [소나큐브 에 PostgreSQL DB 설정하기 (with PostgreSQL)](/2023/11/07/sonarqube-db-설정하기) 에서 이어지는 글입니다.

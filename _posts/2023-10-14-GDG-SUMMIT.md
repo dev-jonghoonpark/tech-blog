@@ -1,21 +1,27 @@
 ---
-layout: post
-title: GDG SUMMIT 2023
-description: GDG SUMMIT 2023에서는 GDG 운영진, GDSC 리드, GDE, WTM을 대상으로 커뮤니티 운영 방법과 구글의 기업문화 및 기술 동향에 대한 발표가 진행되었으며, 참석자들은 오프라인에서 네트워킹을 통해 서로의 경험을 공유하고 지식을 나누는 기회를 가졌습니다. 이 행사에서는 개발자의 역할 변화, AI 시대의 방향, 커뮤니티의 세분화 및 기대 사항에 대한 논의가 이루어졌고, 구글 엔지니어들의 협업 방식과 리더십 스킬, 데이터 및 머신러닝의 중요성에 대한 세션도 포함되었습니다.
-categories: [커뮤니티, 행사]
+layout: "post"
+title: "GDG SUMMIT 2023"
+description: "GDG SUMMIT 2023에서는 GDG 운영진, GDSC 리드, GDE, WTM을 대상으로 커뮤니티 운영 방법과 구글의\
+  \ 기업문화 및 기술 동향에 대한 발표가 진행되었으며, 참석자들은 오프라인에서 네트워킹을 통해 서로의 경험을 공유하고 지식을 나누는 기회를 가졌\
+  습니다. 이 행사에서는 개발자의 역할 변화, AI 시대의 방향, 커뮤니티의 세분화 및 기대 사항에 대한 논의가 이루어졌고, 구글 엔지니어들의 협\
+  업 방식과 리더십 스킬, 데이터 및 머신러닝의 중요성에 대한 세션도 포함되었습니다."
+categories:
+- "커뮤니티"
+- "행사"
 tags:
-  [
-    구글,
-    구글 개발자 그룹,
-    Google,
-    GDG,
-    Google Developer Group,
-    서밋,
-    summit,
-    커뮤니티,
-    community,
-  ]
-date: 2023-10-20 10:00:00 +0900
+- "구글"
+- "구글 개발자 그룹"
+- "Google"
+- "GDG"
+- "Google Developer Group"
+- "서밋"
+- "summit"
+- "커뮤니티"
+- "community"
+date: "2023-10-20 01:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-10-14-GDG-SUMMIT.jpg"
 ---
 
 지난 10월 14일에 GDG 서밋이 있었다.

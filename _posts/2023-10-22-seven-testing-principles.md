@@ -1,10 +1,22 @@
 ---
-layout: post
-title: 테스팅의 7 가지 원리 (seven testing principles)
-description: 테스팅의 7가지 원리는 결함 발견, 조기 테스팅의 중요성, 결함 집중 경향, 테스트의 정황 의존성, 반복 테스트의 한계, 오류 부재의 궤변 등을 다루며, 소프트웨어 개발에서 효과적인 테스트 전략 수립을 위한 기초를 제공합니다.
-categories: [스터디-테스트]
-tags: [테스트, 결함, 조기 테스팅, 절약, 집중, 정황, context]
-date: 2023-10-22 12:00:00 +0900
+layout: "post"
+title: "테스팅의 7 가지 원리 (seven testing principles)"
+description: "테스팅의 7가지 원리는 결함 발견, 조기 테스팅의 중요성, 결함 집중 경향, 테스트의 정황 의존성, 반복 테스트의 한계,\
+  \ 오류 부재의 궤변 등을 다루며, 소프트웨어 개발에서 효과적인 테스트 전략 수립을 위한 기초를 제공합니다."
+categories:
+- "스터디-테스트"
+tags:
+- "테스트"
+- "결함"
+- "조기 테스팅"
+- "절약"
+- "집중"
+- "정황"
+- "context"
+date: "2023-10-22 03:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-10-22-seven-testing-principles.jpg"
 ---
 
 ISTQB CTFL 실라버스  

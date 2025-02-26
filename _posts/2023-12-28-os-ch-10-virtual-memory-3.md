@@ -1,25 +1,30 @@
 ---
-layout: post
-title: 운영체제 10장 - 가상 메모리 (3) - 메모리 교체 알고리즘
-description: 운영체제의 가상 메모리에서 페이지 교체 알고리즘을 다루며, 메모리 초과 할당 상황에서 페이지 폴트 발생 시 운영체제가 선택할 수 있는 방법과 페이지 교체 과정에 대해 설명합니다. 페이지 교체 알고리즘에는 FIFO, OPT, LRU, 2차 기회, 계수 기반 알고리즘 등이 있으며, 각 알고리즘의 특징과 성능을 비교합니다. 또한, 페이지 버퍼링 알고리즘과 특수한 어플리케이션에서의 페이지 교체 방법도 논의합니다.
-categories: [스터디-운영채제]
+layout: "post"
+title: "운영체제 10장 - 가상 메모리 (3) - 메모리 교체 알고리즘"
+description: "운영체제의 가상 메모리에서 페이지 교체 알고리즘을 다루며, 메모리 초과 할당 상황에서 페이지 폴트 발생 시 운영체제가 선택\
+  할 수 있는 방법과 페이지 교체 과정에 대해 설명합니다. 페이지 교체 알고리즘에는 FIFO, OPT, LRU, 2차 기회, 계수 기반 알고리즘\
+  \ 등이 있으며, 각 알고리즘의 특징과 성능을 비교합니다. 또한, 페이지 버퍼링 알고리즘과 특수한 어플리케이션에서의 페이지 교체 방법도 논의합니\
+  다."
+categories:
+- "스터디-운영채제"
 tags:
-  [
-    운영체제,
-    OS,
-    Operating System,
-    memory,
-    virtual memory,
-    페이지 교체,
-    FIFO,
-    OPT,
-    LRU,
-    second chance,
-    2차 기회,
-    counting,
-    buffering,
-  ]
-date: 2024-01-05 22:15:00 +0900
+- "운영체제"
+- "OS"
+- "Operating System"
+- "memory"
+- "virtual memory"
+- "페이지 교체"
+- "FIFO"
+- "OPT"
+- "LRU"
+- "second chance"
+- "2차 기회"
+- "counting"
+- "buffering"
+date: "2024-01-05 13:15:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-12-28-os-ch-10-virtual-memory-3.jpg"
 ---
 
 - [운영체제 10장 - 가상 메모리 (1) - 기본](/2023/12/25/os-ch-10-virtual-memory)

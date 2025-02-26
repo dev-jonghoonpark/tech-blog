@@ -1,25 +1,30 @@
 ---
-layout: post
+layout: "post"
 title: "[k8s, kubernetes] microk8s node 추가 하기"
-description: MicroK8s 환경에 노드를 추가하는 방법과 발생한 문제를 해결한 과정을 다룹니다. K8S의 Worker Node와 Master Node의 역할을 이해하고, 고가용성(HA) 설정을 고려하여 노드를 추가하는 방법을 설명합니다. 노드 연결 후 통신 문제와 API 서버 엔드포인트 설정, INTERNAL-IP 수정 과정을 통해 정상적인 클러스터 구성을 완료하는 방법을 안내합니다. 추가적으로 kubectl alias 설정과 MicroK8s 재시작 방법도 제공합니다.
-categories: [스터디-인프라, 개발]
+description: "MicroK8s 환경에 노드를 추가하는 방법과 발생한 문제를 해결한 과정을 다룹니다. K8S의 Worker Node와 Master\
+  \ Node의 역할을 이해하고, 고가용성(HA) 설정을 고려하여 노드를 추가하는 방법을 설명합니다. 노드 연결 후 통신 문제와 API 서버 엔드\
+  포인트 설정, INTERNAL-IP 수정 과정을 통해 정상적인 클러스터 구성을 완료하는 방법을 안내합니다. 추가적으로 kubectl alias\
+  \ 설정과 MicroK8s 재시작 방법도 제공합니다."
+categories:
+- "스터디-인프라"
+- "개발"
 tags:
-  [
-    k8s,
-    kubernetes,
-    node,
-    master,
-    worker,
-    add-node,
-    ha,
-    high availability,
-    apiserver,
-    advertise address,
-    node ip,
-    internal ip,
-  ]
-date: 2024-08-31 08:30:00 +0900
+- "k8s"
+- "kubernetes"
+- "node"
+- "master"
+- "worker"
+- "add-node"
+- "ha"
+- "high availability"
+- "apiserver"
+- "advertise address"
+- "node ip"
+- "internal ip"
+date: "2024-08-30 23:30:00 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2024-08-29-microk8s-add-node.jpg"
 ---
 
 microk8s 로 구성한 k8s 환경에 추가적으로 노드를 구성하고자 하였다. 더 다양한 시나리오를 실습/테스트할 수 있을 것이라 기대했다.

@@ -1,34 +1,39 @@
 ---
-layout: post
+layout: "post"
 title: "Spring AI 사용을 위한 AI 핵심 컨셉 (2) - 토큰, 구조화된 출력, 모델 튜닝, 함수 호출, RAG, 평가"
-description: Spring AI 사용을 위한 핵심 AI 개념을 다룬 글로, 토큰의 정의와 중요성, 구조화된 출력의 필요성, 데이터 및 API 통합 방법, 검색증강생성(RAG) 기술, 함수 호출 메커니즘, AI 응답 평가 방법 등을 설명합니다. 토큰은 AI 모델의 기본 요소로, 비용과 관련이 있으며, 출력은 JSON 형태로 요구되지만 문자열로 반환됩니다. RAG는 비정형 데이터를 처리하여 AI 모델의 정확성을 높이는 기술이며, 함수 호출은 외부 API와의 연결을 통해 실시간 데이터를 제공하는 기능입니다. AI 응답의 정확성과 유용성을 평가하기 위한 방법도 제시됩니다.
-categories: [스터디-AI]
-tags: [
-    AI,
-    Gen AI,
-    Generative AI,
-    인공지능,
-    생성형 AI,
-    prompt,
-    프롬프트,
-    spring,
-    spring ai,
-    컨셉,
-    개념,
-    java,
-    토큰,
-    Token,
-    구조화된 출럭,
-    Structured Output,
-    Tuning
-    RAG,
-    Function Call,
-    함수 호출,
-    평가,
-    Evaluating,
-  ]
-date: 2024-06-13 22:20:00 +0900
+description: "Spring AI 사용을 위한 핵심 AI 개념을 다룬 글로, 토큰의 정의와 중요성, 구조화된 출력의 필요성, 데이터 및 API\
+  \ 통합 방법, 검색증강생성(RAG) 기술, 함수 호출 메커니즘, AI 응답 평가 방법 등을 설명합니다. 토큰은 AI 모델의 기본 요소로, 비용\
+  과 관련이 있으며, 출력은 JSON 형태로 요구되지만 문자열로 반환됩니다. RAG는 비정형 데이터를 처리하여 AI 모델의 정확성을 높이는 기술이\
+  며, 함수 호출은 외부 API와의 연결을 통해 실시간 데이터를 제공하는 기능입니다. AI 응답의 정확성과 유용성을 평가하기 위한 방법도 제시됩니\
+  다."
+categories:
+- "스터디-AI"
+tags:
+- "AI"
+- "Gen AI"
+- "Generative AI"
+- "인공지능"
+- "생성형 AI"
+- "prompt"
+- "프롬프트"
+- "spring"
+- "spring ai"
+- "컨셉"
+- "개념"
+- "java"
+- "토큰"
+- "Token"
+- "구조화된 출럭"
+- "Structured Output"
+- "Tuning RAG"
+- "Function Call"
+- "함수 호출"
+- "평가"
+- "Evaluating"
+date: "2024-06-13 13:20:00 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2024-06-13-ai-core-concepts-for-spring-ai-2.jpg"
 ---
 
 아래 글은 spring ai 의 doc 을 번역하여 옮긴 것입니다.

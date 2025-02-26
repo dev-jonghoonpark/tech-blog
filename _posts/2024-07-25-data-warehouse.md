@@ -1,25 +1,29 @@
 ---
-layout: post
+layout: "post"
 title: "[한빛앤] 데이터웨어하우스로 효율적인 분석 시스템 만들기 - 후기"
-description: 한빛앤에서 진행한 세미나 "데이터웨어하우스로 효율적인 분석 시스템 만들기"에서는 데이터 웨어하우스의 개념과 OLTP, OLAP의 차이, 데이터 웨어하우스와 데이터 레이크의 특징을 설명하며, 효과적인 데이터 분석을 위한 ETL 과정과 스타 스키마, 스노우플레이크 스키마, 데이터 마트 구축 방법 등을 다루었습니다. 또한, 데이터 품질의 중요성과 분석 시 패턴을 찾아보는 접근법에 대한 팁도 공유되었습니다.
-categories: [행사]
+description: "한빛앤에서 진행한 세미나 \"데이터웨어하우스로 효율적인 분석 시스템 만들기\"에서는 데이터 웨어하우스의 개념과 OLTP,\
+  \ OLAP의 차이, 데이터 웨어하우스와 데이터 레이크의 특징을 설명하며, 효과적인 데이터 분석을 위한 ETL 과정과 스타 스키마, 스노우플레이\
+  크 스키마, 데이터 마트 구축 방법 등을 다루었습니다. 또한, 데이터 품질의 중요성과 분석 시 패턴을 찾아보는 접근법에 대한 팁도 공유되었습니다\
+  ."
+categories:
+- "행사"
 tags:
-  [
-    데이터웨어하우스,
-    Data Warehouse,
-    DW,
-    한빛앤,
-    분석,
-    analytics,
-    분석 시스템,
-    analytics system,
-    DDIA,
-    Data Driven,
-    Database,
-    DB,
-  ]
-date: 2024-07-25 19:00:00 +0900
+- "데이터웨어하우스"
+- "Data Warehouse"
+- "DW"
+- "한빛앤"
+- "분석"
+- "analytics"
+- "분석 시스템"
+- "analytics system"
+- "DDIA"
+- "Data Driven"
+- "Database"
+- "DB"
+date: "2024-07-25 10:00:00 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2024-07-25-data-warehouse.jpg"
 ---
 
 [데이터웨어하우스로 효율적인 분석 시스템 만들기](https://festa.io/events/5501)

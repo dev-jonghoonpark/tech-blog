@@ -1,27 +1,31 @@
 ---
-layout: post
-title: Spring 기반 프로젝트에서 테스트컨테이너 (testcontainer) 사용해보기
-description: Spring 기반 프로젝트에서 테스트컨테이너를 사용하여 데이터베이스 테스트를 설정하는 방법을 소개합니다. Gradle에 필요한 의존성을 추가하고, MySQLContainer를 설정하여 로컬 MySQL DB와 포트 충돌을 피하며, application.yml을 구성하여 테스트가 가능하도록 합니다. 또한, 테스트 실행 시 데이터 정리를 위해 로컬에서 별도의 데이터베이스를 사용하고, 각 테스트 케이스마다 초기화하는 방식을 채택합니다.
-categories: [스터디-테스트]
-tags: [
-    테스트,
-    테스팅,
-    test,
-    testing
-    스프링,
-    spring,
-    도커,
-    docker,
-    컨테이너,
-    container,
-    testcontainer,
-    테스트컨테이너,
-    데이터베이스 테스트,
-    데이터베이스
-    database,
-    db,
-  ]
-date: 2023-12-07 21:00:00 +0900
+layout: "post"
+title: "Spring 기반 프로젝트에서 테스트컨테이너 (testcontainer) 사용해보기"
+description: "Spring 기반 프로젝트에서 테스트컨테이너를 사용하여 데이터베이스 테스트를 설정하는 방법을 소개합니다. Gradle에 필\
+  요한 의존성을 추가하고, MySQLContainer를 설정하여 로컬 MySQL DB와 포트 충돌을 피하며, application.yml을 구성하\
+  여 테스트가 가능하도록 합니다. 또한, 테스트 실행 시 데이터 정리를 위해 로컬에서 별도의 데이터베이스를 사용하고, 각 테스트 케이스마다 초기화\
+  하는 방식을 채택합니다."
+categories:
+- "스터디-테스트"
+tags:
+- "테스트"
+- "테스팅"
+- "test"
+- "testing 스프링"
+- "spring"
+- "도커"
+- "docker"
+- "컨테이너"
+- "container"
+- "testcontainer"
+- "테스트컨테이너"
+- "데이터베이스 테스트"
+- "데이터베이스 database"
+- "db"
+date: "2023-12-07 12:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-12-07-testcontainer-with-spring.jpg"
 ---
 
 Well Grounded Java Developer 의 14장 에는 testcontainer 에 대한 이야기가 나온다.

@@ -1,20 +1,27 @@
 ---
-layout: post
-title: 슬랙봇을 이용하여 슬랙 대화 내역 PostgreSQL 데이터베이스에 기록하기
-description: 슬랙봇을 사용하여 슬랙 대화 내역을 PostgreSQL 데이터베이스에 기록하는 방법을 소개합니다. 무료 플랜의 제한으로 메시지가 사라지는 문제를 해결하기 위해, supabase의 PostgreSQL을 선택하여 데이터베이스를 구성하고, node.js 서버에서 봇을 실행하여 메시지를 자동으로 저장하도록 설정했습니다. 이 과정에서 데이터베이스와 서버 간의 연결을 설정하고, 슬랙에서 발생하는 메시지를 데이터베이스에 삽입하는 코드를 구현했습니다. 최종적으로 데이터가 정상적으로 저장되는 것을 확인하였으며, 향후 사용자 친화적으로 데이터를 재구성할 계획입니다.
-categories: [개발, 스터디-테스트]
+layout: "post"
+title: "슬랙봇을 이용하여 슬랙 대화 내역 PostgreSQL 데이터베이스에 기록하기"
+description: "슬랙봇을 사용하여 슬랙 대화 내역을 PostgreSQL 데이터베이스에 기록하는 방법을 소개합니다. 무료 플랜의 제한으로 메\
+  시지가 사라지는 문제를 해결하기 위해, supabase의 PostgreSQL을 선택하여 데이터베이스를 구성하고, node.js 서버에서 봇을 실\
+  행하여 메시지를 자동으로 저장하도록 설정했습니다. 이 과정에서 데이터베이스와 서버 간의 연결을 설정하고, 슬랙에서 발생하는 메시지를 데이터베이스\
+  에 삽입하는 코드를 구현했습니다. 최종적으로 데이터가 정상적으로 저장되는 것을 확인하였으며, 향후 사용자 친화적으로 데이터를 재구성할 계획입니다\
+  ."
+categories:
+- "개발"
+- "스터디-테스트"
 tags:
-  [
-    slack,
-    bot,
-    PostgreSQL,
-    pg,
-    socket mode,
-    app level token,
-    bot token,
-    socket mode,
-  ]
-date: 2023-12-17 20:40:00 +0900
+- "slack"
+- "bot"
+- "PostgreSQL"
+- "pg"
+- "socket mode"
+- "app level token"
+- "bot token"
+- "socket mode"
+date: "2023-12-17 11:40:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-12-17-archive-slack-messages-to-postgresql-database.jpg"
 ---
 
 오랜만에 시간이 나서 개발을 진행해보았다.

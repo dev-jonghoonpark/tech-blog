@@ -1,24 +1,30 @@
 ---
-layout: post
-title: 운영체제 10장 - 가상 메모리 (1) - 기본
-description: 운영체제의 가상 메모리 개념과 요구 페이징을 설명하며, 가상 메모리가 프로그램의 물리 메모리 제한을 극복하고 효율적인 메모리 사용을 가능하게 하는 방법을 다룹니다. 이 장에서는 FIFO, 최적 및 LRU 페이지 교체 알고리즘을 적용하고, 프로세스의 작업 집합 및 프로그램 지역성과의 관계를 설명합니다. 또한, Linux, Windows 10, Solaris의 가상 메모리 관리 방법과 C 언어를 이용한 가상 메모리 관리자 시뮬레이션 설계에 대해 논의합니다. 요구 페이징은 필요한 페이지만 메모리에 로드하여 페이지 폴트를 처리하는 과정과 그에 따른 성능 향상을 다룹니다.
-categories: [스터디-운영체제]
+layout: "post"
+title: "운영체제 10장 - 가상 메모리 (1) - 기본"
+description: "운영체제의 가상 메모리 개념과 요구 페이징을 설명하며, 가상 메모리가 프로그램의 물리 메모리 제한을 극복하고 효율적인 메모\
+  리 사용을 가능하게 하는 방법을 다룹니다. 이 장에서는 FIFO, 최적 및 LRU 페이지 교체 알고리즘을 적용하고, 프로세스의 작업 집합 및 프\
+  로그램 지역성과의 관계를 설명합니다. 또한, Linux, Windows 10, Solaris의 가상 메모리 관리 방법과 C 언어를 이용한 가상\
+  \ 메모리 관리자 시뮬레이션 설계에 대해 논의합니다. 요구 페이징은 필요한 페이지만 메모리에 로드하여 페이지 폴트를 처리하는 과정과 그에 따른\
+  \ 성능 향상을 다룹니다."
+categories:
+- "스터디-운영체제"
 tags:
-  [
-    운영체제,
-    OS,
-    Operating System,
-    memory,
-    가상 메모리,
-    virtual memory,
-    요구 페이징,
-    demand paging,
-    page fault,
-    trap,
-    참조의 지역성,
-    locality of reference,
-  ]
-date: 2023-12-25 22:00:00 +0900
+- "운영체제"
+- "OS"
+- "Operating System"
+- "memory"
+- "가상 메모리"
+- "virtual memory"
+- "요구 페이징"
+- "demand paging"
+- "page fault"
+- "trap"
+- "참조의 지역성"
+- "locality of reference"
+date: "2023-12-25 13:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-12-25-os-ch-10-virtual-memory.jpg"
 ---
 
 ## 가상 메모리

@@ -1,19 +1,25 @@
 ---
-layout: post
-title: 함수형 아키텍처와 출력 기반 테스트로의 전환 - 단위테스트 6장
-date: "2023-07-15 01:33:08 +0900"
-description: 함수형 아키텍처와 출력 기반 테스트로의 전환을 다룬 이 글에서는, 초기의 감사 시스템 구현에서 파일 시스템 의존성을 제거하고, 목(mock) 객체를 활용하여 테스트를 독립적으로 수행하는 방법을 설명합니다. 리팩토링을 통해 비즈니스 로직과 사이드 이펙트를 분리하고, 새로운 Persister 클래스를 도입하여 테스트의 속도와 유지 보수성을 개선했습니다. 최종적으로, 함수형 아키텍처를 적용함으로써 오류 처리도 간단해지고 명확해졌습니다.
+layout: "post"
+title: "함수형 아키텍처와 출력 기반 테스트로의 전환 - 단위테스트 6장"
+description: "함수형 아키텍처와 출력 기반 테스트로의 전환을 다룬 이 글에서는, 초기의 감사 시스템 구현에서 파일 시스템 의존성을 제거하\
+  고, 목(mock) 객체를 활용하여 테스트를 독립적으로 수행하는 방법을 설명합니다. 리팩토링을 통해 비즈니스 로직과 사이드 이펙트를 분리하고,\
+  \ 새로운 Persister 클래스를 도입하여 테스트의 속도와 유지 보수성을 개선했습니다. 최종적으로, 함수형 아키텍처를 적용함으로써 오류 처리\
+  도 간단해지고 명확해졌습니다."
 categories:
-  - 스터디-테스트
+- "스터디-테스트"
 tags:
-  - 테스트
-  - 단위 테스트
-  - test
-  - unit test
-  - 함수형 아키텍처
-  - fuctional architecture
-  - 출력 기반 테스트
-  - output based testing
+- "테스트"
+- "단위 테스트"
+- "test"
+- "unit test"
+- "함수형 아키텍처"
+- "fuctional architecture"
+- "출력 기반 테스트"
+- "output based testing"
+date: "2023-07-14 16:33:08 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-07-15-transitioning-to-functional-architecture-and-output-based-testing.jpg"
 ---
 
 단위테스트 (블라디미르 코리코프)

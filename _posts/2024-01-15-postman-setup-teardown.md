@@ -1,21 +1,26 @@
 ---
-layout: post
-title: postman - setup, teardown 처리하기 (using newman)
-description: "Postman을 사용한 테스트 자동화에서 데이터 초기화와 정리에 대한 고민을 해결하기 위해 Newman을 활용하는 방법을 소개합니다. Newman은 Postman 컬렉션을 CLI 환경에서 실행할 수 있게 해주며, 특정 이벤트(예: beforeTest, test)를 통해 setup과 teardown 처리를 할 수 있습니다. 이 글에서는 Newman의 사용법과 간단한 테스트 예제를 통해 데이터 셋팅과 정리를 어떻게 효율적으로 수행할 수 있는지 설명합니다."
-categories: [스터디-테스트]
+layout: "post"
+title: "postman - setup, teardown 처리하기 (using newman)"
+description: "Postman을 사용한 테스트 자동화에서 데이터 초기화와 정리에 대한 고민을 해결하기 위해 Newman을 활용하는 방법을\
+  \ 소개합니다. Newman은 Postman 컬렉션을 CLI 환경에서 실행할 수 있게 해주며, 특정 이벤트(예: beforeTest, test)를\
+  \ 통해 setup과 teardown 처리를 할 수 있습니다. 이 글에서는 Newman의 사용법과 간단한 테스트 예제를 통해 데이터 셋팅과 정리\
+  를 어떻게 효율적으로 수행할 수 있는지 설명합니다."
+categories:
+- "스터디-테스트"
 tags:
-  [
-    테스트,
-    Testing,
-    Postman,
-    Newman,
-    Event,
-    Setup,
-    Teardown,
-    external library,
-    api test,
-  ]
-date: 2024-01-15 13:30:00 +0900
+- "테스트"
+- "Testing"
+- "Postman"
+- "Newman"
+- "Event"
+- "Setup"
+- "Teardown"
+- "external library"
+- "api test"
+date: "2024-01-15 04:30:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2024-01-15-postman-setup-teardown.jpg"
 ---
 
 어떻게 보면 별거 아닌 이야기 인데 그래도 비슷한 고민을 하고 있으신 분이 있으실까 싶어서 글로 정리를 해본다.

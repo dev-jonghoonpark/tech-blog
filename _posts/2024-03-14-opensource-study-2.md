@@ -1,29 +1,35 @@
 ---
-layout: post
-title: 오픈소스 스터디 3기 참여 후기 (오픈소스 PR 해보기, github 후원(sponsor) 해보기)
-description: 오픈소스 스터디 3기에 참여한 후기를 공유하며, Playwright와 Querydsl 프로젝트에 기여한 경험을 소개합니다. 스터디를 통해 동기부여를 얻고, $50의 참가비로 오픈소스 후원 기능을 처음 사용해보았습니다. 다양한 이슈를 해결하며 자신감을 얻었고, 향후 Spring 관련 기여도 계획하고 있습니다. 인제님과 함께한 이번 스터디는 오픈소스에 대한 이해를 높이고, 다른 참가자들과의 교류를 통해 많은 자극을 받는 시간이었습니다.
-categories: [개발, 오픈소스]
+layout: "post"
+title: "오픈소스 스터디 3기 참여 후기 (오픈소스 PR 해보기, github 후원(sponsor) 해보기)"
+description: "오픈소스 스터디 3기에 참여한 후기를 공유하며, Playwright와 Querydsl 프로젝트에 기여한 경험을 소개합니다\
+  . 스터디를 통해 동기부여를 얻고, $50의 참가비로 오픈소스 후원 기능을 처음 사용해보았습니다. 다양한 이슈를 해결하며 자신감을 얻었고, 향후\
+  \ Spring 관련 기여도 계획하고 있습니다. 인제님과 함께한 이번 스터디는 오픈소스에 대한 이해를 높이고, 다른 참가자들과의 교류를 통해 많\
+  은 자극을 받는 시간이었습니다."
+categories:
+- "개발"
+- "오픈소스"
 tags:
-  [
-    개발,
-    오픈소스,
-    기여,
-    컨트리뷰트,
-    opensource,
-    contribute,
-    pull request,
-    풀리퀘스트,
-    issue,
-    이슈,
-    github,
-    깃헙,
-    스폰서,
-    sponsor,
-    후원,
-    playwright,
-    querydsl,
-  ]
-date: 2024-03-14 21:00:00 +0900
+- "개발"
+- "오픈소스"
+- "기여"
+- "컨트리뷰트"
+- "opensource"
+- "contribute"
+- "pull request"
+- "풀리퀘스트"
+- "issue"
+- "이슈"
+- "github"
+- "깃헙"
+- "스폰서"
+- "sponsor"
+- "후원"
+- "playwright"
+- "querydsl"
+date: "2024-03-14 12:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2024-03-14-opensource-study-2.jpg"
 ---
 
 요즘 회사 일이 많아져서 정신이 없지만. 공부는 여전히 열심히 하고 있고, 활동도 여전히 열심히 하고 있다.

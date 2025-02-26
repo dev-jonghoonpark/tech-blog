@@ -1,25 +1,31 @@
 ---
-layout: post
-title: AWS Community day 2023 참여 기록 (with AWSKRUG)
-description: AWS Community Day 2023에 참여한 기록으로, AWSKRUG 주최 행사에서 쿠버네티스 관련 핸즈온랩 세션에 참석하였습니다. 기차를 놓치는 해프닝이 있었지만 무사히 행사에 도착했으며, 다양한 트랙 중 컨테이너 세션을 선택했습니다. 실습은 자율적으로 진행되었고, 네트워킹 기회도 있었으나 제한적이었습니다. 앞으로 architecture 소모임에 참여할 계획이며, 핸즈온 세션 관련 내용을 별도로 정리할 예정입니다.
-categories: [행사, 커뮤니티]
+layout: "post"
+title: "AWS Community day 2023 참여 기록 (with AWSKRUG)"
+description: "AWS Community Day 2023에 참여한 기록으로, AWSKRUG 주최 행사에서 쿠버네티스 관련 핸즈온랩 세션에\
+  \ 참석하였습니다. 기차를 놓치는 해프닝이 있었지만 무사히 행사에 도착했으며, 다양한 트랙 중 컨테이너 세션을 선택했습니다. 실습은 자율적으로\
+  \ 진행되었고, 네트워킹 기회도 있었으나 제한적이었습니다. 앞으로 architecture 소모임에 참여할 계획이며, 핸즈온 세션 관련 내용을 별\
+  도로 정리할 예정입니다."
+categories:
+- "행사"
+- "커뮤니티"
 tags:
-  [
-    AWS,
-    AWSKRUG,
-    핸즈온,
-    실습,
-    EKS,
-    쿠버네티스,
-    컨테이너,
-    Docker,
-    Kubernetes,
-    K8s,
-    커뮤니티,
-    행사,
-    굿즈,
-  ]
-date: 2023-11-05 22:00:00 +0900
+- "AWS"
+- "AWSKRUG"
+- "핸즈온"
+- "실습"
+- "EKS"
+- "쿠버네티스"
+- "컨테이너"
+- "Docker"
+- "Kubernetes"
+- "K8s"
+- "커뮤니티"
+- "행사"
+- "굿즈"
+date: "2023-11-05 13:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-11-04-aws-community-day-2023.jpg"
 ---
 
 AWSKRUG 주최 행사(소모임 포함)에 3번째 참여이다.

@@ -1,26 +1,30 @@
 ---
-layout: post
+layout: "post"
 title: "[Database] 데이터베이스 복구 알고리즘"
-description: 데이터베이스 복구 알고리즘에 대한 포스트에서는 DBMS의 스틸/노스틸 및 포스/노포스 정책을 통해 메모리의 변경 사항을 디스크로 플러시하는 시점을 결정하는 방법을 설명합니다. ARIES 알고리즘은 노스틸/노포스 정책을 기반으로 하며, 리두와 언두 로그를 활용하여 빠른 복구와 동시성을 높이는 방식을 채택합니다. 또한, 퍼지 체크포인트를 통해 더티 페이지를 관리하며, 복구 과정은 분석, 리두, 언두 단계로 나뉘어 데이터베이스를 일관된 상태로 복원합니다. MySQL은 이러한 개념을 참고하여 복구 과정을 수행하는 것으로 보입니다.
-categories: [스터디-데이터베이스]
-tags: [
-    Database,
-    internals
-    Database internals,
-    전략,
-    WAL,
-    Force,
-    No-Force,
-    Steal,
-    No-Steal,
-    Redo,
-    Undo,
-    Log,
-    restore,
-    ARIES,
-  ]
-date: 2024-09-01 23:30:00 +0900
+description: "데이터베이스 복구 알고리즘에 대한 포스트에서는 DBMS의 스틸/노스틸 및 포스/노포스 정책을 통해 메모리의 변경 사항을 디\
+  스크로 플러시하는 시점을 결정하는 방법을 설명합니다. ARIES 알고리즘은 노스틸/노포스 정책을 기반으로 하며, 리두와 언두 로그를 활용하여 빠\
+  른 복구와 동시성을 높이는 방식을 채택합니다. 또한, 퍼지 체크포인트를 통해 더티 페이지를 관리하며, 복구 과정은 분석, 리두, 언두 단계로 나\
+  뉘어 데이터베이스를 일관된 상태로 복원합니다. MySQL은 이러한 개념을 참고하여 복구 과정을 수행하는 것으로 보입니다."
+categories:
+- "스터디-데이터베이스"
+tags:
+- "Database"
+- "internals Database internals"
+- "전략"
+- "WAL"
+- "Force"
+- "No-Force"
+- "Steal"
+- "No-Steal"
+- "Redo"
+- "Undo"
+- "Log"
+- "restore"
+- "ARIES"
+date: "2024-09-01 14:30:00 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2024-09-01-database-steal-and-force.jpg"
 ---
 
 아래 내용들은 Database Internals 에 있는 내용을 정리한 것이다.

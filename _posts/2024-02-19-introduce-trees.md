@@ -1,32 +1,34 @@
 ---
-layout: post
-title: 트리 알아보기 - 이진 트리, 이진 탐색 트리, AVL 트리, B-트리, B+트리, Red Black 트리
-description: 트리의 다양한 종류를 살펴보는 블로그 포스트로, 이진 트리, 이진 탐색 트리, AVL 트리, B-트리, B+트리, Red Black 트리에 대한 개요와 특징을 정리하였습니다. 각 트리의 정의, 삽입 및 삭제 과정, 성능 분석을 포함하며, 관련 링크와 시각화 자료도 제공하여 이해를 돕습니다.
-categories: [개발]
-tags: [
-    트리,
-    알고리즘,
-    자료구조,
-    이진 트리,
-    이진 탐색 트리,
-    AVL 트리,
-    B-트리,
-    B 트리
-    B+트리,
-    Red Black 트리,
-    binary tree,
-    binary search tree,
-    AVL Tree,
-    B-Tree,
-    B Tree,
-    B+Tree,
-    Red Black 트리,
-    K-DEVCON,
-    DEVCON,
-  ]
-date: 2024-02-19 23:59:00 +0900
+layout: "post"
+title: "트리 알아보기 - 이진 트리, 이진 탐색 트리, AVL 트리, B-트리, B+트리, Red Black 트리"
+description: "트리의 다양한 종류를 살펴보는 블로그 포스트로, 이진 트리, 이진 탐색 트리, AVL 트리, B-트리, B+트리, Red\
+  \ Black 트리에 대한 개요와 특징을 정리하였습니다. 각 트리의 정의, 삽입 및 삭제 과정, 성능 분석을 포함하며, 관련 링크와 시각화 자료\
+  도 제공하여 이해를 돕습니다."
+categories:
+- "개발"
+tags:
+- "트리"
+- "알고리즘"
+- "자료구조"
+- "이진 트리"
+- "이진 탐색 트리"
+- "AVL 트리"
+- "B-트리"
+- "B 트리 B+트리"
+- "Red Black 트리"
+- "binary tree"
+- "binary search tree"
+- "AVL Tree"
+- "B-Tree"
+- "B Tree"
+- "B+Tree"
+- "Red Black 트리"
+- "K-DEVCON"
+- "DEVCON"
+date: "2024-02-19 14:59:00 +0000"
+toc: true
 image:
-  path: /assets/images/2024-02-19-introduce-trees/thumbnail.png
+  path: "/assets/thumbnails/2024-02-19-introduce-trees.jpg"
 ---
 
 ![트리 알아보기 썸네일](/assets/images/2024-02-19-introduce-trees/thumbnail.png)

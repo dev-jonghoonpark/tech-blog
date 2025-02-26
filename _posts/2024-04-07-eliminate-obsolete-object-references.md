@@ -1,10 +1,23 @@
 ---
-layout: post
+layout: "post"
 title: "[Java] 다 쓴 객체 참조를 해제하라."
-description: Java에서 메모리 누수를 방지하기 위해 다 쓴 객체 참조를 해제하는 방법을 설명합니다. 스택 구현 예시를 통해 pop 메서드에서 요소를 제거할 때 null 처리를 하지 않으면 메모리 누수가 발생할 수 있음을 보여줍니다. 참조를 직접 null 처리하는 것은 예외적인 경우에만 필요하며, 일반적으로는 변수의 유효 범위를 벗어나게 하여 참조를 해제하는 것이 바람직합니다. 가비지 컬렉터가 비활성 영역의 데이터를 인식하지 못하므로, 프로그래머가 직접 관리해야 할 필요가 있습니다.
-categories: [스터디-자바]
-tags: [자바, java, call by value, reference, pointer, java 21]
-date: 2024-04-07 14:00:00 +0900
+description: "Java에서 메모리 누수를 방지하기 위해 다 쓴 객체 참조를 해제하는 방법을 설명합니다. 스택 구현 예시를 통해 pop 메\
+  서드에서 요소를 제거할 때 null 처리를 하지 않으면 메모리 누수가 발생할 수 있음을 보여줍니다. 참조를 직접 null 처리하는 것은 예외적인\
+  \ 경우에만 필요하며, 일반적으로는 변수의 유효 범위를 벗어나게 하여 참조를 해제하는 것이 바람직합니다. 가비지 컬렉터가 비활성 영역의 데이터를\
+  \ 인식하지 못하므로, 프로그래머가 직접 관리해야 할 필요가 있습니다."
+categories:
+- "스터디-자바"
+tags:
+- "자바"
+- "java"
+- "call by value"
+- "reference"
+- "pointer"
+- "java 21"
+date: "2024-04-07 05:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2024-04-07-eliminate-obsolete-object-references.jpg"
 ---
 
 ## 개요

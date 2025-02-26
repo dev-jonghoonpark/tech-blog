@@ -1,18 +1,21 @@
 ---
-layout: post
-title: build linux kernel from macbook pro m1
-date: "2023-08-21 01:48:49 +0900"
-description: MacBook Pro M1에서 리눅스 커널을 빌드하는 과정에 대한 경험을 공유합니다. 운영체제 스터디의 일환으로 리눅스 커널 소스 코드를 다운로드하고, `make menuconfig`로 설정한 후, `make` 명령어로 커널을 컴파일했습니다. ARM 기반의 M1에서의 어려움과 C 언어에 대한 부족한 지식으로 인해 여러 오류를 해결하며 진행했으며, 최종적으로 vmlinux 파일을 생성했습니다. 이 과정에서 openssl 및 elf.h 헤더 파일 문제를 해결하고, 많은 수의 코드 수정을 통해 빌드에 성공했습니다. 결론적으로, Apple Silicon에서 리눅스 커널 빌드는 도전적이며, 많은 시간과 노력이 필요했습니다.
+layout: "post"
+title: "build linux kernel from macbook pro m1"
+description: "Building the Linux kernel on a MacBook Pro with an M1 chip involves downloading the source code, configuring the kernel, and addressing compatibility issues like outdated make versions, missing elf.h, and OpenSSL setup. Despite numerous challenges and extensive modifications, including handling 500+ errors with batch fixes, the process resulted in a successful build. However, it's not recommended due to the significant effort and system limitations."
 categories:
-  - 스터디-운영체제
+- "스터디-운영체제"
 tags:
-  - Operating System
-  - linux
-  - kernel
-  - kernel build
-  - mac m1
-  - apple silicon
-  - linux kernel
+- "Operating System"
+- "linux"
+- "kernel"
+- "kernel build"
+- "mac m1"
+- "apple silicon"
+- "linux kernel"
+date: "2023-08-20 16:48:49 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-08-21-build-linux-kernel-from-macbook-pro-m1-en.jpg"
 ---
 
 <p>

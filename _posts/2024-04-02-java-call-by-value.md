@@ -1,10 +1,22 @@
 ---
-layout: post
+layout: "post"
 title: "[Java] call by value"
-description: 자바는 값을 복사하여 전달하는 call by value 방식을 사용하며, 객체를 전달할 때는 객체의 참조 값을 복사합니다. 이로 인해 객체의 속성을 변경하려고 해도 원본 객체의 값은 변하지 않습니다. 예를 들어, `changeName` 메소드에서 새로운 객체를 생성하면 원본 객체인 `me`는 영향을 받지 않지만, 객체의 속성을 직접 수정하면 값이 변경됩니다.
-categories: [스터디-자바]
-tags: [자바, java, call by value, reference, pointer, java 21]
-date: 2024-03-31 17:00:00 +0900
+description: "자바는 값을 복사하여 전달하는 call by value 방식을 사용하며, 객체를 전달할 때는 객체의 참조 값을 복사합니다\
+  . 이로 인해 객체의 속성을 변경하려고 해도 원본 객체의 값은 변하지 않습니다. 예를 들어, `changeName` 메소드에서 새로운 객체를 생\
+  성하면 원본 객체인 `me`는 영향을 받지 않지만, 객체의 속성을 직접 수정하면 값이 변경됩니다."
+categories:
+- "스터디-자바"
+tags:
+- "자바"
+- "java"
+- "call by value"
+- "reference"
+- "pointer"
+- "java 21"
+date: "2024-03-31 08:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2024-04-02-java-call-by-value.jpg"
 ---
 
 ## 개요

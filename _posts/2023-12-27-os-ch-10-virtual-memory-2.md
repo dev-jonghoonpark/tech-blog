@@ -1,22 +1,27 @@
 ---
-layout: post
-title: 운영체제 10장 - 가상 메모리 (2) - 요구 페이징, copy-on-write
-description: 운영체제의 가상 메모리와 요구 페이징에 대해 다루며, 가용 프레임 리스트와 zero-fill-on-demand 기법을 통해 메모리 할당과 보안 취약점 방지를 설명합니다. 요구 페이징의 성능은 페이지 폴트 발생 시 실질 접근 시간이 크게 증가함을 보여주며, 페이지 폴트율을 낮추는 것이 중요하다고 강조합니다. 또한, 쓰기 시 복사(copy-on-write) 방식을 통해 부모 프로세스의 페이지를 공유하며, 수정 시에만 복사본을 생성하여 효율성을 높이는 방법을 설명합니다.
-categories: [스터디-운영체제]
+layout: "post"
+title: "운영체제 10장 - 가상 메모리 (2) - 요구 페이징, copy-on-write"
+description: "운영체제의 가상 메모리와 요구 페이징에 대해 다루며, 가용 프레임 리스트와 zero-fill-on-demand 기법을 통해\
+  \ 메모리 할당과 보안 취약점 방지를 설명합니다. 요구 페이징의 성능은 페이지 폴트 발생 시 실질 접근 시간이 크게 증가함을 보여주며, 페이지\
+  \ 폴트율을 낮추는 것이 중요하다고 강조합니다. 또한, 쓰기 시 복사(copy-on-write) 방식을 통해 부모 프로세스의 페이지를 공유하며\
+  , 수정 시에만 복사본을 생성하여 효율성을 높이는 방법을 설명합니다."
+categories:
+- "스터디-운영체제"
 tags:
-  [
-    운영체제,
-    OS,
-    Operating System,
-    memory,
-    virtual memory,
-    페이징,
-    요구 페이징,
-    seek time,
-    average latency,
-    copy-on-write,
-  ]
-date: 2023-12-27 23:59:59 +0900
+- "운영체제"
+- "OS"
+- "Operating System"
+- "memory"
+- "virtual memory"
+- "페이징"
+- "요구 페이징"
+- "seek time"
+- "average latency"
+- "copy-on-write"
+date: "2023-12-27 14:59:59 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-12-27-os-ch-10-virtual-memory-2.jpg"
 ---
 
 - [운영체제 10장 - 가상 메모리 (1) - 기본](/2023/12/25/os-ch-10-virtual-memory)

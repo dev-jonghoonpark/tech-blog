@@ -1,10 +1,18 @@
 ---
-layout: post
-title: K-DEVCON 12월 행사 준비중.
-description: K-DEVCON이 12월 2일 서울 강남 코드스쿼드에서 다양한 세션과 경품 추첨이 있는 밋업을, 12월 9일 대전 봉명동 세븐팩토리모먼트에서 네트워킹 행사를 개최합니다. 개발자들의 많은 참여 부탁드립니다. 자세한 내용은 [서울 행사](https://festa.io/events/4319)와 [대전 행사](https://festa.io/events/4320) 링크를 확인하세요.
-categories: [커뮤니티]
-tags: [커뮤니티, 행사]
-date: 2023-11-13 09:00:00 +0900
+layout: "post"
+title: "K-DEVCON 12월 행사 준비중."
+description: "K-DEVCON이 12월 2일 서울 강남 코드스쿼드에서 다양한 세션과 경품 추첨이 있는 밋업을, 12월 9일 대전 봉명동\
+  \ 세븐팩토리모먼트에서 네트워킹 행사를 개최합니다. 개발자들의 많은 참여 부탁드립니다. 자세한 내용은 [서울 행사](https://festa.io/events/4319)와\
+  \ [대전 행사](https://festa.io/events/4320) 링크를 확인하세요."
+categories:
+- "커뮤니티"
+tags:
+- "커뮤니티"
+- "행사"
+date: "2023-11-13 00:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-11-13-community-event.jpg"
 ---
 
 ## 12월 2일 서울 행사

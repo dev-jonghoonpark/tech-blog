@@ -1,10 +1,28 @@
 ---
-layout: post
-title: FreeRadius 로컬 인증서 갱신 및 인증서 파일별 역할 (crt, csr, key, p12, pem)
-description: FreeRadius를 활용한 무선 네트워크 인증서 갱신 과정과 각 인증서 파일(.crt, .csr, .key, .p12, .pem)의 역할을 정리한 포스트입니다. 인증서 재생성 절차와 파일의 의미를 설명하며, 특히 .pem은 ASCII 형식의 X.509 디지털 인증서와 개인 키를 포함하고, .p12는 Windows 환경에서 주로 사용되는 바이너리 파일입니다. .key는 개인 키, .csr은 인증서 서명 요청, .crt는 공개 키 및 디지털 인증서 정보를 저장하는 파일입니다.
-categories: [개발]
-tags: [FreeRadius, 무선인터넷, 보안, WIFI, 와이파이, 인증서, crt,csr, key, p12, pem]
-date: 2023-09-5 12:00:00 +0900
+layout: "post"
+title: "FreeRadius 로컬 인증서 갱신 및 인증서 파일별 역할 (crt, csr, key, p12, pem)"
+description: "FreeRadius를 활용한 무선 네트워크 인증서 갱신 과정과 각 인증서 파일(.crt, .csr, .key, .p12,\
+  \ .pem)의 역할을 정리한 포스트입니다. 인증서 재생성 절차와 파일의 의미를 설명하며, 특히 .pem은 ASCII 형식의 X.509 디지털\
+  \ 인증서와 개인 키를 포함하고, .p12는 Windows 환경에서 주로 사용되는 바이너리 파일입니다. .key는 개인 키, .csr은 인증서\
+  \ 서명 요청, .crt는 공개 키 및 디지털 인증서 정보를 저장하는 파일입니다."
+categories:
+- "개발"
+tags:
+- "FreeRadius"
+- "무선인터넷"
+- "보안"
+- "WIFI"
+- "와이파이"
+- "인증서"
+- "crt"
+- "csr"
+- "key"
+- "p12"
+- "pem"
+date: "2023-09-05 03:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-09-05-FreeRadius-With-Cert.jpg"
 ---
 
 우리 회사에서는 무선 네트워크 인증을 위해 FreeRadius 로 radius 서버를 구축해서 사용중에 있다.

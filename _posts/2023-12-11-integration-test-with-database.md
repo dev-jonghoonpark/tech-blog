@@ -1,21 +1,29 @@
 ---
-layout: post
-title: 통합테스트를 진행하면서 부딪힌 이슈들 (일부 항목만 Mock으로 처리하기, BeforeAll Non-static 에서 사용하기, @SQLDelete 가 적용된 상태에서 테이블 초기화 하기)
-description: 통합 테스트 중 발생한 이슈들에 대해 정리했습니다. 첫째, 일부 항목을 Mock으로 처리하기 위해 비관리 의존성을 목 객체로 만들어 테스트를 진행했습니다. 둘째, BeforeAll을 non-static으로 구현하기 위해 JUnit 5의 TestInstance 어노테이션을 활용했습니다. 셋째, @SQLDelete가 적용된 상태에서 데이터 초기화를 위해 JPQL 대신 native query를 사용하여 데이터를 삭제하고, auto increment를 리셋하기 위해 TRUNCATE를 적용했습니다. 이러한 방법들을 통해 테스트 환경을 효과적으로 관리할 수 있었습니다.
-categories: [개발, 스터디-테스트]
+layout: "post"
+title: "통합테스트를 진행하면서 부딪힌 이슈들 (일부 항목만 Mock으로 처리하기, BeforeAll Non-static 에서 사용하기, @SQLDelete\
+  \ 가 적용된 상태에서 테이블 초기화 하기)"
+description: "통합 테스트 중 발생한 이슈들에 대해 정리했습니다. 첫째, 일부 항목을 Mock으로 처리하기 위해 비관리 의존성을 목 객체\
+  로 만들어 테스트를 진행했습니다. 둘째, BeforeAll을 non-static으로 구현하기 위해 JUnit 5의 TestInstance 어노테\
+  이션을 활용했습니다. 셋째, @SQLDelete가 적용된 상태에서 데이터 초기화를 위해 JPQL 대신 native query를 사용하여 데이터를\
+  \ 삭제하고, auto increment를 리셋하기 위해 TRUNCATE를 적용했습니다. 이러한 방법들을 통해 테스트 환경을 효과적으로 관리할\
+  \ 수 있었습니다."
+categories:
+- "개발"
+- "스터디-테스트"
 tags:
-  [
-    테스트,
-    테스팅,
-    통합 테스트,
-    Mock,
-    비관리 의존성,
-    BeforeAll,
-    LifeCycle.PER_METHOD,
-    LifeCycle.PER_CLASS,
-    SQLDelete,
-  ]
-date: 2023-12-12 01:00:00 +0900
+- "테스트"
+- "테스팅"
+- "통합 테스트"
+- "Mock"
+- "비관리 의존성"
+- "BeforeAll"
+- "LifeCycle.PER_METHOD"
+- "LifeCycle.PER_CLASS"
+- "SQLDelete"
+date: "2023-12-11 16:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-12-11-integration-test-with-database.jpg"
 ---
 
 오늘은 회사에서 서비스 클래스를 테스트 하고자 하였다. 그 과정에서 부딪힌 이슈들에 대해서 정리해본다.

@@ -1,24 +1,27 @@
 ---
-layout: post
+layout: "post"
 title: "[pnpm] github action 을 이용하여 github pages 에 next.js 프로젝트 배포하기"
-description: Next.js 프로젝트를 GitHub Action을 이용해 GitHub Pages에 배포하는 방법을 소개합니다. 기본 YAML 템플릿을 참고하여 pnpm을 사용한 설정을 추가하고, 성공적으로 배포하는 과정을 설명합니다. 이 글에서는 GitHub Pages에 배포하기 위한 YAML 파일 구성과 필요한 단계들을 자세히 안내합니다.
-categories: [개발]
+description: "Next.js 프로젝트를 GitHub Action을 이용해 GitHub Pages에 배포하는 방법을 소개합니다. 기본 YAML\
+  \ 템플릿을 참고하여 pnpm을 사용한 설정을 추가하고, 성공적으로 배포하는 과정을 설명합니다. 이 글에서는 GitHub Pages에 배포하기\
+  \ 위한 YAML 파일 구성과 필요한 단계들을 자세히 안내합니다."
+categories:
+- "개발"
 tags:
-  [
-    github,
-    github action,
-    github pages,
-    pnpm,
-    배포,
-    deploy,
-    hosting,
-    호스팅,
-    nextjs,
-    next,
-    react,
-  ]
-date: 2024-10-29 23:59:59 +0900
+- "github"
+- "github action"
+- "github pages"
+- "pnpm"
+- "배포"
+- "deploy"
+- "hosting"
+- "호스팅"
+- "nextjs"
+- "next"
+- "react"
+date: "2024-10-29 14:59:59 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2024-10-29-next-js-github-hosting-pnpm.jpg"
 ---
 
 개인 프로젝트로 next.js 를 선택하였다.

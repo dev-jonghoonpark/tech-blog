@@ -1,20 +1,25 @@
 ---
-layout: post
-title: Github Action - create-release, upload-release-asset warning 제거하기
-description: Github Action에서 deprecated 경고를 제거하기 위해, 기존의 `actions/create-release@v1` 및 `actions/upload-release-asset@v1.0.1` 대신 `softprops/action-gh-release`를 사용하여 워크플로우를 수정하는 방법을 설명합니다. 이를 통해 APK 빌드 및 릴리즈 과정을 단일 job으로 통합하고, 경고 없이 성공적으로 릴리즈할 수 있습니다.
-categories: [개발]
+layout: "post"
+title: "Github Action - create-release, upload-release-asset warning 제거하기"
+description: "Github Action에서 deprecated 경고를 제거하기 위해, 기존의 `actions/create-release@v1`\
+  \ 및 `actions/upload-release-asset@v1.0.1` 대신 `softprops/action-gh-release`를 사용하여\
+  \ 워크플로우를 수정하는 방법을 설명합니다. 이를 통해 APK 빌드 및 릴리즈 과정을 단일 job으로 통합하고, 경고 없이 성공적으로 릴리즈할\
+  \ 수 있습니다."
+categories:
+- "개발"
 tags:
-  [
-    Github Action,
-    create-release,
-    upload-release-asset,
-    workflow,
-    release,
-    artifacts,
-    deprecated,
-    warning,
-  ]
-date: 2023-05-19 13:00:00 +0900
+- "Github Action"
+- "create-release"
+- "upload-release-asset"
+- "workflow"
+- "release"
+- "artifacts"
+- "deprecated"
+- "warning"
+date: "2023-05-19 04:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-05-19-remove-warning-create-release-and-upload-release-asset.jpg"
 ---
 
 어제 workflow를 구축하고 잘 릴리즈가 되고 있었다.

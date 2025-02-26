@@ -1,23 +1,27 @@
 ---
-layout: post
+layout: "post"
 title: "[MySQL] 압축과 암호화 - Real MySQL 스터디 3회차"
-description: MySQL 8.0에서 압축과 암호화 기능을 다룬 이 글에서는 InnoDB 스토리지 엔진을 기준으로 페이지 압축과 테이블 압축의 장단점, 압축 테이블 생성 방법, 그리고 MySQL 서버의 암호화 방식과 키링 관리에 대해 설명합니다. 페이지 압축은 투명하게 동작하며, 테이블 압축은 데이터 파일 크기를 줄일 수 있지만 성능 저하가 발생할 수 있습니다. 암호화는 디스크 I/O 단계에서만 적용되며, AES256을 기본으로 지원합니다. 또한, 암호화와 압축을 함께 사용할 때의 성능 변화와 설정 방법도 다룹니다.
-categories: [스터디-데이터베이스]
+description: "MySQL 8.0에서 압축과 암호화 기능을 다룬 이 글에서는 InnoDB 스토리지 엔진을 기준으로 페이지 압축과 테이블 압\
+  축의 장단점, 압축 테이블 생성 방법, 그리고 MySQL 서버의 암호화 방식과 키링 관리에 대해 설명합니다. 페이지 압축은 투명하게 동작하며,\
+  \ 테이블 압축은 데이터 파일 크기를 줄일 수 있지만 성능 저하가 발생할 수 있습니다. 암호화는 디스크 I/O 단계에서만 적용되며, AES256을\
+  \ 기본으로 지원합니다. 또한, 암호화와 압축을 함께 사용할 때의 성능 변화와 설정 방법도 다룹니다."
+categories:
+- "스터디-데이터베이스"
 tags:
-  [
-    MySQL,
-    compression,
-    encryption,
-    transparent,
-    mysql 8.0,
-    real mysql,
-    table compression,
-    page compression,
-    keyring,
-    2-tier encryption,
-  ]
-date: 2024-09-28 23:59:59 +0900
+- "MySQL"
+- "compression"
+- "encryption"
+- "transparent"
+- "mysql 8.0"
+- "real mysql"
+- "table compression"
+- "page compression"
+- "keyring"
+- "2-tier encryption"
+date: "2024-09-28 14:59:59 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2024-09-28-mysql-compression-and-encryption.jpg"
 ---
 
 [K-DEVCON](https://k-devcon.com) 대전 개발자 스터디에서 Real Mysql 책으로 스터디를 진행해보기로 했다.

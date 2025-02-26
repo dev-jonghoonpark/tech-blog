@@ -1,23 +1,29 @@
 ---
-layout: post
-title: jenkins pipeline 에서 데이터베이스 테스트 환경 세팅 자동화하기 (테스트용 데이터베이스 컨테이너 사용)
-description: Jenkins 파이프라인을 활용하여 데이터베이스 테스트 환경을 자동으로 설정하는 방법을 다룹니다. 이 과정에서는 최신 코드를 가져오고, 비어있는 테스트 데이터베이스 서버를 구축하여 Gradle 통합 테스트를 수행하며, 테스트 완료 후 데이터베이스 서버를 정리하는 과정을 설명합니다. 또한, Docker와 Jenkins의 통합 사용법과 발생할 수 있는 여러 이슈 및 해결 방법도 포함되어 있습니다.
-categories: [개발, 스터디-테스트, 스터디-자동화]
+layout: "post"
+title: "jenkins pipeline 에서 데이터베이스 테스트 환경 세팅 자동화하기 (테스트용 데이터베이스 컨테이너 사용)"
+description: "Jenkins 파이프라인을 활용하여 데이터베이스 테스트 환경을 자동으로 설정하는 방법을 다룹니다. 이 과정에서는 최신 코드\
+  를 가져오고, 비어있는 테스트 데이터베이스 서버를 구축하여 Gradle 통합 테스트를 수행하며, 테스트 완료 후 데이터베이스 서버를 정리하는 과\
+  정을 설명합니다. 또한, Docker와 Jenkins의 통합 사용법과 발생할 수 있는 여러 이슈 및 해결 방법도 포함되어 있습니다."
+categories:
+- "개발"
+- "스터디-테스트"
+- "스터디-자동화"
 tags:
-  [
-    jenkins,
-    pipeline,
-    git,
-    checkout,
-    docker,
-    network,
-    bridge,
-    docker cli,
-    test container,
-    gradle,
-    mysql,
-  ]
-date: 2024-01-18 23:30:00 +0900
+- "jenkins"
+- "pipeline"
+- "git"
+- "checkout"
+- "docker"
+- "network"
+- "bridge"
+- "docker cli"
+- "test container"
+- "gradle"
+- "mysql"
+date: "2024-01-18 14:30:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2024-01-18-automate-test-with-jenkins.jpg"
 ---
 
 최근 며칠 동안 시간날 때마다 jenkins상에서 데이터베이스 테스트(통합 테스트)를 실행할 수 있도록 만들기위해 매우 많은 삽질을 하였습니다. 어느 정도 진행이 되어서 진행상황을 블로그에 정리해보기로 하였습니다.

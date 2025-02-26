@@ -1,20 +1,26 @@
 ---
-layout: post
-title: BDD를 소개합니다. (Introducing BDD 번역)
-description: 이 글에서는 행동 중심 개발(BDD, Behavior-Driven Development)의 개념과 중요성을 소개합니다. BDD는 테스트 중심 개발(TDD)에서 발생하는 혼란과 오해를 해결하기 위해 설계된 방법론으로, 애자일 소프트웨어 개발에 접근성을 높이고 효과성을 증대시킵니다. BDD는 테스트 메소드 이름을 문장 형태로 작성하고, 행동을 강조하여 요구사항을 정의함으로써 개발자와 비즈니스 간의 소통을 원활하게 합니다. 또한, BDD는 비즈니스 가치에 기반하여 다음 행동을 결정하고, 인수 기준을 통해 실행 가능한 시나리오를 작성하는 데 중점을 둡니다. 이를 통해 애자일 분석과 자동 인수 테스트의 효과를 극대화할 수 있습니다.
-categories: [스터디-테스트]
+layout: "post"
+title: "BDD를 소개합니다. (Introducing BDD 번역)"
+description: "이 글에서는 행동 중심 개발(BDD, Behavior-Driven Development)의 개념과 중요성을 소개합니다. BDD는\
+  \ 테스트 중심 개발(TDD)에서 발생하는 혼란과 오해를 해결하기 위해 설계된 방법론으로, 애자일 소프트웨어 개발에 접근성을 높이고 효과성을 증\
+  대시킵니다. BDD는 테스트 메소드 이름을 문장 형태로 작성하고, 행동을 강조하여 요구사항을 정의함으로써 개발자와 비즈니스 간의 소통을 원활하게\
+  \ 합니다. 또한, BDD는 비즈니스 가치에 기반하여 다음 행동을 결정하고, 인수 기준을 통해 실행 가능한 시나리오를 작성하는 데 중점을 둡니다\
+  . 이를 통해 애자일 분석과 자동 인수 테스트의 효과를 극대화할 수 있습니다."
+categories:
+- "스터디-테스트"
 tags:
-  [
-    테스트,
-    TDD,
-    BDD,
-    테스트 중심 개발,
-    행동 중심 개발,
-    행동,
-    behavior,
-    behavior-driven development,
-  ]
-date: 2023-11-02 23:00:00 +0900
+- "테스트"
+- "TDD"
+- "BDD"
+- "테스트 중심 개발"
+- "행동 중심 개발"
+- "행동"
+- "behavior"
+- "behavior-driven development"
+date: "2023-11-02 14:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-11-02-introducing-bdd.jpg"
 ---
 
 원문 : [Introducing BDD](https://dannorth.net/introducing-bdd/)  

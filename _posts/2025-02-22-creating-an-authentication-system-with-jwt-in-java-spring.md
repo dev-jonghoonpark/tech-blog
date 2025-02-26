@@ -1,28 +1,32 @@
 ---
-layout: post
+layout: "post"
 title: "[Spring] 스프링에서 jwt를 이용한 인증시스템 만들기"
-description: 스프링에서 JWT(Json Web Token)를 이용한 인증 시스템 구축 방법을 소개합니다. 이 글에서는 세션 토큰 방식과 JWT의 차이점을 설명하고, JWT의 구조, 대칭 및 비대칭 키 암호화 방식, 그리고 실제 구현 방법을 다룹니다. 또한, Spring Security와의 통합 방법을 통해 JWT 기반 인증을 설정하는 방법도 안내합니다. JWT는 효율적이고 확장 가능한 인증 방식이지만, 보안상의 고려가 필요하므로 프로젝트 요구사항에 맞는 적절한 인증 방식을 선택하는 것이 중요합니다.
-categories: [스터디-자바]
+description: "스프링에서 JWT(Json Web Token)를 이용한 인증 시스템 구축 방법을 소개합니다. 이 글에서는 세션 토큰 방식과\
+  \ JWT의 차이점을 설명하고, JWT의 구조, 대칭 및 비대칭 키 암호화 방식, 그리고 실제 구현 방법을 다룹니다. 또한, Spring Security와\
+  의 통합 방법을 통해 JWT 기반 인증을 설정하는 방법도 안내합니다. JWT는 효율적이고 확장 가능한 인증 방식이지만, 보안상의 고려가 필요하므\
+  로 프로젝트 요구사항에 맞는 적절한 인증 방식을 선택하는 것이 중요합니다."
+categories:
+- "스터디-자바"
 tags:
-  [
-    Java,
-    Spring,
-    Spring Boot,
-    Spring security,
-    login,
-    access token,
-    refresh token,
-    jwt,
-    jjwt,
-    rsa,
-    hmac,
-    private key,
-    public key,
-    JwtAuthenticationFilter,
-    SecurityFilterChain,
-  ]
-date: 2025-02-22 00:00:00 +0900
+- "Java"
+- "Spring"
+- "Spring Boot"
+- "Spring security"
+- "login"
+- "access token"
+- "refresh token"
+- "jwt"
+- "jjwt"
+- "rsa"
+- "hmac"
+- "private key"
+- "public key"
+- "JwtAuthenticationFilter"
+- "SecurityFilterChain"
+date: "2025-02-21 15:00:00 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2025-02-22-creating-an-authentication-system-with-jwt-in-java-spring.jpg"
 ---
 
 최근에 K-DEVCON 에서 Spring 스터디를 시작하였다.

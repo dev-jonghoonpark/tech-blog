@@ -1,20 +1,26 @@
 ---
-layout: post
-title: 소나큐브 설치하기 (with Docker, macOS)
-date: "2023-08-02 01:32:14 +0900"
-description: macOS에서 Docker를 이용해 SonarQube를 설치하는 방법을 설명합니다. SonarQube는 정적 코드 분석을 통해 코드 품질을 지속적으로 검토하는 오픈 소스 플랫폼입니다. 이 글에서는 Docker 이미지를 pull하고 실행한 후, 웹 콘솔에 접속하여 기본 설정을 진행하고 Bitbucket과 연동하는 과정을 다룹니다. 또한, 프로젝트 분석을 위한 SonarScanner 설치와 환경 변수 설정 방법도 안내합니다. 마지막으로, 기본 데이터베이스로 H2를 사용하며, 필요에 따라 다른 데이터베이스로 변경할 수 있는 옵션도 소개합니다.
+layout: "post"
+title: "소나큐브 설치하기 (with Docker, macOS)"
+description: "macOS에서 Docker를 이용해 SonarQube를 설치하는 방법을 설명합니다. SonarQube는 정적 코드 분석을\
+  \ 통해 코드 품질을 지속적으로 검토하는 오픈 소스 플랫폼입니다. 이 글에서는 Docker 이미지를 pull하고 실행한 후, 웹 콘솔에 접속하여\
+  \ 기본 설정을 진행하고 Bitbucket과 연동하는 과정을 다룹니다. 또한, 프로젝트 분석을 위한 SonarScanner 설치와 환경 변수 설\
+  정 방법도 안내합니다. 마지막으로, 기본 데이터베이스로 H2를 사용하며, 필요에 따라 다른 데이터베이스로 변경할 수 있는 옵션도 소개합니다."
 categories:
-  - 개발
-  - 스터디-테스트
+- "개발"
+- "스터디-테스트"
 tags:
-  - 테스트
-  - testing
-  - macos
-  - sonarqube
-  - 정적 테스트
-  - docker
-  - bitbucket
-  - 소나큐브
+- "테스트"
+- "testing"
+- "macos"
+- "sonarqube"
+- "정적 테스트"
+- "docker"
+- "bitbucket"
+- "소나큐브"
+date: "2023-08-01 16:32:14 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-08-02-install-sonarqube-with-docker-in-local-macos.jpg"
 ---
 
 ## 개요

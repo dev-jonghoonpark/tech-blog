@@ -1,23 +1,29 @@
 ---
-layout: post
-title: 오픈소스 스터디 진행 가이드
-description: 오픈소스 스터디 진행 가이드는 GDG 대전에서 개최된 DevFest의 일환으로, 오픈소스에 기여할 수 있는 경험을 제공하는 것을 목표로 합니다. 스터디는 참여자가 관심 있는 오픈소스를 선택하고, 적절한 이슈를 찾아 기여하는 과정을 통해 진행됩니다. 예를 들어, Playwright 프로젝트를 선택한 후, 기여할 이슈를 분석하고 수정하여 PR을 제출하는 방식으로 구성됩니다. 이 과정을 통해 참여자는 오픈소스 기여의 즐거움을 느끼고, 지속적인 교류를 통해 커뮤니티와 함께 성장할 수 있습니다.
-categories: [오픈소스, 개발]
+layout: "post"
+title: "오픈소스 스터디 진행 가이드"
+description: "오픈소스 스터디 진행 가이드는 GDG 대전에서 개최된 DevFest의 일환으로, 오픈소스에 기여할 수 있는 경험을 제공하는\
+  \ 것을 목표로 합니다. 스터디는 참여자가 관심 있는 오픈소스를 선택하고, 적절한 이슈를 찾아 기여하는 과정을 통해 진행됩니다. 예를 들어, Playwright\
+  \ 프로젝트를 선택한 후, 기여할 이슈를 분석하고 수정하여 PR을 제출하는 방식으로 구성됩니다. 이 과정을 통해 참여자는 오픈소스 기여의 즐거움\
+  을 느끼고, 지속적인 교류를 통해 커뮤니티와 함께 성장할 수 있습니다."
+categories:
+- "오픈소스"
+- "개발"
 tags:
-  [
-    오픈소스,
-    오픈소스 스터디,
-    스터디,
-    GDG,
-    Playwright,
-    PR,
-    Pull Request,
-    issue,
-    maintainer,
-    contributor,
-    contribute,
-  ]
-date: 2023-11-26 01:00:00 +0900
+- "오픈소스"
+- "오픈소스 스터디"
+- "스터디"
+- "GDG"
+- "Playwright"
+- "PR"
+- "Pull Request"
+- "issue"
+- "maintainer"
+- "contributor"
+- "contribute"
+date: "2023-11-25 16:00:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-11-25-opensource-study.jpg"
 ---
 
 전 세계의 GDG 에서는 연말에 DevFest 라는 행사를 개최한다.  

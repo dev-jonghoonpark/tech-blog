@@ -1,26 +1,33 @@
 ---
-layout: post
-title: 소나큐브 정적 분석 자동화 하기 (with Jenkins)
-description: Jenkins를 활용하여 소나큐브의 정적 분석을 자동화하는 방법을 소개합니다. 도커를 이용해 Jenkins를 설정하고, Git 리포지토리에서 코드를 체크아웃한 후, Gradle 플러그인을 동적으로 추가하여 정적 분석을 수행합니다. 또한, 주기적인 실행을 위해 cron 스케줄러를 설정하고, Typescript 프로젝트에서도 Node.js를 설정하여 분석을 진행하는 방법을 설명합니다. 이 글은 Jenkins와 소나큐브를 통합하여 CI/CD 파이프라인을 구축하는 과정을 자세히 다룹니다.
-categories: [개발, 스터디-테스트, 스터디-자동화]
+layout: "post"
+title: "소나큐브 정적 분석 자동화 하기 (with Jenkins)"
+description: "Jenkins를 활용하여 소나큐브의 정적 분석을 자동화하는 방법을 소개합니다. 도커를 이용해 Jenkins를 설정하고, Git\
+  \ 리포지토리에서 코드를 체크아웃한 후, Gradle 플러그인을 동적으로 추가하여 정적 분석을 수행합니다. 또한, 주기적인 실행을 위해 cron\
+  \ 스케줄러를 설정하고, Typescript 프로젝트에서도 Node.js를 설정하여 분석을 진행하는 방법을 설명합니다. 이 글은 Jenkins와\
+  \ 소나큐브를 통합하여 CI/CD 파이프라인을 구축하는 과정을 자세히 다룹니다."
+categories:
+- "개발"
+- "스터디-테스트"
+- "스터디-자동화"
 tags:
-  [
-    Sonarqube,
-    소나큐브,
-    Jenkins,
-    CI/CD,
-    Docker,
-    automation,
-    pipeline,
-    schedule,
-    cron,
-    nodejs,
-    sonar scanner,
-    gradle,
-    build.gradle,
-    build,
-  ]
-date: 2023-11-07 22:30:00 +0900
+- "Sonarqube"
+- "소나큐브"
+- "Jenkins"
+- "CI/CD"
+- "Docker"
+- "automation"
+- "pipeline"
+- "schedule"
+- "cron"
+- "nodejs"
+- "sonar scanner"
+- "gradle"
+- "build.gradle"
+- "build"
+date: "2023-11-07 13:30:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-11-06-sonarqube-with-jenkins.jpg"
 ---
 
 - [소나큐브 에 PostgreSQL DB 설정하기 (with PostgreSQL)](/2023/11/07/sonarqube-db-설정하기)

@@ -1,28 +1,32 @@
 ---
-layout: post
+layout: "post"
 title: "[Spring] Spring In Action - 스프링 시작하기 (1-2장)"
-description: Spring In Action을 기반으로 한 스프링 시작하기 스터디에서는 Spring 프레임워크의 아키텍처, IoC 및 DI 개념, Spring Application Context, Servlet, Spring MVC의 배경과 동작 원리, 그리고 Spring Boot의 특징과 테스트 방법을 다룹니다. 이 과정에서 프론트 컨트롤러 패턴과 MVC 패턴을 통해 웹 애플리케이션의 구조를 이해하고, Spring Boot를 활용한 효율적인 개발 방법을 익힙니다.
-categories: [스터디-자바]
+description: "Spring In Action을 기반으로 한 스프링 시작하기 스터디에서는 Spring 프레임워크의 아키텍처, IoC 및 DI\
+  \ 개념, Spring Application Context, Servlet, Spring MVC의 배경과 동작 원리, 그리고 Spring Boot의\
+  \ 특징과 테스트 방법을 다룹니다. 이 과정에서 프론트 컨트롤러 패턴과 MVC 패턴을 통해 웹 애플리케이션의 구조를 이해하고, Spring Boot를\
+  \ 활용한 효율적인 개발 방법을 익힙니다."
+categories:
+- "스터디-자바"
 tags:
-  [
-    Java,
-    Spring,
-    Spring In Action,
-    Servlet,
-    DispatcherServlet,
-    Spring MVC,
-    Front Controller,
-    Model,
-    View,
-    Controller,
-    MVC Pattern,
-    Spring MVC,
-    Spring Boot,
-    SpringApplication,
-    SpringBootTest,
-  ]
-date: 2025-01-12 22:59:59 +0900
+- "Java"
+- "Spring"
+- "Spring In Action"
+- "Servlet"
+- "DispatcherServlet"
+- "Spring MVC"
+- "Front Controller"
+- "Model"
+- "View"
+- "Controller"
+- "MVC Pattern"
+- "Spring MVC"
+- "Spring Boot"
+- "SpringApplication"
+- "SpringBootTest"
+date: "2025-01-12 13:59:59 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2025-01-11-spring-in-action-getting-started-with-spring.jpg"
 ---
 
 최근에 K-DEVCON 에서 Spring 스터디를 시작하였다.

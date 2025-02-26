@@ -1,32 +1,35 @@
 ---
-layout: post
+layout: "post"
 title: "[Spring] 스프링 부트 기반 간단한 로그인, 회원가입 예제 만들어보기"
-description: 스프링 부트와 스프링 시큐리티를 활용하여 간단한 로그인 및 회원가입 시스템을 구축하는 방법을 설명합니다. 프로젝트 초기화부터 필요한 의존성 설정, 자동 구성, 로그인 및 회원가입 처리, 비밀번호 암호화, 사용자 인증 기능까지 단계별로 안내합니다. 이 예제는 스프링 부트의 생산성 향상 기능을 활용하여 간편하게 구현할 수 있으며, CSRF 보호 및 사용자 정보 관리를 포함합니다.
-categories: [스터디-자바]
+description: "스프링 부트와 스프링 시큐리티를 활용하여 간단한 로그인 및 회원가입 시스템을 구축하는 방법을 설명합니다. 프로젝트 초기화부\
+  터 필요한 의존성 설정, 자동 구성, 로그인 및 회원가입 처리, 비밀번호 암호화, 사용자 인증 기능까지 단계별로 안내합니다. 이 예제는 스프링\
+  \ 부트의 생산성 향상 기능을 활용하여 간편하게 구현할 수 있으며, CSRF 보호 및 사용자 정보 관리를 포함합니다."
+categories:
+- "스터디-자바"
 tags:
-  [
-    Java,
-    Spring In Action,
-    Spring,
-    Spring Boot,
-    Spring Security,
-    Auto Configuration,
-    Configuration,
-    JPA,
-    User,
-    Login,
-    Signup,
-    csrf,
-    UserDetails,
-    UserDetailService,
-    loadUserByUsername,
-    password,
-    password encoder,
-    argon2,
-    bouncycastle,
-  ]
-date: 2025-02-08 23:59:59 +0900
+- "Java"
+- "Spring In Action"
+- "Spring"
+- "Spring Boot"
+- "Spring Security"
+- "Auto Configuration"
+- "Configuration"
+- "JPA"
+- "User"
+- "Login"
+- "Signup"
+- "csrf"
+- "UserDetails"
+- "UserDetailService"
+- "loadUserByUsername"
+- "password"
+- "password encoder"
+- "argon2"
+- "bouncycastle"
+date: "2025-02-08 14:59:59 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2025-02-08-spring-boot-login-system-example.jpg"
 ---
 
 최근에 K-DEVCON 에서 Spring 스터디를 시작하였다.

@@ -1,12 +1,23 @@
 ---
-layout: post
+layout: "post"
 title: "Jekyll 실행시 `level': undefined method `[]' for nil (NoMethodError) 에러 해결법"
-description: "Jekyll 실행 시 발생하는 `level': undefined method `[]' for nil (NoMethodError)` 에러는 Jekyll 버전을 4.3.3으로 업데이트하여 해결할 수 있으며, 이를 위해 `Gemfile`에서 Jekyll 버전을 명시한 후 `bundle install`을 진행하고, 다시 버전 명시를 제거하면 됩니다."
-categories: [블로그]
-tags: [루비, ruby, bundle, jekyll, level, fiber, NoMethodError]
-date: 2024-02-26 22:00:00 +0900
+description: "Jekyll 실행 시 발생하는 `level': undefined method `[]' for nil (NoMethodError)`\
+  \ 에러는 Jekyll 버전을 4.3.3으로 업데이트하여 해결할 수 있으며, 이를 위해 `Gemfile`에서 Jekyll 버전을 명시한 후 `bundle\
+  \ install`을 진행하고, 다시 버전 명시를 제거하면 됩니다."
+categories:
+- "블로그"
+tags:
+- "루비"
+- "ruby"
+- "bundle"
+- "jekyll"
+- "level"
+- "fiber"
+- "NoMethodError"
+date: "2024-02-26 13:00:00 +0000"
+toc: true
 image:
-  path: /assets/images/2024-02-26-jekyll-serve-error-level-undefined-method/error.png
+  path: "/assets/thumbnails/2024-02-26-jekyll-serve-error-level-undefined-method.jpg"
 ---
 
 최근에 맥북을 구매하면서 환경을 새로 구성하였다.

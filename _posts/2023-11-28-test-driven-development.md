@@ -1,20 +1,25 @@
 ---
-layout: post
-title: 기초가 탄탄한 자바 개발자가 되기 위해 알아야할 테스트 주도 개발 (TDD, Test-driven development)
-description: 기초가 탄탄한 자바 개발자가 되기 위한 테스트 주도 개발(TDD)의 중요성과 기본 원칙을 소개하며, TDD가 코드 설계에 미치는 긍정적인 영향을 설명합니다. TDD는 실패하는 테스트를 먼저 작성하고, 이를 통과하도록 구현한 후 리팩터링하는 과정을 통해 깨끗하고 유연한 코드를 생성합니다. 이 글에서는 티켓 판매 수익 계산 예제를 통해 TDD의 red-green-refactor 방식을 실제로 적용하는 방법을 설명하고, 다양한 테스트 케이스를 통해 코드의 신뢰성을 높이는 방법을 제시합니다.
-categories: [스터디-테스트]
-tags: [
-    테스트,
-    테스팅,
-    테스트 주도 개발
-    TDD,
-    Test Driven Development,
-    Red,
-    Green,
-    Refactor,
-    리팩터링,
-  ]
-date: 2023-12-01 23:10:00 +0900
+layout: "post"
+title: "기초가 탄탄한 자바 개발자가 되기 위해 알아야할 테스트 주도 개발 (TDD, Test-driven development)"
+description: "기초가 탄탄한 자바 개발자가 되기 위한 테스트 주도 개발(TDD)의 중요성과 기본 원칙을 소개하며, TDD가 코드 설계에\
+  \ 미치는 긍정적인 영향을 설명합니다. TDD는 실패하는 테스트를 먼저 작성하고, 이를 통과하도록 구현한 후 리팩터링하는 과정을 통해 깨끗하고\
+  \ 유연한 코드를 생성합니다. 이 글에서는 티켓 판매 수익 계산 예제를 통해 TDD의 red-green-refactor 방식을 실제로 적용하는\
+  \ 방법을 설명하고, 다양한 테스트 케이스를 통해 코드의 신뢰성을 높이는 방법을 제시합니다."
+categories:
+- "스터디-테스트"
+tags:
+- "테스트"
+- "테스팅"
+- "테스트 주도 개발 TDD"
+- "Test Driven Development"
+- "Red"
+- "Green"
+- "Refactor"
+- "리팩터링"
+date: "2023-12-01 14:10:00 +0000"
+toc: true
+image:
+  path: "/assets/thumbnails/2023-11-28-test-driven-development.jpg"
 ---
 
 원문 : Well Grounded Java Developer - ch13 testing fundamentals

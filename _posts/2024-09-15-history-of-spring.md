@@ -1,11 +1,24 @@
 ---
-layout: post
+layout: "post"
 title: "[번역] Spring의 역사 (history of spring)"
-description: Spring의 역사는 2002년 Rod Johnson의 J2EE 복잡성을 다룬 책 출판을 시작으로, 2003년 Spring Framework 오픈 소스 프로젝트가 시작되었고, 2004년 Spring Framework 1.0이 출시되었습니다. 이후 2008년 Spring Security 2.0, 2011년 Spring Data, 2014년 Spring Boot 1.0, Spring Batch 3.0, Spring Integration 4.0, 2015년 Spring Cloud 1.0, 2016년 Spring Cloud Task와 Stream, 2018년 Spring Cloud Skipper, 2021년 Spring Cloud Gateway for Kubernetes, 2022년 Spring Boot 3 및 Spring Framework 6가 출시되며 발전해왔습니다. 이 글에서는 Spring의 주요 역사적 사건들을 정리하고, Spring Cloud에 대한 추가 학습의 필요성을 언급합니다.
-categories: [스터디-자바]
-tags: [Spring, history, 스프링, 역사]
-date: 2024-09-15 21:00:00 +0900
+description: "Spring의 역사는 2002년 Rod Johnson의 J2EE 복잡성을 다룬 책 출판을 시작으로, 2003년 Spring\
+  \ Framework 오픈 소스 프로젝트가 시작되었고, 2004년 Spring Framework 1.0이 출시되었습니다. 이후 2008년 Spring\
+  \ Security 2.0, 2011년 Spring Data, 2014년 Spring Boot 1.0, Spring Batch 3.0, Spring\
+  \ Integration 4.0, 2015년 Spring Cloud 1.0, 2016년 Spring Cloud Task와 Stream, 2018년\
+  \ Spring Cloud Skipper, 2021년 Spring Cloud Gateway for Kubernetes, 2022년 Spring\
+  \ Boot 3 및 Spring Framework 6가 출시되며 발전해왔습니다. 이 글에서는 Spring의 주요 역사적 사건들을 정리하고, Spring\
+  \ Cloud에 대한 추가 학습의 필요성을 언급합니다."
+categories:
+- "스터디-자바"
+tags:
+- "Spring"
+- "history"
+- "스프링"
+- "역사"
+date: "2024-09-15 12:00:00 +0000"
 toc: true
+image:
+  path: "/assets/thumbnails/2024-09-15-history-of-spring.jpg"
 ---
 
 Linkedin 을 보다가 재밌는 링크를 발견해서 정리해본다.
