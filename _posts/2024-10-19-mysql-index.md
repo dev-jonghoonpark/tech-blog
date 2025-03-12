@@ -1,40 +1,33 @@
 ---
 layout: "post"
 title: "[MySQL] 인덱스  - Real MySQL 스터디 4회차"
-description: "MySQL에서 인덱스는 데이터베이스 쿼리 성능을 향상시키는 중요한 요소로, 다양한 종류의 인덱스(프라이머리 키, 세컨더리\
+description:
+  "MySQL에서 인덱스는 데이터베이스 쿼리 성능을 향상시키는 중요한 요소로, 다양한 종류의 인덱스(프라이머리 키, 세컨더리\
   \ 키 등)와 그 특성을 이해하는 것이 필수적입니다. 인덱스는 데이터가 정렬된 상태로 유지되며, 디스크 I/O를 줄이는 데 기여합니다. 쿼리 튜\
   닝 시 랜덤 I/O를 최소화하고 순차 I/O를 활용하는 것이 중요하며, B-Tree 알고리즘을 기반으로 한 인덱스 구조가 일반적으로 사용됩니다\
   . 인덱스의 선택도와 기수성은 성능에 큰 영향을 미치며, 다중 컬럼 인덱스 및 함수 기반 인덱스와 같은 고급 기능도 활용할 수 있습니다. 또한\
   , 외래 키는 데이터 무결성을 보장하는 제약 조건으로, 인덱스와는 다른 목적을 가지고 있습니다."
 categories:
-- "스터디-데이터베이스"
+  - "스터디-데이터베이스"
 tags:
-- "MySQL"
-- "index"
-- "scan"
-- "index scan"
-- "full scan"
-- "table full scan"
-- "index full scan"
-- "range scan"
-- "loose scan"
-- "key"
-- "primary key"
-- "secondary key"
-- "unique key"
-- "foreign key"
+  - "MySQL"
+  - "index"
+  - "scan"
+  - "index scan"
+  - "full scan"
+  - "table full scan"
+  - "index full scan"
+  - "range scan"
+  - "loose scan"
+  - "key"
+  - "primary key"
+  - "secondary key"
+  - "unique key"
+  - "foreign key"
 date: "2024-10-19 14:59:59 +0000"
 toc: true
 image:
   path: "/assets/thumbnails/2024-10-19-mysql-index.jpg"
----
-
-[K-DEVCON](https://k-devcon.com) 대전 개발자 스터디에서 Real Mysql 책으로 스터디를 진행해보기로 했다.
-
-발표하면서 준비한 내용을 블로그로도 옮겨보려고 한다.
-
-이 글의 내용은 Mysql 8.0 에서 InnoDB 를 기준으로 정리되었다. 이 글은 정리글이기에 생략이 있으며, 책에서는 이전 버전이나 다른 스토리지 엔진에 대해서도 다루기도 하고 더 자세한 내용들을 다루고 있다. 책의 구성이 이미 안다는것을 전제하에 진행된 부분들도 있어 해당 부분에 대해서 보충설명을 넣기도 하였다.
-
 ---
 
 # 인덱스

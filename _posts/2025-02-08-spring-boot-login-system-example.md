@@ -1,43 +1,36 @@
 ---
 layout: "post"
 title: "[Spring] 스프링 부트 기반 간단한 로그인, 회원가입 예제 만들어보기"
-description: "스프링 부트와 스프링 시큐리티를 활용하여 간단한 로그인 및 회원가입 시스템을 구축하는 방법을 설명합니다. 프로젝트 초기화부\
+description:
+  "스프링 부트와 스프링 시큐리티를 활용하여 간단한 로그인 및 회원가입 시스템을 구축하는 방법을 설명합니다. 프로젝트 초기화부\
   터 필요한 의존성 설정, 자동 구성, 로그인 및 회원가입 처리, 비밀번호 암호화, 사용자 인증 기능까지 단계별로 안내합니다. 이 예제는 스프링\
   \ 부트의 생산성 향상 기능을 활용하여 간편하게 구현할 수 있으며, CSRF 보호 및 사용자 정보 관리를 포함합니다."
 categories:
-- "스터디-자바"
+  - "스터디-자바"
 tags:
-- "Java"
-- "Spring In Action"
-- "Spring"
-- "Spring Boot"
-- "Spring Security"
-- "Auto Configuration"
-- "Configuration"
-- "JPA"
-- "User"
-- "Login"
-- "Signup"
-- "csrf"
-- "UserDetails"
-- "UserDetailService"
-- "loadUserByUsername"
-- "password"
-- "password encoder"
-- "argon2"
-- "bouncycastle"
+  - "Java"
+  - "Spring In Action"
+  - "Spring"
+  - "Spring Boot"
+  - "Spring Security"
+  - "Auto Configuration"
+  - "Configuration"
+  - "JPA"
+  - "User"
+  - "Login"
+  - "Signup"
+  - "csrf"
+  - "UserDetails"
+  - "UserDetailService"
+  - "loadUserByUsername"
+  - "password"
+  - "password encoder"
+  - "argon2"
+  - "bouncycastle"
 date: "2025-02-08 14:59:59 +0000"
 toc: true
 image:
   path: "/assets/thumbnails/2025-02-08-spring-boot-login-system-example.jpg"
----
-
-최근에 K-DEVCON 에서 Spring 스터디를 시작하였다.
-Spring In Action 이라는 책을 함께 공부하기로 하였다.
-책에 있는 내용들도 다루지만, 그 외에도 관련된 다양한 내용들을 함께 다뤄보고자 한다.
-
-[https://k-devcon.web.app/spring2025](https://k-devcon.web.app/spring2025)
-
 ---
 
 # 스프링 부트 기반 간단한 로그인, 회원가입 예제 만들어보기

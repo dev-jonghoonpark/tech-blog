@@ -1,39 +1,28 @@
 ---
 layout: "post"
 title: "[MySQL] 잠금 과 트랜잭션 (Lock and Transacdtion) - Real MySQL 스터디 2회차"
-description: "MySQL에서 트랜잭션과 잠금의 관계를 이해하고, 데이터의 정합성과 동시성을 보장하는 방법을 다룹니다. 트랜잭션은 작업의\
+description:
+  "MySQL에서 트랜잭션과 잠금의 관계를 이해하고, 데이터의 정합성과 동시성을 보장하는 방법을 다룹니다. 트랜잭션은 작업의\
   \ 완전성을 보장하며, 잠금은 여러 커넥션의 자원 요청을 제어합니다. InnoDB 스토리지 엔진을 기준으로 트랜잭션의 AUTO-COMMIT 모드\
   와 다양한 잠금 방식(글로벌, 테이블, 메타데이터, 네임드 락 등)을 설명하며, 트랜잭션의 격리 수준(READ UNCOMMITTED, READ\
   \ COMMITTED, REPEATABLE READ, SERIALIZABLE)과 리두 로그 및 바이너리 로그의 차이점도 다룹니다."
 categories:
-- "스터디-데이터베이스"
+  - "스터디-데이터베이스"
 tags:
-- "MySQL"
-- "real mysql"
-- "lock"
-- "transaction"
-- "level"
-- "commit"
-- "rollback"
-- "uncommit"
-- "repeatable"
-- "phantom"
+  - "MySQL"
+  - "real mysql"
+  - "lock"
+  - "transaction"
+  - "level"
+  - "commit"
+  - "rollback"
+  - "uncommit"
+  - "repeatable"
+  - "phantom"
 date: "2024-09-07 14:59:59 +0000"
 toc: true
 image:
   path: "/assets/thumbnails/2024-09-07-mysql-lock-and-transaction.jpg"
----
-
-[K-DEVCON](https://k-devcon.com) 대전 개발자 스터디에서 Real Mysql 책으로 스터디를 진행해보기로 했다.
-
-발표하면서 준비한 내용을 블로그로도 옮겨보려고 한다.
-
-발표를 위해 ppt도 만들어야하고, 블로그에 올리려면 글도 남겨야 하는게 아쉽긴 하지만, 아직 좋은 방법을 찾지는 못했기 때문에 번거로움을 감수해야할 것 같다.
-
-이 글의 내용은 Mysql 8.0 에서 InnoDB 를 기준으로 정리되었다. 이 글은 정리글이기에 생략이 있으며, 책에서는 이전 버전이나 다른 스토리지 엔진에 대해서도 다루기도 하고 더 자세한 내용들을 다루고 있다. 책의 구성이 이미 안다는것을 전제하에 진행된 부분들도 있어 해당 부분에 대해서 보충설명을 넣기도 하였다.
-
-참고로 대전 개발자 스터디 에 관심이 있다면 [구글 폼](http://k-devcon.web.app/daejeon-membership) 을 통해 신청할 수 있다.
-
 ---
 
 # 아키텍처 - Real MySQL 스터디 2회차

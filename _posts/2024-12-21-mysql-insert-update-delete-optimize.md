@@ -1,35 +1,28 @@
 ---
 layout: "post"
 title: "[MySQL] INSERT, UPDATE, DELETE 쿼리 작성 및 최적화 - Real MySQL 스터디 7회차 (끝)"
-description: "MySQL 8.0에서 INSERT, UPDATE, DELETE 쿼리 작성 및 최적화에 대한 내용을 다룬 글로, INSERT\
+description:
+  "MySQL 8.0에서 INSERT, UPDATE, DELETE 쿼리 작성 및 최적화에 대한 내용을 다룬 글로, INSERT\
   \ IGNORE와 ON DUPLICATE KEY UPDATE를 활용해 데이터 처리 시 발생할 수 있는 에러를 방지하고, BULK INSERT와\
   \ LOAD DATA를 통해 대량의 데이터를 효율적으로 삽입하는 방법을 설명합니다. 또한, PRIMARY KEY 선정 및 UUID, SNOWFLAKE\
   \ ID와 같은 고유 식별자 생성 전략을 제시하며, UPDATE와 DELETE 쿼리의 LIMIT 사용법, JOIN을 통한 다중 레코드 업데이트\
   \ 및 삭제 방법도 포함되어 있습니다."
 categories:
-- "스터디-데이터베이스"
+  - "스터디-데이터베이스"
 tags:
-- "MySQL"
-- "INDEX"
-- "INSERT"
-- "UPDATE"
-- "DELETE"
-- "PRIMARY KEY"
-- "AUTO INCREMENT"
-- "UUID"
-- "SNOWFLAKE ID"
+  - "MySQL"
+  - "INDEX"
+  - "INSERT"
+  - "UPDATE"
+  - "DELETE"
+  - "PRIMARY KEY"
+  - "AUTO INCREMENT"
+  - "UUID"
+  - "SNOWFLAKE ID"
 date: "2024-12-21 14:59:59 +0000"
 toc: true
 image:
   path: "/assets/thumbnails/2024-12-21-mysql-insert-update-delete-optimize.jpg"
----
-
-[K-DEVCON](https://k-devcon.com) 대전 개발자 스터디에서 Real Mysql 책으로 스터디를 진행해보기로 했다.
-
-발표하면서 준비한 내용을 블로그로도 옮겨보려고 한다.
-
-이 글의 내용은 Mysql 8.0 에서 InnoDB 를 기준으로 정리되었다. 이 글은 정리글이기에 생략이 있으며, 책에서는 이전 버전이나 다른 스토리지 엔진에 대해서도 다루기도 하고 더 자세한 내용들을 다루고 있다. 책의 구성이 이미 안다는것을 전제하에 진행된 부분들도 있어 해당 부분에 대해서 보충설명을 넣기도 하였다.
-
 ---
 
 # INSERT, UPDATE, DELETE 쿼리 작성 및 최적화

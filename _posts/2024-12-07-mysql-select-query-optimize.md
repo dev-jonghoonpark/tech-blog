@@ -1,38 +1,31 @@
 ---
 layout: "post"
 title: "[MySQL] SELECT 쿼리 작성 및 최적화 - Real MySQL 스터디 6회차"
-description: "MySQL 8.0에서 SELECT 쿼리 작성 및 최적화에 대한 내용을 다루며, 쿼리의 구조, 처리 순서, WHERE 및 HAVING\
+description:
+  "MySQL 8.0에서 SELECT 쿼리 작성 및 최적화에 대한 내용을 다루며, 쿼리의 구조, 처리 순서, WHERE 및 HAVING\
   \ 절의 차이, COUNT 함수의 사용법, DISTINCT와 GROUP BY의 차이, 인덱스 활용 방법, LIMIT 절의 사용 및 페이징 쿼리\
   \ 작성법, 그리고 CTE(Common Table Expression) 활용법 등을 정리했습니다. 이 글은 MySQL 쿼리 최적화와 성능 향상에\
   \ 대한 실용적인 팁을 제공합니다."
 categories:
-- "스터디-데이터베이스"
+  - "스터디-데이터베이스"
 tags:
-- "MySQL"
-- "SELECT"
-- "INDEX"
-- "WHERE"
-- "GROUP BY"
-- "DISTINCT"
-- "ORDER BY"
-- "COUNT"
-- "LIMIT"
-- "PAGING"
-- "CTE"
-- "EXPLAIN"
-- "VISUAL EXPLAIN"
+  - "MySQL"
+  - "SELECT"
+  - "INDEX"
+  - "WHERE"
+  - "GROUP BY"
+  - "DISTINCT"
+  - "ORDER BY"
+  - "COUNT"
+  - "LIMIT"
+  - "PAGING"
+  - "CTE"
+  - "EXPLAIN"
+  - "VISUAL EXPLAIN"
 date: "2024-12-07 14:59:59 +0000"
 toc: true
 image:
   path: "/assets/thumbnails/2024-12-07-mysql-select-query-optimize.jpg"
----
-
-[K-DEVCON](https://k-devcon.com) 대전 개발자 스터디에서 Real Mysql 책으로 스터디를 진행해보기로 했다.
-
-발표하면서 준비한 내용을 블로그로도 옮겨보려고 한다.
-
-이 글의 내용은 Mysql 8.0 에서 InnoDB 를 기준으로 정리되었다. 이 글은 정리글이기에 생략이 있으며, 책에서는 이전 버전이나 다른 스토리지 엔진에 대해서도 다루기도 하고 더 자세한 내용들을 다루고 있다. 책의 구성이 이미 안다는것을 전제하에 진행된 부분들도 있어 해당 부분에 대해서 보충설명을 넣기도 하였다.
-
 ---
 
 # SELECT 쿼리 작성 및 최적화

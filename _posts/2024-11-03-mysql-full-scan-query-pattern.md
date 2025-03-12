@@ -1,39 +1,30 @@
 ---
 layout: "post"
 title: "[MySQL] 풀 스캔 패턴 및 튜닝  - Real MySQL 스터디 5회차"
-description: "MySQL에서 풀 스캔 패턴과 튜닝 방법을 설명하는 글로, 실행 계획(EXPLAIN)을 통해 쿼리 최적화를 다루고 있습니다\
+description:
+  "MySQL에서 풀 스캔 패턴과 튜닝 방법을 설명하는 글로, 실행 계획(EXPLAIN)을 통해 쿼리 최적화를 다루고 있습니다\
   . 풀 스캔이 발생하는 주요 패턴으로는 컬럼 가공, 인덱스 미사용 컬럼의 OR 조건, 복합 인덱스의 선행 컬럼 누락, 와일드카드 사용, REGEXP\
   \ 사용 등이 있으며, 이러한 패턴에 대한 개선 방법도 제시됩니다. 최적화를 위해 인덱스 사용을 극대화하는 방법과 풀 스캔이 더 효율적인 경우에\
   \ 대해 논의합니다."
 categories:
-- "스터디-데이터베이스"
+  - "스터디-데이터베이스"
 tags:
-- "MySQL"
-- "index"
-- "scan"
-- "index scan"
-- "full scan"
-- "table full scan"
-- "query"
-- "pattern"
-- "optimize"
-- "optimizer"
-- "explain"
-- "access type"
+  - "MySQL"
+  - "index"
+  - "scan"
+  - "index scan"
+  - "full scan"
+  - "table full scan"
+  - "query"
+  - "pattern"
+  - "optimize"
+  - "optimizer"
+  - "explain"
+  - "access type"
 date: "2024-11-03 14:00:00 +0000"
 toc: true
 image:
   path: "/assets/thumbnails/2024-11-03-mysql-full-scan-query-pattern.jpg"
----
-
-[K-DEVCON](https://k-devcon.com) 대전 개발자 스터디에서 Real Mysql 책으로 스터디를 진행해보기로 했다.
-
-발표하면서 준비한 내용을 블로그로도 옮겨보려고 한다.
-
-이 글의 내용은 Mysql 8.0 에서 InnoDB 를 기준으로 정리되었다. 이 글은 정리글이기에 생략이 있으며, 책에서는 이전 버전이나 다른 스토리지 엔진에 대해서도 다루기도 하고 더 자세한 내용들을 다루고 있다. 책의 구성이 이미 안다는것을 전제하에 진행된 부분들도 있어 해당 부분에 대해서 보충설명을 넣기도 하였다.
-
-참고로 대전 개발자 스터디 에 관심이 있다면 [구글 폼](http://k-devcon.web.app/daejeon-membership) 을 통해 신청할 수 있다.
-
 ---
 
 # MySQL 풀스캔 쿼리 패턴 및 튜닝

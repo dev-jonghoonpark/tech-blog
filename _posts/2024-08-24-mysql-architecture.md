@@ -1,43 +1,32 @@
 ---
 layout: "post"
 title: "[MySQL] 아키텍처 - Real MySQL 스터디 1회차"
-description: "MySQL 아키텍처에 대한 첫 번째 스터디에서는 Real MySQL 8.0을 기반으로 InnoDB 스토리지 엔진의 구조와\
+description:
+  "MySQL 아키텍처에 대한 첫 번째 스터디에서는 Real MySQL 8.0을 기반으로 InnoDB 스토리지 엔진의 구조와\
   \ 작동 방식을 다룹니다. MySQL은 커넥션 핸들러, SQL 파서, 옵티마이저, 쿼리 실행기 등으로 구성된 엔진과 데이터 저장을 담당하는 스토\
   리지 엔진으로 나뉘며, 스레드 기반으로 작동하여 클라이언트 요청을 처리합니다. 메모리는 글로벌과 로컬 영역으로 나뉘며, InnoDB는 레코드 기\
   반 잠금, 클러스터링, 외래 키 지원 등의 기능을 제공합니다. 또한, MVCC를 통해 일관된 읽기를 제공하고, ACID 원칙을 준수하여 트랜잭션\
   의 안전성을 보장합니다. 이 글은 MySQL의 다양한 아키텍처 요소와 작동 원리를 간략하게 정리합니다."
 categories:
-- "스터디-데이터베이스"
+  - "스터디-데이터베이스"
 tags:
-- "MySQL"
-- "아키텍처"
-- "architecture"
-- "engine"
-- "mysql engine"
-- "storage engine"
-- "InnoDB"
-- "memory"
-- "structure"
-- "flow"
-- "thread"
-- "thread pool"
-- "metadata"
+  - "MySQL"
+  - "아키텍처"
+  - "architecture"
+  - "engine"
+  - "mysql engine"
+  - "storage engine"
+  - "InnoDB"
+  - "memory"
+  - "structure"
+  - "flow"
+  - "thread"
+  - "thread pool"
+  - "metadata"
 date: "2024-08-24 14:59:59 +0000"
 toc: true
 image:
   path: "/assets/thumbnails/2024-08-24-mysql-architecture.jpg"
----
-
-[K-DEVCON](https://k-devcon.com) 대전 개발자 스터디에서 Real Mysql 책으로 스터디를 진행해보기로 했다.
-
-발표하면서 준비한 내용을 블로그로도 옮겨보려고 한다.
-
-발표를 위해 ppt도 만들어야하고, 블로그에 올리려면 글도 남겨야 하는게 아쉽긴 하지만, 아직 좋은 방법을 찾지는 못했기 때문에 번거로움을 감수해야할 것 같다.
-
-이 글의 내용은 Mysql 8.0 에서 InnoDB 를 기준으로 정리되었다. 이 글은 정리글이기에 생략이 있으며, 책에서는 이전 버전이나 다른 스토리지 엔진에 대해서도 다루기도 하고 더 자세한 내용들을 다루고 있다. 책의 구성이 이미 안다는것을 전제하에 진행된 부분들도 있어 해당 부분에 대해서 보충설명을 넣기도 하였다.
-
-참고로 대전 개발자 스터디 에 관심이 있다면 [구글 폼](http://k-devcon.web.app/daejeon-membership) 을 통해 신청할 수 있다.
-
 ---
 
 # 아키텍처 - Real MySQL 스터디 1회차

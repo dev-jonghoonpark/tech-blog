@@ -1,42 +1,37 @@
 ---
 layout: "post"
 title: "[Spring] Spring In Action - 데이터로 작업하기 (3장)"
-description: "Spring In Action의 3장에서는 Java와 Spring을 활용한 데이터 작업에 대해 다룹니다. 도메인과 엔티티의\
+description:
+  "Spring In Action의 3장에서는 Java와 Spring을 활용한 데이터 작업에 대해 다룹니다. 도메인과 엔티티의\
   \ 차이, 객체 영속성, Repository와 DAO의 개념을 정리하며, JDBC와 JPA를 통한 데이터 접근 방법을 설명합니다. Spring\
   \ JDBC의 JdbcTemplate을 활용한 간편한 데이터베이스 쿼리 작성법과, KeyHolder를 이용한 자동 생성 키 가져오기, SimpleJdbcInsert로\
   의 데이터 삽입 방법을 소개합니다. 또한, Spring Data JPA를 통해 데이터 작업을 간소화하는 방법과 메소드 이름으로 쿼리를 생성하는\
   \ 기능도 설명합니다."
 categories:
-- "스터디-자바"
+  - "스터디-자바"
 tags:
-- "Java"
-- "Spring"
-- "Spring In Action"
-- "JDBC"
-- "Spring JDBC"
-- "Data"
-- "JdbcTemplate"
-- "JdbcClient"
-- "PreparedStatement"
-- "Keyholder"
-- "SimpleJdbcInsert"
-- "JPA"
-- "Spring Data JPA"
-- "method naming"
-- "JPA Repository"
-- "Repository"
-- "DAO"
+  - "Java"
+  - "Spring"
+  - "Spring In Action"
+  - "JDBC"
+  - "Spring JDBC"
+  - "Data"
+  - "JdbcTemplate"
+  - "JdbcClient"
+  - "PreparedStatement"
+  - "Keyholder"
+  - "SimpleJdbcInsert"
+  - "JPA"
+  - "Spring Data JPA"
+  - "method naming"
+  - "JPA Repository"
+  - "Repository"
+  - "DAO"
 date: "2025-01-12 14:59:59 +0000"
 toc: true
 image:
   path: "/assets/thumbnails/2025-01-11-spring-in-action-working-with-data.jpg"
 ---
-
-최근에 K-DEVCON 에서 Spring 스터디를 시작하였다.
-Spring In Action 이라는 책을 함께 공부하기로 하였다.
-책에 있는 내용들도 다루지만, 그 외에도 관련된 다양한 내용들을 함께 다뤄보고자 한다.
-
-[https://k-devcon.web.app/spring2025](https://k-devcon.web.app/spring2025)
 
 # 데이터로 작업하기
 
