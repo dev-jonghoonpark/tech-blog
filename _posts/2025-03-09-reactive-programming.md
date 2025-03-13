@@ -35,11 +35,11 @@ image:
 
 위 문장은 리액티브 프로그래밍에 대한 요약이다. 말만 들으면 무슨 말인지 잘 이해가 되지 않을 것이다. 처음이면 당연하다. 차근차근 정리해보겠다.
 
-## Declarative Programming (선언형 프로그래밍) 과의 비교
+## Imperative Programming(명령형 프로그래밍) 과의 비교
 
-우리가 일반적으로 프로그래밍 하는 방식을 **선언형 프로그래밍** 이라고 한다.
+우리가 일반적으로 프로그래밍 하는 방식을 **명령형 프로그래밍** 이라고 한다.
 
-선언형 프로그래밍에서는 작업을 순차적으로 진행한다. 각 작업은 한 번에 하나씩 그리고 이전 작업 다음에 실행 데이터는 모아서 처리되고 이전 작업이 데이터 처리를 끝낸 후에 다음 작업으로 넘어간다. 즉, **동기식** 이다. 동기는 작업 완료에 대한 응답을 기다리는 방식이다.
+명령형 프로그래밍에서는 작업을 순차적으로 진행한다. 각 작업은 한 번에 하나씩 그리고 이전 작업 다음에 실행 데이터는 모아서 처리되고 이전 작업이 데이터 처리를 끝낸 후에 다음 작업으로 넘어간다. 즉, **동기식** 이다. 동기는 작업 완료에 대한 응답을 기다리는 방식이다.
 
 반면에 리액티브 프로그래밍은 비동기 방식이다. 작업 완료에 대한 응답을 기다리지 않아도 된다.
 
@@ -512,15 +512,15 @@ ids.take(1) // 테스트를 위해 1개만 받아오도록 처리
 
 Reactive Programming 은 개념은 간단하다. 하지만 실제로 사용을 해보고자 하면 쉽지 않다. 많은 학습이 필요한 방식이다. 하지만 제대로 적용한다면, 더 좋은 성능을 낼 수 있는 어플리케이션을 만드는데 도움이 될 것이다. (무조건 쓰는게 좋다는 뜻은 아님.)
 
-참고로 Reactive Programming 은 기존 방식(선언형 프로그래밍)에 비해 학습 해야할 것이 많아 진입 장벽이 있는 편이고, 디버깅과 에러 추적이 쉽지 않다. 모든 것에는 트레이드 오프가 따르는 것 같다.
+참고로 Reactive Programming 은 기존 방식(명령형 프로그래밍)에 비해 학습 해야할 것이 많아 진입 장벽이 있는 편이고, 디버깅과 에러 추적이 쉽지 않다. 모든 것에는 트레이드 오프가 따르는 것 같다.
 
 ## 기타
 
 ### 참고 자료
 
 - Spring In Action
-- Reactive Streams : [https://www.reactive-streams.org/](https://www.reactive-streams.org/)
-- Reactor Core : [https://projectreactor.io/docs/core/release/reference/aboutDoc.html](https://projectreactor.io/docs/core/release/reference/aboutDoc.html)
+- Reactive Streams: [https://www.reactive-streams.org/](https://www.reactive-streams.org/)
+- Reactor Core: [https://projectreactor.io/docs/core/release/reference/aboutDoc.html](https://projectreactor.io/docs/core/release/reference/aboutDoc.html)
 - [Reactor3 intro By Simon Basle](https://files.speakerdeck.com/presentations/fa5195b61d9e4d7bb85c84fc53740b89/Reactor3ForSite.pdf)
 
 ### Operator 를 사용했는데 적용이 되지 않습니다.
@@ -564,6 +564,10 @@ Flux.just("something", "chain")
 
 본문에서 이야기 한 대로 Reactive Programming 은 프로그래밍 패터다임 중 하나이다.
 
-React.js 는 UI 라이브러리이다. 컴포넌트의 상태가 변경되었을 때, 변경사항에 따라 UI 를 렌더링 한다. 선언형 프로그래밍 (declarative programming) 을 사용한다.
+React.js 는 UI 라이브러리이다. 컴포넌트의 상태가 변경되었을 때, 변경사항에 따라 UI 를 렌더링 한다. 선언형 프로그래밍 (declarative programming, 선언형 프로그래밍은 원하는 결과를 묘사하는 방식으로 코드를 작성하는 프로그래밍 패러다임이다. 세부사항은 라이브러리나 프레임워크가 담당한다.) 을 사용한다.
 
-따라서 크게 관련있거나 하지는 않는다.
+따라서 크게 관련있거나 하지는 않다.
+
+참고: [How does React run your code?](https://react.dev/reference/rules/components-and-hooks-must-be-pure#how-does-react-run-your-code)
+
+> React는 선언적입니다. 무엇을 렌더링할지 React에 알려주면 React가 사용자에게 가장 잘 표시하는 방법을 알아냅니다.
