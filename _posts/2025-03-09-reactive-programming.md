@@ -1,27 +1,28 @@
 ---
 layout: "post"
 title: "[Spring] Reactive Programming (with reactor)"
-description: "리액티브 프로그래밍은 비동기 프로그래밍 패러다임으로, 데이터 스트림과 변화의 전파를 다루며, Java에서는 RxJava와\
+description:
+  "리액티브 프로그래밍은 비동기 프로그래밍 패러다임으로, 데이터 스트림과 변화의 전파를 다루며, Java에서는 RxJava와\
   \ Reactor를 통해 구현된다. 리액티브 프로그래밍은 동기식 처리와 달리 비동기식으로 작업을 수행하여 리소스 효율성과 응답성을 향상시키고,\
   \ Reactive Streams 인터페이스를 통해 데이터 흐름을 관리한다. Reactor는 Flux와 Mono를 제공하며, 다양한 오퍼레이션을\
   \ 통해 데이터 파이프라인을 구성할 수 있다. Spring에서는 Webflux와 R2DBC를 활용하여 리액티브 스택을 구현할 수 있으며, 이를\
   \ 통해 성능이 개선된 어플리케이션 개발이 가능하다."
 categories:
-- "스터디-자바"
+  - "스터디-자바"
 tags:
-- "Spring"
-- "Reactive Programming"
-- "Reactive"
-- "RxJava"
-- "ReactiveX"
-- "Reactive Streams"
-- "Reactor"
-- "async"
-- "asynchronous"
-- "operation"
-- "publisher"
-- "webflux"
-- "r2dbc"
+  - "Spring"
+  - "Reactive Programming"
+  - "Reactive"
+  - "RxJava"
+  - "ReactiveX"
+  - "Reactive Streams"
+  - "Reactor"
+  - "async"
+  - "asynchronous"
+  - "operation"
+  - "publisher"
+  - "webflux"
+  - "r2dbc"
 date: "2025-03-09 03:00:00 +0000"
 toc: true
 image:
@@ -453,8 +454,6 @@ buffer operation의 입력값은 maxSize를 지정하는데 사용된다. 입력
 ### 기타 오퍼레이션
 
 - `log()` : operation 에 적용하면 데이터 스트림의 데이터를 로깅한다.
-
-#### log
 
 ## Spring 에서 Reactive Programming 사용하기
 
