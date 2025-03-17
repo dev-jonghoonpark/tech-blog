@@ -9,7 +9,8 @@
 }
 
 body {
-  font-family: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue,
+    Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   line-height: 1.7;
@@ -151,8 +152,11 @@ h5 {
 }
 
 section h1:first-child {
+  font-size: 2.125em;
+  font-weight: 800;
   margin-top: 0;
-  line-height: 36px;
+  margin-bottom: 0.5em;
+  line-height: 1.5;
 }
 
 strong,
@@ -361,12 +365,6 @@ figcaption {
   }
 }
 
-.post > h1 {
-  font-size: 2.125em;
-  margin-bottom: .5em;
-  line-height: 36px;
-}
-
 .content {
   --content-heading-weight: var(--weight-extrabold);
   --content-heading-line-height: 1.125;
@@ -524,7 +522,9 @@ figcaption {
 }
 .content table tbody tr:last-child td,
 .content table tbody tr:last-child th {
-  border-bottom-width: var(--content-table-body-last-row-cell-border-bottom-width);
+  border-bottom-width: var(
+    --content-table-body-last-row-cell-border-bottom-width
+  );
 }
 .content .tabs li + li {
   margin-top: 0;
