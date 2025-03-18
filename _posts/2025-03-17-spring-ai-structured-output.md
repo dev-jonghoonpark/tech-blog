@@ -15,6 +15,7 @@ tags:
   - "AI Agents"
   - "JSON"
   - "BeanOutputConverter"
+  - "Google Agents Whitepapers"
 date: "2025-03-17 00:00:00 +0900"
 toc: true
 image:
