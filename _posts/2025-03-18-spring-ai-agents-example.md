@@ -1,28 +1,29 @@
 ---
 layout: "post"
 title: "[Spring AI] AI 에이전트 구현해보기 (AI Agents)"
-description: "Spring AI를 활용하여 AI Agents의 기능을 구현하는 방법을 다루는 이 글에서는 Google Search API와\
+description:
+  "Spring AI를 활용하여 AI Agents의 기능을 구현하는 방법을 다루는 이 글에서는 Google Search API와\
   \ Google Places API를 이용해 실시간 정보를 검색하고, 복잡한 작업을 수행하는 예제를 제공합니다. 코드 예시를 통해 도구를 구현하\
   고, 사용자 입력에 따라 여러 도구를 순차적으로 호출하여 최종 결과를 도출하는 과정을 설명합니다. AI Agents의 특성을 이해하고 싶다면 Google\
   \ Agents Whitepapers를 참고하는 것을 추천합니다."
 categories:
-- "스터디-자바"
+  - "스터디-자바"
 tags:
-- "Spring"
-- "Spring AI"
-- "AI Agents"
-- "Agents"
-- "AI 에이전트"
-- "Example"
-- "Serp"
-- "Tool"
-- "Tool Calling"
-- "Langchain"
-- "LangGraph"
-- "Google Search"
-- "Google Search API"
-- "Google Place API"
-- "Google Agents Whitepapers"
+  - "Spring"
+  - "Spring AI"
+  - "AI Agents"
+  - "Agents"
+  - "AI 에이전트"
+  - "Example"
+  - "Serp"
+  - "Tool"
+  - "Tool Calling"
+  - "Langchain"
+  - "LangGraph"
+  - "Google Search"
+  - "Google Search API"
+  - "Google Place API"
+  - "Google Agents Whitepapers"
 date: "2025-03-17 15:00:00 +0000"
 toc: true
 image:
@@ -152,9 +153,8 @@ WebClient webClient = WebClient.builder()
 
 class PlaceTools {
     @Tool(description = "Use the Google Places API to run a Google Places Query.", name = "place_search")
-    Mono<String> run(String query) {
-        System.out.println(query);
-        return webClient.post()
+    String run(String query) {
+        Mono<String> response = webClient.post()
                 .uri("/v1/places:searchText")
                 .headers(httpHeaders -> {
                     httpHeaders.set("Content-Type", "application/json");
@@ -165,12 +165,22 @@ class PlaceTools {
                 .bodyValue(new PlaceSearchParam(query))
                 .retrieve()
                 .bodyToMono(String.class);
+        return response.block();
     }
 }
 
 record PlaceSearchParam(String textQuery) {
 }
 ```
+
+현재 Spring AI 에서 Tool을 처리할 때, 다음과 같은 방식을 지원하지 않는다. (참고: ([Method Tool Limitations](https://docs.spring.io/spring-ai/reference/api/tools.html#_method_tool_limitations)))
+
+- `Optional`
+- Asynchronous types (e.g. `CompletableFuture`, `Future`)
+- Reactive types (e.g. `Flow`, `Mono`, `Flux`)
+- Functional types (e.g. `Function`, `Supplier`, `Consumer`).
+
+그래서 webclient를 통해 받아온 결과값을 Mono 타입 으로 반환하는게 아니라 `block`을 통해 결과 값을 반환하도록 처리하였다.
 
 그리고 예시에서는 나오지 않았지만, 실제로 예시를 만들다보니 한가지 Tool 이 더 필요하단 것을 알게되었다.
 바로 현재의 DateTime을 조회하는 Tool 이다. 이 Tool이 없다면 model은 last week 를 계산하기 위한 기준을 알 수가 없다. (지금이 언제인지 알 수 있는 기능이 없다.) 기준이 없으면 이상한 날짜를 기준으로 계산을 진행하게 된다.
