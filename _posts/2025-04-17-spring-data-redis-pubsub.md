@@ -55,11 +55,14 @@ prod 환경에서는 그럴일이 크게 없겠지만, 개발 환경에서는 �
 
 이 시스템에는 이미 Redis 도, Rabbit MQ 도 구성되어 있다. 하지만, 데이터가 지속되어야 할 필요가 없었고, 수신을 검증할 필요도 없는 작업이라고 생각하였기 때문에 Redis PubSub로 빠르게 결정하고 진행하였다. 설정도 간단하게 가능한 것도 선택에 영향을 주었다.
 
-기존의 architecture 는 다음과 같은 구조였다. 잘 변하지 않는 데이터라 그런지, 데이터 조회 후 cache 처리는 하는데 cache를 수정/삭제 하는 방법은 제공하고 있지 않았다. 그래서 캐시 초기화를 하려면 서버를 재실행 해야만 했다.
+기존의 architecture 는 다음과 같은 구조였다.
+
+- Service A 에서 Domain A 에 대한 데이터를 redis 캐시로 관리하고 있다.
+- Service B 에서 Service A 에서 Domain A에 대한 부분을 grpc로 받아온다. 그리고 메모리에 cache 처리한다. 잘 변하지 않는 데이터라 그런지, 최초에 데이터를 조회한 후 cache 처리는 하는데, 이 후 cache를 수정/삭제 하는 방법은 제공하고 있지 않았다. 그래서 해당 데이터에 대한 캐시를 초기화 하려면 Service B 의 Pod들을 재실행 해야만 했다.
 
 ![prev architecture](/assets/images/2025-04-17-spring-data-redis-pubsub/prev-architecture-1.png)
 
-그래서 evict 를 할 수 있도록 아래와 같이 개선을 해보기로 하였다.
+그래서 redis pubusb을 통해 Service A 에서 Domain A 에 대해 evict 처리를 하였을 때 Service B 에서도 함께 evict 처리를 하도록 아래와 같이 개선을 해보기로 하였다.
 
 ![redis pubsub architecture](/assets/images/2025-04-17-spring-data-redis-pubsub/redis-pubsub-architecture.png)
 
@@ -70,6 +73,8 @@ prod 환경에서는 그럴일이 크게 없겠지만, 개발 환경에서는 �
 다음은 spring-data-redis 를 이용한 pub/sub 코드이다. pub/sub 을 위한 channel 명을 동일하게 설정해줘야 한다.
 
 ### Publisher
+
+#### RedisPublisher.java
 
 ```java
 @RequiredArgsConstructor
@@ -105,7 +110,7 @@ public RedisMessageListenerContainer redisMessageListenerContainer(RedisConnecti
 }
 ```
 
-공식 Document 에서는 Pattern 을 사용할 수도 있다고만 언급되어있는데, Pattern을 사용하려면 ChannelTopic이 아닌 PatternTopic 을 사용해야 한다. Document 에는 PatternTopic에 대한 언급이 없다. pattern 방식이 동작하지 않아 코드를 직접 확인해보고 알게되었다.
+공식 Document 에서는 Pattern 을 사용할 수도 있다고만 언급되어있는데, Pattern 을 사용하려면 ChannelTopic 이 아닌 PatternTopic 을 사용해야 한다. Document 에는 PatternTopic 에 대한 언급이 없다. pattern 방식이 동작하지 않아 코드를 직접 확인해보고 알게되었다.
 
 여기서는 모든 channel 의 데이터를 한 곳에서 받을 수 있도록 `*` 로 처리하였다.
 
@@ -115,8 +120,7 @@ public RedisMessageListenerContainer redisMessageListenerContainer(RedisConnecti
 @Component
 public class RedisSubscriber implements MessageListener {
 
-  private static final String EVICT_CACHE_PRODUCT_INFO = "evict-cache-product-info";
-  private static final String EVICT_ALL_CACHE_PRODUCT_INFO = "evict-all-cache-product-info";
+  private static final String EVICT_CACHE_OF_SOMETHING = "evict-cache-of-something";
 
   @Override
   public void onMessage(Message message, byte[] bytes) {
@@ -145,3 +149,20 @@ public class RedisSubscriber implements MessageListener {
 ## 기타
 
 - [RabbitMQ 와 Kafka 비교](https://jonghoonpark.com/2025/02/22/kafka-in-spring#rabbitmq-%EC%99%80-kafka-%EB%B9%84%EA%B5%90)
+
+## 컨트리뷰트
+
+위에서 다음과 같은 이야기를 하였다.
+
+> 공식 Document 에서는 Pattern 을 사용할 수도 있다고만 언급되어있는데, Pattern 을 사용하려면 ChannelTopic 이 아닌 PatternTopic 을 사용해야 한다. Document 에는 PatternTopic 에 대한 언급이 없다. pattern 방식이 동작하지 않아 코드를 직접 확인해보고 알게되었다.
+
+그래서 문서에 PatternTopic에 대한 언급을 추가하는 [PR](https://github.com/spring-projects/spring-data-redis/pull/3131)을 작성하였다.
+
+spring-data-redis 의 멤버인 Mark Paluch(mp911de) 가 PR을 확인하고는 문서에 추가하는 것 뿐 아니라 ChannelTopic 과 PatternTopic 의 공통 인터페이스인 `Topic` interface 에 factory 메소드를 추가해주었다.
+
+그래서 추후에는 아래와 같은 형태로 사용 가능하게 될 예정이다.
+
+- `Topic.channel("chatroom")`
+- `Topic.pattern("*room")`
+
+색다른 컨트리뷰트 경험이였어서 공유해본다.
