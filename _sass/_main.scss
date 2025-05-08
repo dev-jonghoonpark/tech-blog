@@ -82,6 +82,14 @@ pre {
   background: #fafafa;
 }
 
+pre.mermaid {
+  background: none;
+}
+
+pre.mermaid > * {
+  background: inherit;
+}
+
 code {
   padding: 0.1rem;
 }
@@ -369,7 +377,7 @@ figcaption {
   --content-heading-weight: var(--weight-extrabold);
   --content-heading-line-height: 1.125;
   --content-block-margin-bottom: 1em;
-  --content-blockquote-padding: 1.25em 1.5em;
+  --content-blockquote-padding: 0.5em 1.5em;
   --content-pre-padding: 1.25em 1.5em;
   --content-table-cell-border-width: 0 0 1px;
   --content-table-cell-padding: 0.5em 0.75em;
