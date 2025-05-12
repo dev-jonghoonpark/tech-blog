@@ -1,23 +1,24 @@
 ---
 layout: "post"
 title: "[SQL] JOIN 알고리즘"
-description: "관계형 데이터베이스에서 JOIN 알고리즘은 여러 테이블의 데이터를 연결하여 원하는 결과를 얻기 위해 사용되며, 효율적인 실\
+description:
+  "관계형 데이터베이스에서 JOIN 알고리즘은 여러 테이블의 데이터를 연결하여 원하는 결과를 얻기 위해 사용되며, 효율적인 실\
   행 계획을 위해 데이터 통계 정보를 활용한다. 주요 JOIN 알고리즘으로는 중첩 루프 JOIN, 해시 JOIN, 머지 JOIN이 있으며, 각각의\
   \ 알고리즘은 데이터 양과 구조에 따라 성능 차이가 있다. 효율적인 JOIN을 위해서는 실행 계획을 이해하고 쿼리 구조를 최적화하는 것이 중요하\
   다."
 categories:
-- "스터디-데이터베이스"
+  - "스터디-데이터베이스"
 tags:
-- "DATABASE"
-- "SQL"
-- "Join"
-- "Join Performance"
-- "Performance"
-- "Nested Loop Join"
-- "Hash Join"
-- "Merge Join"
-- "JPA (ORM) 개발자를 위한 고성능 SQL"
-date: "2025-05-09 00:00:00 +0000"
+  - "DATABASE"
+  - "SQL"
+  - "Join"
+  - "Join Performance"
+  - "Performance"
+  - "Nested Loop Join"
+  - "Hash Join"
+  - "Merge Join"
+  - "JPA (ORM) 개발자를 위한 고성능 SQL"
+date: "2025-05-09 00:30:00 +0900"
 toc: true
 image:
   path: "/assets/thumbnails/2025-05-09-join-algorithms.jpg"
@@ -71,9 +72,17 @@ GROUP BY p.title
 ORDER BY comment_count DESC
 ```
 
+실행계획을 확인보면 PostgreSQL 에서는 Hash Join 을, MySQL 에서는 Nested Loop Join 를 사용하였다.
+
+- PostgreSQL 실행계획: [https://explain.depesz.com/s/Ndbz](https://explain.depesz.com/s/Ndbz)
+- MySQL 실행계획: [https://explain.depesz.com/s/OPez](https://explain.depesz.com/s/OPez)
+
 **개선 솔루션**
 
-쿼리는 더 복잡해졌지만. 속도는 훨씬 줄어든다.
+위 솔루션은 개선의 여지가 있다.
+
+댓글이 가장 많은 상위 게시글 3개를 찾아내는 과정 자체는 post 테이블이 필요하지 않다. post_comment 만 있으면 된다.
+따라서 아래와 같이 수정해볼 수 있다. 쿼리는 더 복잡해졌지만. 속도는 훨씬 줄어든다.
 
 ```sql
 SELECT
@@ -91,6 +100,11 @@ JOIN (
 ) pc ON p.id = pc.post_id
 ORDER BY comment_count DESC
 ```
+
+위와 같이 개선 하면 약 3배 더 빠르게 동작하게 되었다. 실행 계획도 더 단순해졌다.
+
+- PostgreSQL 실행계획: [https://explain.depesz.com/s/qwKl](https://explain.depesz.com/s/qwKl)
+- MySQL: 실행계획: [https://explain.depesz.com/s/Bku8](https://explain.depesz.com/s/Bku8)
 
 조인을 하기 전에 집계를 선행하면, 조인의 대상이 되는 레코드 수가 매우 줄어들어 훨씬 빠른 실행이 가능해진다.
 
