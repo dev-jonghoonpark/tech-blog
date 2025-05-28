@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Search
+sitemap: false
 ---
 
 <style>

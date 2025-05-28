@@ -63,6 +63,23 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+      defaults:
+  - scope:
+      path: "assets/**/*.pdf"
+    values:
+      sitemap: false
+  - scope:
+      path: "category/**"
+    values:
+      sitemap: false
+  - scope:
+      path: "page*/"
+    values:
+      sitemap: false
+  - scope:
+      path: "*.html"
+    values:
+      sitemap: false
 
 social:
   name: jonghoonpark
