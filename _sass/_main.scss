@@ -77,9 +77,19 @@ pre {
   margin-bottom: 0.5rem;
 }
 
-code,
+.highlight code,
 pre {
   background: #fafafa;
+}
+
+.highlight code {
+  padding: 0.1rem;
+}
+
+p > code {
+  background-color: #818b981f;
+  padding: 2px 4px;
+  border-radius: 6px;
 }
 
 pre.mermaid {
@@ -88,10 +98,6 @@ pre.mermaid {
 
 pre.mermaid > * {
   background: inherit;
-}
-
-code {
-  padding: 0.1rem;
 }
 
 pre code {

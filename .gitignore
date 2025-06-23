@@ -6,3 +6,5 @@ tmp
 .jekyll-cache
 .git
 _site
+/*.jpg
+/*.jar
