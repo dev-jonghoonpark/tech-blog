@@ -86,6 +86,13 @@ pre {
   padding: 0.1rem;
 }
 
+h1 > code,
+h2 > code,
+h3 > code,
+h4 > code,
+h5 > code,
+h6 > code,
+li > code,
 p > code {
   background-color: #818b981f;
   padding: 2px 4px;
@@ -366,6 +373,7 @@ section.post .toc a {
 
 section.post .table-wrapper {
   overflow-x: auto;
+  padding-bottom: 1rem;
 }
 
 figcaption {
