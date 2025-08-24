@@ -187,9 +187,17 @@ yml 파일을 작성한 후 podman compose 로 실행 시켰다.
 podman compose up -d
 ```
 
-### mysql table 설정
+### mysql 설정
 
-아래와 같이 테이블을 생성해주었다.
+참고로 mysql에서 debezium 을 사용할 때는 `binlog_format` 이 반드시 'ROW' 여야 한다. (MySQL 기본 값은 `ROW` 이다. 따라서 별도로 설정하지 않았다면 문제가 없을 것이다.)
+
+아래 명령어로 어떻게 설정되어있는지 확인해볼 수 있다.
+
+```SQL
+SHOW VARIABLES LIKE 'binlog_format';
+```
+
+테스트를 위해 아래와 같이 테이블을 생성해주었다.
 
 ```sql
 CREATE TABLE IF NOT EXISTS customers (
@@ -347,7 +355,7 @@ curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 
 Update 는 PUT 으로 가능하다.
 
 ```bash
-curl -i -X PUT -H "Accept:application/json" -H "Content-Type:application/json" http://localhost:8083/connectors/<connector-name> -d '{
+curl -i -X PUT -H "Accept:application/json" -H "Content-Type:application/json" http://localhost:8083/connectors/<connector-name>/config -d '{
     "connector.class": "io.debezium.connector.mysql.MySqlConnector",
     "database.hostname": "mysql",
     "database.port": "3306",
