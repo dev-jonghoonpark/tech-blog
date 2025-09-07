@@ -98,6 +98,17 @@ N = 3 인 경우의 예시를 살펴보자.
 
 **예시를 통해 이해해보자.**
 
+<pre class="mermaid">
+flowchart TD
+    D1["D1 ([Sx,1])"] -->|write<br/>handled by Sx| D2["D2 ([Sx,2])"]
+
+    D2 -->|write<br/>handled by Sy| D3["D3 ([Sx,2],[Sy,1])"]
+    D2 -->|write<br/>handled by Sz| D4["D4 ([Sx,2],[Sz,1])"]
+
+    D3 --> D5["D5 ([Sx,3],[Sy,1],[Sz,1])"]
+    D4 -->|reconciled<br/>and written by Sx| D5
+</pre>
+
 ① 클라이언트가 데이터 D1을 시스템에 기록한다. 이 쓰기 연산을 처리한 서버는 Sx이다. 따라서 벡터 시계는 D1\[Sx, 1\]으로 변한다.
 
 ② 다른 클라이언트가 데이터 D1을 읽고 D2로 업데이트한 다음 기록한다. D2는 D1에 대한 변경이므로 D1을 덮어쓴다. 이때 쓰기 연산은 같은 서버 Sx가 처리한다고 가정하자. 벡터 시계는 D2(\[Sx, 2\])로 바뀔 것이다.
