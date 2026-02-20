@@ -15,6 +15,7 @@ baseurl: ""
 highlighter: rouge
 kramdown:
   input: GFM
+  math_engine: mathjax
   syntax_highlighter_opts:
     default_lang: html
     css_class: "syntax"
