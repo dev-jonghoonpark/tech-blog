@@ -9,8 +9,17 @@
 }
 
 body {
-  font-family: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue,
-    Helvetica, Arial, sans-serif;
+  font-family:
+    Inter,
+    SF Pro,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   line-height: 1.7;
@@ -562,6 +571,9 @@ figcaption {
 }
 .content.is-large {
   font-size: var(--size-large);
+}
+.content hr {
+  background: #ececec;
 }
 
 :root {
