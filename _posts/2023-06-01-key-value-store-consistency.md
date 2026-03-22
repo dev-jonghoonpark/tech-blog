@@ -20,6 +20,7 @@ tags:
   - "Merkle"
 date: "2023-05-31 18:37:34 +0000"
 toc: true
+mermaid: true
 image:
   path: "/assets/thumbnails/2023-06-01-key-value-store-consistency.jpg"
 ---

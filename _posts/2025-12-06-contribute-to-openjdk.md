@@ -1,6 +1,7 @@
 ---
 layout: "post"
 title: "OpenJDK 기여하기"
+description: "DevFest 2025 Incheon에서 발표한 OpenJDK 기여 경험을 정리한 글입니다. OpenJDK Author가 되기까지의 과정, 기여 방법, 빌드 환경 구성, 이슈 선택부터 PR 제출까지의 전체 워크플로우를 소개합니다."
 categories:
   - "오픈소스"
 tags:

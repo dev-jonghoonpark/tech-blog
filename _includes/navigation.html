@@ -1,5 +1,5 @@
-<header aria-hidden="true" class="no-print">
-   <nav role="navigation" aria-hidden="true">
+<header class="no-print">
+   <nav role="navigation" aria-label="Main navigation">
       <ul>
          {% for item in site.data.navigation.links %}
             <li><a href="{{ item.url }}" {% if item.url == page.url %} class="active"{% endif %} {% if item.target %} target="_blank"{% endif %}>{{ item.title }}</a></li>
@@ -7,7 +7,7 @@
       </ul>
    </nav>
 
-   <nav role="navigation" aria-hidden="true">
+   <nav role="navigation" aria-label="Blog navigation">
       <ul>
          {% for item in site.data.blog.links %}
             <li><a href="{{ item.url }}" {% if item.url == page.url %} class="active"{% endif %} {% if item.target %} target="_blank"{% endif %}>{{ item.title }}</a></li>
@@ -16,6 +16,6 @@
    </nav>
 
    <div class="mobile close-button">
-      <img src="/assets/icons/close.svg">
+      <img src="/assets/icons/close.svg" alt="close menu" width="24" height="24">
    </div>
 </header>

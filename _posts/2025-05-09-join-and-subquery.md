@@ -16,6 +16,7 @@ tags:
 - "JPA (ORM) 개발자를 위한 고성능 SQL"
 date: "2025-05-09 00:00:00 +0000"
 toc: true
+mermaid: true
 image:
   path: "/assets/thumbnails/2025-05-09-join-and-subquery.jpg"
 ---

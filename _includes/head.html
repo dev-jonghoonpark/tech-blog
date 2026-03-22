@@ -1,4 +1,10 @@
 <head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
   <!-- Google tag (gtag.js) -->
   <link rel="preconnect" href="https://www.googletagmanager.com" />
   <script
@@ -13,12 +19,6 @@
     gtag("js", new Date());
     gtag("config", "G-6H7DG05B2H");
   </script>
-
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-  />
 
   {% seo title=false %}
 
@@ -53,13 +53,16 @@
     {{ include_to_scssify | scssify }}
   </style>
 
+  {% if page.layout == 'post' %}
   <link href="/assets/css/syntax.min.css" rel="stylesheet" />
+  {% endif %}
 
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#070707" />
 
-  <script src="/assets/js/mobile.min.js" type="text/javascript"></script>
+  <script src="/assets/js/mobile.min.js" defer></script>
 
+  {% if page.math %}
   <!-- MathJax -->
   <script>
     MathJax = {
@@ -70,4 +73,5 @@
     };
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  {% endif %}
 </head>

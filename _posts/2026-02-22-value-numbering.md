@@ -1,6 +1,7 @@
 ---
 layout: "post"
 title: "Value Numbering (GVN, LVN)"
+description: "컴파일러 최적화 기법인 Value Numbering을 소개합니다. GVN(Global Value Numbering)과 LVN(Local Value Numbering)의 원리, 동작 예시, 그리고 CSE와의 차이점을 다룹니다."
 categories:
   - "개발"
 tags:
@@ -10,6 +11,7 @@ tags:
   - "SSA"
 date: "2026-02-22 01:00:00"
 toc: true
+math: true
 ---
 
 [Value numbering](https://en.wikipedia.org/wiki/Value_numbering) 은 프로그램 내의 두 계산 식이 서로 동일한지 판단하여, 중복된 계산을 제거함으로써 시맨틱(의미)을 유지한 채 프로그램을 최적화하는 기법입니다.

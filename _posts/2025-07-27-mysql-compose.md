@@ -1,6 +1,7 @@
 ---
 layout: "post"
 title: "MySQL Docker Compose Yaml 구성 예시"
+description: "자주 사용하는 MySQL Docker Compose YAML 구성 예시입니다. innodb-buffer-pool-size 설정, 볼륨 마운트, 환경변수 설정 등 실무에서 바로 사용할 수 있는 템플릿을 제공합니다."
 categories:
   - "스터디-데이터베이스"
   - "개발"

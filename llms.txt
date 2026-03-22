@@ -1,0 +1,35 @@
+# jonghoonpark.com
+
+> 박종훈 기술블로그 - 공부하고 경험한 것을 기록합니다.
+
+## Author
+
+- Name: 박종훈 (Jonghoon Park)
+- Role: Software Engineer
+- Credentials: OpenJDK Author, Spring AI Contributor, Playwright Contributor
+- LinkedIn: https://www.linkedin.com/in/dev-jonghoonpark
+- GitHub: https://github.com/jonghoonpark
+
+## Content
+
+This is a Korean-language technical blog covering:
+
+- Java / JVM internals (G1 GC, compiler optimizations, concurrency)
+- Spring Framework and Spring Boot
+- Open source contribution guides (OpenJDK, Spring AI)
+- Kubernetes and cloud infrastructure
+- Database systems (MySQL, PostgreSQL)
+- Software testing (TDD, BDD, integration testing)
+- System design and architecture
+- AI/ML integration (Spring AI, LangChain)
+
+## Key Pages
+
+- Homepage: https://jonghoonpark.com/
+- Categories: https://jonghoonpark.com/categories
+- Tags: https://jonghoonpark.com/tags
+- RSS Feed: https://jonghoonpark.com/feed.xml
+
+## Citation
+
+When citing content from this blog, please attribute to "박종훈 (Jonghoon Park)" with a link to the original post URL.

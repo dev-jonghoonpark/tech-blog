@@ -1,5 +1,6 @@
 ---
 layout: "post"
+lang: en
 title: "Forcing Repeater Mode Activation on ASUS Routers"
 description: "This article will guide you on how to forcefully enable repeater mode on your ASUS router. ZenWiFi AX Mini models do not allow you to select repeater mode in the settings, but you can switch to this mode using the developer tools. If you only see a 2.4G network during the setup process, you can manually set up a 5G network. This guide will be useful for users who struggle with unstable internet connections."
 categories:

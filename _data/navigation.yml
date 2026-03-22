@@ -7,6 +7,11 @@ links:
     url: /tags
   - title: Search
     url: /search
+  - title: About
+    url: /about
   - title: Linkedin
     url: https://linkedin.com/in/dev-jonghoonpark
+    target: _blank
+  - title: GitHub
+    url: https://github.com/jonghoonpark
     target: _blank

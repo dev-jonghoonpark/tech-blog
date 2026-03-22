@@ -7,6 +7,7 @@ author:
   email: dev@jonghoonpark.com
   linkedin: https://www.linkedin.com/in/dev-jonghoonpark
   url: https://jonghoonpark.com
+logo: /favicon.png
 permalink: pretty
 timezone: Asia/Seoul
 
@@ -86,6 +87,7 @@ social:
   name: jonghoonpark
   links:
     - https://www.linkedin.com/in/dev-jonghoonpark
+    - https://github.com/jonghoonpark
 
 paginate: 20
 paginate_path: "/page:num/"
