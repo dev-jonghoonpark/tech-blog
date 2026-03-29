@@ -52,6 +52,8 @@ jobs:
         run: |
           mkdir -p ./_site/page1
           mv ./_site/index.html ./_site/page1/index.html
+          sed -i 's|rel="canonical" href="https://jonghoonpark.com/"|rel="canonical" href="https://jonghoonpark.com/page1/"|g' ./_site/page1/index.html
+          sed -i 's|"og:url" content="https://jonghoonpark.com/"|"og:url" content="https://jonghoonpark.com/page1/"|g' ./_site/page1/index.html
           mv ./_site/redirect.html ./_site/index.html
 
       - name: Upload artifact
