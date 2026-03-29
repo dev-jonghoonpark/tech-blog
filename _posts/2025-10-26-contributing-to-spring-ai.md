@@ -7,6 +7,7 @@ description:
   \ 그리고 기여하면서 느낀 AI 업계와 커리어에 대한 인사이트를 공유합니다."
 categories:
   - "오픈소스"
+  - "발표"
 tags:
   - "Spring AI"
   - "오픈소스"
