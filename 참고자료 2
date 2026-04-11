@@ -1,0 +1,156 @@
+# LambdaProxyClassDictionary 정리
+
+## 1. 개요
+
+`LambdaProxyClassDictionary`는 **JEP 483 이전의 CDS(Class Data Sharing) 아카이브에서 lambda proxy class를 저장·조회하기 위한 *레거시* 최적화 자료구조**이다.
+
+- 위치: `src/hotspot/share/cds/lambdaProxyClassDictionary.{hpp,cpp}`
+- 헤더 주석에 명시: _"legacy optimization for lambdas before JEP 483. May be removed in the future."_
+- `CDSConfig::is_dumping_lambdas_in_legacy_mode()`가 true일 때만 등록 경로가 동작한다.
+- JEP 483 (AOT class loading & linking) 에서는 lambda call site 자체를 AOT cache assembly 단계에서 완전히 resolve하므로 이 테이블이 더 이상 필요하지 않다.
+
+## 2. 배경
+
+Java의 lambda 표현식은 첫 실행 시 `invokedynamic` → `LambdaMetafactory.metafactory`를 통해 `java.util.ResourceBundle$Control$$Lambda/0x80000001d` 같은 proxy class를 런타임 생성한다. 이 생성 비용을 줄이기 위해, 레거시 경로에서는:
+
+1. CDS 덤프 시점에 생성된 proxy class들을 아카이브에 함께 저장해 두고,
+2. 프로덕션 실행 시 같은 키가 나오면 아카이브에서 꺼내 재사용한다.
+
+단, call site resolution의 상당 부분은 여전히 런타임에 발생한다. JEP 483는 이 잔여 비용까지 제거한다.
+
+## 3. 주요 자료구조
+
+### 3.1 `LambdaProxyClassKey` (dump-time 키)
+
+다음 6-튜플로 lambda proxy class를 유일하게 식별한다.
+
+| 필드                                | 의미                        |
+| ----------------------------------- | --------------------------- |
+| `InstanceKlass* _caller_ik`         | lambda를 호출한 클래스      |
+| `Symbol* _invoked_name`             | invokedynamic의 이름        |
+| `Symbol* _invoked_type`             | invokedynamic의 타입        |
+| `Symbol* _method_type`              | SAM method type             |
+| `Method* _member_method`            | 실제 구현 메서드 (nullable) |
+| `Symbol* _instantiated_method_type` | 인스턴스화된 method type    |
+
+- `hash()`는 `SystemDictionaryShared::hash_for_shared_dictionary`로 포인터 기반 해시를 합산 (member_method 제외).
+- `dumptime_hash()`는 심볼 UTF-8 해시 기반 (덤프 중 재배치에 안전).
+- `metaspace_pointers_do`로 메타스페이스 포인터를 방문자에게 노출.
+
+### 3.2 `RunTimeLambdaProxyClassKey` (런타임/아카이브 키)
+
+`LambdaProxyClassKey`를 **CDS 아카이브에 저장 가능한 압축 형태**로 변환한 것.
+
+- 모든 필드를 `AOTCompressedPointers::narrowPtr`(u4 오프셋)로 보관.
+- `init_for_dumptime(key)` — 덤프 시 `encode_not_null` / `encode`로 인코딩.
+- `init_for_runtime(...)` — 런타임 조회 시 `encode_address_in_cache(_or_null)`로 키 생성.
+- `member_method`만 nullable 인코딩 사용.
+
+### 3.3 `DumpTimeLambdaProxyClassInfo`
+
+덤프 중 한 키에 모이는 proxy class 집합. 내부적으로 `GrowableArray<InstanceKlass*>* _proxy_klasses`를 들고 있다가 `add_proxy_klass()`로 append.
+
+### 3.4 `RunTimeLambdaProxyClassInfo`
+
+아카이브 read-only 영역에 저장되는 엔트리.
+
+- `RunTimeLambdaProxyClassKey _key`
+- `InstanceKlass* _proxy_klass_head` — 같은 키의 proxy class들을 `InstanceKlass::next_link()` 체인으로 연결.
+- `init(key, info)`는 `ArchiveBuilder::current()->write_pointer_in_buffer`로 head 포인터를 버퍼에 기록.
+
+### 3.5 `DumpTimeLambdaProxyClassDictionary`
+
+`HashTable<LambdaProxyClassKey, DumpTimeLambdaProxyClassInfo, 137(prime), C_HEAP, mtClassShared, DUMPTIME_HASH, DUMPTIME_EQUALS>`. `_count`로 엔트리 수 추적.
+
+### 3.6 `LambdaProxyClassDictionary` (핵심 클래스)
+
+`OffsetCompactHashtable<RunTimeLambdaProxyClassKey*, const RunTimeLambdaProxyClassInfo*, ...>`를 상속한 **정적 유틸리티**.
+
+내부 상태 (모두 `static`):
+
+- `_dumptime_table` — 덤프 중 축적용
+- `_runtime_static_table` — static CDS 아카이브용
+- `_runtime_dynamic_table` — dynamic CDS 아카이브용
+
+## 4. 생명주기와 주요 흐름
+
+### 4.1 덤프 타임 — 등록
+
+```
+dumptime_init()
+  └─> _dumptime_table = new DumpTimeLambdaProxyClassDictionary
+```
+
+`add_lambda_proxy_class(caller_ik, lambda_ik, invoked_name, invoked_type, method_type, member_method, instantiated_method_type)`:
+
+- `CDSConfig::is_dumping_lambdas_in_legacy_mode()`가 false면 즉시 return (JEP 483 경로는 AOT-resolved CP entry 사용).
+- preimage static archive 덤프 중이면 `FinalImageRecipes`에 맡기고 return.
+- caller와 lambda의 class loader / CLD가 같아야 함 (assert).
+- `caller_ik->nest_host()`를 구하고, 다음 조건을 모두 만족해야 등록:
+  - `DumpTimeClassInfo`가 존재
+  - `!lambda_ik->is_non_strong_hidden()`
+  - `is_builtin(lambda_ik) && is_builtin(caller_ik)`
+  - nest host가 `is_linked()` 상태
+- 조건 만족 시 `info->_is_registered_lambda_proxy = true`로 마크하여 덤프에서 제외되지 않게 하고, nest host를 기록.
+- `DumpTimeTable_lock` 아래 `add_to_dumptime_table(key, lambda_ik)` 호출.
+  - `AOTClassFilter::is_aot_tooling_class`면 skip.
+  - `put_if_absent` 후 `info->add_proxy_klass(proxy_klass)`로 축적.
+
+### 4.2 덤프 타임 — 정리/직렬화
+
+- `dumptime_classes_do(it)` — 살아있는 caller의 엔트리에 대해 키/정보의 metaspace 포인터를 `MetaspaceClosure`에 노출.
+- `cleanup_dumptime_table()` — `CleanupDumpTimeLambdaProxyClassTable`로 caller/nest_host/proxy class가 exclude 대상이면 해당 proxy를 `reset_registered_lambda_proxy_class`로 되돌리고 배열에서 제거. proxy 리스트가 비면 엔트리 자체를 삭제.
+- `adjust_dumptime_table()` — `AdjustLambdaProxyClassInfo`가 각 엔트리의 proxy class들을 역순으로 순회하여 buffer 주소로 치환 후 `set_lambda_proxy_is_available()` + `set_next_link()`로 체인 구성. `ArchivePtrMarker::mark_pointer`로 링크 기록.
+- `write_dictionary(is_static_archive)`:
+  - 대상 runtime 테이블을 `reset()`.
+  - `CompactHashtableWriter`로 모든 엔트리를 `RunTimeLambdaProxyClassInfo`에 복사(`ro_region_alloc` + `init`), 압축 포인터로 인코딩 후 `writer.dump(dictionary, ...)`.
+- `serialize(soc, is_static_archive)` — 해당 runtime 테이블 헤더를 `serialize_header(soc)`로 직렬화.
+
+### 4.3 런타임 — 조회/로드
+
+`load_shared_lambda_proxy_class(...)`:
+
+1. `find_lambda_proxy_class(caller_ik, invoked_name, ...)` 호출.
+   - 모든 입력 심볼/클래스/메서드가 `in_aot_cache()`여야 함. 아니면 u4 오프셋으로 인코딩 불가 → return nullptr.
+   - `CDSLambda_lock` 아래 `RunTimeLambdaProxyClassKey::init_for_runtime`으로 키 생성.
+   - `_runtime_static_table.lookup(&key, hash, 0)` → 없으면 `_runtime_dynamic_table.lookup(...)` 순서로 조회.
+   - 반환된 `RunTimeLambdaProxyClassInfo*`에서 `find_lambda_proxy_class(info)`로 사용 가능한 proxy class를 하나 꺼냄:
+     - `proxy_klass_head()`에서 시작해 `next_link()` 체인 끝까지 이동(가장 마지막 노드를 꺼내는 구조).
+     - `lambda_proxy_is_available()`가 true여야 소비.
+     - 소비 후 `prev->set_next_link(nullptr)`, `proxy_klass->clear_lambda_proxy_is_available()`로 상태 갱신.
+2. 찾은 `lambda_ik`에 대해 `load_and_init_lambda_proxy_class(lambda_ik, caller_ik, THREAD)` 호출:
+   - caller의 class loader/protection domain을 구성 (`CDSProtectionDomain::init_security_info`).
+   - 덤프 당시의 shared nest host(`get_shared_nest_host`)를 dynamic resolve한 결과와 동일한지 확인. 다르면 사용 불가(nullptr).
+   - `SystemDictionary::load_shared_class`로 공유 클래스 로드. JVMTI 재정의 등으로 다른 클래스가 돌아오면 nullptr.
+   - nest host 동일성 assert 후 `lambda_ik->set_nest_host(shared_nest_host)`.
+   - `add_to_hierarchy`, `link_class`, JVMTI/JFR class load 이벤트 post, `initialize` 순서로 준비 완료.
+
+### 4.4 보조 API
+
+- `is_supported_invokedynamic(BootstrapInfo*)` — BSM이 `java/lang/invoke/LambdaMetafactory.metafactory(...)Ljava/lang/invoke/CallSite;`인지, `arg_values`가 `objArray`인지, BSM이 `DirectMethodHandle`인지 확인. 덤프 타임에 이 indy가 최적화 대상인지 판별하는 사전 필터.
+- `is_registered_lambda_proxy_class(ik)` / `reset_registered_lambda_proxy_class(ik)` — `DumpTimeClassInfo::_is_registered_lambda_proxy` 플래그 조회/해제(+ `set_excluded`).
+- `get_shared_nest_host(lambda_ik)` — 런타임에서 `RunTimeClassInfo`를 통해 저장된 nest host 조회.
+- `reset_dictionary(is_static_archive)` — 해당 runtime 테이블 초기화.
+- `print_on(prefix, st, start_index, is_static_archive)` — `SharedLambdaDictionaryPrinter`로 사용 가능한 엔트리를 사람이 읽는 형태로 출력.
+- `print_statistics(st, is_static_archive)` — CompactHashtable 통계 출력.
+
+## 5. 동시성
+
+- 덤프 중 등록/정리: `DumpTimeTable_lock` (`Mutex::_no_safepoint_check_flag`).
+- 런타임 조회: `CDSLambda_lock` (`Mutex::_no_safepoint_check_flag`). proxy class 체인에서 하나를 소비하는 동작이 경합할 수 있어 잠금이 필요.
+
+## 6. JEP 483와의 관계
+
+- JEP 483 적용 시 `is_dumping_lambdas_in_legacy_mode()`가 false → `add_lambda_proxy_class`가 즉시 return하여 이 테이블은 비어 있음.
+- lambda call site는 `BootstrapInfo` 단계부터 AOT cache에 resolve된 CP entry로 저장되므로 별도 proxy 조회가 불필요.
+- 따라서 이 파일 전체는 "legacy only"이며 향후 삭제 후보.
+
+## 7. 참고 파일/심볼
+
+- `src/hotspot/share/cds/lambdaProxyClassDictionary.hpp`
+- `src/hotspot/share/cds/lambdaProxyClassDictionary.cpp`
+- `src/hotspot/share/cds/aotCompressedPointers.hpp` — narrowPtr 인코딩
+- `src/hotspot/share/cds/archiveBuilder.hpp` — `ro_region_alloc`, buffer pointer 기록
+- `src/hotspot/share/classfile/systemDictionaryShared.hpp` — `DumpTimeClassInfo`, `get_info_locked`, `is_builtin`
+- `src/hotspot/share/classfile/compactHashtable.hpp` — `OffsetCompactHashtable`, `CompactHashtableWriter`
+- `src/hotspot/share/cds/cdsConfig.hpp` — `is_dumping_lambdas_in_legacy_mode`, `is_dumping_preimage_static_archive`

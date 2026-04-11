@@ -1,0 +1,7 @@
+JDK-8381924: Fix include guard in lambdaProxyClassDictionary.hpp
+
+The include guard refers to another name:
+SHARE_CDS_LAMBDAPROXYCLASSINFO_HPP
+
+It should be fixed to be:
+SHARE_CDS_LAMBDAPROXYCLASSDICTIONARY_HPP

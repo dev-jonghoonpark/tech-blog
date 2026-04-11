@@ -1,0 +1,189 @@
+JEP 483: Ahead-of-Time Class Loading & Linking
+Authors Ioi Lam, Dan Heidinga, & John Rose
+Owner Ioi Lam
+Type Feature
+Scope JDK
+Status Closed / Delivered
+Release 24
+Component hotspot / runtime
+Discussion leyden dash dev at openjdk dot org
+Relates to JEP 515: Ahead-of-Time Method Profiling
+JEP 514: Ahead-of-Time Command-Line Ergonomics
+Reviewed by Alex Buckley, Brian Goetz, Mark Reinhold, Vladimir Kozlov
+Endorsed by Vladimir Kozlov
+Created 2023/09/06 04:07
+Updated 2026/03/19 23:52
+Issue 8315737
+Summary
+Improve startup time by making the classes of an application instantly available, in a loaded and linked state, when the HotSpot Java Virtual Machine starts. Achieve this by monitoring the application during one run and storing the loaded and linked forms of all classes in a cache for use in subsequent runs. Lay a foundation for future improvements to both startup and warmup time.
+
+Goals
+Improve startup time by exploiting the fact that most applications start up in roughly the same way every time they run.
+
+Do not require any change to the code of applications, libraries, or frameworks.
+
+Do not require any change to how applications are started from the command line with the java launcher, beyond the command-line options related directly to this feature.
+
+Do not require the use of the jlink or jpackage tools.
+
+Lay a foundation for continued improvements to startup time and also to warmup time, i.e., the time required for the HotSpot JVM to optimize an application’s code for peak performance.
+
+Non-Goals
+It is not a goal to cache classes that are loaded by user-defined class loaders. Only classes loaded from the class path, the module path, and the JDK itself, by the JDK’s built-in class loaders, can be cached. We may address this limitation in future work.
+Motivation
+The Java Platform is highly dynamic. This is a source of great strength.
+
+Features such as dynamic class loading, dynamic linkage, dynamic dispatch, and dynamic reflection give vast expressive power to developers. They can create frameworks which use reflection to determine an application’s configuration by inspecting application code for annotations. They can write libraries which dynamically load and then link to plug-in components discovered at run time. They can, finally, assemble applications by composing libraries which dynamically link to other libraries, leveraging the rich Java ecosystem.
+
+Features such as dynamic compilation, dynamic deoptimization, and dynamic storage reclamation give broad flexibility to the JVM. It can compile a method from bytecode to native code when it detects, by observing an application’s behavior, that doing so will be worthwhile. It can speculatively optimize native code, assuming a particular frequent path of execution, and revert to interpreting bytecode when it observes that the assumption no longer holds. It can reclaim storage when it observes that doing will be profitable. By these and related techniques, the JVM can achieve higher peak performance than is possible with traditional static approaches.
+
+All this dynamism comes at a price, however, which must be paid every time an application starts.
+
+The JVM does a lot of work during the startup of a typical server application, interleaving several kinds of activities:
+
+It scans hundreds of JAR files on disk and reads and parses thousands of class files into memory;
+
+It loads the parsed class data into class objects and links them together so that classes can use each others’ APIs, which involves verifying bytecodes and resolving symbolic references, which in turn may involve instantiating lambda objects; and
+
+It executes the static initializers of classes — their static field initializers and static { ... } blocks — which can create many objects and even perform I/O operations such as opening log files.
+
+If, additionally, the application uses a framework, e.g., the Spring Framework, then the framework’s startup-time discovery of @Bean, @Configuration, and related annotations will trigger yet more work.
+
+All this work is done on demand, lazily, just in time. It is heavily optimized, however, so many Java programs start up in milliseconds. Even so, a large server application which uses a web application framework plus libraries for XML processing, database persistence, etc., may require seconds or even minutes to start up.
+
+Yet applications tend to repeat themselves, often doing essentially the same thing every time they start: Scanning the same JAR files, reading and parsing and loading and linking the same classes, executing the same static initializers, and using reflection to configure the same application objects. The key to improving startup time is to try to do at least some of this work eagerly, ahead of time, rather than just in time. To put it another way, in the terms of Project Leyden, we aim to shift some of this work earlier in time.
+
+Description
+We extend the HotSpot JVM to support an ahead-of-time cache which can store classes after reading, parsing, loading, and linking them. Once a cache is created for a specific application, it can be re-used in subsequent runs of that application to improve startup time.
+
+To create a cache takes two steps. First, run the application once, in a training run, to record its AOT configuration, in this case into the file app.aotconf:
+
+$ java -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf \
+ -cp app.jar com.example.App ...
+Second, use the configuration to create the cache, in the file app.aot:
+
+$ java -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf \
+ -XX:AOTCache=app.aot -cp app.jar
+(This second step doesn’t run the application, it just creates the cache. We intend to streamline the process of cache creation in future work.)
+
+Subsequently, in testing or production, run the application with the cache:
+
+$ java -XX:AOTCache=app.aot -cp app.jar com.example.App ...
+(If the cache file is unusable or does not exist then the JVM issues a warning message and continues.)
+
+Note that the format of the configuration and cache files is not specified and is subject to change without notice.
+
+With the AOT cache, the reading, parsing, loading, and linking work that the JVM would usually do just-in-time when the program runs in the third step is shifted ahead-of-time to the second step, which creates the cache. Subsequently, the program starts up faster in the third step because its classes are available instantly from the cache.
+
+For example, here is a program which, though short, uses the Stream API and thus causes almost 600 JDK classes to be read, parsed, loaded, and linked:
+
+import java.util._;
+import java.util.stream._;
+
+public class HelloStream {
+
+    public static void main(String ... args) {
+        var words = List.of("hello", "fuzzy", "world");
+        var greeting = words.stream()
+            .filter(w -> !w.contains("z"))
+            .collect(Collectors.joining(", "));
+        System.out.println(greeting);  // hello, world
+    }
+
+}
+This program runs in 0.031 seconds on JDK 23. After doing the small amount of additional work required to create an AOT cache it runs in in 0.018 seconds on JDK 24 — an improvement of 42%. The AOT cache occupies 11.4 megabytes.
+
+For a representative server application, consider Spring PetClinic, version 3.2.0. It loads and links about 21,000 classes at startup. It starts in 4.486 seconds on JDK 23 and in 2.604 seconds on JDK 24 when using an AOT cache — also an improvement of 42%, by coincidence. The AOT cache occupies 130 megabytes.
+
+How to train your JVM
+A training run captures application configuration and execution history for use in subsequent testing and production runs. A good candidate for a training run is, therefore, a production run. Using a production run for training, however, is not always practical, especially for server applications which, e.g., create log files, open network connections, and access databases. For such cases we recommend creating a synthetic training run that resembles actual production runs as much as possible. It should, among other things, fully configure itself and exercise typical production code paths.
+
+One way to achieve this is to add a second main class to your application specifically for training, e.g., com.example.AppTrainer. This class can invoke the production main class to exercise the common modes of the application using a temporary log-file directory, a local network configuration, and a mocked database if required. You might already have such a main class in the form of an integration test.
+
+Some additional tips:
+
+To optimize for startup time, structure the training run so that it loads the same classes that a production run loads when it starts. You can check which classes are loaded via the -verbose:class command-line option or the jdk.ClassLoad event of the JDK Flight Recorder.
+
+To minimize the size of the AOT cache, avoid loading classes in the training run that are not used in production runs. Do not, e.g., use a test suite written with a rich test framework. We may provide a way to filter such classes from the cache in future work.
+
+If, in production, your application interacts with other hosts on the network or accesses a database then, in training, you may want to mock those interactions to ensure that the necessary classes are loaded. Such mocking, if done in Java code, will cause additional classes to be cached which are not needed in production. Again, we may provide a way to filter such classes from the cache in future work. If, for some reason, you cannot mock these kinds of interactions, and therefore cannot include them in the training run, then the classes required in production to handle them will be loaded from the class path or from modules, just-in-time, as usual.
+
+Focus on running a broad set of short verification scenarios, sometimes called “smoke tests” or “sanity tests.” This is often enough to load most of the classes you will need in production. Avoid large test suites that cover rare corner cases and seldom-used functionality. Also avoid stress and regression tests, which generally do not characterize typical startup activities.
+
+Keep in mind that an AOT cache only helps insofar as the training run does similar things as production runs. If the training run stops short of that then the cache will be less useful.
+
+Consistency of training and subsequent runs
+To enjoy the benefits of the AOT cache generated during a training run, the training run and all subsequent runs must be essentially similar.
+
+All runs must use the same JDK release and be on the same hardware architecture (e.g., x64 or aarch64) and operating system.
+
+All runs must have consistent class paths. A subsequent run may specify extra class-path entries, appended to the training class path; otherwise, the class paths must be identical. Class paths must contain only JAR files; directories in class paths are not supported because the JVM cannot efficiently check them for consistency.
+
+All runs must have consistent module options on the command line, and consistent module graphs. The arguments to the -m, --module, -p, --module-path, --add-modules, and --enable-native-access options, if present, must be identical. The --add-exports, --add-opens, --add-reads, --illegal-native-access, --limit-modules, --patch-module, and --upgrade-module-path options must not be used.
+
+All runs must not use JVMTI agents that can arbitrarily rewrite classfiles using ClassFileLoadHook.
+
+All runs must not use JVMTI agents that call the AddToBootstrapClassLoaderSearch and AddToSystemClassLoaderSearch APIs.
+
+If any of these constraints are violated then the JVM, by default, issues a warning and ignores the cache.
+
+To check if your JVM is correctly configured to use the AOT cache, you can add the option -XX:AOTMode=on to the command line:
+
+$ java -XX:AOTCache=app.aot -XX:AOTMode=on \
+ -cp app.jar com.example.App ...
+If this option is present then the JVM reports an error and exits if any of the above constraints are violated, or if the cache does not exist.
+
+(The -XX:AOTMode=on option should be used for diagnostic purposes only and should be avoided in production environment. Otherwise, your application may fail to launch if an incompatible VM option is added outside of your control. E.g., a cloud provider may decide to run some of your JVMs with JVMTI/ClassFileLoadHook for monitoring purposes).
+
+(If needed, you can disable the AOT cache entirely via -XX:AOTMode=off. You can also specify the default mode via -XX:AOTMode=auto, in which case the JVM tries to use the AOT cache specified via the -XX:AOTCache option; if the cache is unusable or does not exist then it issues a warning message and continues.)
+
+A useful exception to the requirement for consistency is that training and subsequent runs may use different garbage collectors. Another useful exception is that training and subsequent runs may use different main classes; this gives flexibility in constructing training runs, as noted above.
+
+History
+The ahead-of-time cache proposed here is a natural evolution of an old feature in the HotSpot JVM, class-data sharing (CDS).
+
+CDS was first introduced in an update to JDK 5, in 2004. It initially aimed to shrink the memory footprint of multiple Java applications running on the same machine. It achieved this by reading and parsing JDK class files, storing the resulting metadata in a read-only archive file that could later be mapped directly into memory by multiple JVM processes using the same virtual-memory pages. We later extended CDS so that it could also store metadata for application classes.
+
+Nowadays the sharing benefit of CDS has been reduced by new security practices such as address space layout randomization (ASLR), which makes the address at which a file is mapped into memory unpredictable. CDS still, however, offers a significant startup-time improvement — so much so that builds of JDK 12 and later include a built-in CDS archive containing the metadata of over a thousand commonly-used JDK classes. CDS is, therefore, ubiquitous, even though many Java developers have never heard of it and few have used it directly.
+
+The AOT cache builds upon CDS by not only reading and parsing class files ahead-of-time but also loading and linking them. You can see the effect of the latter two optimizations by disabling them via the -XX:-AOTClassLinking option when creating a cache:
+
+$ java -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf \
+ -XX:AOTCache=app.aot -XX:-AOTClassLinking
+When we use this option, we can see that most of the improvement to the startup time of the HelloStream program is due to ahead-of-time loading and linking, while most of the improvement to the startup time of the PetClinic application is due to the ahead-of-time reading and parsing already done by CDS today (all times are in seconds, and percentages are cumulative):
+
+HelloStream PetClinic
+JDK 23 0.031 4.486
+AOT cache, no loading or linking 0.027 (+13%) 3.008 (+33%)
+AOT cache, with loading and linking 0.018 (+42%) 2.604 (+42%)
+Users of Spring Boot and, more generally, the Spring Framework, can therefore enjoy significant startup-time improvements, today, simply by using the CDS feature already available in previous JDK releases.
+
+The new -XX:AOT* command-line options are, for the most part at this time, macros for existing CDS options such as -Xshare, -XX:DumpLoadedClassList, and -XX:SharedArchiveFile. We are introducing the -XX:AOT* options in order to provide a uniform user experience for both this and future ahead-of-time features, and to drop the potentially confusing words “share” and “shared.”
+
+Compatibility
+Ahead-of-time class loading and linking works with every existing Java application, library, and framework. It requires no changes to source code and no changes to build configurations, aside from the additional step of creating the AOT cache. It fully supports the highly dynamic nature of the Java Platform, including run-time reflection.
+
+This is so because the timing and ordering of class reading, parsing, loading, and linking is immaterial to Java code. The Java language and virtual-machine specifications give the JVM broad freedom in scheduling these operations. When we shift these operations from just-in-time to ahead-of-time, the application observes classes being loaded and linked as if the JVM did that work at the exact moment requested — though unaccountably fast.
+
+Future work
+The two-step workflow proposed here is cumbersome. In the near future we expect to reduce this to one step which both performs the training run and creates the AOT cache.
+
+At present, the only way to do a training run is to have the application run a representative workload, at least through startup, and then exit. In future work we may create new tools to help developers more flexibly define and evaluate such training runs and workloads, and perhaps also allow them to manually adjust what is stored in AOT caches. We may also enable training data to be gathered unobtrusively during production runs.
+
+ZGC is not yet supported. We intend to address this limitation in future work.
+
+In some cases the JVM cannot load classes ahead of time, much less link them. These include classes loaded by user-defined class loaders, old classes which require an old version of the bytecode verifier, and signed classes. If a class cannot be AOT-loaded then other, AOT-loadable classes cannot be AOT-linked to it. In all such cases the JVM falls back to loading and linking just-in-time, as usual. We may address these limitations in future work, if and when they prove significant.
+
+Loading and linking classes ahead-of-time enables future improvements to warmup time. In the future, during training runs we can record statistics about which code runs most frequently and cache any optimized code that is generated. This will enable applications to start immediately in an optimized state.
+
+Testing
+We will create new unit-test cases to cover the new command-line options.
+
+Ahead-of-time loading and linking is independent of existing CDS features. Most CDS tests should pass when run with the -XX:+AOTClassLinking option. A few tests are sensitive to the order in which classes are loaded; we will revise them as appropriate.
+
+Risks and Assumptions
+We assume that the consistency required across training and subsequent runs is tolerable to developers who want to use this feature. They must, especially, ensure that class paths and module configurations are consistent in all runs.
+
+We assume that the limited support for user-defined class loaders is tolerable. Conversations with some potential users suggest that they are willing to accept fixed class paths and module configurations, and thus a fixed set of built-in class loaders, and to use specialized class loaders only when that flexibility is required.
+
+We assume that the low-level side effects of ahead-of-time loading and linking are immaterial in practice. These include the timing of filesystem accesses, log messages, JDK-internal bookkeeping activities, and changes in CPU and memory usage. Applications that observe and depend on such subtle effects may become unstable if classes are loaded and linked ahead-of-time. We assume that such applications are rare, and that they can be adjusted to compensate.

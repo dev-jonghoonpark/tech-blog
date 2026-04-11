@@ -1,0 +1,17 @@
+JDK-8381924: Fix include guard in lambdaProxyClassDictionary.hpp
+에 대해 수정하게 되었음.
+참고자료 1 참고
+
+lambdaProxyClassDictionary 클래스는 뭘 하는 애인지 대해서 궁금해짐
+쉬운 변경사항이지만, 이를 통해서 내부 구조를 공부할 수 있는데 의의를 두고자 함.
+
+---
+
+찾아보니 다음과 같았음.
+참고자료 2 참고
+
+---
+
+근데 이 클래스는 곧 사라질 예정임
+그 이유는 다음과 같음
+참고자료 3 참고
