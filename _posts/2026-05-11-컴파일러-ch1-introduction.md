@@ -6,6 +6,7 @@ categories: ["스터디"]
 tags: [컴파일러, Dragon Book, JVM, HotSpot, 스터디]
 date: 2026-05-11 18:00:00 +0900
 toc: true
+mermaid: true
 ---
 
 ## 들어가며
@@ -54,7 +55,7 @@ Java는 두 방식을 결합한다. 소스 코드를 먼저 **바이트코드(by
 
 컴파일러 내부의 각 단계(phase)를 그림으로 나타내면 다음과 같다.
 
-```mermaid
+<pre class="mermaid">
 flowchart TD
     A[character stream] --> B[Lexical Analyzer]
     B -- token stream --> C[Syntax Analyzer]
@@ -66,7 +67,7 @@ flowchart TD
     H -- target-machine code --> I[ ]
 
     style I fill:none,stroke:none
-```
+</pre>
 
 각 단계를 순서대로 살펴보자.
 
