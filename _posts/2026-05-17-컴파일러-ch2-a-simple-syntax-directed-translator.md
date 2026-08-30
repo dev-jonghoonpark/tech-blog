@@ -2,7 +2,7 @@
 layout: post
 title: "Compilers (Dragon Book) Ch.2 A Simple Syntax-Directed Translator 정리 - 1"
 description: "Dragon Book 2장을 읽고 정리한다. 이번 글에서는 2.1 Introduction과 2.2 Syntax Definition(문맥 자유 문법, 유도, 파스 트리, 모호성, 결합성, 우선순위)을 다룬다."
-categories: ["스터디"]
+categories: ["스터디-컴파일러"]
 tags: [컴파일러, Dragon Book, 파싱, CFG, 스터디]
 date: 2026-05-17 18:00:00 +0900
 toc: true

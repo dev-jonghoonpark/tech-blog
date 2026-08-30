@@ -2,7 +2,7 @@
 layout: post
 title: "Compilers (Dragon Book) Ch.1 Introduction 정리"
 description: "Dragon Book 1장을 읽고 정리한다. 컴파일러의 구조, 각 단계(어휘 분석~코드 생성), 프로그래밍 언어의 진화, 컴파일러 기술의 응용, 프로그래밍 언어 기초 개념을 다룬다."
-categories: ["스터디"]
+categories: ["스터디-컴파일러"]
 tags: [컴파일러, Dragon Book, JVM, HotSpot, 스터디]
 date: 2026-05-11 18:00:00 +0900
 toc: true
