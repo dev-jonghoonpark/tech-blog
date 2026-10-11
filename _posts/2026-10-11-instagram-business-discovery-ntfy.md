@@ -195,6 +195,13 @@ GET https://graph.facebook.com/v26.0/{내 IG 계정 ID}
 
 본문, 썸네일, 게시물 링크, 작성 시각까지 알림에 필요한 건 다 들어 있다.
 
+### 한계
+
+이 API 의 한계는 다음과 같다.
+
+- **비즈니스·크리에이터 계정만 볼 수 있다.** 개인 계정은 공식 API로 볼 방법이 없다.
+- **스토리는 볼 수 없다.** Business Discovery는 피드 게시물만 준다.
+
 ## 알림 만들기
 
 나머지는 평범한 폴링이다. 의존성 없이 Python 표준 라이브러리만 썼다.
@@ -207,7 +214,7 @@ GET https://graph.facebook.com/v26.0/{내 IG 계정 ID}
 
 ntfy 에 대한 글은 아니기 때문에, 이 글에서 ntfy 에 대해서는 자세히 설명하지는 않는다.
 
-## 결과
+### 실제로 받은 알림
 
 새 게시물이 올라오면 ntfy를 통해 휴대폰 알림 센터에 이렇게 뜬다.
 
@@ -221,24 +228,13 @@ ntfy 에 대한 글은 아니기 때문에, 이 글에서 ntfy 에 대해서는 
 
 딱 이런 콜라보 소식을 받고 싶어서 만든 거라 만족스러웠다.
 
-## 한계
-
-- **비즈니스·크리에이터 계정만 볼 수 있다.** 개인 계정은 공식 API로 볼 방법이 없다.
-- **스토리는 볼 수 없다.** Business Discovery는 피드 게시물만 준다.
-- **처음 세팅이 번거롭다.** 프로페셔널 계정 전환, 페이지 연결, 개발자 앱, 권한, 토큰 교환까지 한 번은 거쳐야 한다. 대신 한 번 해두면 토큰 갱신 없이 계속 돈다.
-
 ## 마무리
 
 로그인 쿠키를 쓰는 비공식 방식이었다면 금방 끝났을 일이다. 공식 API로 하느라 20분 정도를 Meta 개발자 콘솔에서 보냈다. 그래도 약관을 신경 쓸 필요가 없고, 계정이 막힐 걱정도 없고, 인스타그램이 내부 API를 바꿔도 영향을 받지 않는다. 만료 없는 토큰까지 받았으니 정말 넣어두고 잊어버리면 된다.
 
 인스타그램 알림은 여전히 꺼두었다. 보고 싶은 소식만 내가 정한 시간에 받아볼 수 있게 되었다.
 
-## 결과물 확인
-
-전체 코드는 GitHub에 올려두었다.
-
-- [dev-jonghoonpark/insta-ntfy](https://github.com/dev-jonghoonpark/insta-ntfy)
-
 ## 참고
 
 - [Business Discovery - Instagram Platform](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/business-discovery)
+- 전체 코드는 GitHub에 올려두었다. [dev-jonghoonpark/insta-ntfy](https://github.com/dev-jonghoonpark/insta-ntfy)
