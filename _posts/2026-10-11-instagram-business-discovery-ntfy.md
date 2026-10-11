@@ -21,6 +21,7 @@ toc: true
 유튜브 쇼츠를 보다가 개인적으로 진짜 마음에 드는 옷을 찾았다.
 
 ![IAB Studio x Yonex Woven Pullover Blue](/assets/images/2026-10-11-instagram-business-discovery-ntfy/iab-studio-x-yonex-woven-pullover-blue.png)
+<small>IAB Studio x Yonex Woven Pullover Blue</small>
 
 몇 년 전 제품이라 현재는 아쉽게도 팔지 않고 크림에서나 살 수 있다.
 
