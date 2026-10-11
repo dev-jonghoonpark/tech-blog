@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "내가 원하는 템포로 인스타그램 새 글 알림 받기 - 합법적인 방식으로 인스타그램 게시물 수집하기"
+title: "인스타그램 게시물, 약관 어기지 않고 수집하기"
 description: "좋아하는 브랜드의 콜라보 공지를 자꾸 놓쳐서 인스타그램 새 글을 ntfy로 받아보기로 했다. 비로그인 요청은 막혀 있고 로그인 쿠키를 쓰는 건 약관 위반이다. Meta 공식 Graph API의 Business Discovery로 해결할 수 있었다."
 categories:
   - "개발"
