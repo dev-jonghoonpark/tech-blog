@@ -19,6 +19,7 @@ tags:
 - "trick"
 - "optimizing"
 - "jvm optimizing"
+- "UseCompressedOops"
 date: "2024-03-29 13:00:00 +0000"
 toc: true
 image:
