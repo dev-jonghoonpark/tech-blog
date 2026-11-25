@@ -85,6 +85,8 @@ Livepatch는 심각도가 높음(High) 이상인 커널 취약점의 패치를 �
 
 다만 재부팅을 완전히 대신하지는 못한다. 모든 커널 취약점을 다루는 것이 아니고 커널 패키지를 업그레이드한 뒤에는 결국 재부팅해야 새 커널로 올라간다. "급한 커널 패치가 재부팅을 기다리는 동안 열려 있는 시간을 줄여 준다" 정도로 이해하면 된다.
 
+또 Livepatch의 대상은 커널뿐이다. `openssl`이나 `glibc` 같은 사용자 공간 패키지는 업그레이드해도 이미 떠 있는 프로세스가 예전 라이브러리를 메모리에 올린 채로 돌기 때문에, 그 프로세스를 다시 시작해야 패치가 적용된다. `openssl`은 관련 서비스만 재시작하면 되지만 `glibc`는 거의 모든 프로세스가 쓰고 있어서 사실상 재부팅하는 편이 간단하다. 그러니 Livepatch를 켰다고 재부팅 일정을 없앨 수는 없다. 재부팅할 시간대를 정해 두고, 그때까지 버티게 해 주는 용도로 쓰는 것이 안전하다.
+
 ## 붙이는 방법
 
 1. [ubuntu.com/pro](https://ubuntu.com/pro)에 Ubuntu One 계정으로 로그인하고 토큰을 복사한다.
@@ -104,11 +106,17 @@ pro status                 # 켜진 서비스 확인
 canonical-livepatch status # Livepatch 동작 확인
 ```
 
-내 서버에서는 `pro attach`만으로 `esm-infra`, `esm-apps`, `livepatch`가 켜졌다. `pro status`에서 꺼져 있는 서비스가 있다면 `sudo pro enable livepatch`처럼 따로 켜면 된다.
+내 서버에서는 `pro attach`만으로 `esm-infra`, `esm-apps`, `livepatch`가 켜졌다. 다만 attach만 하고 끝내면 일부가 꺼진 채로 남는 경우가 있다고 하니, `pro status`에서 `esm-apps`, `esm-infra`, `livepatch` 세 줄이 모두 `enabled`인지 확인하자. 꺼져 있는 것은 따로 켠다.
+
+```bash
+sudo pro enable esm-apps   # esm-infra, livepatch도 같은 방식
+```
+
+특히 `esm-apps`가 꺼져 있으면 Pro를 붙여 놓고도 Universe 패키지 패치는 들어오지 않는다.
 
 일반 업데이트도 밀려 있다면 Pro를 먼저 붙이고 업그레이드하는 편이 낫다. 일반 업데이트와 ESM 패치를 한 번에 받고 재부팅도 한 번으로 끝난다.
 
-`unattended-upgrades`를 쓰고 있다면 이후에는 따로 할 일이 없다. Ubuntu의 기본 설정(`/etc/apt/apt.conf.d/50unattended-upgrades`)에 ESM 저장소가 이미 허용 대상으로 들어 있다.
+`unattended-upgrades`를 쓰고 있다면 ESM 저장소가 자동 업데이트 대상에 들어 있는지도 확인한다. Ubuntu의 기본 설정(`/etc/apt/apt.conf.d/50unattended-upgrades`)에는 ESM 저장소가 이미 허용 대상으로 들어 있다.
 
 ```
 Unattended-Upgrade::Allowed-Origins {
@@ -118,6 +126,14 @@ Unattended-Upgrade::Allowed-Origins {
         "${distro_id}ESM:${distro_codename}-infra-security";
 };
 ```
+
+내 서버는 기본 설정 그대로라 따로 할 일이 없었다. 하지만 이 파일을 직접 고쳐 썼거나 다른 설정으로 덮어쓴 서버라면 ESM 두 줄이 빠져 있을 수 있다. 그러면 패치가 저장소에는 올라와 있어도 자동으로 설치되지는 않는다.
+
+```bash
+grep -n ESM /etc/apt/apt.conf.d/50unattended-upgrades
+```
+
+두 줄이 보이지 않으면 `Allowed-Origins`에 추가한다.
 
 ## 알아둘 점
 
