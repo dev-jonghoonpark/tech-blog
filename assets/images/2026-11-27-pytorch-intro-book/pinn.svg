@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" width="760" height="340" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="340" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3a9a6b"/></marker></defs>
+<rect x="20" y="65" width="70" height="50" rx="10" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="55" y="96" text-anchor="middle" font-size="16" font-weight="600" fill="#222">(x, t)</text>
+<rect x="135" y="60" width="110" height="60" rx="10" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" />
+<text x="190" y="96" text-anchor="middle" font-size="16" font-weight="700" fill="#222">신경망</text>
+<rect x="290" y="60" width="110" height="60" rx="10" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="345" y="96" text-anchor="middle" font-size="16" font-weight="600" fill="#222">u(x, t)</text>
+<rect x="445" y="60" width="120" height="60" rx="10" fill="#f6f8fb" stroke="#9aa3ad" stroke-width="1.5" />
+<text x="505" y="96" text-anchor="middle" font-size="15" font-weight="700" fill="#222">자동 미분</text>
+<rect x="610" y="60" width="125" height="60" rx="10" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="1.5" />
+<text x="672.5" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="#222">물리 법칙 (PDE)</text>
+<text x="672.5" y="106" text-anchor="middle" font-size="12" font-weight="400" fill="#555">잔차 계산</text>
+<text x="505" y="143" text-anchor="middle" font-size="13" font-weight="400" fill="#555">∂u/∂t, ∂u/∂x, ∂²u/∂x²</text>
+<text x="345" y="44" text-anchor="middle" font-size="12" font-weight="400" fill="#888">신경망의 예측</text>
+<line x1="90" y1="90" x2="133" y2="90" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<line x1="245" y1="90" x2="288" y2="90" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<line x1="400" y1="90" x2="443" y2="90" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<line x1="565" y1="90" x2="608" y2="90" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<line x1="345" y1="120" x2="345" y2="208" stroke="#3f78d1" stroke-width="2" marker-end="url(#ab)"/>
+<line x1="672" y1="120" x2="672" y2="208" stroke="#3a9a6b" stroke-width="2" marker-end="url(#an)"/>
+<rect x="275" y="210" width="140" height="56" rx="10" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="345" y="234" text-anchor="middle" font-size="15" font-weight="700" fill="#222">데이터 손실</text>
+<text x="345" y="254" text-anchor="middle" font-size="12" font-weight="400" fill="#555">관측값과의 차이</text>
+<rect x="602" y="210" width="140" height="56" rx="10" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="1.5" />
+<text x="672" y="234" text-anchor="middle" font-size="15" font-weight="700" fill="#222">물리 손실</text>
+<text x="672" y="254" text-anchor="middle" font-size="12" font-weight="400" fill="#555">잔차의 크기</text>
+<line x1="415" y1="238" x2="491" y2="238" stroke="#3f78d1" stroke-width="2" marker-end="url(#ab)"/>
+<line x1="602" y1="238" x2="525" y2="238" stroke="#3a9a6b" stroke-width="2" marker-end="url(#an)"/>
+<circle cx="508" cy="238" r="15" fill="#fff" stroke="#222" stroke-width="1.8" />
+<text x="508" y="245" text-anchor="middle" font-size="20" font-weight="600" fill="#222">+</text>
+<polyline points="508,253 508,300 190,300 190,123" fill="none" stroke="#e8833a" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ao)"/>
+<text x="349" y="322" text-anchor="middle" font-size="13" font-weight="400" fill="#555">손실 = 데이터 손실 + 물리 손실 → 이 값을 줄이도록 신경망 가중치를 갱신</text>
+</svg>

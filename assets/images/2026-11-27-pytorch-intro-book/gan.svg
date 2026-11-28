@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 306" width="760" height="306" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="306" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3a9a6b"/></marker></defs>
+<polyline points="580,135 580,40 210,40 210,68" fill="none" stroke="#666" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#ag)"/>
+<text x="395" y="30" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">D의 판정 결과가 G와 D 모두의 학습 신호가 된다</text>
+<circle cx="60" cy="100" r="27" fill="#f6f8fb" stroke="#9aa3ad" stroke-width="2" />
+<text x="60" y="105" text-anchor="middle" font-size="13" font-weight="400" fill="#222">잡음 z</text>
+<line x1="87" y1="100" x2="148" y2="100" stroke="#666" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="150" y="70" width="120" height="60" rx="10" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" />
+<text x="210" y="106" text-anchor="middle" font-size="16" font-weight="700" fill="#222">생성자 G</text>
+<line x1="270" y1="100" x2="328" y2="100" stroke="#666" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="330" y="72" width="110" height="56" rx="10" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="385" y="105" text-anchor="middle" font-size="14" font-weight="400" fill="#222">가짜 이미지</text>
+<rect x="330" y="212" width="110" height="56" rx="10" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="1.5" />
+<text x="385" y="245" text-anchor="middle" font-size="14" font-weight="400" fill="#222">진짜 이미지</text>
+<text x="385" y="288" text-anchor="middle" font-size="12" font-weight="400" fill="#888">학습 데이터</text>
+<line x1="440" y1="100" x2="518" y2="153" stroke="#666" stroke-width="2" marker-end="url(#ag)"/>
+<line x1="440" y1="240" x2="518" y2="187" stroke="#666" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="520" y="135" width="120" height="70" rx="10" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="580" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#222">판별자 D</text>
+<line x1="640" y1="170" x2="672" y2="170" stroke="#666" stroke-width="2" marker-end="url(#ag)"/>
+<text x="712" y="165" text-anchor="middle" font-size="15" font-weight="600" fill="#222">진짜?</text>
+<text x="712" y="187" text-anchor="middle" font-size="15" font-weight="600" fill="#222">가짜?</text>
+<text x="30" y="205" text-anchor="start" font-size="14" font-weight="700" fill="#e8833a">생성자 G의 목표</text>
+<text x="30" y="226" text-anchor="start" font-size="12.5" font-weight="400" fill="#555">D가 가짜를 진짜로 판정하게 속인다</text>
+<text x="30" y="261" text-anchor="start" font-size="14" font-weight="700" fill="#3f78d1">판별자 D의 목표</text>
+<text x="30" y="282" text-anchor="start" font-size="12.5" font-weight="400" fill="#555">진짜와 가짜를 정확히 구별한다</text>
+</svg>

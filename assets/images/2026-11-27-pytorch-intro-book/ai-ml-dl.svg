@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" width="720" height="400" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="720" height="400" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker></defs>
+<rect x="20" y="20" width="680" height="360" rx="16" fill="#eef3fb" stroke="#c3d4ee" stroke-width="1.5" />
+<text x="44" y="54" text-anchor="start" font-size="20" font-weight="700" fill="#222">인공지능 (AI)</text>
+<text x="44" y="80" text-anchor="start" font-size="13" font-weight="400" fill="#555">사람의 지적 능력을 기계로 구현하려는 분야 전체 · 규칙 기반 시스템 포함</text>
+<rect x="70" y="110" width="610" height="250" rx="14" fill="#d6e4f8" stroke="#a9c3ea" stroke-width="1.5" />
+<text x="94" y="144" text-anchor="start" font-size="20" font-weight="700" fill="#222">머신러닝 (ML)</text>
+<text x="94" y="170" text-anchor="start" font-size="13" font-weight="400" fill="#555">규칙을 데이터에서 학습 · 선형 회귀, 결정 트리, SVM</text>
+<rect x="120" y="200" width="540" height="140" rx="12" fill="#a9c6ef" stroke="#7ea6e0" stroke-width="1.5" />
+<text x="144" y="236" text-anchor="start" font-size="20" font-weight="700" fill="#222">딥러닝 (DL)</text>
+<text x="144" y="262" text-anchor="start" font-size="13" font-weight="400" fill="#333">층을 깊게 쌓은 인공 신경망 · 특징 추출까지 스스로 학습</text>
+<text x="144" y="286" text-anchor="start" font-size="13" font-weight="400" fill="#333">MLP, CNN, RNN, Transformer</text>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 366" width="760" height="366" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="366" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3a9a6b"/></marker></defs>
+<circle cx="90" cy="170" r="22" fill="#fff" stroke="#9aa3ad" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="90" y="176" text-anchor="middle" font-size="17" font-weight="400" fill="#888">θ</text>
+<text x="90" y="212" text-anchor="middle" font-size="12" font-weight="400" fill="#888">이전 θ</text>
+<line x1="114" y1="170" x2="266" y2="170" stroke="#3f78d1" stroke-width="3" marker-end="url(#ab)"/>
+<text x="190" y="152" text-anchor="middle" font-size="14" font-weight="700" fill="#3f78d1">외부 루프</text>
+<polyline points="329.6,155.5 387.8,136.9 434.1,94.2 494.0,74.8" fill="none" stroke="#e8833a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ao)"/>
+<circle cx="387.8" cy="136.9" r="3.5" fill="#e8833a" stroke="none" stroke-width="0" />
+<circle cx="434.1" cy="94.2" r="3.5" fill="#e8833a" stroke="none" stroke-width="0" />
+<circle cx="520" cy="62" r="26" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<text x="520" y="68" text-anchor="middle" font-size="16" font-weight="600" fill="#222">θ′₁</text>
+<text x="556" y="67" text-anchor="start" font-size="13" font-weight="400" fill="#555">과제 1</text>
+<polyline points="333.0,170.0 414.8,179.0 496.7,161.0 581.0,170.0" fill="none" stroke="#e8833a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ao)"/>
+<circle cx="414.8" cy="179.0" r="3.5" fill="#e8833a" stroke="none" stroke-width="0" />
+<circle cx="496.7" cy="161.0" r="3.5" fill="#e8833a" stroke="none" stroke-width="0" />
+<circle cx="610" cy="170" r="26" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<text x="610" y="176" text-anchor="middle" font-size="16" font-weight="600" fill="#222">θ′₂</text>
+<text x="646" y="175" text-anchor="start" font-size="13" font-weight="400" fill="#555">과제 2</text>
+<polyline points="329.6,184.5 379.9,219.2 442.1,229.7 494.0,265.2" fill="none" stroke="#e8833a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ao)"/>
+<circle cx="379.9" cy="219.2" r="3.5" fill="#e8833a" stroke="none" stroke-width="0" />
+<circle cx="442.1" cy="229.7" r="3.5" fill="#e8833a" stroke="none" stroke-width="0" />
+<circle cx="520" cy="278" r="26" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<text x="520" y="284" text-anchor="middle" font-size="16" font-weight="600" fill="#222">θ′₃</text>
+<text x="556" y="283" text-anchor="start" font-size="13" font-weight="400" fill="#555">과제 3</text>
+<circle cx="300" cy="170" r="30" fill="#e3edfb" stroke="#3f78d1" stroke-width="2.5" />
+<text x="300" y="177" text-anchor="middle" font-size="21" font-weight="700" fill="#222">θ</text>
+<text x="300" y="220" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">메타 파라미터</text>
+<text x="388" y="88" text-anchor="middle" font-size="14" font-weight="700" fill="#e8833a">내부 루프</text>
+<line x1="40" y1="319" x2="70" y2="319" stroke="#e8833a" stroke-width="2" marker-end="url(#ao)"/>
+<text x="82" y="324" text-anchor="start" font-size="13" font-weight="400" fill="#555">내부 루프: 과제별 데이터로 몇 걸음만 적응해 θ′₁, θ′₂, θ′₃를 얻는다</text>
+<line x1="40" y1="343" x2="70" y2="343" stroke="#3f78d1" stroke-width="3" marker-end="url(#ab)"/>
+<text x="82" y="348" text-anchor="start" font-size="13" font-weight="400" fill="#555">외부 루프: θ를 어느 과제로든 몇 걸음이면 닿는 출발점으로 옮긴다</text>
+</svg>

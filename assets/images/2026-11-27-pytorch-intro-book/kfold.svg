@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 316" width="760" height="316" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="316" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3a9a6b"/></marker></defs>
+<rect x="110" y="26" width="16" height="16" rx="3" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="133" y="39" text-anchor="start" font-size="13" font-weight="400" fill="#555">학습에 사용</text>
+<rect x="230" y="26" width="16" height="16" rx="3" fill="#fbdcc3" stroke="#e8833a" stroke-width="1.5" />
+<text x="253" y="39" text-anchor="start" font-size="13" font-weight="400" fill="#555">검증에 사용</text>
+<text x="40" y="84" text-anchor="start" font-size="13" font-weight="400" fill="#555">1회차</text>
+<rect x="112" y="64" width="80" height="30" rx="6" fill="#fbdcc3" stroke="#e8833a" stroke-width="1.5" />
+<text x="152.0" y="84" text-anchor="middle" font-size="12.5" font-weight="700" fill="#222">검증</text>
+<rect x="196" y="64" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="236.0" y="84" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="280" y="64" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="320.0" y="84" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="364" y="64" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="404.0" y="84" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="448" y="64" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="488.0" y="84" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<line x1="538" y1="79" x2="576" y2="79" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<text x="610" y="84" text-anchor="middle" font-size="14" font-weight="400" fill="#222">점수 1</text>
+<text x="40" y="126" text-anchor="start" font-size="13" font-weight="400" fill="#555">2회차</text>
+<rect x="112" y="106" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="152.0" y="126" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="196" y="106" width="80" height="30" rx="6" fill="#fbdcc3" stroke="#e8833a" stroke-width="1.5" />
+<text x="236.0" y="126" text-anchor="middle" font-size="12.5" font-weight="700" fill="#222">검증</text>
+<rect x="280" y="106" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="320.0" y="126" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="364" y="106" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="404.0" y="126" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="448" y="106" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="488.0" y="126" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<line x1="538" y1="121" x2="576" y2="121" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<text x="610" y="126" text-anchor="middle" font-size="14" font-weight="400" fill="#222">점수 2</text>
+<text x="40" y="168" text-anchor="start" font-size="13" font-weight="400" fill="#555">3회차</text>
+<rect x="112" y="148" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="152.0" y="168" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="196" y="148" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="236.0" y="168" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="280" y="148" width="80" height="30" rx="6" fill="#fbdcc3" stroke="#e8833a" stroke-width="1.5" />
+<text x="320.0" y="168" text-anchor="middle" font-size="12.5" font-weight="700" fill="#222">검증</text>
+<rect x="364" y="148" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="404.0" y="168" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="448" y="148" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="488.0" y="168" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<line x1="538" y1="163" x2="576" y2="163" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<text x="610" y="168" text-anchor="middle" font-size="14" font-weight="400" fill="#222">점수 3</text>
+<text x="40" y="210" text-anchor="start" font-size="13" font-weight="400" fill="#555">4회차</text>
+<rect x="112" y="190" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="152.0" y="210" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="196" y="190" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="236.0" y="210" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="280" y="190" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="320.0" y="210" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="364" y="190" width="80" height="30" rx="6" fill="#fbdcc3" stroke="#e8833a" stroke-width="1.5" />
+<text x="404.0" y="210" text-anchor="middle" font-size="12.5" font-weight="700" fill="#222">검증</text>
+<rect x="448" y="190" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="488.0" y="210" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<line x1="538" y1="205" x2="576" y2="205" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<text x="610" y="210" text-anchor="middle" font-size="14" font-weight="400" fill="#222">점수 4</text>
+<text x="40" y="252" text-anchor="start" font-size="13" font-weight="400" fill="#555">5회차</text>
+<rect x="112" y="232" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="152.0" y="252" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="196" y="232" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="236.0" y="252" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="280" y="232" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="320.0" y="252" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="364" y="232" width="80" height="30" rx="6" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="404.0" y="252" text-anchor="middle" font-size="12.5" font-weight="400" fill="#557">학습</text>
+<rect x="448" y="232" width="80" height="30" rx="6" fill="#fbdcc3" stroke="#e8833a" stroke-width="1.5" />
+<text x="488.0" y="252" text-anchor="middle" font-size="12.5" font-weight="700" fill="#222">검증</text>
+<line x1="538" y1="247" x2="576" y2="247" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<text x="610" y="252" text-anchor="middle" font-size="14" font-weight="400" fill="#222">점수 5</text>
+<path d="M640,79 L648,79 L648,247 L640,247" fill="none" stroke="#9aa3ad" stroke-width="1.5"/>
+<line x1="648" y1="163.0" x2="678" y2="163.0" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<text x="712" y="169.0" text-anchor="middle" font-size="17" font-weight="700" fill="#222">평균</text>
+<text x="320" y="296" text-anchor="middle" font-size="13" font-weight="400" fill="#555">데이터를 5등분하고, 검증에 쓰는 칸을 바꿔 가며 5번 학습·평가한다</text>
+</svg>

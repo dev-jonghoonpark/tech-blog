@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 312" width="760" height="312" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="312" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3a9a6b"/></marker></defs>
+<rect x="60" y="60" width="50" height="160" rx="8" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="85" y="146" text-anchor="middle" font-size="18" font-weight="600" fill="#222">x</text>
+<text x="85" y="240" text-anchor="middle" font-size="13" font-weight="400" fill="#555">입력</text>
+<line x1="110" y1="140" x2="138" y2="140" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<polygon points="140,60 320,105 320,175 140,220" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="228" y="137" text-anchor="middle" font-size="16" font-weight="700" fill="#222">인코더</text>
+<text x="228" y="159" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">압축</text>
+<line x1="320" y1="140" x2="348" y2="140" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<rect x="350" y="105" width="60" height="70" rx="8" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="1.5" />
+<text x="380" y="146" text-anchor="middle" font-size="18" font-weight="600" fill="#222">z</text>
+<text x="380" y="76" text-anchor="middle" font-size="13" font-weight="600" fill="#222">잠재 벡터</text>
+<text x="380" y="94" text-anchor="middle" font-size="12" font-weight="400" fill="#777">(병목)</text>
+<line x1="410" y1="140" x2="438" y2="140" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<polygon points="440,105 620,60 620,220 440,175" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="532" y="137" text-anchor="middle" font-size="16" font-weight="700" fill="#222">디코더</text>
+<text x="532" y="159" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">복원</text>
+<line x1="620" y1="140" x2="648" y2="140" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<rect x="650" y="60" width="50" height="160" rx="8" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="675" y="148" text-anchor="middle" font-size="18" font-weight="600" fill="#222">x</text>
+<polyline points="670.7,134.8 675,130.9 679.3,134.8" fill="none" stroke="#222" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="675" y="240" text-anchor="middle" font-size="13" font-weight="400" fill="#555">복원 결과</text>
+<path d="M85,250 L85,264 L675,264 L675,250" fill="none" stroke="#9aa3ad" stroke-width="1.5"/>
+<text x="341" y="292" text-anchor="end" font-size="14" font-weight="700" fill="#222">손실 = x와</text>
+<text x="346" y="292" text-anchor="start" font-size="14" font-weight="700" fill="#222">x</text>
+<polyline points="346.6,281.3 350,278.2 353.4,281.3" fill="none" stroke="#222" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="355" y="292" text-anchor="start" font-size="14" font-weight="700" fill="#222">의 차이 (복원 오차)</text>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" width="760" height="200" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="200" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker></defs>
+<text x="380" y="34" text-anchor="middle" font-size="15" font-weight="700" fill="#222">전체 데이터</text>
+<path d="M40,56 L40,48 L720,48 L720,56" fill="none" stroke="#9aa3ad" stroke-width="1.5"/>
+<rect x="42" y="66" width="404" height="70" rx="8" fill="#cfe0f7" stroke="#3f78d1" stroke-width="1.5" />
+<text x="244.0" y="97" text-anchor="middle" font-size="14" font-weight="700" fill="#222">학습 (train)</text>
+<text x="244.0" y="119" text-anchor="middle" font-size="13" font-weight="400" fill="#555">60%</text>
+<text x="244.0" y="164" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">가중치를 학습한다</text>
+<text x="244.0" y="183" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555"></text>
+<rect x="450" y="66" width="132" height="70" rx="8" fill="#fbdcc3" stroke="#e8833a" stroke-width="1.5" />
+<text x="516.0" y="97" text-anchor="middle" font-size="14" font-weight="700" fill="#222">검증 (validation)</text>
+<text x="516.0" y="119" text-anchor="middle" font-size="13" font-weight="400" fill="#555">20%</text>
+<text x="516.0" y="164" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">하이퍼파라미터 선택</text>
+<text x="516.0" y="183" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">학습 중단 시점 결정</text>
+<rect x="586" y="66" width="132" height="70" rx="8" fill="#cdebdb" stroke="#3a9a6b" stroke-width="1.5" />
+<text x="652.0" y="97" text-anchor="middle" font-size="14" font-weight="700" fill="#222">평가 (test)</text>
+<text x="652.0" y="119" text-anchor="middle" font-size="13" font-weight="400" fill="#555">20%</text>
+<text x="652.0" y="164" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">최종 성능 측정</text>
+<text x="652.0" y="183" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">마지막에 한 번만</text>
+</svg>

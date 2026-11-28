@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="280" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker></defs>
+<rect x="30" y="50" width="310" height="200" rx="12" fill="#f6f8fb" stroke="#c9d2dc" stroke-width="1.5" />
+<text x="185" y="80" text-anchor="middle" font-size="15" font-weight="700" fill="#222">라벨이 붙은 학습 데이터</text>
+<text x="115" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#3f78d1">입력 x</text>
+<text x="275" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#e8833a">정답 y</text>
+<line x1="50" y1="122" x2="320" y2="122" stroke="#c9d2dc" stroke-width="1.2"/>
+<text x="115" y="150" text-anchor="middle" font-size="14" font-weight="400" fill="#222">메일 본문</text>
+<line x1="195" y1="145" x2="228" y2="145" stroke="#9aa3ad" stroke-width="1.5" marker-end="url(#ag)"/>
+<text x="275" y="150" text-anchor="middle" font-size="14" font-weight="600" fill="#222">스팸</text>
+<text x="115" y="186" text-anchor="middle" font-size="14" font-weight="400" fill="#222">손글씨 이미지</text>
+<line x1="195" y1="181" x2="228" y2="181" stroke="#9aa3ad" stroke-width="1.5" marker-end="url(#ag)"/>
+<text x="275" y="186" text-anchor="middle" font-size="14" font-weight="600" fill="#222">7</text>
+<text x="115" y="222" text-anchor="middle" font-size="14" font-weight="400" fill="#222">면적, 위치</text>
+<line x1="195" y1="217" x2="228" y2="217" stroke="#9aa3ad" stroke-width="1.5" marker-end="url(#ag)"/>
+<text x="275" y="222" text-anchor="middle" font-size="14" font-weight="600" fill="#222">5억 원</text>
+<line x1="340" y1="150" x2="443" y2="150" stroke="#666" stroke-width="2" marker-end="url(#ag)"/>
+<text x="392" y="138" text-anchor="middle" font-size="14" font-weight="400" fill="#555">학습</text>
+<rect x="446" y="105" width="130" height="90" rx="12" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" />
+<text x="511" y="157" text-anchor="middle" font-size="18" font-weight="700" fill="#222">모델</text>
+<text x="511" y="40" text-anchor="middle" font-size="14" font-weight="600" fill="#222">처음 보는 입력 x</text>
+<line x1="511" y1="50" x2="511" y2="102" stroke="#3f78d1" stroke-width="2" marker-end="url(#ab)"/>
+<line x1="576" y1="150" x2="632" y2="150" stroke="#3f78d1" stroke-width="2" marker-end="url(#ab)"/>
+<rect x="635" y="122" width="100" height="56" rx="10" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="685" y="156" text-anchor="middle" font-size="16" font-weight="600" fill="#222">예측 ŷ</text>
+<text x="511" y="222" text-anchor="middle" font-size="12" font-weight="400" fill="#777">예측과 정답의 차이(손실)를</text>
+<text x="511" y="240" text-anchor="middle" font-size="12" font-weight="400" fill="#777">줄이는 방향으로 가중치를 수정</text>
+</svg>

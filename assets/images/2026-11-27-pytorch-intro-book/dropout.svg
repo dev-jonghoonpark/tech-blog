@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 332" width="760" height="332" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="332" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3a9a6b"/></marker></defs>
+<text x="195" y="38" text-anchor="middle" font-size="16" font-weight="700" fill="#222">학습 시</text>
+<text x="195" y="61" text-anchor="middle" font-size="13" font-weight="400" fill="#555">은닉 노드 일부를 무작위로 끈다</text>
+<text x="565" y="38" text-anchor="middle" font-size="16" font-weight="700" fill="#222">평가 시</text>
+<text x="565" y="61" text-anchor="middle" font-size="13" font-weight="400" fill="#555">모든 노드를 사용한다</text>
+<line x1="380" y1="28" x2="380" y2="318" stroke="#dfe4ea" stroke-width="1.2" stroke-dasharray="5 4"/>
+<line x1="60" y1="135.0" x2="150" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="60" y1="135.0" x2="150" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="60" y1="185.0" x2="150" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="60" y1="185.0" x2="150" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="60" y1="235.0" x2="150" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="60" y1="235.0" x2="150" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="150" y1="110.0" x2="240" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="150" y1="110.0" x2="240" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="150" y1="110.0" x2="240" y2="260.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="150" y1="210.0" x2="240" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="150" y1="210.0" x2="240" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="150" y1="210.0" x2="240" y2="260.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="240" y1="110.0" x2="330" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="240" y1="110.0" x2="330" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="240" y1="160.0" x2="330" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="240" y1="160.0" x2="330" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="240" y1="260.0" x2="330" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="240" y1="260.0" x2="330" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<circle cx="60" cy="135.0" r="15" fill="#e3edfb" stroke="#3f78d1" stroke-width="2" />
+<circle cx="60" cy="185.0" r="15" fill="#e3edfb" stroke="#3f78d1" stroke-width="2" />
+<circle cx="60" cy="235.0" r="15" fill="#e3edfb" stroke="#3f78d1" stroke-width="2" />
+<circle cx="150" cy="110.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="150" cy="160.0" r="15" fill="#fff" stroke="#c5ccd3" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="144" y1="154.0" x2="156" y2="166.0" stroke="#b0b8c0" stroke-width="1.8"/>
+<line x1="144" y1="166.0" x2="156" y2="154.0" stroke="#b0b8c0" stroke-width="1.8"/>
+<circle cx="150" cy="210.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="150" cy="260.0" r="15" fill="#fff" stroke="#c5ccd3" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="144" y1="254.0" x2="156" y2="266.0" stroke="#b0b8c0" stroke-width="1.8"/>
+<line x1="144" y1="266.0" x2="156" y2="254.0" stroke="#b0b8c0" stroke-width="1.8"/>
+<circle cx="240" cy="110.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="240" cy="160.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="240" cy="210.0" r="15" fill="#fff" stroke="#c5ccd3" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="234" y1="204.0" x2="246" y2="216.0" stroke="#b0b8c0" stroke-width="1.8"/>
+<line x1="234" y1="216.0" x2="246" y2="204.0" stroke="#b0b8c0" stroke-width="1.8"/>
+<circle cx="240" cy="260.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="330" cy="160.0" r="15" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="2" />
+<circle cx="330" cy="210.0" r="15" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="2" />
+<line x1="430" y1="135.0" x2="520" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="430" y1="135.0" x2="520" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="430" y1="135.0" x2="520" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="430" y1="135.0" x2="520" y2="260.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="430" y1="185.0" x2="520" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="430" y1="185.0" x2="520" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="430" y1="185.0" x2="520" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="430" y1="185.0" x2="520" y2="260.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="430" y1="235.0" x2="520" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="430" y1="235.0" x2="520" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="430" y1="235.0" x2="520" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="430" y1="235.0" x2="520" y2="260.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="110.0" x2="610" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="110.0" x2="610" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="110.0" x2="610" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="110.0" x2="610" y2="260.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="160.0" x2="610" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="160.0" x2="610" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="160.0" x2="610" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="160.0" x2="610" y2="260.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="210.0" x2="610" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="210.0" x2="610" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="210.0" x2="610" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="210.0" x2="610" y2="260.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="260.0" x2="610" y2="110.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="260.0" x2="610" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="260.0" x2="610" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="520" y1="260.0" x2="610" y2="260.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="610" y1="110.0" x2="700" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="610" y1="110.0" x2="700" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="610" y1="160.0" x2="700" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="610" y1="160.0" x2="700" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="610" y1="210.0" x2="700" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="610" y1="210.0" x2="700" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="610" y1="260.0" x2="700" y2="160.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="610" y1="260.0" x2="700" y2="210.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<circle cx="430" cy="135.0" r="15" fill="#e3edfb" stroke="#3f78d1" stroke-width="2" />
+<circle cx="430" cy="185.0" r="15" fill="#e3edfb" stroke="#3f78d1" stroke-width="2" />
+<circle cx="430" cy="235.0" r="15" fill="#e3edfb" stroke="#3f78d1" stroke-width="2" />
+<circle cx="520" cy="110.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="520" cy="160.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="520" cy="210.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="520" cy="260.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="610" cy="110.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="610" cy="160.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="610" cy="210.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="610" cy="260.0" r="15" fill="#fdebdc" stroke="#e8833a" stroke-width="2" />
+<circle cx="700" cy="160.0" r="15" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="2" />
+<circle cx="700" cy="210.0" r="15" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="2" />
+<text x="195" y="312" text-anchor="middle" font-size="12.5" font-weight="400" fill="#777">꺼진 노드와 그 연결은 계산에서 빠진다 · 배치마다 달라진다</text>
+<text x="565" y="312" text-anchor="middle" font-size="12.5" font-weight="400" fill="#777">꺼진 노드 없이 전체 신경망으로 예측한다</text>
+</svg>

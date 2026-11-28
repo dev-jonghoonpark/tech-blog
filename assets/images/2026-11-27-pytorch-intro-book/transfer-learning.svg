@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 324" width="760" height="324" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="324" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3a9a6b"/></marker></defs>
+<text x="40" y="40" text-anchor="start" font-size="15" font-weight="700" fill="#222">① ImageNet으로 사전 학습</text>
+<text x="40" y="196" text-anchor="start" font-size="15" font-weight="700" fill="#222">② 내 데이터로 미세 조정</text>
+<rect x="60" y="58" width="88" height="56" rx="8" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="104" y="92" text-anchor="middle" font-size="14" font-weight="600" fill="#222">합성곱 1</text>
+<line x1="148" y1="86" x2="170" y2="86" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<rect x="172" y="58" width="88" height="56" rx="8" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="216" y="92" text-anchor="middle" font-size="14" font-weight="600" fill="#222">합성곱 2</text>
+<line x1="260" y1="86" x2="282" y2="86" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<rect x="284" y="58" width="88" height="56" rx="8" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="328" y="92" text-anchor="middle" font-size="14" font-weight="600" fill="#222">합성곱 3</text>
+<line x1="372" y1="86" x2="394" y2="86" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<rect x="396" y="58" width="88" height="56" rx="8" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="440" y="92" text-anchor="middle" font-size="14" font-weight="600" fill="#222">합성곱 4</text>
+<line x1="484" y1="86" x2="528" y2="86" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<rect x="60" y="212" width="88" height="56" rx="8" fill="#eef2f8" stroke="#8fa9cf" stroke-width="1.5" />
+<text x="104" y="237" text-anchor="middle" font-size="14" font-weight="600" fill="#222">합성곱 1</text>
+<text x="104" y="256" text-anchor="middle" font-size="12" font-weight="400" fill="#777">고정</text>
+<line x1="148" y1="240" x2="170" y2="240" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<rect x="172" y="212" width="88" height="56" rx="8" fill="#eef2f8" stroke="#8fa9cf" stroke-width="1.5" />
+<text x="216" y="237" text-anchor="middle" font-size="14" font-weight="600" fill="#222">합성곱 2</text>
+<text x="216" y="256" text-anchor="middle" font-size="12" font-weight="400" fill="#777">고정</text>
+<line x1="260" y1="240" x2="282" y2="240" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<rect x="284" y="212" width="88" height="56" rx="8" fill="#eef2f8" stroke="#8fa9cf" stroke-width="1.5" />
+<text x="328" y="237" text-anchor="middle" font-size="14" font-weight="600" fill="#222">합성곱 3</text>
+<text x="328" y="256" text-anchor="middle" font-size="12" font-weight="400" fill="#777">고정</text>
+<line x1="372" y1="240" x2="394" y2="240" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<rect x="396" y="212" width="88" height="56" rx="8" fill="#eef2f8" stroke="#8fa9cf" stroke-width="1.5" />
+<text x="440" y="237" text-anchor="middle" font-size="14" font-weight="600" fill="#222">합성곱 4</text>
+<text x="440" y="256" text-anchor="middle" font-size="12" font-weight="400" fill="#777">고정</text>
+<line x1="484" y1="240" x2="528" y2="240" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<rect x="530" y="58" width="170" height="56" rx="8" fill="#f6f8fb" stroke="#9aa3ad" stroke-width="1.5" />
+<text x="615" y="83" text-anchor="middle" font-size="14" font-weight="700" fill="#222">분류기</text>
+<text x="615" y="102" text-anchor="middle" font-size="12" font-weight="400" fill="#555">ImageNet 1000개 클래스</text>
+<rect x="530" y="212" width="170" height="56" rx="8" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" />
+<text x="615" y="237" text-anchor="middle" font-size="14" font-weight="700" fill="#222">새 분류기</text>
+<text x="615" y="256" text-anchor="middle" font-size="12" font-weight="400" fill="#555">내 데이터의 클래스 수</text>
+<line x1="272" y1="120" x2="272" y2="206" stroke="#3f78d1" stroke-width="2" marker-end="url(#ab)"/>
+<text x="284" y="167" text-anchor="start" font-size="13" font-weight="400" fill="#555">학습된 가중치를 그대로 가져온다</text>
+<line x1="615" y1="120" x2="615" y2="206" stroke="#e8833a" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ao)"/>
+<text x="627" y="167" text-anchor="start" font-size="13" font-weight="700" fill="#e8833a">교체</text>
+<path d="M60,276 L60,284 L484,284 L484,276" fill="none" stroke="#9aa3ad" stroke-width="1.5"/>
+<text x="272" y="305" text-anchor="middle" font-size="13" font-weight="400" fill="#555">특징 추출기 · 가중치 고정</text>
+<path d="M530,276 L530,284 L700,284 L700,276" fill="none" stroke="#e8833a" stroke-width="1.5"/>
+<text x="615" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#e8833a">새로 학습</text>
+</svg>

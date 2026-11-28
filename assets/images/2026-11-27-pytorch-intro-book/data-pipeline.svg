@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250" width="760" height="250" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="250" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker></defs>
+<rect x="20" y="50" width="150" height="96" rx="10" fill="#f6f8fb" stroke="#9aa3ad" stroke-width="1.5" />
+<text x="95" y="82" text-anchor="middle" font-size="16" font-weight="700" fill="#222">원본 데이터</text>
+<text x="95" y="106" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">이미지 파일, CSV 등</text>
+<line x1="170" y1="98" x2="207" y2="98" stroke="#666" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="210" y="50" width="150" height="96" rx="10" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="285" y="82" text-anchor="middle" font-size="16" font-weight="700" fill="#222">Dataset</text>
+<text x="285" y="106" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">샘플 하나를 꺼낸다</text>
+<text x="285" y="129" text-anchor="middle" font-size="11" fill="#555" font-family="Menlo, Consolas, monospace">__getitem__(i)</text>
+<line x1="360" y1="98" x2="397" y2="98" stroke="#666" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="400" y="50" width="150" height="96" rx="10" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" />
+<text x="475" y="82" text-anchor="middle" font-size="16" font-weight="700" fill="#222">DataLoader</text>
+<text x="475" y="106" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">배치로 묶고 섞는다</text>
+<text x="475" y="129" text-anchor="middle" font-size="11" fill="#555" font-family="Menlo, Consolas, monospace">batch_size, shuffle</text>
+<line x1="550" y1="98" x2="587" y2="98" stroke="#666" stroke-width="2" marker-end="url(#ag)"/>
+<rect x="590" y="50" width="150" height="96" rx="10" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="1.5" />
+<text x="665" y="82" text-anchor="middle" font-size="16" font-weight="700" fill="#222">학습 루프</text>
+<text x="665" y="106" text-anchor="middle" font-size="12.5" font-weight="400" fill="#555">배치를 받아 학습한다</text>
+<text x="665" y="129" text-anchor="middle" font-size="11" fill="#555" font-family="Menlo, Consolas, monospace">for x, y in loader</text>
+<line x1="285" y1="190" x2="285" y2="150" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<rect x="205" y="190" width="160" height="40" rx="8" fill="#fff" stroke="#3f78d1" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="285" y="215" text-anchor="middle" font-size="13" font-weight="600" fill="#222">transform (전처리)</text>
+<text x="380" y="215" text-anchor="start" font-size="12.5" font-weight="400" fill="#555">꺼낼 때마다 크기 조정, 텐서 변환, 정규화를 적용</text>
+</svg>

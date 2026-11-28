@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 344" width="760" height="344" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="344" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker><marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3a9a6b"/></marker></defs>
+<line x1="50" y1="300" x2="455" y2="300" stroke="#888" stroke-width="1.3" marker-end="url(#ag)"/>
+<line x1="50" y1="300" x2="50" y2="36" stroke="#888" stroke-width="1.3" marker-end="url(#ag)"/>
+<text x="250" y="326" text-anchor="middle" font-size="13" font-weight="400" fill="#555">특징 1</text>
+<text x="34" y="168" text-anchor="middle" font-size="13" fill="#555" transform="rotate(-90 34 168)">특징 2</text>
+<circle cx="111.0" cy="115.6" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="142.5" cy="98.5" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="176.1" cy="111.6" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="142.6" cy="153.3" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="136.6" cy="79.7" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="112.9" cy="97.4" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="167.8" cy="130.5" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="180.7" cy="154.5" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="196.5" cy="126.0" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="186.7" cy="126.5" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="135.7" cy="130.9" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="152.9" cy="106.1" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="205.6" cy="129.9" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="138.2" cy="109.4" r="5" fill="#3f78d1" stroke="#fff" stroke-width="1" />
+<circle cx="410.2" cy="130.3" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="366.5" cy="151.4" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="360.5" cy="150.6" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="333.3" cy="125.1" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="342.1" cy="127.6" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="368.6" cy="173.8" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="322.2" cy="149.6" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="319.7" cy="119.5" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="340.0" cy="139.0" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="334.5" cy="72.9" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="384.4" cy="129.7" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="329.1" cy="152.9" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="330.2" cy="101.6" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="359.9" cy="146.5" r="5" fill="#e8833a" stroke="#fff" stroke-width="1" />
+<circle cx="213.9" cy="261.7" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="246.7" cy="213.7" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="284.4" cy="247.9" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="205.4" cy="252.3" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="240.0" cy="265.0" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="199.6" cy="266.7" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="262.3" cy="258.2" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="253.2" cy="273.3" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="256.1" cy="244.4" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="213.6" cy="268.4" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="263.4" cy="248.6" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="240.6" cy="258.9" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="167.6" cy="249.0" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="168.0" cy="247.1" r="5" fill="#3a9a6b" stroke="#fff" stroke-width="1" />
+<circle cx="156.1" cy="119.3" r="11" fill="#fff" stroke="#3f78d1" stroke-width="4" />
+<circle cx="156.1" cy="119.3" r="3" fill="#3f78d1" stroke="none" stroke-width="0" />
+<circle cx="350.1" cy="133.6" r="11" fill="#fff" stroke="#e8833a" stroke-width="4" />
+<circle cx="350.1" cy="133.6" r="3" fill="#e8833a" stroke="none" stroke-width="0" />
+<circle cx="229.6" cy="253.9" r="11" fill="#fff" stroke="#3a9a6b" stroke-width="4" />
+<circle cx="229.6" cy="253.9" r="3" fill="#3a9a6b" stroke="none" stroke-width="0" />
+<text x="490" y="78" text-anchor="start" font-size="16" font-weight="700" fill="#222">k-평균 군집화 (k = 3)</text>
+<text x="490" y="122" text-anchor="start" font-size="14" font-weight="400" fill="#222">① 각 점을 가장 가까운 중심에 할당</text>
+<text x="490" y="154" text-anchor="start" font-size="14" font-weight="400" fill="#222">② 중심을 군집의 평균 위치로 이동</text>
+<text x="490" y="186" text-anchor="start" font-size="14" font-weight="400" fill="#222">③ 할당이 바뀌지 않을 때까지 반복</text>
+<circle cx="500" cy="236" r="9" fill="#fff" stroke="#666" stroke-width="3.5" />
+<circle cx="500" cy="236" r="2.5" fill="#666" stroke="none" stroke-width="0" />
+<text x="520" y="241" text-anchor="start" font-size="13" font-weight="400" fill="#555">군집 중심</text>
+<circle cx="500" cy="266" r="5" fill="#666" stroke="#fff" stroke-width="1" />
+<text x="520" y="271" text-anchor="start" font-size="13" font-weight="400" fill="#555">데이터 (색 = 속한 군집)</text>
+</svg>

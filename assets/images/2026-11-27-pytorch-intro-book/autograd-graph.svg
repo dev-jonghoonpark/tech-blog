@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 310" width="760" height="310" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="310" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker></defs>
+<line x1="129.91069180089573" y1="140.68764070964312" x2="257.91069180089573" y2="97.68764070964313" stroke="#3f78d1" stroke-width="2" marker-end="url(#ab)"/>
+<line x1="254.08930819910427" y1="86.31235929035687" x2="126.08930819910427" y2="129.31235929035688" stroke="#e8833a" stroke-width="2" marker-end="url(#ao)"/>
+<line x1="126.08930819910427" y1="170.68764070964312" x2="254.08930819910427" y2="213.68764070964312" stroke="#3f78d1" stroke-width="2" marker-end="url(#ab)"/>
+<line x1="257.91069180089573" y1="202.31235929035688" x2="129.91069180089573" y2="159.31235929035688" stroke="#e8833a" stroke-width="2" marker-end="url(#ao)"/>
+<line x1="382.0255469902224" y1="97.6658216802314" x2="514.0255469902224" y2="143.6658216802314" stroke="#3f78d1" stroke-width="2" marker-end="url(#ab)"/>
+<line x1="517.9744530097776" y1="132.3341783197686" x2="385.9744530097776" y2="86.3341783197686" stroke="#e8833a" stroke-width="2" marker-end="url(#ao)"/>
+<line x1="385.9744530097776" y1="213.6658216802314" x2="517.9744530097776" y2="167.6658216802314" stroke="#3f78d1" stroke-width="2" marker-end="url(#ab)"/>
+<line x1="514.0255469902224" y1="156.3341783197686" x2="382.0255469902224" y2="202.3341783197686" stroke="#e8833a" stroke-width="2" marker-end="url(#ao)"/>
+<circle cx="90" cy="150" r="38" fill="#e3edfb" stroke="#3f78d1" stroke-width="2"/>
+<text x="90" y="156" text-anchor="middle" font-size="16" font-weight="600" fill="#222">x = 2</text>
+<rect x="260" y="58" width="124" height="60" rx="10" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" />
+<text x="322" y="84" text-anchor="middle" font-size="15" font-weight="600" fill="#222">a = x²</text>
+<text x="322" y="105" text-anchor="middle" font-size="13" font-weight="400" fill="#555">4</text>
+<rect x="260" y="182" width="124" height="60" rx="10" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" />
+<text x="322" y="208" text-anchor="middle" font-size="15" font-weight="600" fill="#222">b = 3x</text>
+<text x="322" y="229" text-anchor="middle" font-size="13" font-weight="400" fill="#555">6</text>
+<rect x="520" y="120" width="140" height="60" rx="10" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="1.5" />
+<text x="590" y="146" text-anchor="middle" font-size="15" font-weight="600" fill="#222">y = a + b</text>
+<text x="590" y="167" text-anchor="middle" font-size="13" font-weight="400" fill="#555">10</text>
+<text x="176" y="96" text-anchor="middle" font-size="12.5" font-weight="600" fill="#e8833a">∂a/∂x = 2x = 4</text>
+<text x="176" y="216" text-anchor="middle" font-size="12.5" font-weight="600" fill="#e8833a">∂b/∂x = 3</text>
+<text x="466" y="96" text-anchor="middle" font-size="12.5" font-weight="600" fill="#e8833a">∂y/∂a = 1</text>
+<text x="466" y="216" text-anchor="middle" font-size="12.5" font-weight="600" fill="#e8833a">∂y/∂b = 1</text>
+<line x1="40" y1="282" x2="76" y2="282" stroke="#3f78d1" stroke-width="2" marker-end="url(#ab)"/>
+<text x="84" y="287" text-anchor="start" font-size="13" font-weight="400" fill="#555">순전파: 값을 계산하며 그래프를 기록</text>
+<line x1="376" y1="282" x2="340" y2="282" stroke="#e8833a" stroke-width="2" marker-end="url(#ao)"/>
+<text x="384" y="287" text-anchor="start" font-size="13" font-weight="400" fill="#555">역전파: y.backward()</text>
+<text x="720" y="287" text-anchor="end" font-size="14" font-weight="700" fill="#222">x.grad = 1·4 + 1·3 = 7</text>
+</svg>

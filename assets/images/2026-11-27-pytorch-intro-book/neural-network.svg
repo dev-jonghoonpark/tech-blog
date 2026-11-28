@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 390" width="760" height="390" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="390" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker></defs>
+<line x1="110" y1="122.0" x2="290" y2="88.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="110" y1="122.0" x2="290" y2="156.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="110" y1="122.0" x2="290" y2="224.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="110" y1="122.0" x2="290" y2="292.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="110" y1="190.0" x2="290" y2="88.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="110" y1="190.0" x2="290" y2="156.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="110" y1="190.0" x2="290" y2="224.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="110" y1="190.0" x2="290" y2="292.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="110" y1="258.0" x2="290" y2="88.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="110" y1="258.0" x2="290" y2="156.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="110" y1="258.0" x2="290" y2="224.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="110" y1="258.0" x2="290" y2="292.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="88.0" x2="470" y2="88.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="88.0" x2="470" y2="156.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="88.0" x2="470" y2="224.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="88.0" x2="470" y2="292.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="156.0" x2="470" y2="88.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="156.0" x2="470" y2="156.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="156.0" x2="470" y2="224.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="156.0" x2="470" y2="292.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="224.0" x2="470" y2="88.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="224.0" x2="470" y2="156.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="224.0" x2="470" y2="224.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="224.0" x2="470" y2="292.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="292.0" x2="470" y2="88.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="292.0" x2="470" y2="156.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="292.0" x2="470" y2="224.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="290" y1="292.0" x2="470" y2="292.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="470" y1="88.0" x2="650" y2="156.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="470" y1="88.0" x2="650" y2="224.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="470" y1="156.0" x2="650" y2="156.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="470" y1="156.0" x2="650" y2="224.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="470" y1="224.0" x2="650" y2="156.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="470" y1="224.0" x2="650" y2="224.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="470" y1="292.0" x2="650" y2="156.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<line x1="470" y1="292.0" x2="650" y2="224.0" stroke="#c5ccd3" stroke-width="1.2"/>
+<circle cx="110" cy="122.0" r="22" fill="#e3edfb" stroke="#3f78d1" stroke-width="2"/>
+<circle cx="110" cy="190.0" r="22" fill="#e3edfb" stroke="#3f78d1" stroke-width="2"/>
+<circle cx="110" cy="258.0" r="22" fill="#e3edfb" stroke="#3f78d1" stroke-width="2"/>
+<circle cx="290" cy="88.0" r="22" fill="#fdebdc" stroke="#e8833a" stroke-width="2"/>
+<circle cx="290" cy="156.0" r="22" fill="#fdebdc" stroke="#e8833a" stroke-width="2"/>
+<circle cx="290" cy="224.0" r="22" fill="#fdebdc" stroke="#e8833a" stroke-width="2"/>
+<circle cx="290" cy="292.0" r="22" fill="#fdebdc" stroke="#e8833a" stroke-width="2"/>
+<circle cx="470" cy="88.0" r="22" fill="#fdebdc" stroke="#e8833a" stroke-width="2"/>
+<circle cx="470" cy="156.0" r="22" fill="#fdebdc" stroke="#e8833a" stroke-width="2"/>
+<circle cx="470" cy="224.0" r="22" fill="#fdebdc" stroke="#e8833a" stroke-width="2"/>
+<circle cx="470" cy="292.0" r="22" fill="#fdebdc" stroke="#e8833a" stroke-width="2"/>
+<circle cx="650" cy="156.0" r="22" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="2"/>
+<circle cx="650" cy="224.0" r="22" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="2"/>
+<text x="110" y="44" text-anchor="middle" font-size="16" font-weight="700" fill="#222">입력층</text>
+<text x="380" y="44" text-anchor="middle" font-size="16" font-weight="700" fill="#222">은닉층</text>
+<text x="650" y="44" text-anchor="middle" font-size="16" font-weight="700" fill="#222">출력층</text>
+<path d="M268,58 L268,52 L492,52 L492,58" fill="none" stroke="#9aa3ad" stroke-width="1.5"/>
+<text x="110" y="350" text-anchor="middle" font-size="13" font-weight="400" fill="#555">데이터를 받는다</text>
+<text x="380" y="350" text-anchor="middle" font-size="13" font-weight="400" fill="#555">입력을 변환하며 특징을 추출한다</text>
+<text x="650" y="350" text-anchor="middle" font-size="13" font-weight="400" fill="#555">예측값을 낸다</text>
+<text x="380" y="372" text-anchor="middle" font-size="12" font-weight="400" fill="#888">은닉층이 여러 개면 심층 신경망(DNN)</text>
+</svg>

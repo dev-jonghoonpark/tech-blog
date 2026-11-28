@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 305" width="760" height="305" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif">
+<rect width="760" height="305" fill="#ffffff"/>
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3f78d1"/></marker><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8833a"/></marker><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#666"/></marker></defs>
+<rect x="40" y="120" width="100" height="70" rx="10" fill="#e3edfb" stroke="#3f78d1" stroke-width="1.5" />
+<text x="90.0" y="161" text-anchor="middle" font-size="16" font-weight="600" fill="#222">입력 x</text>
+<rect x="210" y="120" width="130" height="70" rx="10" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" />
+<text x="275.0" y="161" text-anchor="middle" font-size="16" font-weight="600" fill="#222">은닉층</text>
+<rect x="410" y="120" width="130" height="70" rx="10" fill="#fdebdc" stroke="#e8833a" stroke-width="1.5" />
+<text x="475.0" y="161" text-anchor="middle" font-size="16" font-weight="600" fill="#222">출력층</text>
+<rect x="620" y="120" width="110" height="70" rx="10" fill="#e2f3ea" stroke="#3a9a6b" stroke-width="1.5" />
+<text x="675.0" y="161" text-anchor="middle" font-size="16" font-weight="600" fill="#222">손실 L</text>
+<line x1="140" y1="140" x2="208" y2="140" stroke="#3f78d1" stroke-width="2.2" marker-end="url(#ab)"/>
+<line x1="340" y1="140" x2="408" y2="140" stroke="#3f78d1" stroke-width="2.2" marker-end="url(#ab)"/>
+<line x1="540" y1="140" x2="618" y2="140" stroke="#3f78d1" stroke-width="2.2" marker-end="url(#ab)"/>
+<line x1="620" y1="172" x2="542" y2="172" stroke="#e8833a" stroke-width="2.2" marker-end="url(#ao)"/>
+<line x1="410" y1="172" x2="342" y2="172" stroke="#e8833a" stroke-width="2.2" marker-end="url(#ao)"/>
+<text x="579" y="130" text-anchor="middle" font-size="13" font-weight="400" fill="#555">예측 ŷ</text>
+<text x="675" y="50" text-anchor="middle" font-size="14" font-weight="600" fill="#222">정답 y</text>
+<line x1="675" y1="60" x2="675" y2="117" stroke="#666" stroke-width="1.8" marker-end="url(#ag)"/>
+<text x="40" y="60" text-anchor="start" font-size="15" font-weight="700" fill="#3f78d1">① 순전파</text>
+<text x="112" y="60" text-anchor="start" font-size="13" font-weight="400" fill="#555">입력에서 출력 방향으로 예측을 계산</text>
+<text x="730" y="216" text-anchor="end" font-size="14" font-weight="700" fill="#3a9a6b">② 손실 계산</text>
+<text x="40" y="250" text-anchor="start" font-size="15" font-weight="700" fill="#e8833a">③ 역전파</text>
+<text x="112" y="250" text-anchor="start" font-size="13" font-weight="400" fill="#555">출력에서 입력 방향으로 기울기 ∂L/∂w를 연쇄 법칙으로 전달</text>
+<text x="40" y="280" text-anchor="start" font-size="15" font-weight="700" fill="#222">④ 가중치 갱신</text>
+<text x="148" y="280" text-anchor="start" font-size="14" font-weight="400" fill="#555">w ← w − η · ∂L/∂w</text>
+<text x="275" y="212" text-anchor="middle" font-size="12" font-weight="400" fill="#888">w 갱신</text>
+<text x="475" y="212" text-anchor="middle" font-size="12" font-weight="400" fill="#888">w 갱신</text>
+</svg>
